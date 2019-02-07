@@ -1,0 +1,23 @@
+{
+  "name": "abon",
+  "version": "1.0.0",
+  "description": "Website developed for small Bristol food business, Abon",
+  "main": "index.js",
+  "dependencies": {
+    "upper-case": "^1.1.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/org9711/abon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/org9711/abon/issues"
+  },
+  "homepage": "https://github.com/org9711/abon#readme"
+}
