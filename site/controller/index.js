@@ -9,7 +9,7 @@ module.exports = {
   getPageSnippet: async function (url, response) {
       let snippet;
       url = url + ".html";
-      let file = ".." + url;
+      let file = "." + url;
       try { snippet = await fs.readFile(file); }
       catch (err) { console.log(err); }
       deliverSnippet(snippet, response);
