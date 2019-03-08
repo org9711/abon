@@ -42,7 +42,7 @@ product ingredients
 product picture
 
 
-### Table 4 (testemonials):
+### Table 4 (testimonials):
 
 client name
 
