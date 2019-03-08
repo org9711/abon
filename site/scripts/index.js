@@ -21,6 +21,9 @@ function fetchData(page) {
 
 function receive() {
     if(this.readyState != XMLHttpRequest.DONE) return;
-    var ul = document.querySelector("#container");
-    ul.innerHTML = this.responseText;
+    splitPage = JSON.parse(this.responseText);
+    var head = document.querySelector("#headerDiv");
+    var body = document.querySelector("#bodyDiv");
+    head.innerHTML = splitPage['head'];
+    body.innerHTML = splitPage['body'];
 }

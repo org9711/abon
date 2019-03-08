@@ -29,11 +29,11 @@ async function handleGetRequest(url, response) {
         let hdrs;
         let file = url;
         if(url.endsWith(".html")) {
-            file = "./public" + url;
+            file = "./pages" + url;
             hdrs = { 'Content-Type': 'application/xhtml+xml' };
         }
         if(url.endsWith(".js")) {
-            file = "." + url;
+            file = "./scripts" + url;
             hdrs = { 'Content-Type': 'script' };
         }
         let content;
@@ -42,7 +42,7 @@ async function handleGetRequest(url, response) {
         respond.reply(response, hdrs, content);
     }
     else {
-        try{ await indexC.getPageSnippet(url, response); }
+        try{ await indexC.getPage(url, response); }
         catch (err) { console.log(err); }
     }
 }
@@ -50,6 +50,7 @@ async function handleGetRequest(url, response) {
 async function handlePostRequest(url, response) {
     try { let body = await request.body.read(); }
     catch (err) { console.log(err); }
+    console.log(body)
     let hdrs = {'Content-Type': 'text/plain'};
     respond.reply(response, hdrs, "[OK]");
 }

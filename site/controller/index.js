@@ -6,18 +6,31 @@ let fs = require('fs').promises;
 let respond = require('../lib/respond.js');
 
 module.exports = {
-  getPageSnippet: async function (url, response) {
+  getPage: async function (url, response) {
       let snippet;
       url = url + ".html";
-      let file = "." + url;
-      try { snippet = await fs.readFile(file); }
+      let file = "./pages" + url;
+      try { page = await fs.readFile(file); }
       catch (err) { console.log(err); }
-      deliverSnippet(snippet, response);
-      function ready(err,snippet) { deliverSnippet(snippet, response); }
+      let pageS = String(page);
+      let splitPageResult = splitPage(pageS);
+      deliverSplitPage(splitPageResult, response);
+      function ready(err,snippet) { deliverSplitPage(splitPageResult, response); }
   }
 };
 
-function deliverSnippet(snippet, response) {
-    let hdrs = { 'Content-Type': 'application/xhtml+xml' };
-    respond.reply(response, hdrs, snippet);
+function splitPage(page) {
+  let splitOnHeadO = page.split("<head>\n");
+  let splitOnHeadC = splitOnHeadO[1].split("</head>");
+  let splitOnBodyO = splitOnHeadC[1].split("<body>");
+  let splitOnBodyC = splitOnBodyO[1].split("</body>");
+  let splitPage = {};
+  splitPage['head'] = splitOnHeadC[0];
+  splitPage['body'] = splitOnBodyC[0];
+  return splitPage;
+}
+
+function deliverSplitPage(splitPage, response) {
+    let hdrs = { 'Content-Type': 'application/json' };
+    respond.replyJSON(response, hdrs, splitPage);
 }

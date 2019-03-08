@@ -1,9 +1,15 @@
 module.exports = {
   // Send a reply.
   reply: function (response, hdrs, content) {
-      response.writeHead(200, hdrs);
-      response.write(content);
-      response.end();
+    response.writeHead(200, hdrs);
+    response.write(content);
+    response.end();
+  },
+  
+  replyJSON: function (response, hdrs, content) {
+    response.writeHead(200, hdrs);
+    response.write(JSON.stringify(content));
+    response.end();
   },
 
   // Send a failure message

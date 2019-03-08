@@ -4,6 +4,8 @@
   "description": "Website developed for small Bristol food business, Abon",
   "main": "index.js",
   "dependencies": {
+    "sqlite": "^3.0.2",
+    "sqlite3": "^4.0.6",
     "upper-case": "^1.1.3"
   },
   "devDependencies": {},
