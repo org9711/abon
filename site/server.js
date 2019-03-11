@@ -27,7 +27,6 @@ async function handle(request, response) {
     navbarC.handle(request, response);
   }
   else if (request.url.startsWith("/testimonials")) {
-    console.log(url)
     tesimonialsC.handle(request, response);
   }
   else {

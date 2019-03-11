@@ -23,3 +23,7 @@ Week starting | Description
 06 May        |
 13 May        |
 20 May        | Final touches
+
+## Check for consistency
+* When to use async, await etc. - currently looking very messy
+* Indentation
