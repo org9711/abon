@@ -1,29 +1,29 @@
 addEventListener('load', start);
 
 function start() {
-    fetchData("/home");
-    var homeButton = document.querySelector("#homePage"); 
-    homeButton.addEventListener("click", function() {
-        fetchData("/home")
-    });
-    var testimonialsButton = document.querySelector("#testimonialsPage")
-    testimonialsButton.addEventListener("click", function() {
-        fetchData("/testimonials")
-    });
+    insertNavBar();
 }
 
 function fetchData(page) {
+    console.log(page);
     var q = new XMLHttpRequest();
-    q.onreadystatechange = receive;
-    q.open("GET", page, true)
+    // q.onreadystatechange = receive;
+    q.open("GET", page, true);
     q.send();
 }
 
-function receive() {
+function insertNavBar() {
+    console.log("insert nav bar function");
+    var q = new XMLHttpRequest();
+    q.onreadystatechange = receiveNavbar;
+    q.open("GET", '/navbar', true);
+    q.send();
+}
+
+function receiveNavbar() {
+    console.log("receive navbar function");
     if(this.readyState != XMLHttpRequest.DONE) return;
-    splitPage = JSON.parse(this.responseText);
-    var head = document.querySelector("#headerDiv");
-    var body = document.querySelector("#bodyDiv");
-    head.innerHTML = splitPage['head'];
-    body.innerHTML = splitPage['body'];
+    var navbar = document.querySelector("#navbar");
+    navbar.innerHTML = this.responseText;
+    // addNavbarListeners()
 }

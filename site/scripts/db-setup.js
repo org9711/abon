@@ -16,7 +16,7 @@ async function create() {
         "INSERT INTO testimonials (name, email, title, review, stars)" +
         "VALUES ('Oliver Ryan-George', 'org.9711@hotmail.co.uk', 'Superfood Pesto tastes great!', 'Superfast delivery too!', 5);";
     try {
-        var db = await sqlite.open("./db.sqlite")
+        var db = await sqlite.open("../db.sqlite")
         await db.run(createDbCommand);
         await db.run(insertRowCommand);
         var as = await db.all("select * from testimonials");

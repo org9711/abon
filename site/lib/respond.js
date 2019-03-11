@@ -14,9 +14,9 @@ module.exports = {
 
   // Send a failure message
   fail: function (response, code, message) {
-      let hdrs = { 'Content-Type': 'text/plain' };
-      response.writeHead(code, hdrs);
-      response.write(message);
-      response.end();
+    let hdrs = { 'Content-Type': 'text/plain' };
+    response.writeHead(code, hdrs);
+    response.write(message);
+    response.end();
   }
 };
