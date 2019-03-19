@@ -41,6 +41,10 @@ product ingredients
 
 product picture
 
+product stock
+
+product status
+
 
 ### Table 4 (testimonials):
 

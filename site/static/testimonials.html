@@ -3,17 +3,17 @@
   lang="en-GB" xml:lang="en-GB">
   <head>
     <meta charset="UTF-8"/>
-    <script src="navbar.js"></script>
+    <script src="frame.js"></script>
     <script src="testimonials.js"></script>
     <title>Abon - Testimonials</title>
   </head>
+  <header id="header"></header>
   <body>
-    <div id="navbar"></div>
     <h1>Testimonials</h1>
       <h2>Past Testimonials</h2>
         <div id="pastTestimonials"></div>
       <h2>Write your own!</h2>
-        <form name="testimonialsForm" action="/" method="post">
+        <form name="testimonialsForm" action="/testimonials/submit_testimonial" method="post">
             <input type="text" name="name" placeholder="Name"/><br/>
             <input type="text" name="email" placeholder="Email"/><br/>
             <input type="text" name="title" placeholder="Title"/><br/>
@@ -27,4 +27,5 @@
             <input type="submit" name="submitTestimonial" value="Submit"/>
         </form>
   </body>
+  <footer id="footer"></footer>
 </html>

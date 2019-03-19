@@ -1,17 +1,17 @@
 addEventListener('load', start);
 
 function start() {
-    fetchReviews();
+    getTestimonials();
 }
 
-function fetchReviews() {
+function getTestimonials() {
     var q = new XMLHttpRequest();
-    q.onreadystatechange = displayReviews;
-    q.open("GET", '/testimonials/getreviews', true);
+    q.onreadystatechange = displayTestimonials;
+    q.open("GET", '/testimonials/get_testimonials', true);
     q.send();
 }
 
-function displayReviews() {
+function displayTestimonials() {
     if (this.readyState != XMLHttpRequest.DONE) return;
     let reviews = JSON.parse(this.responseText);
     let ul = document.querySelector("#pastTestimonials");
@@ -37,14 +37,14 @@ function displayReviews() {
     }
 }
 
-function sendResponse() {
+function postTestimonial() {
     var q = new XMLHttpRequest();
-    q.onreadystatechange = displayReviews;
-    q.open("POST", '/testimonials/submitreviews', true);
+    q.onreadystatechange = displayConfirmation;
+    q.open("POST", '/testimonials/submit_testimonial', true);
     q.send();
 }
 
 function displayConfirmation() {
     if (this.readyState != XMLHttpRequest.DONE) return;
-    console.log("response ready to process")
+    console.log("display confirmation");
 }

@@ -2,8 +2,8 @@ let HTTP = require('http');
 let fs = require('fs').promises;
 let OK = 200, NotFound = 404, BadType = 415;
 let respond = require('./lib/respond.js');
-let filesC = require('./controllers/files.js');
-let navbarC = require('./controllers/navbar.js');
+let indexC = require('./controllers/index.js');
+let frameC = require('./controllers/frame.js');
 let tesimonialsC = require('./controllers/testimonials.js');
 start(8080);
 
@@ -17,19 +17,16 @@ function start(port) {
 
 // Deal with a request.
 async function handle(request, response) {
-  if (request.url.endsWith("/")) {
-    request.url = request.url + "index.html";
-  }
-  if (request.url.endsWith(".html") || request.url.endsWith(".js")) {
-    filesC.handle(request, response);
-  }
-  else if (request.url.endsWith("/navbar")) {
-    navbarC.handle(request, response);
+  if (request.url.startsWith("/frame")) {
+    frameC.handle(request, response);
   }
   else if (request.url.startsWith("/testimonials")) {
     tesimonialsC.handle(request, response);
   }
+  else if (request.url.startsWith("/")) {
+    indexC.handle(request, response);
+  }
   else {
-    return respond.fail(response, BadType, "Not .html");
+    return respond.fail(response, NotFound, "Request URL not valid.");
   }
 }
