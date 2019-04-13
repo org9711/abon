@@ -1,7 +1,7 @@
 window.onload = function(){
 
 let xs = []
-for (var i = 0; i <= 500; i++){
+for (var i = 0; i <= 1000; i++){
   xs.push(i)
 }
 
@@ -11,7 +11,7 @@ function animate(){
   
   let points = xs.map(x => {
     
-    let y = 200 + 20 *Math.sin((x+t) / 10)
+    let y = 200 + 2 * Math.sin((x+t) / 5)
     return [x, y]
   })
   
@@ -20,7 +20,9 @@ function animate(){
     return p[0] + "," + p[1]
   }).join(" L")
   
-  document.querySelector("path").setAttribute("d", path)
+  // document.querySelector("path").setAttribute("d", path)
+  ('d').attr('path', path);
+
   
   t+=1
   requestAnimationFrame(animate)
