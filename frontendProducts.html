@@ -20,6 +20,8 @@
     <script>
         $("input[type='number']").inputSpinner()
     </script>
+    <script src="shopping-cart.js"></script>
+    
     <!--[if IE]>
         <script src="//cdnjs.../html5shiv.min.js"
         ></script>
@@ -53,28 +55,10 @@
     
     <main role="main">
         
-<!--
-      <div class="jumbotron">
-          <div class="container">
-              <img src="https://picsum.photos/2000/300 " alt="First slide"/>
-              <div class="carousel-caption">
-                  <h1 class="inner">Hello, world!</h1>
-                  <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-                  <p><a class="inner btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
-              </div>
-          </div>
-          
-      </div>
--->
 
-
-      <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
-
+    <!-- MEAL TABS --> 
       <div class="container marketing">
-       <!-- START THE FEATURETTES -->
-
+          <h1>Our Products</h1>
 <!--
         <hr class="featurette-divider">
         <h1 class="text-center">Our Products</h1>
@@ -91,7 +75,7 @@
         </div>
         <hr class="featurette-divider">
 -->
-          
+        <!-- PESTO TAB --> 
         <div class="row justify-content-center">
             <div class="col-md-5 p-2 carousel-inner">
               <div class="view view-first carousel-item active">
@@ -104,6 +88,7 @@
 
                     As it's a fusion dish you can get away serving it with pasta or noodles. We prefer it with conchiglie, which catches brilliant little puddles of sauce.</p>
 -->
+                    <!-- INPUT SPINNER -->
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-xs-3 col-xs-offset-3">
@@ -111,7 +96,7 @@
                                     <span class="input-group-btn">
                                         <button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button>
                                     </span>
-                                    <input type="text" style="max-width: 3.0rem" class="form-control text-center" value="1" min="1" max="20">
+                                    <input type="text" style="max-width: 3.0rem" class="form-control text-center" value="0" min="0" max="20">
                                     <span class="input-group-btn">
                                         <button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button>
                                     </span>
@@ -136,7 +121,7 @@
 
                     Pimp yours at home with extra chilli if you like it spicy, or just enjoy the zing from all the spices, lime and coriander.</p>
 -->     
-                    <!-- input-spinner -->
+                    <!-- INPUT SPINNER -->
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-xs-3 col-xs-offset-3">
@@ -144,7 +129,7 @@
                                     <span class="input-group-btn">
                                         <button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button>
                                     </span>
-                                    <input type="text" style="max-width: 3.0rem" class="form-control text-center" value="1" min="1" max="20">
+                                    <input type="text" style="max-width: 3.0rem" class="form-control text-center" value="0" min="0" max="20">
                                     <span class="input-group-btn">
                                         <button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button>
                                     </span>
@@ -157,12 +142,79 @@
                 </div>
               </div>
             </div>
+            
+            <!-- COMING SOON TAB -->
+            <div class="col-md-5 p-2 carousel-inner">
+              <div class="view view-first carousel-item active">
+                <img src="site/images/coming-soon.jpg" alt="First slide" style="width:100% "/>
+                <div class="container">
+                  <div class="carousel-caption mask">
+                    <h1 class="curry-colour">Watch This Space</h1>
+                    <p><a class="btn btn-sm btn-primary" href="#" role="button">Learn More</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- COMING SOON TAB -->
+            <div class="col-md-5 p-2 carousel-inner">
+              <div class="view view-first carousel-item active">
+                <img src="site/images/coming-soon.jpg" alt="First slide" style="width:100% "/>
+                <div class="container">
+                  <div class="carousel-caption mask">
+                    <h1 class="curry-colour">Watch This Space</h1>
+                    <p><a class="btn btn-sm btn-primary" href="#" role="button">Learn More</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
         </div>
           
         <hr class="featurette-divider">
 
-        <!-- /END THE FEATURETTES -->
-
+        <!-- SHOPPING CART -->
+        <div container>
+            <h1>Your Basket</h1>
+            
+            <!-- Editable table -->
+            <div class="card">
+              <div class="card-body">
+                <div id="table" class="table-editable">
+                  <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x"
+                        aria-hidden="true"></i></a></span>
+                  <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <tr>
+                      <th class="text-center">Product Name</th>
+                      <th class="text-center">Price(£)</th>
+                      <th class="text-center">Quantity</th>
+                    </tr>
+                    <tr>
+                      <td class="pt-3-half">Pesto</td>
+                      <td class="pt-3-half">2.20</td>
+                      <td class="pt-3-half" contenteditable="true">2</td>
+                      <td>
+                        <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+                      </td>
+                    </tr>
+                    <!-- This is our clonable table line -->
+                    <tr class="hide">
+                      <td class="pt-3-half">Curry</td>
+                      <td class="pt-3-half">2.20</td>
+                      <td class="pt-3-half" contenteditable="true">4</td>
+                      <td>
+                        <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- Editable table -->
+            
+            
+        </div>
+          
       </div><!-- /.container -->
 
     </main>
