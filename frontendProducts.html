@@ -14,7 +14,12 @@
      <!-- Custom styles for this template -->
     <link href="carousel.css" rel="stylesheet">
     <link href="kwamestrap.css" rel="stylesheet">
-
+    
+    <!-- Custom Scripts -->
+    <script src="input-spinner.js"></script>
+    <script>
+        $("input[type='number']").inputSpinner()
+    </script>
     <!--[if IE]>
         <script src="//cdnjs.../html5shiv.min.js"
         ></script>
@@ -89,13 +94,32 @@
           
         <div class="row justify-content-center">
             <div class="col-md-5 p-2 carousel-inner">
-              <div class="carousel-item active">
+              <div class="view view-first carousel-item active">
                 <img src="site/images/pesto.jpg" alt="First slide" style="width:100% "/>
                 <div class="container">
-                  <div class="carousel-caption ">
+                  <div class="carousel-caption mask">
                     <h1 class="pesto-colour">Superfood Pesto</h1>
-<!--                    <p class="pesto-colour">Bringing taste to vegan food! It may not be bacon, but hey! What did you expect?</p>-->
-                    <p><a class="btn btn-sm btn-primary" href="#" role="button">Sign up today</a></p>
+<!--
+                    <p >This pesto is as vibrant in colour as it is in flavour. It takes inspiration from both Japanese and Italian cooking and fuses the best of both cuisines. It's full of spinach, edamame beans, garlic, coriander, chilli and much more. It also has a bit of white miso which is really good for you and adds a brilliant umami funk to the dish.
+
+                    As it's a fusion dish you can get away serving it with pasta or noodles. We prefer it with conchiglie, which catches brilliant little puddles of sauce.</p>
+-->
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-xs-3 col-xs-offset-3">
+                                <div class="input-group number-spinner">
+                                    <span class="input-group-btn">
+                                        <button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button>
+                                    </span>
+                                    <input type="text" style="max-width: 3.0rem" class="form-control text-center" value="1" min="1" max="20">
+                                    <span class="input-group-btn">
+                                        <button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p><a class="btn btn-sm btn-primary" href="#" role="button">Add to Basket</a></p>
                   </div>
                 </div>
               </div>
@@ -107,82 +131,35 @@
                 <div class="container">
                   <div class="carousel-caption mask">
                     <h1 class="curry-colour">Roasted Veg Curry</h1>
-<!--                    <p class="curry-colour">Bringing taste to vegan food! It may not be bacon, but hey! What did you expect?</p>-->
-                    <p><a class="btn btn-sm btn-primary" href="#" role="button">Sign up today</a></p>
+<!--
+                    <p class="curry-colour">The roasted veg curry is packed full of the good stuff. It includes butternut squash, sweet potato, peppers, mushrooms and tons of other veg that will make you feel as good as it tastes.
+
+                    Pimp yours at home with extra chilli if you like it spicy, or just enjoy the zing from all the spices, lime and coriander.</p>
+-->     
+                    <!-- input-spinner -->
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-xs-3 col-xs-offset-3">
+                                <div class="input-group number-spinner">
+                                    <span class="input-group-btn">
+                                        <button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button>
+                                    </span>
+                                    <input type="text" style="max-width: 3.0rem" class="form-control text-center" value="1" min="1" max="20">
+                                    <span class="input-group-btn">
+                                        <button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p><a class="btn btn-sm btn-primary" href="#" role="button">Add to Basket</a></p>
                   </div>
                 </div>
               </div>
             </div>
         </div>
           
-          <div class="view view-first">
-            <img src="https://static1.squarespace.com/static/5aea79c52487fde9b8efd0b1/t/5bb6b38ce5e5f09147c1b8ab/1538700172787/empire-state.png" />
-            <div class="mask">
-              <h2>Empire State</h2>
-              <p>A cool description of some sort between these tags. I am so cool and awesomely awesome.</p>
-              <a href="#" class="info">Read More</a>
-            </div>
-          </div>
-
-        
-<!--
-        <div class="row featurette">
-            <div class="col-md-12">
-                <h2 class="featurette-heading">Fast, Tasty, Nutritious <span class="text-muted">The way it should be</span></h2>
-                <p class="lead">The ideal ready-meal is tasty, nutritious, cheap and quick to prepare. Currently, there isn’t one product that ticks all the boxes, and supermarket shelves are filled with uninspiring compromises.</p>
- 
-                <p class="lead">The solution is A Bag Of Nutrition (Abon) - a frozen, vacuum sachet of curry or pasta sauce. Each sachet guarantees three of your five a day, is vegan, gluten free, preservative free, and can be prepared in less than five minutes. Just add a sachet to a pan of boiling water with your rice or pasta, snip it open and enjoy!</p>
- 
-                <p class="lead">More and more people are recognising the benefits of a plant based diet, but being vegan can be really hard; our products are a shortcut to this healthier, more ethical lifestyle.</p>
-            </div>
-        </div>
--->
-          
         <hr class="featurette-divider">
-
-        <!-- Three columns of text displaying benefits -->
-       
-
-
-       
-          
-<!--
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-          </div>
-          <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" src="https://picsum.photos/300/300" alt="Generic placeholder image">
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-          <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-          </div>
-          <div class="col-md-5 order-md-1">
-            <img class="featurette-image img-fluid mx-auto" src="https://picsum.photos/300/301" alt="Generic placeholder image">
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-          </div>
-          <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" src="https://picsum.photos/301/300" alt="Generic placeholder image">
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
--->
 
         <!-- /END THE FEATURETTES -->
 
