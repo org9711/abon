@@ -8,7 +8,7 @@
     <!--BootstrapCDN-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="sine.js"></script>
+    <script defer type="text/javascript" src="sine.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     
@@ -25,7 +25,7 @@
     
 <body>
     <header id="header">
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #095256">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2b2a24">
             
             <!-- The logo button-->
             <a class="navbar-brand mb-0 h1" href="#">Abon
@@ -49,34 +49,50 @@
     
     <main>
       <div class="container">
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id 
-          ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo,
-           tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-           
-        <h3>Environmental Commitment</h3>
-        <svg>
-          <path d="M10,10 L50,100 L90,50"></path>
-        </svg>
-        <p>Abon is focused on being ethically driven throughout 
-          the business. There are many great reasons to eat vegan food.
-           It’s great for you, for animals, and for the planet.
+                  <hr class="featurette-divider">
+
+           <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">Environmental Commitment</h2>
+            <p class="lead">Abon is focused on being ethically driven throughout 
+            the business. There are many great reasons to eat vegan food.
+            It’s great for you, for animals, and for the planet.
             We are developing new, minimal waste packaging solutions that 
             will reduce the environmental impact of our products even more, 
             corporate social responsibility is very important to us.</p>
-        <h3>What's Next?</h3>
+          </div>
+          <div class="col-md-5">
+            <img class="featurette-image img-fluid mx-auto" src="https://picsum.photos/300/300" alt="Generic placeholder image">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">What's Next?</h2>
+            <p class="lead">Abon may be small, but we have big plans for the future. 
+             There are many recipes in the pipeline which we can't wait to share with you.</p>
+
+            <p class="lead">Currently we can only deliver to a small area, but have started talking to some 
+              excited potential retailers. If we can't deliver to you at the moment, make sure 
+                you <a class="link" href="http://www.facebook.com/abonfoods/">follow us on Facebook</a> to stay up to date with where we are selling.</p>
+
+            <p class="lead">Want to help? For the big players in the industry to sit up and take us seriously, 
+              we need to demonstrate the demand for the product. Like us on <a class="link" href="http://www.facebook.com/abonfoods/">Facebook</a>, and send us 
+              any feedback you have!</p>
+          </div>
+          <div class="col-md-5 order-md-1">
+            <img class="featurette-image img-fluid mx-auto" src="https://picsum.photos/300/301" alt="Generic placeholder image">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+        
         <svg>
           <path d="M10,10 L50,100 L90,50"></path>
         </svg>
-        <p>Abon may be small, but we have big plans for the future. 
-          There are many recipes in the pipeline which we can't wait to share with you.</p>
-
-        <p>Currently we can only deliver to a small area, but have started talking to some 
-          excited potential retailers. If we can't deliver to you at the moment, make sure 
-          you follow us on Facebook to stay up to date with where we are selling.</p>
-
-        <p>Want to help? For the big players in the industry to sit up and take us seriously, 
-          we need to demonstrate the demand for the product. Like us on Facebook, and send us 
-          any feedback you have!</p>
+        
           
       </div>
     </main>
