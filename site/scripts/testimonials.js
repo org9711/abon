@@ -1,6 +1,7 @@
-addEventListener('load', start);
+addEventListener('load', testimonialStart);
 
-function start() {
+function testimonialStart() {
+    console.log("loaded");
     getTestimonials();
 }
 
@@ -14,6 +15,7 @@ function getTestimonials() {
 function displayTestimonials() {
     if (this.readyState != XMLHttpRequest.DONE) return;
     let reviews = JSON.parse(this.responseText);
+    console.log(reviews);
     let ul = document.querySelector("#pastTestimonials");
     for (var i = 0; i < reviews.length; i++) {
         let review = document.createElement('div');
@@ -22,11 +24,10 @@ function displayTestimonials() {
         var stars = document.createElement('p');
         var description = document.createElement('p');
 
-        title.textContent = reviews[0].title;
-        name.textContent = reviews[0].name;
-        stars.textContent = reviews[0].stars;
-        description.textContent = reviews[0].review;
-
+        title.textContent = reviews[i].title;
+        name.textContent = reviews[i].name;
+        stars.textContent = reviews[i].stars;
+        description.textContent = reviews[i].review;
 
         review.appendChild(title);
         review.appendChild(name);

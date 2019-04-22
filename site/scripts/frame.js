@@ -1,6 +1,6 @@
-addEventListener('load', start);
+addEventListener('load', frameStart);
 
-function start() {
+function frameStart() {
     getHeader();
     getFooter();
 }
