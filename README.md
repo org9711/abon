@@ -1,4 +1,7 @@
 # Abon
+## Note
+Please see prelim.html for details preliminary submission.
+
 ## Overview
 This project is to build a website for local environmentally conscious food startup, Abon.
 
