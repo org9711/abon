@@ -5,7 +5,11 @@ let send = require('../lib/send.js');
 
 module.exports = {
   handle: async function(request, response) {
-      if (request.url.endsWith("/")) {
+      if (request.url.endsWith(".js")) {
+          let path = "scripts/index.js";
+          send.sendPage(path, response);
+      }
+      else if (request.url.endsWith("/")) {
           let path = "static/index.html"
           send.sendPage(path, response);
       }

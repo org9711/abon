@@ -1,6 +1,6 @@
 # Abon
 ## Overview
-This project is to build a website for local environmentally concious food startup, Abon.
+This project is to build a website for local environmentally conscious food startup, Abon.
 
 Customers will be able to learn about the company and its products as well as purchase the products directly online. The administrator will be able to edit the website's information as well as manage orders from their own user interface after logging on.
 
