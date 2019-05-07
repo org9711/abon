@@ -69,8 +69,14 @@ function postTestimonial() {
     };
     testimonial = JSON.stringify(testimonialObj);
     var q = new XMLHttpRequest();
-    q.onreadystatechange = displayTestimonialForm;
+    q.onreadystatechange = displaySubmissionConfirmation;
     q.open("POST", '/testimonials/submit_testimonial', true);
+    q.setRequestHeader("Content-type", "application/JSON");
     q.send(testimonial);
-    console.log("here");
+}
+
+function displaySubmissionConfirmation() {
+    if(this.readyState != XMLHttpRequest.DONE) return;
+    var testimonialForm = document.querySelector("#testimonialForm");
+    testimonialForm.innerHTML = this.responseText;
 }

@@ -20,6 +20,14 @@ module.exports = {
         send.sendObject(statement, response);
     }
     else if (request.url.endsWith("/submit_testimonial")) {
+        response.on('data', (chunk) => {
+          console.log(`BODY: ${chunk}`);
+        });
+        response.on('end', () => {
+          console.log('No more data in response.');
+        });
+        // try { await request.body.read(); }
+        // catch (err) { console.log(err); }
         let path = "static/testimonial_submission_confirmation.html";
         send.sendPage(path, response);
     }
