@@ -1,6 +1,9 @@
 addEventListener('load', start);
 
 function start() {
+    console.log("loaded");
+    getHeader();
+    getFooter();
     getTestimonials();
     getTestimonialForm();
 }
@@ -15,6 +18,7 @@ function getTestimonials() {
 function displayTestimonials() {
     if (this.readyState != XMLHttpRequest.DONE) return;
     let reviews = JSON.parse(this.responseText);
+    console.log(reviews);
     let ul = document.querySelector("#pastTestimonials");
     for (var i = 0; i < reviews.length; i++) {
         let review = document.createElement('div');
@@ -23,11 +27,10 @@ function displayTestimonials() {
         var stars = document.createElement('p');
         var description = document.createElement('p');
 
-        title.textContent = reviews[0].title;
-        name.textContent = reviews[0].name;
-        stars.textContent = reviews[0].stars;
-        description.textContent = reviews[0].review;
-
+        title.textContent = reviews[i].title;
+        name.textContent = reviews[i].name;
+        stars.textContent = reviews[i].stars;
+        description.textContent = reviews[i].review;
 
         review.appendChild(title);
         review.appendChild(name);
@@ -49,7 +52,7 @@ function displayTestimonialForm() {
     if(this.readyState != XMLHttpRequest.DONE) return;
     var testimonialForm = document.querySelector("#testimonialForm");
     testimonialForm.innerHTML = this.responseText;
-    document.querySelector("#submitTestimonial").addEventListener("click", postTestimonial); 
+    document.querySelector("#submitTestimonial").addEventListener("click", postTestimonial);
 }
 
 function postTestimonial() {
@@ -60,7 +63,7 @@ function postTestimonial() {
             star = stars[i].value;
         }
     }
-    testimonialObj = { 
+    testimonialObj = {
         name: document.querySelector('input[name="name"]').value,
         email: document.querySelector('input[name="email"]').value,
         title: document.querySelector('input[name="title"]').value,
@@ -73,6 +76,27 @@ function postTestimonial() {
     q.open("POST", '/testimonials/submit_testimonial', true);
     q.setRequestHeader("Content-type", "application/JSON");
     q.send(testimonial);
+}
+
+
+function getHeader() {
+    var q = new XMLHttpRequest();
+    q.onreadystatechange = displayHeader;
+    q.open("GET", '/frame/get_header', true);
+    q.send();
+}
+
+function displayHeader() {
+    if(this.readyState != XMLHttpRequest.DONE) return;
+    var header = document.querySelector("#header");
+    header.innerHTML = this.responseText;
+}
+
+function getFooter() {
+    var q = new XMLHttpRequest();
+    q.onreadystatechange = displayFooter;
+    q.open("GET", '/frame/get_footer', true);
+    q.send();
 }
 
 function displaySubmissionConfirmation() {

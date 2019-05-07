@@ -1,3 +1,11 @@
+addEventListener('load', start);
+
+function start() {
+    console.log("loaded");
+    getHeader();
+    getFooter();
+}
+
 function getHeader() {
     var q = new XMLHttpRequest();
     q.onreadystatechange = displayHeader;

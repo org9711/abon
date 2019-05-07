@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/org9711/abon#readme",
   "dependencies": {
-    "sqlite": "^3.0.2"
+    "sqlite": "^3.0.3"
   }
 }
