@@ -5,6 +5,7 @@ function start() {
     getHeader();
     getFooter();
     getTestimonials();
+    getTestimonialForm();
 }
 
 function getTestimonials() {
@@ -40,16 +41,41 @@ function displayTestimonials() {
     }
 }
 
-function postTestimonial() {
+function getTestimonialForm() {
     var q = new XMLHttpRequest();
-    q.onreadystatechange = displayConfirmation;
-    q.open("POST", '/testimonials/submit_testimonial', true);
+    q.onreadystatechange = displayTestimonialForm;
+    q.open("GET", '/testimonials/get_testimonial_form', true);
     q.send();
 }
 
-function displayConfirmation() {
-    if (this.readyState != XMLHttpRequest.DONE) return;
-    console.log("display confirmation");
+function displayTestimonialForm() {
+    if(this.readyState != XMLHttpRequest.DONE) return;
+    var testimonialForm = document.querySelector("#testimonialForm");
+    testimonialForm.innerHTML = this.responseText;
+    document.querySelector("#submitTestimonial").addEventListener("click", postTestimonial);
+}
+
+function postTestimonial() {
+    let stars = document.getElementsByName("stars");
+    let star = 0;
+    for (let i = 0; i < stars.length; i++) {
+        if (stars[i].checked) {
+            star = stars[i].value;
+        }
+    }
+    testimonialObj = {
+        name: document.querySelector('input[name="name"]').value,
+        email: document.querySelector('input[name="email"]').value,
+        title: document.querySelector('input[name="title"]').value,
+        stars: star,
+        review: document.querySelector('input[name="review"]').value
+    };
+    testimonial = JSON.stringify(testimonialObj);
+    var q = new XMLHttpRequest();
+    q.onreadystatechange = displaySubmissionConfirmation;
+    q.open("POST", '/testimonials/submit_testimonial', true);
+    q.setRequestHeader("Content-type", "application/JSON");
+    q.send(testimonial);
 }
 
 
@@ -73,8 +99,8 @@ function getFooter() {
     q.send();
 }
 
-function displayFooter() {
+function displaySubmissionConfirmation() {
     if(this.readyState != XMLHttpRequest.DONE) return;
-    var footer = document.querySelector("#footer");
-    footer.innerHTML = this.responseText;
+    var testimonialForm = document.querySelector("#testimonialForm");
+    testimonialForm.innerHTML = this.responseText;
 }

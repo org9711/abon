@@ -15,8 +15,11 @@ module.exports = {
 
   sendObject: async function(statement, response) {
       let object;
-      try { object = await database.getAllFromDatabase(statement); }
-      catch (err) { return respond.fail(response, BadType, "Not found in database."); }
+      try { object = await database.getAll(statement); }
+      catch (err) { 
+          console.log(err);
+          return respond.fail(response, BadType, "Not found in database."); 
+      }
       let hdrs = { 'Content-Type': 'application/JSON' };
       respond.replyJSON(response, hdrs, object);
   }
