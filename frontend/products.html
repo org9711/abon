@@ -21,6 +21,7 @@
         $("input[type='number']").inputSpinner()
     </script>
     <script src="shopping-cart.js"></script>
+    <script src="abon-shopping.js"></script>
     
     <!--[if IE]>
         <script src="//cdnjs.../html5shiv.min.js"
@@ -34,19 +35,19 @@
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2b2a24">
             
             <!-- The logo button-->
-            <a class="navbar-brand mb-0 h1" href="#">Abon
-    <!--                <img src="images/logo.webp" width="50%" height="20%" class="d-inline-block align-top" alt="" />-->
+            <a class="navbar-brand mb-0 h1" href="#">
+                <img src="../site/images/logo.png" width="auto" height="100%" class="d-inline-block align-top" alt="" />
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="index.html">Home</a>
-                    <a class="nav-item active nav-link" href="products.html">Products</a>
-                    <a class="nav-item nav-link" href="about.html">About Us</a>
-                    <a class="nav-item nav-link" href="order.html">Testimonials</a>
+                <div class="navbar-nav ">
+                    <a class="nav-item nav-link" href="index.html"><h2>Home</h2></a>
+                    <a class="nav-item active nav-link" href="products.html"><h2 class="abon-yellow">Products</h2></a>
+                    <a class="nav-item nav-link" href="about.html"><h2>About Us</h2> </a>
+                    <a class="nav-item nav-link" href="order.html"><h2>Testimonials</h2></a>
                 </div>
             </div>
         </nav>
@@ -75,98 +76,160 @@
         </div>
         <hr class="featurette-divider">
 -->
-        <!-- PESTO TAB --> 
-        <div class="row justify-content-center">
-            <div class="col-md-5 p-2 carousel-inner">
-              <div class="view view-first carousel-item active">
-                <img src="../site/images/pesto.jpg" alt="First slide" style="width:100% "/>
-                <div class="container">
-                  <div class="carousel-caption mask">
-                    <h1 class="pesto-colour">Superfood Pesto</h1>
-<!--
-                    <p >This pesto is as vibrant in colour as it is in flavour. It takes inspiration from both Japanese and Italian cooking and fuses the best of both cuisines. It's full of spinach, edamame beans, garlic, coriander, chilli and much more. It also has a bit of white miso which is really good for you and adds a brilliant umami funk to the dish.
+        <div class="row">
+            
+            <!-- SIDE CART --> 
+            <div class="col-md-4 order-md-2 mb-4">
+              <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Your Order</span>
+                <span class="badge badge-secondary badge-pill">3</span>
+              </h4>
+              <ul id="cart" class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                    <h6 class="my-0">Superfood Pesto</h6>
+                  </div>
+                  <span class="text-muted">$12</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                    <h6 class="my-0">Roast Veg Curry</h6>
+                  </div>
+                  <span class="text-muted">$8</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                    <h6 class="my-0">Bacon</h6>
+                  </div>
+                  <span class="text-muted">$5</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div class="text-success">
+                    <h6 class="my-0">Promo code</h6>
+                    <small>BRISOTLSTUDENT</small>
+                  </div>
+                  <span class="text-success">-$5</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Subtotal (£)</span>
+                  <strong>$20</strong>
+                </li>
+              </ul>
 
-                    As it's a fusion dish you can get away serving it with pasta or noodles. We prefer it with conchiglie, which catches brilliant little puddles of sauce.</p>
--->
-                    <!-- INPUT SPINNER -->
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-xs-3 col-xs-offset-3">
-                                <div class="input-group number-spinner">
-                                    <span class="input-group-btn">
-                                        <button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button>
-                                    </span>
-                                    <input type="text" style="max-width: 3.0rem" class="form-control text-center" value="0">
-                                    <span class="input-group-btn">
-                                        <button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p><a class="btn btn-sm btn-primary" href="#" role="button">Add to Basket</a></p>
+              <form class="card p-2 mb-1">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Promo code">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-secondary">Redeem</button>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <div class="col-md-5 p-2 carousel-inner">
-              <div class="view view-first carousel-item active">
-                <img src="../site/images/curry.jpg" alt="First slide" style="width:100% "/>
-                <div class="container">
-                  <div class="carousel-caption mask">
-                    <h1 class="curry-colour">Roasted Veg Curry</h1>
-<!--
-                    <p class="curry-colour">The roasted veg curry is packed full of the good stuff. It includes butternut squash, sweet potato, peppers, mushrooms and tons of other veg that will make you feel as good as it tastes.
-
-                    Pimp yours at home with extra chilli if you like it spicy, or just enjoy the zing from all the spices, lime and coriander.</p>
--->     
-                    <!-- INPUT SPINNER -->
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-xs-3 col-xs-offset-3">
-                                <div class="input-group number-spinner">
-                                    <span class="input-group-btn">
-                                        <button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button>
-                                    </span>
-                                    <input type="text" style="max-width: 3.0rem" class="form-control text-center" value="0">
-                                    <span class="input-group-btn">
-                                        <button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p><a class="btn btn-sm btn-primary" href="#" role="button">Add to Basket</a></p>
-                  </div>
-                </div>
-              </div>
+              </form>
+                
+             <!-- Button trigger modal -->
+             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+               Proceed to Checkout
+             </button>
             </div>
             
-            <!-- COMING SOON TAB -->
-            <div class="col-md-5 p-2 carousel-inner">
-              <div class="view view-first carousel-item active">
-                <img src="../site/images/coming-soon.jpg" alt="First slide" style="width:100% "/>
-                <div class="container">
-                  <div class="carousel-caption mask">
-                    <h1 class="curry-colour">Watch This Space</h1>
-                    <p><a class="btn btn-sm btn-primary" href="#" role="button">Learn More</a></p>
-                  </div>
+            <div class="col-md-8 order-md-1">
+                <div class="row">
+                    <!-- PESTO TAB -->
+                    <div class="col-md-6 p-2 carousel-inner">
+                      <div class="view view-first carousel-item active">
+                        <img src="../site/images/pesto.jpg" alt="First slide" style="width:100% "/>
+                        <div class="container">
+                          <div class="carousel-caption mask">
+                            <h1 class="pesto-colour">Superfood Pesto</h1>
+        <!--
+                            <p >This pesto is as vibrant in colour as it is in flavour. It takes inspiration from both Japanese and Italian cooking and fuses the best of both cuisines. It's full of spinach, edamame beans, garlic, coriander, chilli and much more. It also has a bit of white miso which is really good for you and adds a brilliant umami funk to the dish.
+
+                            As it's a fusion dish you can get away serving it with pasta or noodles. We prefer it with conchiglie, which catches brilliant little puddles of sauce.</p>
+        -->
+                            <!-- INPUT SPINNER -->
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-xs-3 col-xs-offset-3">
+                                        <div class="input-group number-spinner">
+                                            <span class="input-group-btn">
+                                                <button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button>
+                                            </span>
+                                            <input type="text" style="max-width: 3.0rem" class="form-control text-center" value="0">
+                                            <span class="input-group-btn">
+                                                <button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p><a id="addSuperfood" class="btn btn-sm btn-primary" href="#" role="button">Add to Basket</a></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!--ROAST VEG TAB-->
+                    <div class="col-md-6 p-2 carousel-inner">
+                      <div class="view view-first carousel-item active">
+                        <img src="../site/images/curry.jpg" alt="First slide" style="width:100% "/>
+                        <div class="container">
+                          <div class="carousel-caption mask">
+                            <h1 class="curry-colour">Roasted Veg Curry</h1>
+        <!--
+                            <p class="curry-colour">The roasted veg curry is packed full of the good stuff. It includes butternut squash, sweet potato, peppers, mushrooms and tons of other veg that will make you feel as good as it tastes.
+
+                            Pimp yours at home with extra chilli if you like it spicy, or just enjoy the zing from all the spices, lime and coriander.</p>
+        -->     
+                            <!-- INPUT SPINNER -->
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-xs-3 col-xs-offset-3">
+                                        <div class="input-group number-spinner">
+                                            <span class="input-group-btn">
+                                                <button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button>
+                                            </span>
+                                            <input type="text" style="max-width: 3.0rem" class="form-control text-center" value="0">
+                                            <span class="input-group-btn">
+                                                <button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p><a class="btn btn-sm btn-primary" href="#" role="button">Add to Basket</a></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+
+                <div class="row">
+                    <!-- COMING SOON TAB -->
+                    <div class="col-md-6 p-2 carousel-inner">
+                      <div class="view view-first carousel-item active">
+                        <img src="../site/images/coming-soon.jpg" alt="First slide" style="width:100% "/>
+                        <div class="container">
+                          <div class="carousel-caption mask">
+                            <h1 class="curry-colour">Watch This Space</h1>
+                            <p><a class="btn btn-sm btn-primary" href="#" role="button">Learn More</a></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- COMING SOON TAB -->
+                    <div class="col-md-6 p-2 carousel-inner">
+                      <div class="view view-first carousel-item active">
+                        <img src="../site/images/coming-soon.jpg" alt="First slide" style="width:100% "/>
+                        <div class="container">
+                          <div class="carousel-caption mask">
+                            <h1 class="curry-colour">Watch This Space</h1>
+                            <p><a class="btn btn-sm btn-primary" href="#" role="button">Learn More</a></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            
-            <!-- COMING SOON TAB -->
-            <div class="col-md-5 p-2 carousel-inner">
-              <div class="view view-first carousel-item active">
-                <img src="../site/images/coming-soon.jpg" alt="First slide" style="width:100% "/>
-                <div class="container">
-                  <div class="carousel-caption mask">
-                    <h1 class="curry-colour">Watch This Space</h1>
-                    <p><a class="btn btn-sm btn-primary" href="#" role="button">Learn More</a></p>
-                  </div>
-                </div>
-              </div>
+                
             </div>
             
         </div>
@@ -175,7 +238,93 @@
 
         <!-- SHOPPING CART -->
         <div class="container">
+            
             <h1>Your Basket</h1>
+            
+            <hr>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Checkout</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h5>Details</h5>
+                    <label for="firstName">Full Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                    <div class="invalid-feedback">
+                      Valid first name is required.
+                    </div>
+                      
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="nick@gmail.com">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
+                    </div>
+                      
+                    <hr class="mb-2">
+                    
+                    <h5>Payment Details</h5>
+                    
+                    <div class="d-block my-3">
+                      <div class="custom-control custom-radio">
+                        <input id="cash" name="paymentMethod" type="radio" class="custom-control-input"  checked required>
+                        <label class="custom-control-label" for="cash">Card</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+                        <label class="custom-control-label" for="paypal">Paypal</label>
+                      </div>
+                    </div>
+                      
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="cc-name">Name on card</label>
+                        <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                        <small class="text-muted">Full name as displayed on card</small>
+                        <div class="invalid-feedback">
+                          Name on card is required
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="cc-number">Credit card number</label>
+                        <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                        <div class="invalid-feedback">
+                          Credit card number is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3 mb-3">
+                        <label for="cc-expiration">Expiration</label>
+                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                        <div class="invalid-feedback">
+                          Expiration date required
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <label for="cc-expiration">CVV</label>
+                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                        <div class="invalid-feedback">
+                          Security code required
+                        </div>
+                      </div>
+                    </div>
+                      
+                      
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Pay</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             
             <!-- Editable table -->
             <div class="card">
