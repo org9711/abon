@@ -13,14 +13,19 @@ module.exports = {
     respond.reply(response, hdrs, file);
   },
 
-  sendObject: async function(statement, response) {
-    let object;
-    try { object = await database.getAllFromDatabase(statement); }
+  sendConfirmation: async function(path, response) {
+    let text = "Post successful.";
+    let hdrs = { 'Content-Type': 'text/plain' };
+    respond.reply(response, hdrs, text);
+  },
+
+  sendObject: async function(statement, list, response) {
+    let objects;
+    try { objects = await database.getRows(statement, list); }
     catch (err) {
-      // console.log(err);
-      // console.log(object);
+      console.log(err);
       return respond.fail(response, BadType, "Not found in database."); }
     let hdrs = { 'Content-Type': 'application/JSON' };
-    respond.replyJSON(response, hdrs, object);
+    respond.reply(response, hdrs, JSON.stringify(objects));
   }
 };

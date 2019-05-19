@@ -24,8 +24,9 @@ async function getHandler(request, response) {
     send.sendPage(path, response);
   }
   else if (request.url.endsWith("/get_testimonials")) {
+    list = [];
     let statement = "SELECT title,name,stars,review FROM testimonials";
-    send.sendObject(statement, response);
+    send.sendObject(statement, list, response);
   }
   else if (request.url.endsWith("/get_testimonial_form")) {
     let path = 'static/testimonial_form.html';
@@ -37,7 +38,7 @@ async function postHandler(object, request, response) {
   if (request.url.endsWith("/submit_testimonial")) {
     list = [object.name, object.email, object.title, object.review, object.stars];
     let statement = "INSERT INTO testimonials(name,email,title,review,stars) VALUES(?,?,?,?,?)";
-    database.runDatabase(statement, list);
+    database.insertRow(statement, list);
     let path = "static/testimonial_submission_confirmation.html";
     send.sendPage(path, response);
   }

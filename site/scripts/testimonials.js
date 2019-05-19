@@ -9,7 +9,6 @@ function start() {
 
 function displayTestimonials() {
   if (this.readyState != XMLHttpRequest.DONE) return;
-  console.log(this.responseText)
   let reviews = JSON.parse(this.responseText);
   let ul = document.querySelector("#pastTestimonials");
   for (var i = 0; i < reviews.length; i++) {
@@ -71,7 +70,13 @@ function postTestimonial() {
   };
   testimonial = JSON.stringify(testimonialObj);
   var q = new XMLHttpRequest();
-  q.onreadystatechange = displayTestimonialForm;
+  q.onreadystatechange = displayTestimonialFormConfirmation;
   q.open("POST", '/testimonials/submit_testimonial', true);
   q.send(testimonial);
+}
+
+function displayTestimonialFormConfirmation() {
+  if(this.readyState != XMLHttpRequest.DONE) return;
+  var testimonialForm = document.querySelector("#testimonialForm");
+  testimonialForm.innerHTML = this.responseText;
 }
