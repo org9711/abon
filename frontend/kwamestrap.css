@@ -37,6 +37,16 @@ path{
   height: 150px; 
 }
 
+.rcorners-tab{
+    border-radius: 30px;
+}
+
+.tab-border{
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 30px;
+}
+
 .curry-colour{
     color: #ffa133;
 }
@@ -63,6 +73,18 @@ path{
 
 .abon-black{
     color: #2b2a24;
+}
+
+.checked {
+  color: orange;
+}
+
+.abon-bg-green{
+    background-color: #00cc00;
+}
+
+.abon-bg-orange{
+    background-color: #ff6033;
 }
 
 div#all {

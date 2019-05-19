@@ -12,7 +12,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     
      <!-- Custom styles for this template -->
-    <link href="carousel.css" rel="stylesheet">
     <link href="kwamestrap.css" rel="stylesheet">
     
     <!-- Custom Scripts -->
@@ -47,7 +46,7 @@
                     <a class="nav-item nav-link" href="index.html"><h2>Home</h2></a>
                     <a class="nav-item active nav-link" href="products.html"><h2 class="abon-yellow">Products</h2></a>
                     <a class="nav-item nav-link" href="about.html"><h2>About Us</h2> </a>
-                    <a class="nav-item nav-link" href="order.html"><h2>Testimonials</h2></a>
+                    <a class="nav-item nav-link" href="testimonials.html"><h2>Testimonials</h2></a>
                 </div>
             </div>
         </nav>
@@ -77,69 +76,15 @@
         <hr class="featurette-divider">
 -->
         <div class="row">
-            
-            <!-- SIDE CART --> 
-            <div class="col-md-4 order-md-2 mb-4">
-              <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Your Order</span>
-                <span class="badge badge-secondary badge-pill">3</span>
-              </h4>
-              <ul id="cart" class="list-group mb-3">
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                  <div>
-                    <h6 class="my-0">Superfood Pesto</h6>
-                  </div>
-                  <span class="text-muted">$12</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                  <div>
-                    <h6 class="my-0">Roast Veg Curry</h6>
-                  </div>
-                  <span class="text-muted">$8</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                  <div>
-                    <h6 class="my-0">Bacon</h6>
-                  </div>
-                  <span class="text-muted">$5</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between bg-light">
-                  <div class="text-success">
-                    <h6 class="my-0">Promo code</h6>
-                    <small>BRISOTLSTUDENT</small>
-                  </div>
-                  <span class="text-success">-$5</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                  <span>Subtotal (£)</span>
-                  <strong>$20</strong>
-                </li>
-              </ul>
-
-              <form class="card p-2 mb-1">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Promo code">
-                  <div class="input-group-append">
-                    <button type="submit" class="btn btn-secondary">Redeem</button>
-                  </div>
-                </div>
-              </form>
-                
-             <!-- Button trigger modal -->
-             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
-               Proceed to Checkout
-             </button>
-            </div>
-            
-            <div class="col-md-8 order-md-1">
+            <div class="col-md-12">
                 <div class="row">
                     <!-- PESTO TAB -->
                     <div class="col-md-6 p-2 carousel-inner">
-                      <div class="view view-first carousel-item active">
+                      <div class="view view-first carousel-item active rcorners-tab">
                         <img src="../site/images/pesto.jpg" alt="First slide" style="width:100% "/>
                         <div class="container">
                           <div class="carousel-caption mask">
-                            <h1 class="pesto-colour">Superfood Pesto</h1>
+                            <h1 class="abon-orange">Superfood Pesto</h1>
         <!--
                             <p >This pesto is as vibrant in colour as it is in flavour. It takes inspiration from both Japanese and Italian cooking and fuses the best of both cuisines. It's full of spinach, edamame beans, garlic, coriander, chilli and much more. It also has a bit of white miso which is really good for you and adds a brilliant umami funk to the dish.
 
@@ -161,7 +106,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p><a id="addSuperfood" class="btn btn-sm btn-primary" href="#" role="button">Add to Basket</a></p>
+                            <button id="addSuperfoodPesto" class="mt-1 btn btn-sm btn-info" value="Superfood Pesto">Add to Basket</button>
                           </div>
                         </div>
                       </div>
@@ -169,11 +114,11 @@
 
                     <!--ROAST VEG TAB-->
                     <div class="col-md-6 p-2 carousel-inner">
-                      <div class="view view-first carousel-item active">
+                      <div class="view view-first carousel-item active rcorners-tab">
                         <img src="../site/images/curry.jpg" alt="First slide" style="width:100% "/>
                         <div class="container">
                           <div class="carousel-caption mask">
-                            <h1 class="curry-colour">Roasted Veg Curry</h1>
+                            <h1 class="abon-orange">Roasted Veg Curry</h1>
         <!--
                             <p class="curry-colour">The roasted veg curry is packed full of the good stuff. It includes butternut squash, sweet potato, peppers, mushrooms and tons of other veg that will make you feel as good as it tastes.
 
@@ -195,22 +140,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p><a class="btn btn-sm btn-primary" href="#" role="button">Add to Basket</a></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    </div>
-
-                <div class="row">
-                    <!-- COMING SOON TAB -->
-                    <div class="col-md-6 p-2 carousel-inner">
-                      <div class="view view-first carousel-item active">
-                        <img src="../site/images/coming-soon.jpg" alt="First slide" style="width:100% "/>
-                        <div class="container">
-                          <div class="carousel-caption mask">
-                            <h1 class="curry-colour">Watch This Space</h1>
-                            <p><a class="btn btn-sm btn-primary" href="#" role="button">Learn More</a></p>
+                            <button id="addVegCurry" class="mt-1 btn btn-sm btn-info" value="Veg Curry">Add to Basket</button>
                           </div>
                         </div>
                       </div>
@@ -218,12 +148,25 @@
 
                     <!-- COMING SOON TAB -->
                     <div class="col-md-6 p-2 carousel-inner">
-                      <div class="view view-first carousel-item active">
+                      <div class="view view-first carousel-item active rcorners-tab">
                         <img src="../site/images/coming-soon.jpg" alt="First slide" style="width:100% "/>
                         <div class="container">
                           <div class="carousel-caption mask">
                             <h1 class="curry-colour">Watch This Space</h1>
-                            <p><a class="btn btn-sm btn-primary" href="#" role="button">Learn More</a></p>
+<!--                            <button class="mt-1 btn btn-sm btn-info">Learn More</button>-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- COMING SOON TAB -->
+                    <div class="col-md-6 p-2 carousel-inner">
+                      <div class="view view-first carousel-item active  rcorners-tab">
+                        <img src="../site/images/coming-soon.jpg" alt="First slide" style="width:100% "/>
+                        <div class="container">
+                          <div class="carousel-caption mask">
+                            <h1 class="curry-colour">Watch This Space</h1>
+<!--                            <button class="mt-1 btn btn-sm btn-info">Learn More</button>-->
                           </div>
                         </div>
                       </div>
@@ -240,7 +183,7 @@
         <div class="container">
             
             <h1>Your Basket</h1>
-            
+
             <hr>
 
             <!-- Modal -->
@@ -332,22 +275,23 @@
                 <div id="table" class="table-editable">
                   <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x"
                         aria-hidden="true"></i></a></span>
-                  <table class="table table-bordered table-responsive-md table-striped text-center">
+                  <table id="cart" class="table table-responsive-md table-striped text-center">
                     <tr>
                       <th class="text-center">Product Name</th>
                       <th class="text-center">Price(£)</th>
                       <th class="text-center">Quantity</th>
                       <th></th>
                     </tr>
+<!--
                     <tr>
                       <td class="pt-3-half">Pesto</td>
                       <td class="pt-3-half">2.20</td>
-                      <td class="pt-3-half" contenteditable="true">2</td>
+                      <td class="pt-3-half" contenteditable="true">3</td>
                       <td>
                         <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
                       </td>
                     </tr>
-                    <!-- This is our clonable table line -->
+                     This is our clonable table line 
                     <tr class="hide">
                       <td class="pt-3-half">Curry</td>
                       <td class="pt-3-half">2.20</td>
@@ -356,16 +300,23 @@
                         <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
                       </td>
                     </tr>
+-->
                   </table>
                 </div>
               </div>
+                
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success ml-2 mb-2 mt-2" data-toggle="modal" data-target="#exampleModalCenter">
+                Proceed to Checkout
+                </button>
+                
             </div>
-            <!-- Editable table -->
-            
-            
+                  
         </div>
-          
+        
       </div><!-- /.container -->
+        
+        
 
     </main>
     
