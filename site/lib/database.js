@@ -1,14 +1,27 @@
 let sqlite = require("sqlite");
 
 module.exports = {
-    getAll: async function(statement) {
-        let db = await sqlite.open("./db.sqlite");
-        let testimonials = await db.all(statement);
-        return testimonials;
-    },
+  getRows: async function(statement, list) {
+    let object
+    let db = await sqlite.open("./db.sqlite");
+    try { object = await db.all(statement, list); }
+    catch(err) { console.log(err); }
+    return object;
+  },
 
-    postEntry: async function(statement) {
-        let db = await sqlite.open("./db.sqlite")
-        await db.run(statement);
-    }
+  insertRow: async function(statement, list) {
+    let db = await sqlite.open("./db.sqlite");
+    try { await db.run(statement, list); }
+    catch(err) { console.log(err); }
+    return getLastInsertRowId(db);
+  }
 };
+
+async function getLastInsertRowId(db) {
+  statement = "SELECT last_insert_rowid()";
+  let id;
+  try { id = await db.get(statement); }
+  catch(err) { console.log(err); }
+  id = id["last_insert_rowid()"];
+  return id;
+}
