@@ -6,13 +6,15 @@ module.exports = {
       let splits = request.url.split('/');
       filename = splits[splits.length-1];
       let path = 'static/images/' + filename;
-      send.sendPage(path, response);
+      let hdrs = { 'Content-Type': 'image/png' };
+      send.sendPage(path, hdrs, response);
     }
     else if (request.url.endsWith(".jpg")) {
       let splits = request.url.split('/');
       filename = splits[splits.length-1];
       let path = 'static/images/' + filename;
-      send.sendPage(path, response);
+      let hdrs = { 'Content-Type': 'image/jpeg' };
+      send.sendPage(path, hdrs, response);
     }
   }
 };

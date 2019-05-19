@@ -15,18 +15,20 @@ module.exports = {
 };
 
 async function getHandler(request, response) {
-  if (request.url.endsWith("/product_admin")) {
-    let path = 'static/product_admin.html';
-    send.sendPage(path, response);
+  if (request.url.endsWith("/products")) {
+      let path = 'static/pages/products.html';
+      let hdrs = { 'Content-Type': 'application/xhtml+xml' };
+      send.sendPage(path, hdrs, response);
   }
   else if (request.url.endsWith("/get_products")) {
     list = [];
     let statement = "SELECT name,price,image_name FROM products";
     send.sendObject(statement, list, response);
   }
-  else if (request.url.endsWith("/get_product_form")) {
-    let path = 'static/admin_product_form.html';
-    send.sendPage(path, response)
+  else if (request.url.endsWith("/get_products_layout")) {
+      let path = 'static/components/product_tab.html';
+      let hdrs = { 'Content-Type': 'application/xhtml+xml' };
+      send.sendPage(path, hdrs, response);
   }
 }
 
