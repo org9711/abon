@@ -48,16 +48,27 @@
                     <h5 class="modal-title" id="exampleModalLongTitle">Checkout</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <!-- add times button here -->
-                      <span aria-hidden="true"></span>
+                      <span aria-hidden="true">&#215;</span>
                     </button>
                   </div>
                     
                   <div class="modal-body">
                     <h5>Details</h5>
-                    <label for="firstName">Full Name</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required="true"/>
-                    <div class="invalid-feedback">
-                      Valid first name is required.
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Michael" value="" required="true"/>
+                            <div class="invalid-feedback">
+                              Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Buble" value="" required="true"/>
+                            <div class="invalid-feedback">
+                              Valid first name is required.
+                            </div>
+                        </div>
                     </div>
                       
                     <label for="email">Email</label>
@@ -67,13 +78,34 @@
                     </div>
                       
                     <hr class="mb-2"/>
+                      
+                    <h5>Address</h5>
+                      
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="Address1" placeholder="Address Line 1" value="" required="true"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="Address2" placeholder="Address Line 2" value="" required="false"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="Town" placeholder="Town" value="" required="false"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="County" placeholder="County" value="" required="false"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="PostCode" placeholder="Postcode" value="" required="true"/>
+                    </div>
+                    
+                      
+                    <hr class="mb-2"/>
                     
                     <h5>Payment Details</h5>
                     
                     <div class="d-block my-3">
                       <div class="custom-control custom-radio">
                         <input id="cash" name="paymentMethod" type="radio" class="custom-control-input"  checked="true" required="true"/>
-                        <label class="custom-control-label" for="cash">Card</label>
+                        <label class="custom-control-label" for="cash">Cash</label>
                       </div>
                       <div class="custom-control custom-radio">
                         <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="true"/>
@@ -118,7 +150,7 @@
                     
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Pay</button>
+                    <button type="button" class="btn btn-primary">Complete Order</button>
                   </div>
                     
                 </div>
