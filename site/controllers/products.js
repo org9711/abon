@@ -22,7 +22,7 @@ async function getHandler(request, response) {
   }
   else if (request.url.endsWith("/get_products")) {
     list = [];
-    let statement = "SELECT id,name,price,image_name FROM products";
+    let statement = "SELECT id,name,price,image_name,description,status FROM products";
     send.sendObject(statement, list, response);
   }
   else if (request.url.endsWith("/get_product_layout")) {

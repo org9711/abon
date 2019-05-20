@@ -41,27 +41,17 @@ function displayTestimonials() {
     let nameTag = review.getElementsByClassName('font-weight-bold mb-4')[0];
     let descriptionTag = review.getElementsByClassName('dark-grey-text mt-4')[0];
 
-    console.log('div before:')
-    console.log(starsDiv);
-
     for (let j = 0; j < reviews[i].stars; j++) {
       let newSpan = document.createElement('span');
       newSpan.className = "fa fa-star checked";
       starsDiv.append(newSpan);
-      console.log('pos:')
-      console.log(newSpan)
     }
     for (let j = 0; j < 5 - reviews[i].stars; j++) {
       let newSpan = document.createElement('span');
       newSpan.className = "fa fa-star";
       starsDiv.append(newSpan);
-      console.log('neg:')
-      console.log(newSpan)
     }
-
-    console.log('div after:')
-    console.log(starsDiv);
-
+    
     nameTag.textContent = reviews[i].name;
     descriptionTag.textContent += reviews[i].review;
 

@@ -42,6 +42,12 @@ function displayProducts() {
       let image = product.getElementsByClassName('product-image')[0];
       let addToBasketButton = document.createElement("button");
 
+      // 2 == AVAILABLE
+      // 1 == SOLD OUT
+      // 0 == COMING SOON
+      let productStatus = products[i].status;
+      let productDescription = products[i].description;
+
       name.textContent = products[i].name;
       image.src = products[i].image_name;
 
