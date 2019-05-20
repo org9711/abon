@@ -37,7 +37,7 @@ function displayProducts() {
   let ul = document.querySelector("#product-list");
   for (var i = 0; i < products.length; i++) {
     let product = productLayout.cloneNode(true);
-    let buttonDiv = product.getElementsByClassName('carousel-caption mask proudct-content')[0];
+    let buttonDiv = product.getElementsByClassName('mask proudct-content')[0];
     let name = product.getElementsByTagName('h1')[0];
     let image = product.getElementsByClassName('product-image')[0];
     let addToBasketButton = document.createElement("button");
@@ -46,8 +46,8 @@ function displayProducts() {
     image.src = products[i].image_name;
 
     addToBasketButton.innerHTML = "Add to Basket";
-    addToBasketButton.className = "mt-1 btn btn-sm btn-info";
-    addToBasketButton.addEventListener("click", function() {
+    addToBasketButton.className = "mt-1 btn btn-lg abon-bg-orange";
+    addToBasketButton.addEventListener("click", function(){
       var myCart = document.getElementById("cart");
       addToBasket(myCart, products[i].id, products[i].name, products[i].price);
     });
@@ -66,18 +66,18 @@ function addToBasket(myCart, productId, productName, productPrice) {
     meal = myCart.getElementsByClassName(rowId)[0];
 
     let el = document.createElement('html');
-    rowText = '<tr class="' + rowId + '"><td class="pt-3-half">' + productName + '</td><td class="pt-3-half">' + productPrice + '</td><td class="pt-3-half meal-quantity" contenteditable="false">1</td><td><button type="button" class="btn btn-danger btn-rounded removeBtn btn-sm my-0">Remove</button></td></tr>';
+    rowText = '<tr class="' + rowId + '"><td class="pt-3-half">' + productName + '</td><td class="pt-3-half">2.20</td><td class="pt-3-half meal-quantity" contenteditable="false"><div class="container"><div class="row justify-content-center"><div class="col-xs-3 col-xs-offset-3"><div class="input-group number-spinner"><span class="input-group-btn"><button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button></span><input type="text" style="max-width: 3.0rem" class="form-control text-center" value="0"/><span class="input-group-btn"><button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button></span></div></div></div></div></td><td><button type="button" class="btn btn-danger btn-rounded removeBtn btn-sm my-0">Remove</button></td></tr>';
     el.innerHTML = rowText;
     rowHTML = el.firstElementChild;
     myCart.append(rowHTML);
 
-    meal.getElementsByClassName("removeBtn")[0].addEventListener("click", function(){
-      this.parentElement.parentElement.remove();
-    });
+      meal.getElementsByClassName("removeBtn")[0].addEventListener("click", function() {
+          this.parentElement.parentElement.remove();
+      });
   }
   else {
-    var mealQuantity = meal.getElementsByClassName('pt-3-half meal-quantity')[0];
-    mealQuantity.innerHTML = parseInt(mealQuantity.innerHTML) + 1;
+    var mealQuantity = meal.getElementsByClassName('form-control text-center')[0];
+    mealQuantity.value = parseInt(mealQuantity.value) + 1;
   }
 }
 

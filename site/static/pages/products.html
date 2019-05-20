@@ -5,11 +5,6 @@
     <meta name="author" content="Kwame Dogbe and Ollie Ryan-George"/>
     <title>Abon</title>
     
-    <!--Scripts-->
-    <script src="products.js"></script>
-<!--    <script src="input-spinner.js"></script>-->
-    <script src="abon-shopping.js"></script>
-    
     <!--BootstrapCDN-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     
@@ -19,6 +14,11 @@
     
      <!-- Custom styles for this template -->
     <link href="kwamestrap.css" rel="stylesheet"/>
+    
+    <!--Scripts-->
+    <script src="products.js"></script>
+    <script src="abon-shopping.js"></script>
+    <script src="input-spinner.js"></script>
 </head>
     
 <body>
@@ -48,16 +48,27 @@
                     <h5 class="modal-title" id="exampleModalLongTitle">Checkout</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <!-- add times button here -->
-                      <span aria-hidden="true"></span>
+                      <span aria-hidden="true">&#215;</span>
                     </button>
                   </div>
                     
                   <div class="modal-body">
                     <h5>Details</h5>
-                    <label for="firstName">Full Name</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required="true"/>
-                    <div class="invalid-feedback">
-                      Valid first name is required.
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Michael" value="" required="true"/>
+                            <div class="invalid-feedback">
+                              Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Buble" value="" required="true"/>
+                            <div class="invalid-feedback">
+                              Valid first name is required.
+                            </div>
+                        </div>
                     </div>
                       
                     <label for="email">Email</label>
@@ -67,13 +78,34 @@
                     </div>
                       
                     <hr class="mb-2"/>
+                      
+                    <h5>Address</h5>
+                      
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="Address1" placeholder="Address Line 1" value="" required="true"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="Address2" placeholder="Address Line 2" value="" required="false"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="Town" placeholder="Town" value="" required="false"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="County" placeholder="County" value="" required="false"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="PostCode" placeholder="Postcode" value="" required="true"/>
+                    </div>
+                    
+                      
+                    <hr class="mb-2"/>
                     
                     <h5>Payment Details</h5>
                     
                     <div class="d-block my-3">
                       <div class="custom-control custom-radio">
                         <input id="cash" name="paymentMethod" type="radio" class="custom-control-input"  checked="true" required="true"/>
-                        <label class="custom-control-label" for="cash">Card</label>
+                        <label class="custom-control-label" for="cash">Cash</label>
                       </div>
                       <div class="custom-control custom-radio">
                         <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="true"/>
@@ -118,7 +150,7 @@
                     
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Pay</button>
+                    <button type="button" class="btn btn-primary">Complete Order</button>
                   </div>
                     
                 </div>
@@ -156,7 +188,7 @@
         
 
     </main>
-    
+        
     <footer class="footer mt-auto py-3" id="footer" style="background: #343434"></footer>
 </body>
 </html>

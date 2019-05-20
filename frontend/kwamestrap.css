@@ -87,6 +87,17 @@ path{
     background-color: #ff6033;
 }
 
+.post__meta {
+    content: "";
+    display: inline;
+    height: 5px;
+    margin: 40px auto 0;
+    width: 50%;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+
 div#all {
   width: 100%;
   height: 100%;
@@ -200,5 +211,8 @@ div#all {
     line-height: 27px;
   }
 
-
+.wriggle {
+    width: 30px;
+    height: 30px;
+}
 
