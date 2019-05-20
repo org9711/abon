@@ -157,18 +157,8 @@ async function createOrdersTable() {
     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
     "customer INTEGER NOT NULL, " +
     "product INTEGER NOT NULL, " +
-    // "quantity INTEGER NOT NULL)";
     "quantity INTEGER NOT NULL, " +
     "datetime DATETIME NOT NULL)";
-  // let insertRowCommand1 =
-  //   "INSERT INTO orders (customer, product, quantity) " +
-  //   "VALUES (0, 0, 2)";
-  // let insertRowCommand2 =
-  //   "INSERT INTO orders (customer, product, quantity)" +
-  //   "VALUES (0, 1, 1)";
-  // let insertRowCommand3 =
-  //   "INSERT INTO orders (customer, product, quantity)" +
-  //   "VALUES (1, 1, 3)";
   let insertRowCommand1 =
     "INSERT INTO orders (customer, product, quantity, datetime) " +
     "VALUES (0, 0, 2, '2019-05-10 16-05-30')";

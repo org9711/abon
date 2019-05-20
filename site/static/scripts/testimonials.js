@@ -3,40 +3,71 @@ addEventListener('load', start);
 function start() {
   getHeader();
   getFooter();
-  // getTestimonials();
+  getTestimonialLayout();
   // getTestimonialForm();
 }
 
-function displayTestimonials() {
-  if (this.readyState != XMLHttpRequest.DONE) return;
-  let reviews = JSON.parse(this.responseText);
-  let ul = document.querySelector("#pastTestimonials");
-  for (var i = 0; i < reviews.length; i++) {
-    let review = document.createElement('div');
-    var title = document.createElement('h3');
-    var name = document.createElement('h4');
-    var stars = document.createElement('p');
-    var description = document.createElement('p');
+var testimonialLayout;
 
-    title.textContent = reviews[i].title;
-    name.textContent = reviews[i].name;
-    stars.textContent = reviews[i].stars;
-    description.textContent = reviews[i].review;
+function getTestimonialLayout() {
+  var q = new XMLHttpRequest();
+  q.onreadystatechange = storeTestimonialLayout;
+  q.open("GET", '/testimonials/get_testimonial_layout', true);
+  q.send();
+}
 
-    review.appendChild(title);
-    review.appendChild(name);
-    review.appendChild(stars);
-    review.appendChild(description);
-
-    ul.appendChild(review);
-  }
+function storeTestimonialLayout() {
+  if(this.readyState != XMLHttpRequest.DONE) return;
+  var el = document.createElement('html');
+  el.innerHTML = this.responseText;
+  testimonialLayout = el;
+  getTestimonials();
 }
 
 function getTestimonials() {
   var q = new XMLHttpRequest();
   q.onreadystatechange = displayTestimonials;
-  q.open("GET", '/testimonials/get_testimonials', true);
+  q.open("GET", '/testimonials/get_approved', true);
   q.send();
+}
+
+function displayTestimonials() {
+  if (this.readyState != XMLHttpRequest.DONE) return;
+  let reviews = JSON.parse(this.responseText);
+  let ul = document.getElementsByClassName('row')[0];
+  for (var i = 0; i < reviews.length; i++) {
+    let review = testimonialLayout.cloneNode(true);
+    let starsDiv = review.getElementsByClassName('card-header abon-bg-orange')[0];
+    let nameTag = review.getElementsByClassName('font-weight-bold mb-4')[0];
+    let descriptionTag = review.getElementsByClassName('dark-grey-text mt-4')[0];
+
+    console.log('div before:')
+    console.log(starsDiv);
+
+    for (let j = 0; j < reviews[i].stars; j++) {
+      let newSpan = document.createElement('span');
+      newSpan.className = "fa fa-star checked";
+      starsDiv.append(newSpan);
+      console.log('pos:')
+      console.log(newSpan)
+    }
+    for (let j = 0; j < 5 - reviews[i].stars; j++) {
+      let newSpan = document.createElement('span');
+      newSpan.className = "fa fa-star";
+      starsDiv.append(newSpan);
+      console.log('neg:')
+      console.log(newSpan)
+    }
+
+    console.log('div after:')
+    console.log(starsDiv);
+
+    nameTag.textContent = reviews[i].name;
+    descriptionTag.textContent += reviews[i].review;
+
+    review = review.firstElementChild;
+    ul.appendChild(review);
+  }
 }
 
 function getTestimonialForm() {
