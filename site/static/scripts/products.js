@@ -57,7 +57,11 @@ function getHeader() {
 function displayHeader() {
   if(this.readyState != XMLHttpRequest.DONE) return;
   var header = document.querySelector("#header");
-  header.innerHTML = this.responseText;
+  let headerText = this.responseText;
+  let headerTextSplit = headerText.split("$PRODUCTSCLASS$");
+  headerText = headerTextSplit.join(" class=\"abon-yellow\"")
+  headerText = headerText.replace(/\$\w*\$/g, "");
+  header.innerHTML = headerText;
 }
 
 function getFooter() {
