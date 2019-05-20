@@ -87,6 +87,23 @@ path{
     background-color: #ff6033;
 }
 
+.wriggle{
+    content: "";
+    display: block;
+    height: 5px;
+    margin: 40px auto 0;
+    width: 50%;
+    box-sizing: border-box;
+    background-color: red;
+}
+
+.test{
+    height: 500px;
+    width = 100px;
+    background-color: red;
+    color: red;
+}
+
 div#all {
   width: 100%;
   height: 100%;
