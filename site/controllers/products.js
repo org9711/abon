@@ -28,6 +28,11 @@ async function getHandler(request, response) {
     let path = 'static/components/product_tab.html';
     send.sendPage(path, request, response);
   }
+  else if (request.url.endsWith("/get_product_description")) {
+      let path = 'static/components/product_modal.html';
+      let hdrs = { 'Content-Type': 'application/xhtml+xml' };
+      send.sendPage(path, hdrs, response);
+  }
 }
 
 async function postHandler(object, request, response) {
