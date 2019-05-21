@@ -1,4 +1,4 @@
-let HTTP = require('http');
+let HTTPS = require('https');
 let fs = require('fs');
 let OK = 200, NotFound = 404, BadType = 415;
 let respond = require('./lib/respond.js');
@@ -8,11 +8,15 @@ let picturesC = require('./controllers/pictures.js');
 let productsC = require('./controllers/products.js');
 let testimonialsC = require('./controllers/testimonials.js');
 let frameC = require('./controllers/frame.js');
-start(8080);
+start(44300);
 
 // Provide a service to localhost only.
 function start(port) {
-  let service = HTTP.createServer(handle);
+  let cert = {
+    pfx: fs.readFileSync('cert/server.pfx'),
+    passphrase: "password"
+  };
+  let service = HTTPS.createServer(cert, handle);
   try { service.listen(port, 'localhost'); }
   catch (err) { throw err; }
   console.log("Visit localhost:" + port);
@@ -36,7 +40,7 @@ async function handle(request, response) {
   else if (request.url.startsWith("/testimonials")) {
     testimonialsC.handle(request, response);
   }
-  else if (request.url == "/") {
+  else if (request.url.startsWith("/")) {
     htmlsC.handle(request, response);
   }
   else {
