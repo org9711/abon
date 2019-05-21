@@ -69,29 +69,36 @@ function displayProducts() {
       // 2 == AVAILABLE
       // 1 == SOLD OUT
       // 0 == COMING SOON
+      
       let productId = products[i].id;
       let productName = products[i].name;
       let productPrice = products[i].price;
       let productStatus = products[i].status;
       let productDescrt = products[i].description;
+      
+      if(productStatus == 2){
+          name.textContent = products[i].name;
+          
+          addToBasketButton.innerHTML = 'Add to Basket <i class="fa fa-shopping-basket"></i>';
+          addToBasketButton.className = "mt-1 btn btn-lg abon-bg-orange";
+          addToBasketButton.addEventListener("click", function() {
+            var myCart = document.getElementById("cart");
+            addToBasket(myCart, productId, productName, productPrice);
+          });
+          buttonDiv.append(addToBasketButton);
+      }else if(productStatus == 1){
+          name.textContent = 'Sold Out';
+      }else if(productStatus == 0){
+          name.textContent = 'Coming Soon';
+      }
 
-      name.textContent = products[i].name;
       image.src = products[i].image_name;
       infoButton.dataset.target = '#productId' + products[i].id;
       
       nameModal.textContent = products[i].name + ' Info';
       descriptionModal.textContent = products[i].description;
       mainDiv.id = 'productId' + products[i].id;
-      console.log(typeof products[i].id)
-      priceModal.textContent = 'Price: £' + products[i].price.toFixed(2) + ' (Each sachet serves one person)'
-
-      addToBasketButton.innerHTML = 'Add to Basket <i class="fa fa-shopping-basket"></i>';
-      addToBasketButton.className = "mt-1 btn btn-lg abon-bg-orange";
-      addToBasketButton.addEventListener("click", function() {
-        var myCart = document.getElementById("cart");
-        addToBasket(myCart, productId, productName, productPrice);
-      });
-      buttonDiv.append(addToBasketButton);
+      priceModal.textContent = 'Price: £' + products[i].price.toFixed(2) + ' (Each sachet serves one person)';
 
       product = product.firstElementChild;
       productDescr = productDescr.firstElementChild;
@@ -108,7 +115,7 @@ function addToBasket(myCart, productId, productName, productPrice) {
   if(meal == null) {
     let el = document.createElement('html');
 
-    rowText = '<tr class="' + rowId + '"><td class="pt-3-half">' + productName + '</td><td class="pt-3-half">2.20</td><td class="pt-3-half meal-quantity" contenteditable="false"><div class="container"><div class="row justify-content-center"><div class="col-xs-3 col-xs-offset-3"><div class="input-group number-spinner"><span class="input-group-btn"><button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button></span><input type="text" style="max-width: 3.0rem" class="form-control text-center" value="1"/><span class="input-group-btn"><button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button></span></div></div></div></div></td><td><button type="button" class="btn btn-danger btn-rounded removeBtn btn-sm my-0">Remove</button></td></tr>';
+    rowText = '<tr class="' + rowId + '"><td class="pt-3-half">' + productName + '</td><td class="pt-3-half price">'+ productPrice.toFixed(2) +'</td><td class="pt-3-half meal-quantity" contenteditable="false"><div class="container"><div class="row justify-content-center"><div class="col-xs-3 col-xs-offset-3"><div class="input-group number-spinner"><span class="input-group-btn"><button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button></span><input type="text" style="max-width: 3.0rem" class="form-control text-center" value="1" readonly="true"/><span class="input-group-btn"><button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button></span></div></div></div></div></td><td><button type="button" class="btn btn-danger btn-rounded removeBtn btn-sm my-0">Remove</button></td></tr>';
 
     el.innerHTML = rowText;
     rowHTML = el.firstElementChild;
@@ -124,6 +131,23 @@ function addToBasket(myCart, productId, productName, productPrice) {
     var mealQuantity = meal.getElementsByClassName('form-control text-center')[0];
     mealQuantity.value = parseInt(mealQuantity.value) + 1;
   }
+    
+    subtotal();
+}
+
+function subtotal(){
+    var myCart = document.getElementById("cart");
+    var tableRows = myCart.children;
+    var sum = 0;
+
+    for(i = 1; i < tableRows.length; i++){
+        var price = parseFloat(tableRows[i].getElementsByClassName("pt-3-half price")[0].innerHTML);
+        var quantity = parseFloat(tableRows[i].getElementsByTagName("input")[0].value);
+        sum += price * quantity;
+    }
+    sum = sum.toFixed(2);
+    document.getElementById("total").innerHTML = sum;
+    console.log(sum);
 }
 
 function getHeader() {
