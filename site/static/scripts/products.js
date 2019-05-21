@@ -32,7 +32,7 @@ function getProducts() {
 
 function displayProducts() {
   if (this.readyState != XMLHttpRequest.DONE) return;
-  let products = JSON.parse(this.responseText);
+  products = JSON.parse(this.responseText);
   let ul = document.querySelector("#product-list");
 
   for (var i = 0; i < products.length; i++) {
@@ -45,6 +45,9 @@ function displayProducts() {
       // 2 == AVAILABLE
       // 1 == SOLD OUT
       // 0 == COMING SOON
+      let productId = products[i].id;
+      let productName = products[i].name;
+      let productPrice = products[i].price;
       let productStatus = products[i].status;
       let productDescription = products[i].description;
 
@@ -55,7 +58,7 @@ function displayProducts() {
       addToBasketButton.className = "mt-1 btn btn-lg abon-bg-orange";
       addToBasketButton.addEventListener("click", function() {
         var myCart = document.getElementById("cart");
-        addToBasket(myCart, products[i].id, products[i].name, products[i].price);
+        addToBasket(myCart, productId, productName, productPrice);
       });
       buttonDiv.append(addToBasketButton);
 
@@ -72,7 +75,7 @@ function addToBasket(myCart, productId, productName, productPrice) {
   if(meal == null) {
     let el = document.createElement('html');
 
-    rowText = '<tr class="' + rowId + '"><td class="pt-3-half">' + productName + '</td><td class="pt-3-half">2.20</td><td class="pt-3-half meal-quantity" contenteditable="false"><div class="container"><div class="row justify-content-center"><div class="col-xs-3 col-xs-offset-3"><div class="input-group number-spinner"><span class="input-group-btn"><button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button></span><input type="text" style="max-width: 3.0rem" class="form-control text-center" value="0"/><span class="input-group-btn"><button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button></span></div></div></div></div></td><td><button type="button" class="btn btn-danger btn-rounded removeBtn btn-sm my-0">Remove</button></td></tr>';
+    rowText = '<tr class="' + rowId + '"><td class="pt-3-half">' + productName + '</td><td class="pt-3-half">2.20</td><td class="pt-3-half meal-quantity" contenteditable="false"><div class="container"><div class="row justify-content-center"><div class="col-xs-3 col-xs-offset-3"><div class="input-group number-spinner"><span class="input-group-btn"><button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button></span><input type="text" style="max-width: 3.0rem" class="form-control text-center" value="1"/><span class="input-group-btn"><button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button></span></div></div></div></div></td><td><button type="button" class="btn btn-danger btn-rounded removeBtn btn-sm my-0">Remove</button></td></tr>';
 
     el.innerHTML = rowText;
     rowHTML = el.firstElementChild;
