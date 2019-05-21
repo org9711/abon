@@ -2,7 +2,7 @@ var sqlite = require("sqlite");
 // createTestimonialsTable();
 // createProductsTable();
 // createCustomersTable();
-createOrdersTable();
+// createOrdersTable();
 
 async function createTestimonialsTable() {
   let createDbCommand =
@@ -27,13 +27,13 @@ async function createTestimonialsTable() {
     "VALUES ('Joe Williams', 'willywiz@gmail.com', 'I eat this with a beer while watching the football!', 3, 2)";
   let insertRowCommand5 =
     "INSERT INTO testimonials (name, email, review, stars, status) " +
-    "VALUES ('James Lace', 'thekdog@gmail.com', 'This curry gave me the shits :\()', 1, 2)";
+    "VALUES ('Emma Labert', 'em@wix.com', 'Just ordinarily excellent!', 1, 2)";
   let insertRowCommand6 =
     "INSERT INTO testimonials (name, email, review, stars, status) " +
     "VALUES ('Noah Haran', 'noahbuilttheark@gmail.com', 'I don''t eat much but when I do, I eat Abon!', 4, 0)";
   let insertRowCommand7 =
     "INSERT INTO testimonials (name, email, review, stars, status) " +
-    "VALUES ('James Lace', 'jl-marketing@gmail.com', 'This curry gave me the shits :\()', 1, 0)";
+    "VALUES ('James Lace', 'jl-marketing@gmail.com', 'This curry gave me the shits :()', 1, 0)";
   let insertRowCommand8 =
     "INSERT INTO testimonials (name, email, review, stars, status) " +
     "VALUES ('Luke Leckie', 'ilovewindsurfing@yahoo.com', 'Join windsurfing please!', 1, 1)";

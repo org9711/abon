@@ -4,46 +4,45 @@
     <meta charset="UTF-8"/>
     <meta name="author" content="Kwame Dogbe and Ollie Ryan-George"/>
     <title>Abon</title>
-    
+
     <!--BootstrapCDN-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-    
+
      <!-- Custom styles for this template -->
     <link href="kwamestrap.css" rel="stylesheet"/>
-    
+
     <!--Scripts-->
     <script src="products.js"></script>
-    <script src="abon-shopping.js"></script>
     <script src="input-spinner.js"></script>
 </head>
-    
+
 <body>
     <header id="header"></header>
-    
+
     <main>
-        
-    <!-- MEAL TABS --> 
+
+    <!-- MEAL TABS -->
       <div class="container marketing">
           <h1>Our Products</h1>
 
         <div class="row" id="product-list"></div>
-          
+
         <hr class="featurette-divider"/>
 
         <!-- SHOPPING CART -->
         <div class="container">
-            
+
             <h1>Your Basket</h1>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    
+
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Checkout</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -51,7 +50,7 @@
                       <span aria-hidden="true">&#215;</span>
                     </button>
                   </div>
-                    
+
                   <div class="modal-body">
                     <h5>Details</h5>
                     <div class="row">
@@ -70,17 +69,17 @@
                             </div>
                         </div>
                     </div>
-                      
+
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" placeholder="nick@gmail.com"/>
                     <div class="invalid-feedback">
                         Please enter a valid email address for shipping updates.
                     </div>
-                      
+
                     <hr class="mb-2"/>
-                      
+
                     <h5>Address</h5>
-                      
+
                     <div class="col-md-6 mb-3">
                         <input type="text" class="form-control" id="Address1" placeholder="Address Line 1" value="" required="true"/>
                     </div>
@@ -96,12 +95,12 @@
                     <div class="col-md-6 mb-3">
                         <input type="text" class="form-control" id="PostCode" placeholder="Postcode" value="" required="true"/>
                     </div>
-                    
-                      
+
+
                     <hr class="mb-2"/>
-                    
+
                     <h5>Payment Details</h5>
-                    
+
                     <div class="d-block my-3">
                       <div class="custom-control custom-radio">
                         <input id="cash" name="paymentMethod" type="radio" class="custom-control-input"  checked="true" required="true"/>
@@ -112,7 +111,7 @@
                         <label class="custom-control-label" for="paypal">Paypal</label>
                       </div>
                     </div>
-                      
+
                     <div class="row">
                       <div class="col-md-6 mb-3">
                         <label for="cc-name">Name on card</label>
@@ -145,18 +144,18 @@
                           Security code required
                         </div>
                       </div>
-                    </div> 
+                    </div>
                   </div>
-                    
+
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Complete Order</button>
                   </div>
-                    
+
                 </div>
               </div>
             </div>
-            
+
             <!-- Editable table -->
             <div class="card">
               <div class="card-body">
@@ -173,22 +172,22 @@
                   </table>
                 </div>
               </div>
-                
+
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-success ml-2 mb-2 mt-2" data-toggle="modal" data-target="#exampleModalCenter">
                 Proceed to Checkout
                 </button>
-                
+
             </div>
-                  
+
         </div>
-        
+
       </div><!-- /.container -->
-        
-        
+
+
 
     </main>
-        
+
     <footer class="footer mt-auto py-3" id="footer" style="background: #343434"></footer>
 </body>
 </html>

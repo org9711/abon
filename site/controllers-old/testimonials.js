@@ -17,11 +17,11 @@ module.exports = {
 async function getHandler(request, response) {
   if (request.url.endsWith("/testimonials")) {
     let path = 'static/testimonials.html';
-    send.sendPage(path, response);
+    send.sendPage(path, request, response);
   }
   else if (request.url.endsWith(".js")) {
     let path = 'scripts/testimonials.js';
-    send.sendPage(path, response);
+    send.sendPage(path, request, response);
   }
   else if (request.url.endsWith("/get_testimonials")) {
     list = [];
@@ -40,6 +40,6 @@ async function postHandler(object, request, response) {
     let statement = "INSERT INTO testimonials(name,email,title,review,stars) VALUES(?,?,?,?,?)";
     database.insertRow(statement, list);
     let path = "static/testimonial_submission_confirmation.html";
-    send.sendPage(path, response);
+    send.sendPage(path, request, response);
   }
 }

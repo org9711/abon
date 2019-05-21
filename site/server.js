@@ -24,6 +24,7 @@ function start(port) {
 
 // Deal with a request.
 async function handle(request, response) {
+  await validateURL(request, response);
   if (request.url.endsWith(".png") || request.url.endsWith(".jpg")) {
     picturesC.handle(request, response);
   }
@@ -44,5 +45,15 @@ async function handle(request, response) {
   }
   else {
     return respond.fail(response, NotFound, "Request URL not valid.");
+  }
+}
+
+async function validateURL(request, response) {
+  dotDot = request.url.includes("..");
+  slashSlash = request.url.includes("//");
+  dotSlash = request.url.includes("./");
+  slashDot = request.url.includes("/.");
+  if (dotDot || slashSlash || dotSlash || slashDot) {
+    return respond.fail(response, BadType, "Restricted characters used in URL.")
   }
 }

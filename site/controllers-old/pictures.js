@@ -6,13 +6,13 @@ module.exports = {
       let splits = request.url.split('/');
       filename = splits[splits.length-1];
       let path = 'static/images/' + filename;
-      send.sendPage(path, response);
+      send.sendPage(path, request, response);
     }
     else if (request.url.endsWith(".jpg")) {
       let splits = request.url.split('/');
       filename = splits[splits.length-1];
       let path = 'static/images/' + filename;
-      send.sendPage(path, response);
+      send.sendPage(path, request, response);
     }
   }
 };

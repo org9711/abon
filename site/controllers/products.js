@@ -17,8 +17,7 @@ module.exports = {
 async function getHandler(request, response) {
   if (request.url.endsWith("/products")) {
       let path = 'static/pages/products.html';
-      let hdrs = { 'Content-Type': 'application/xhtml+xml' };
-      send.sendPage(path, hdrs, response);
+      send.sendPage(path, request, response);
   }
   else if (request.url.endsWith("/get_products")) {
     list = [];
@@ -26,9 +25,8 @@ async function getHandler(request, response) {
     send.sendObject(statement, list, response);
   }
   else if (request.url.endsWith("/get_product_layout")) {
-      let path = 'static/components/product_tab.html';
-      let hdrs = { 'Content-Type': 'application/xhtml+xml' };
-      send.sendPage(path, hdrs, response);
+    let path = 'static/components/product_tab.html';
+    send.sendPage(path, request, response);
   }
 }
 

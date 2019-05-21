@@ -7,11 +7,11 @@ module.exports = {
   handle: async function(request, response) {
     if (request.url.endsWith("admin_products.js")) {
       let path = "scripts/admin_products.js";
-      send.sendPage(path, response);
+      send.sendPage(path, request, response);
     }
     else if (request.url.endsWith("/admin")) {
       let path = "static/admin_products.html"
-      send.sendPage(path, response);
+      send.sendPage(path, request, response);
     }
   }
 };

@@ -7,15 +7,13 @@ module.exports = {
   handle: async function(request, response) {
     if (request.url.endsWith("/")) {
         let path = "static/pages/index.html";
-        let hdrs = { 'Content-Type': 'application/xhtml+xml' };
-        send.sendPage(path, hdrs, response);
+        send.sendPage(path, request, response);
     }
     else if (request.url.endsWith(".html")) {
       let splits = request.url.split('/');
       filename = splits[splits.length-1];
       let path = 'static/pages/' + filename;
-      let hdrs = { 'Content-Type': 'application/xhtml+xml' };      
-      send.sendPage(path, hdrs, response);
+      send.sendPage(path, request, response);
     }
   }
 };

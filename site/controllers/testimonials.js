@@ -17,12 +17,11 @@ module.exports = {
 async function getHandler(request, response) {
   if (request.url.endsWith("/testimonials")) {
     let path = 'static/pages/testimonials.html';
-    let hdrs = { 'Content-Type': 'application/xhtml+xml' };
-    send.sendPage(path, hdrs, response);
+    send.sendPage(path, request, response);
   }
   else if (request.url.endsWith(".js")) {
     let path = 'scripts/testimonials.js';
-    send.sendPage(path, response);
+    send.sendPage(path, request, response);
   }
   else if (request.url.endsWith("/get_approved")) {
     list = [];
@@ -36,8 +35,7 @@ async function getHandler(request, response) {
   }
   else if (request.url.endsWith("/get_testimonial_layout")) {
       let path = 'static/components/testimonial_tab.html';
-      let hdrs = { 'Content-Type': 'application/xhtml+xml' };
-      send.sendPage(path, hdrs, response);
+      send.sendPage(path, request, response);
   }
 }
 
@@ -47,6 +45,6 @@ async function postHandler(object, request, response) {
     let statement = "INSERT INTO testimonials(name,email,title,review,stars) VALUES(?,?,?,?,?)";
     database.insertRow(statement, list);
     let path = "static/testimonial_submission_confirmation.html";
-    send.sendPage(path, response);
+    send.sendPage(path, request, response);
   }
 }

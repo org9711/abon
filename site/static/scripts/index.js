@@ -14,12 +14,10 @@ function getHeader() {
 
 function displayHeader() {
   if(this.readyState != XMLHttpRequest.DONE) return;
-  var header = document.querySelector("#header");
-  let headerText = this.responseText;
-  let headerTextSplit = headerText.split("$HOMECLASS$");
-  headerText = headerTextSplit.join(" class=\"abon-yellow\"")
-  headerText = headerText.replace(/\$\w*\$/g, "");
-  header.innerHTML = headerText;
+  let header = document.getElementsByTagName("header")[0];
+  header.innerHTML = this.responseText;
+  pageHeading = header.getElementsByClassName("homeHeader")[0];
+  pageHeading.className = "abon-yellow"
 }
 
 function getFooter() {
@@ -31,6 +29,6 @@ function getFooter() {
 
 function displayFooter() {
   if(this.readyState != XMLHttpRequest.DONE) return;
-  var footer = document.querySelector("#footer");
+  let footer = document.getElementsByTagName("footer")[0];
   footer.innerHTML = this.responseText;
 }

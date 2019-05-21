@@ -17,7 +17,7 @@ module.exports = {
 async function getHandler(request, response) {
   if (request.url.endsWith("/product_admin")) {
     let path = 'static/product_admin.html';
-    send.sendPage(path, response);
+    send.sendPage(path, request, response);
   }
   else if (request.url.endsWith("/get_products")) {
     list = [];
