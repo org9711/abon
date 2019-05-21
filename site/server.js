@@ -20,7 +20,6 @@ function start(port) {
 
 // Deal with a request.
 async function handle(request, response) {
-  console.log(request.url)
   if (request.url.endsWith(".png") || request.url.endsWith(".jpg")) {
     picturesC.handle(request, response);
   }
