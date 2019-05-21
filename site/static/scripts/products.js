@@ -7,6 +7,7 @@ function start() {
 }
 
 var productLayout;
+var productDescription;
 
 function getProductLayout() {
   var q = new XMLHttpRequest();
@@ -15,12 +16,27 @@ function getProductLayout() {
   q.send();
 }
 
+function getProductDescription(){
+    var q = new XMLHttpRequest();
+    q.onreadystatechange = storeProductDescription;
+    q.open("GET", '/products/get_product_description', true);
+    q.send();
+}
+
 function storeProductLayout() {
   if(this.readyState != XMLHttpRequest.DONE) return;
   var el = document.createElement('html');
   el.innerHTML = this.responseText;
   productLayout = el;
+  getProductDescription();
   getProducts();
+}
+
+function storeProductDescription() {
+  if(this.readyState != XMLHttpRequest.DONE) return;
+  var el = document.createElement('html');
+  el.innerHTML = this.responseText;
+  productDescription = el;
 }
 
 function getProducts() {
@@ -37,10 +53,18 @@ function displayProducts() {
 
   for (var i = 0; i < products.length; i++) {
       let product = productLayout.cloneNode(true);
-      let buttonDiv = product.getElementsByClassName('mask proudct-content')[0];
+      let productDescr = productDescription.cloneNode(true);
+      
+      let buttonDiv = product.getElementsByClassName('mask proudct-content')[0]; //product spelt wrong here
       let name = product.getElementsByTagName('h1')[0];
       let image = product.getElementsByClassName('product-image')[0];
+      let infoButton = product.getElementsByClassName('mt-1 btn btn-lg abon-bg-orange')[0];
       let addToBasketButton = document.createElement("button");
+      
+      let nameModal = productDescr.getElementsByClassName('modal-title')[0];
+      let descriptionModal = productDescr.getElementsByClassName('product-description')[0];
+      let priceModal = productDescr.getElementsByClassName('product-price')[0];
+      let mainDiv = productDescr.getElementsByClassName('modal fade')[0];
 
       // 2 == AVAILABLE
       // 1 == SOLD OUT
@@ -49,12 +73,19 @@ function displayProducts() {
       let productName = products[i].name;
       let productPrice = products[i].price;
       let productStatus = products[i].status;
-      let productDescription = products[i].description;
+      let productDescrt = products[i].description;
 
       name.textContent = products[i].name;
       image.src = products[i].image_name;
+      infoButton.dataset.target = '#productId' + products[i].id;
+      
+      nameModal.textContent = products[i].name + ' Info';
+      descriptionModal.textContent = products[i].description;
+      mainDiv.id = 'productId' + products[i].id;
+      console.log(typeof products[i].id)
+      priceModal.textContent = 'Price: £' + products[i].price.toFixed(2) + ' (Each sachet serves one person)'
 
-      addToBasketButton.innerHTML = "Add to Basket";
+      addToBasketButton.innerHTML = 'Add to Basket <i class="fa fa-shopping-basket"></i>';
       addToBasketButton.className = "mt-1 btn btn-lg abon-bg-orange";
       addToBasketButton.addEventListener("click", function() {
         var myCart = document.getElementById("cart");
@@ -63,7 +94,9 @@ function displayProducts() {
       buttonDiv.append(addToBasketButton);
 
       product = product.firstElementChild;
+      productDescr = productDescr.firstElementChild;
       ul.appendChild(product);
+      ul.append(productDescr);
   }
 }
 

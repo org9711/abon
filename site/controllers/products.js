@@ -30,6 +30,12 @@ async function getHandler(request, response) {
       let hdrs = { 'Content-Type': 'application/xhtml+xml' };
       send.sendPage(path, hdrs, response);
   }
+  else if (request.url.endsWith("/get_product_description")) {
+      let path = 'static/components/product_modal.html';
+      let hdrs = { 'Content-Type': 'application/xhtml+xml' };
+      send.sendPage(path, hdrs, response);
+      console.log(request.url);
+  }
 }
 
 async function postHandler(object, request, response) {
