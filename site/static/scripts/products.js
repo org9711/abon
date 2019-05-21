@@ -6,41 +6,57 @@ function start() {
   getProductLayout();
 }
 
-var productLayout;
-var productDescription;
+let productLayout;
+let descriptionLayout;
+let basketRowLayout;
 
 function getProductLayout() {
-  var q = new XMLHttpRequest();
+  let q = new XMLHttpRequest();
   q.onreadystatechange = storeProductLayout;
   q.open("GET", '/products/get_product_layout', true);
   q.send();
 }
 
-function getProductDescription(){
-    var q = new XMLHttpRequest();
-    q.onreadystatechange = storeProductDescription;
-    q.open("GET", '/products/get_product_description', true);
-    q.send();
-}
-
 function storeProductLayout() {
   if(this.readyState != XMLHttpRequest.DONE) return;
-  var el = document.createElement('html');
+  el = document.createElement("html");
   el.innerHTML = this.responseText;
   productLayout = el;
-  getProductDescription();
+  getBasketRowLayout();
+}
+
+function getBasketRowLayout() {
+  let q = new XMLHttpRequest();
+  q.onreadystatechange = storeBasketRowLayout;
+  q.open("GET", '/products/get_basket_row_layout', true);
+  q.send();
+}
+
+function storeBasketRowLayout() {
+  if(this.readyState != XMLHttpRequest.DONE) return;
+  el = document.createElement("html");
+  el.innerHTML = this.responseText;
+  basketRowLayout = el;
+  getDescriptionLayout();
+}
+
+function getDescriptionLayout() {
+  let q = new XMLHttpRequest();
+  q.onreadystatechange = storeDescriptionLayout;
+  q.open("GET", '/products/get_description_layout', true);
+  q.send();
+}
+
+function storeDescriptionLayout() {
+  if(this.readyState != XMLHttpRequest.DONE) return;
+  el = document.createElement("html");
+  el.innerHTML = this.responseText;
+  descriptionLayout = el;
   getProducts();
 }
 
-function storeProductDescription() {
-  if(this.readyState != XMLHttpRequest.DONE) return;
-  var el = document.createElement('html');
-  el.innerHTML = this.responseText;
-  productDescription = el;
-}
-
 function getProducts() {
-  var q = new XMLHttpRequest();
+  let q = new XMLHttpRequest();
   q.onreadystatechange = displayProducts;
   q.open("GET", '/products/get_products', true);
   q.send();
@@ -51,107 +67,124 @@ function displayProducts() {
   products = JSON.parse(this.responseText);
   let ul = document.querySelector("#product-list");
 
-  for (var i = 0; i < products.length; i++) {
-      let product = productLayout.cloneNode(true);
-      let productDescr = productDescription.cloneNode(true);
-      
-      let buttonDiv = product.getElementsByClassName('mask proudct-content')[0]; //product spelt wrong here
-      let name = product.getElementsByTagName('h1')[0];
-      let image = product.getElementsByClassName('product-image')[0];
-      let infoButton = product.getElementsByClassName('mt-1 btn btn-lg abon-bg-orange')[0];
-      let addToBasketButton = document.createElement("button");
-      
-      let nameModal = productDescr.getElementsByClassName('modal-title')[0];
-      let descriptionModal = productDescr.getElementsByClassName('product-description')[0];
-      let priceModal = productDescr.getElementsByClassName('product-price')[0];
-      let mainDiv = productDescr.getElementsByClassName('modal fade')[0];
+  for (let i = 0; i < products.length; i++) {
+    let product = productLayout.cloneNode(true);
+    let description = descriptionLayout.cloneNode(true);
 
-      // 2 == AVAILABLE
-      // 1 == SOLD OUT
-      // 0 == COMING SOON
-      
-      let productId = products[i].id;
-      let productName = products[i].name;
-      let productPrice = products[i].price;
-      let productStatus = products[i].status;
-      let productDescrt = products[i].description;
-      
-      if(productStatus == 2){
-          name.textContent = products[i].name;
-          
-          addToBasketButton.innerHTML = 'Add to Basket <i class="fa fa-shopping-basket"></i>';
-          addToBasketButton.className = "mt-1 btn btn-lg abon-bg-orange";
-          addToBasketButton.addEventListener("click", function() {
-            var myCart = document.getElementById("cart");
-            addToBasket(myCart, productId, productName, productPrice);
-          });
-          buttonDiv.append(addToBasketButton);
-      }else if(productStatus == 1){
-          name.textContent = 'Sold Out';
-      }else if(productStatus == 0){
-          name.textContent = 'Coming Soon';
-      }
+    let buttonDiv = product.getElementsByClassName('mask proudct-content')[0]; //product spelt wrong here
+    let productNameTag = product.getElementsByTagName('h1')[0];
+    let imageTag = product.getElementsByClassName('product-image')[0];
+    let infoButtonTag = product.getElementsByClassName('mt-1 btn btn-lg abon-bg-orange')[0];
+    let basketButtonTag = document.createElement("button");
 
-      image.src = products[i].image_name;
-      infoButton.dataset.target = '#productId' + products[i].id;
-      
-      nameModal.textContent = products[i].name + ' Info';
-      descriptionModal.textContent = products[i].description;
-      mainDiv.id = 'productId' + products[i].id;
-      priceModal.textContent = 'Price: £' + products[i].price.toFixed(2) + ' (Each sachet serves one person)';
+    let modalNameTag = description.getElementsByClassName('modal-title')[0];
+    let modalDescriptionTag = description.getElementsByClassName('product-description')[0];
+    let modalPriceTag = description.getElementsByClassName('product-price')[0];
+    let modalDivTag = description.getElementsByClassName('modal fade')[0];
 
-      product = product.firstElementChild;
-      productDescr = productDescr.firstElementChild;
-      ul.appendChild(product);
-      ul.append(productDescr);
+    let productId = products[i].id;
+    let productName = products[i].name;
+    let productPrice = products[i].price;
+    let productImageName = products[i].image_name;
+    let productStatus = products[i].status;
+    let productDescription = products[i].description;
+
+    let cartTag = document.getElementById("cart");
+
+    if (productStatus == 2) {
+      productNameTag.textContent = productName;
+
+      basketButtonTag.innerHTML = 'Add to Basket <i class="fa fa-shopping-basket"></i>';
+      basketButtonTag.className = "mt-1 btn btn-lg abon-bg-orange";
+      basketButtonTag.addEventListener("click", function() {
+        addToBasket(cartTag, productId, productName, productPrice);
+      });
+      buttonDiv.append(basketButtonTag);
+    }
+    else if (productStatus == 1) {
+        productNameTag.textContent = 'Sold Out';
+    }
+    else if (productStatus == 0) {
+        productNameTag.textContent = 'Coming Soon';
+    }
+
+    imageTag.src = productImageName;
+    infoButtonTag.dataset.target = '#productId' + productId;
+
+    modalNameTag.textContent = productName;
+    modalDescriptionTag.textContent = productDescription;
+    modalDivTag.id = 'productId' + productId;
+    modalPriceTag.textContent = 'Price: £' + productPrice.toFixed(2) + ' (each sachet serves one person)';
+
+    product = product.firstElementChild;
+    productDescription = productDescription.firstElementChild;
+    ul.appendChild(product);
+    ul.append(description);
   }
 }
 
-function addToBasket(myCart, productId, productName, productPrice) {
+function addToBasket(cartTag, productId, productName, productPrice) {
+  let cartTotalTag = document.getElementById("total");
+  let productPriceFloat = parseFloat(productPrice);
+  console.log(cartTotalTag.innerText);
+  console.log(productPriceFloat)
+  addToTotal(cartTotalTag, productPriceFloat);
 
-  var rowId = "row-id-" + productId.toString();
-  var meal = myCart.getElementsByClassName(rowId)[0];
+  let rowId = "row-id-" + productId.toString();
+  let basketRow = cartTag.getElementsByClassName(rowId)[0];
 
-  if(meal == null) {
-    let el = document.createElement('html');
+  if (basketRow == null) {
+    let basketRow = basketRowLayout.cloneNode(true);
 
-    rowText = '<tr class="' + rowId + '"><td class="pt-3-half">' + productName + '</td><td class="pt-3-half price">'+ productPrice.toFixed(2) +'</td><td class="pt-3-half meal-quantity" contenteditable="false"><div class="container"><div class="row justify-content-center"><div class="col-xs-3 col-xs-offset-3"><div class="input-group number-spinner"><span class="input-group-btn"><button style="min-width: 2.5rem" data-dir="dwn" class="bg-light btn btn-decrement btn-outline-secondary" type="button"><strong>-</strong></button></span><input type="text" style="max-width: 3.0rem" class="form-control text-center" value="1" readonly="true"/><span class="input-group-btn"><button style="min-width: 2.5rem" data-dir="up" class="bg-light btn btn-increment btn-outline-secondary" type="button"><strong>+</strong></button></span></div></div></div></div></td><td><button type="button" class="btn btn-danger btn-rounded removeBtn btn-sm my-0">Remove</button></td></tr>';
+    let basketRowTag = basketRow.getElementsByClassName("basketRowId")[0];
+    let basketRowNameTag = basketRow.getElementsByClassName("basket-row-product-name")[0];
+    let basketRowPriceTag = basketRow.getElementsByClassName("basket-row-product-price")[0];
 
-    el.innerHTML = rowText;
-    rowHTML = el.firstElementChild;
-    myCart.append(rowHTML);
+    basketRowTag.className = rowId;
+    basketRowNameTag.innerText = productName;
+    basketRowPriceTag.innerText = productPrice.toFixed(2);
 
-    meal = myCart.getElementsByClassName(rowId)[0];
+    let plusButton = basketRow.getElementsByClassName("bg-light btn btn-increment btn-outline-secondary")[0];
+    let minusButton = basketRow.getElementsByClassName("bg-light btn btn-decrement btn-outline-secondary")[0];
 
-    meal.getElementsByClassName("removeBtn")[0].addEventListener("click", function(){
-        this.parentElement.parentElement.remove();
+    plusButton.addEventListener("click", function() {
+      addToTotal(cartTotalTag, productPriceFloat);
     });
+    minusButton.addEventListener("click", function() {
+      takeFromTotal(cartTotalTag, productPriceFloat);
+    })
+
+    basketRow.getElementsByClassName("removeBtn")[0].addEventListener("click", function() {
+      let basketRowQuantity = basketRow.getElementsByClassName('form-control text-center')[0];
+      currentPrice = parseFloat(cartTotalTag.innerText);
+      newPrice = currentPrice - (productPriceFloat * parseInt(basketRowQuantity.value))
+      cartTotalTag.innerText = newPrice.toFixed(2);
+      this.parentElement.parentElement.remove();
+    });
+
+    basketRow = basketRow.firstElementChild;
+    cartTag.append(basketRow);
   }
   else {
-    var mealQuantity = meal.getElementsByClassName('form-control text-center')[0];
-    mealQuantity.value = parseInt(mealQuantity.value) + 1;
+    let basketRowQuantity = basketRow.getElementsByClassName('form-control text-center')[0];
+    basketRowQuantity.value = parseInt(basketRowQuantity.value) + 1;
   }
-    
-    subtotal();
 }
 
-function subtotal(){
-    var myCart = document.getElementById("cart");
-    var tableRows = myCart.children;
-    var sum = 0;
+function addToTotal(cartTotalTag, productPriceFloat) {
+  currentPrice = parseFloat(cartTotalTag.innerText);
+  totalPrice = currentPrice + productPriceFloat;
+  cartTotalTag.innerText = totalPrice.toFixed(2);
+}
 
-    for(i = 1; i < tableRows.length; i++){
-        var price = parseFloat(tableRows[i].getElementsByClassName("pt-3-half price")[0].innerHTML);
-        var quantity = parseFloat(tableRows[i].getElementsByTagName("input")[0].value);
-        sum += price * quantity;
-    }
-    sum = sum.toFixed(2);
-    document.getElementById("total").innerHTML = sum;
-    console.log(sum);
+function takeFromTotal(cartTotalTag, productPriceFloat) {
+  currentPrice = parseFloat(cartTotalTag.innerText);
+  totalPrice = currentPrice - productPriceFloat;
+  cartTotalTag.innerText = totalPrice.toFixed(2);
 }
 
 function getHeader() {
-  var q = new XMLHttpRequest();
+  let q = new XMLHttpRequest();
   q.onreadystatechange = displayHeader;
   q.open("GET", '/frame/get_header', true);
   q.send();
@@ -166,7 +199,7 @@ function displayHeader() {
 }
 
 function getFooter() {
-  var q = new XMLHttpRequest();
+  let q = new XMLHttpRequest();
   q.onreadystatechange = displayFooter;
   q.open("GET", '/frame/get_footer', true);
   q.send();

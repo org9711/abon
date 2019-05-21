@@ -46,7 +46,6 @@ module.exports = {
     let objects;
     try { objects = await database.getRows(statement, list); }
     catch (err) {
-      console.log(err);
       return respond.fail(response, BadType, "Database error.\n" + err); }
     let hdrs = { 'Content-Type': 'application/JSON' };
     respond.reply(response, hdrs, JSON.stringify(objects));

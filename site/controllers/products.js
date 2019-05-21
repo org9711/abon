@@ -28,10 +28,13 @@ async function getHandler(request, response) {
     let path = 'static/components/product_tab.html';
     send.sendPage(path, request, response);
   }
-  else if (request.url.endsWith("/get_product_description")) {
+  else if (request.url.endsWith("/get_description_layout")) {
       let path = 'static/components/product_modal.html';
-      let hdrs = { 'Content-Type': 'application/xhtml+xml' };
-      send.sendPage(path, hdrs, response);
+      send.sendPage(path, request, response);
+  }
+  else if (request.url.endsWith("/get_basket_row_layout")) {
+      let path = 'static/components/product_basket_row.html';
+      send.sendPage(path, request, response);
   }
 }
 
