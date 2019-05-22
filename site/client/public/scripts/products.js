@@ -126,7 +126,7 @@ function displayProducts() {
 function addToBasket(cartTag, productId, productName, productPrice) {
   let cartTotalTag = document.getElementById("total");
   let productPriceFloat = parseFloat(productPrice);
-  addToTotal(cartTotalTag, productPriceFloat);
+//  addToTotal(cartTotalTag, productPriceFloat);
 
   let rowId = "row-id-" + productId.toString();
   let basketRow = cartTag.getElementsByClassName(rowId)[0];
@@ -145,12 +145,12 @@ function addToBasket(cartTag, productId, productName, productPrice) {
     let plusButton = basketRow.getElementsByClassName("bg-light btn btn-increment btn-outline-secondary")[0];
     let minusButton = basketRow.getElementsByClassName("bg-light btn btn-decrement btn-outline-secondary")[0];
 
-    plusButton.addEventListener("click", function() {
-      addToTotal(cartTotalTag, productPriceFloat);
-    });
-    minusButton.addEventListener("click", function() {
-      takeFromTotal(cartTotalTag, productPriceFloat);
-    })
+//    plusButton.addEventListener("click", function() {
+//      addToTotal(cartTotalTag, productPriceFloat);
+//    });
+//    minusButton.addEventListener("click", function() {
+//      takeFromTotal(cartTotalTag, productPriceFloat);
+//    })
 
     basketRow.getElementsByClassName("removeBtn")[0].addEventListener("click", function() {
       let basketRowQuantity = basketRow.getElementsByClassName('form-control text-center')[0];
@@ -167,19 +167,36 @@ function addToBasket(cartTag, productId, productName, productPrice) {
     let basketRowQuantity = basketRow.getElementsByClassName('form-control text-center')[0];
     basketRowQuantity.value = parseInt(basketRowQuantity.value) + 1;
   }
+    
+  subtotal();
 }
 
-function addToTotal(cartTotalTag, productPriceFloat) {
-  currentPrice = parseFloat(cartTotalTag.innerText);
-  totalPrice = currentPrice + productPriceFloat;
-  cartTotalTag.innerText = totalPrice.toFixed(2);
+function subtotal(){
+    var myCart = document.getElementById("cart");
+    var tableRows = myCart.children;
+    var sum = 0;
+
+    for(i = 1; i < tableRows.length; i++){
+        var price = parseFloat(tableRows[i].getElementsByClassName("pt-3-half basket-row-product-price")[0].innerHTML);
+        var quantity = parseFloat(tableRows[i].getElementsByTagName("input")[0].value);
+        sum += price * quantity;
+    }
+    sum = sum.toFixed(2);
+    document.getElementById("total").innerHTML = sum;
+    console.log(sum);
 }
 
-function takeFromTotal(cartTotalTag, productPriceFloat) {
-  currentPrice = parseFloat(cartTotalTag.innerText);
-  totalPrice = currentPrice - productPriceFloat;
-  cartTotalTag.innerText = totalPrice.toFixed(2);
-}
+//function addToTotal(cartTotalTag, productPriceFloat) {
+//  currentPrice = parseFloat(cartTotalTag.innerText);
+//  totalPrice = currentPrice + productPriceFloat;
+//  cartTotalTag.innerText = totalPrice.toFixed(2);
+//}
+
+//function takeFromTotal(cartTotalTag, productPriceFloat) {
+//  currentPrice = parseFloat(cartTotalTag.innerText);
+//  totalPrice = currentPrice - productPriceFloat;
+//  cartTotalTag.innerText = totalPrice.toFixed(2);
+//}
 
 function getHeader() {
   let q = new XMLHttpRequest();
