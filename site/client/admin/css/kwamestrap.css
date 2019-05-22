@@ -1,6 +1,6 @@
 svg{
   width: 100%;
-  height:400px; 
+  height:400px;
   background-color: #FFFFFF
 }
 
@@ -11,28 +11,47 @@ path{
   fill: none;
 }
 
-#footer{
-    position: fixed;
-    left: 0;
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+
+main {
+  padding:10px;
+  padding-bottom:60px;
+}
+
+#container {
+    min-height:100%;
+    position:relative;
+    width: 100%;
+}
+
+
+footer{
+    position: absolute;
     bottom: 0;
     width: 100%;
     background-color: #343434;
+    height: 60px;
 }
 
 .rcorners1 {
   border-radius: 25px;
   background: #73AD21;
-  padding: 20px; 
+  padding: 20px;
   width: 200px;
-  height: 150px; 
+  height: 150px;
 }
 
 .rcorners2 {
   border-radius: 25px;
   border: 2px solid #73AD21;
-  padding: 20px; 
+  padding: 20px;
   width: 200px;
-  height: 150px; 
+  height: 150px;
 }
 
 .rcorners3 {
@@ -40,9 +59,9 @@ path{
   background: url(paper.gif);
   background-position: left top;
   background-repeat: repeat;
-  padding: 20px; 
+  padding: 20px;
   width: 200px;
-  height: 150px; 
+  height: 150px;
 }
 
 .rcorners-tab{
@@ -156,11 +175,11 @@ div#all {
   padding: 50px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991.98px) {    
+@media only screen and (min-width: 768px) and (max-width: 991.98px) {
     .view-first .mask h1 {
       font-size: 30px;
     }
-    
+
     .view-first .mask {
       opacity: 0;
       background-color: rgba(43, 42, 36, 0.8);
@@ -237,6 +256,3 @@ div#all {
     padding-bottom: 26.5px;
     line-height: 27px;
   }
-
-
-

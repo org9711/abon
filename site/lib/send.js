@@ -26,7 +26,7 @@ module.exports = {
   sendPage: async function(path, request, response) {
     let file;
     try { file = await fs.readFile(path); }
-    catch (err) { return respond.fail(response, NotFound, "File not found."); }
+    catch (err) { return respond.fail(response, NotFound, "File not found at " + path); }
     let splits = path.split('.');
     let ext = splits[splits.length-1];
     let accepts = request.headers.accept.split(",");
