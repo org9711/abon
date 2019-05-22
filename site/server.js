@@ -7,6 +7,7 @@ let scriptsC = require('./controllers/scripts.js');
 let picturesC = require('./controllers/pictures.js');
 let productsC = require('./controllers/products.js');
 let testimonialsC = require('./controllers/testimonials.js');
+let aboutC = require('./controllers/about.js');
 let frameC = require('./controllers/frame.js');
 start(8080);
 
@@ -35,6 +36,9 @@ async function handle(request, response) {
   }
   else if (request.url.startsWith("/testimonials")) {
     testimonialsC.handle(request, response);
+  }
+  else if (request.url.startsWith("/about")) {
+    aboutC.handle(request, response);
   }
   else if (request.url == "/") {
     htmlsC.handle(request, response);
