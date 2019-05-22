@@ -11,6 +11,33 @@ path{
   fill: none;
 }
 
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+
+main {
+  padding:10px;
+  padding-bottom:60px;
+}
+
+#container {
+    min-height:100%;
+    position:relative;
+    width: 100%;
+}
+
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #343434;
+    height: 60px;  
+}
+
 .rcorners1 {
   border-radius: 25px;
   background: #73AD21;
