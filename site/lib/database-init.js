@@ -1,6 +1,6 @@
 var sqlite = require("sqlite");
 // createTestimonialsTable();
-// createProductsTable();
+createProductsTable();
 // createCustomersTable();
 // createOrdersTable();
 
@@ -9,34 +9,33 @@ async function createTestimonialsTable() {
     "CREATE TABLE testimonials(" +
     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
     "name VARCHAR(63) NOT NULL, " +
-    "email VARCHAR(127), " +
     "review VARCHAR(2047), " +
     "stars INT NOT NULL, " +
     "status INT NOT NULL)";
   let insertRowCommand1 =
-    "INSERT INTO testimonials (name, email, review, stars, status) " +
-    "VALUES ('Oliver Ryan-George', 'org.9711@hotmail.co.uk', 'Superfood pesto? More like superfast pesto!', 5, 2)";
+    "INSERT INTO testimonials (name, review, stars, status) " +
+    "VALUES ('Oliver Ryan-George', 'Superfood pesto? More like superfast pesto!', 5, 2)";
   let insertRowCommand2 =
-    "INSERT INTO testimonials (name, email, review, stars, status) " +
-    "VALUES ('Kwame Dogbe', 'thekdog@gmail.com', 'I''m going vega because of these meals!', 5, 2)";
+    "INSERT INTO testimonials (name, review, stars, status) " +
+    "VALUES ('Kwame Dogbe', 'I''m going vega because of these meals!', 5, 2)";
   let insertRowCommand3 =
-    "INSERT INTO testimonials (name, email, review, stars, status) " +
-    "VALUES ('Bethan Howe', 'bethan.howe@outlook.com', 'Great food, even greater people', 5, 2)";
+    "INSERT INTO testimonials (name, review, stars, status) " +
+    "VALUES ('Bethan Howe', 'Great food, even greater people', 5, 2)";
   let insertRowCommand4 =
-    "INSERT INTO testimonials (name, email, review, stars, status) " +
-    "VALUES ('Joe Williams', 'willywiz@gmail.com', 'I eat this with a beer while watching the football!', 3, 2)";
+    "INSERT INTO testimonials (name, review, stars, status) " +
+    "VALUES ('Joe Williams', 'I eat this with a beer while watching the football!', 3, 2)";
   let insertRowCommand5 =
-    "INSERT INTO testimonials (name, email, review, stars, status) " +
-    "VALUES ('Emma Labert', 'em@wix.com', 'Just ordinarily excellent!', 1, 2)";
+    "INSERT INTO testimonials (name, review, stars, status) " +
+    "VALUES ('Emma Labert', 'Just ordinarily excellent!', 1, 2)";
   let insertRowCommand6 =
-    "INSERT INTO testimonials (name, email, review, stars, status) " +
-    "VALUES ('Noah Haran', 'noahbuilttheark@gmail.com', 'I don''t eat much but when I do, I eat Abon!', 4, 0)";
+    "INSERT INTO testimonials (name, review, stars, status) " +
+    "VALUES ('Noah Haran', 'I don''t eat much but when I do, I eat Abon!', 4, 0)";
   let insertRowCommand7 =
-    "INSERT INTO testimonials (name, email, review, stars, status) " +
-    "VALUES ('James Lace', 'jl-marketing@gmail.com', 'This curry gave me the shits :()', 1, 0)";
+    "INSERT INTO testimonials (name, review, stars, status) " +
+    "VALUES ('James Lace', 'This curry gave me the shits :()', 1, 0)";
   let insertRowCommand8 =
-    "INSERT INTO testimonials (name, email, review, stars, status) " +
-    "VALUES ('Luke Leckie', 'ilovewindsurfing@yahoo.com', 'Join windsurfing please!', 1, 1)";
+    "INSERT INTO testimonials (name, review, stars, status) " +
+    "VALUES ('Luke Leckie', 'Join windsurfing please!', 1, 1)";
 
   try {
     let db = await sqlite.open("./db.sqlite")
@@ -158,16 +157,17 @@ async function createOrdersTable() {
     "customer INTEGER NOT NULL, " +
     "product INTEGER NOT NULL, " +
     "quantity INTEGER NOT NULL, " +
-    "datetime DATETIME NOT NULL)";
+    "datetime DATETIME NOT NULL), " +
+    "status INTEGER NOT NULL"
   let insertRowCommand1 =
-    "INSERT INTO orders (customer, product, quantity, datetime) " +
-    "VALUES (0, 0, 2, '2019-05-10 16-05-30')";
+    "INSERT INTO orders (customer, product, quantity, datetime, status) " +
+    "VALUES (0, 0, 2, '2019-05-10 16-05-30', 1)";
   let insertRowCommand2 =
-    "INSERT INTO orders (customer, product, quantity, datetime)" +
-    "VALUES (0, 1, 1, '2019-05-10 16-05-30')";
+    "INSERT INTO orders (customer, product, quantity, datetime, status)" +
+    "VALUES (0, 1, 1, '2019-05-10 16-05-30', 1)";
   let insertRowCommand3 =
-    "INSERT INTO orders (customer, product, quantity, datetime)" +
-    "VALUES (1, 1, 3, '2019-05-20 17-05-30')";
+    "INSERT INTO orders (customer, product, quantity, datetime, status)" +
+    "VALUES (1, 1, 3, '2019-05-20 17-05-30', 0)";
   try {
     let db = await sqlite.open("./db.sqlite")
     await db.run(createDbCommand);

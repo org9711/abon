@@ -4,7 +4,7 @@ function start() {
   getHeader();
   getFooter();
   getTestimonialLayout();
-  // getTestimonialForm();
+  getTestimonialForm();
 }
 
 var testimonialLayout;
@@ -69,9 +69,9 @@ function getTestimonialForm() {
 
 function displayTestimonialForm() {
   if(this.readyState != XMLHttpRequest.DONE) return;
-  var testimonialForm = document.querySelector("#testimonialForm");
+  var testimonialForm = document.getElementsByClassName("container my-4")[0];
   testimonialForm.innerHTML = this.responseText;
-  document.querySelector("#submitTestimonial").addEventListener("click", postTestimonial);
+  document.getElementsByClassName("btn btn-lg btn-primary float-right")[0].addEventListener("click", postTestimonial);
 }
 
 function postTestimonial() {
@@ -84,10 +84,8 @@ function postTestimonial() {
   }
   testimonialObj = {
     name: document.querySelector('input[name="name"]').value,
-    email: document.querySelector('input[name="email"]').value,
-    title: document.querySelector('input[name="title"]').value,
     stars: star,
-    review: document.querySelector('input[name="review"]').value
+    review: document.querySelector('textarea[name="review"]').value
   };
   testimonial = JSON.stringify(testimonialObj);
   var q = new XMLHttpRequest();
@@ -98,7 +96,7 @@ function postTestimonial() {
 
 function displayTestimonialFormConfirmation() {
   if(this.readyState != XMLHttpRequest.DONE) return;
-  var testimonialForm = document.querySelector("#testimonialForm");
+  var testimonialForm = document.getElementsByClassName("container my-4")[0];
   testimonialForm.innerHTML = this.responseText;
 }
 

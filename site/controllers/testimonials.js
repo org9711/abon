@@ -34,17 +34,21 @@ async function getHandler(request, response) {
     send.sendObject(statement, list, response);
   }
   else if (request.url.endsWith("/get_testimonial_layout")) {
-      let path = 'static/components/testimonial_tab.html';
-      send.sendPage(path, request, response);
+    let path = 'static/components/testimonial_tab.html';
+    send.sendPage(path, request, response);
+  }
+  else if (request.url.endsWith("/get_testimonial_form")) {
+    let path = 'static/components/testimonial_form.html';
+    send.sendPage(path, request, response);
   }
 }
 
 async function postHandler(object, request, response) {
   if (request.url.endsWith("/submit_testimonial")) {
-    list = [object.name, object.email, object.title, object.review, object.stars];
-    let statement = "INSERT INTO testimonials(name,email,title,review,stars) VALUES(?,?,?,?,?)";
+    list = [object.name, object.review, object.stars,0];
+    let statement = "INSERT INTO testimonials(name,review,stars,status) VALUES(?,?,?,?)";
     database.insertRow(statement, list);
-    let path = "static/testimonial_submission_confirmation.html";
+    let path = "static/components/testimonial_submitted.html";
     send.sendPage(path, request, response);
   }
 }
