@@ -210,3 +210,7 @@ function displayFooter() {
   let footer = document.getElementsByTagName("footer")[0];
   footer.innerHTML = this.responseText;
 }
+
+function kwalidation(){
+    console.log("git here");
+}
