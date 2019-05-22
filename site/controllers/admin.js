@@ -13,39 +13,38 @@ module.exports = {
 };
 
 async function getHandler(request, response) {
-      console.log(request.url);
-    if (request.url.endsWith("/admin")) {
-      let path = "admin/pages/orders.html"
-      send.sendPage(path, request, response)
-    }
-    else if (request.url.endsWith("admin_orders.js")) {
-      let path = "admin/scripts/orders.js";
-      send.sendPage(path, request, response);
-    }
-    else if (request.url.endsWith("admin_products.js")) {
-      let path = "admin/scripts/admin_products.js";
-      send.sendPage(path, request, response);
-    }
-    else if (request.url.endsWith("admin_testimonials.js")) {
-      let path = "admin/scripts/testimonials.js";
-      send.sendPage(path, request, response);
-    }
-    else if (request.url.endsWith("/orders")) {
-      let path = "admin/pages/orders.html"
-      send.sendPage(path, request, response);
-    }
-    else if (request.url.endsWith("/products")) {
-      let path = "admin/pages/products.html"
-      send.sendPage(path, request, response);
-    }
-    else if (request.url.endsWith("/testimonials")) {
-      let path = "admin/pages/testimonials.html"
-      send.sendPage(path, request, response);
-    }
-    else if (request.url.endsWith("/kwamestrap.css")) {
-      let path = "admin/css/kwamestrap.css"
-      send.sendPage(path, request, response);
-    }
+  if (request.url.endsWith(".js")) {
+    let splits = request.url.split('/');
+    let filename = splits[splits.length-1];
+    let path = 'client/admin/scripts/' + filename;
+    send.sendPage(path, request, response);
+  }
+  else if (request.url.endsWith(".css")) {
+    let splits = request.url.split('/');
+    let filename = splits[splits.length-1];
+    let path = 'client/admin/css/' + filename;
+    send.sendPage(path, request, response);
+  }
+  else if (request.url.endsWith("/frame/get_header")) {
+    let path = "client/admin/components/header.html";
+    send.sendPage(path, request, response);
+  }
+  else if (request.url.endsWith("/frame/get_footer")) {
+    let path = "client/admin/components/footer.html";
+    send.sendPage(path, request, response);
+  }
+  else if (request.url.endsWith("/admin") || request.url.endsWith("/orders")) {
+    let path = "client/admin/pages/orders.html"
+    send.sendPage(path, request, response);
+  }
+  else if (request.url.endsWith("/products")) {
+    let path = "client/admin/pages/products.html"
+    send.sendPage(path, request, response);
+  }
+  else if (request.url.endsWith("/testimonials")) {
+    let path = "client/admin/pages/testimonials.html"
+    send.sendPage(path, request, response);
+  }
 }
 
 async function postHandler(object, request, response) {
@@ -53,4 +52,3 @@ async function postHandler(object, request, response) {
     console.log(object);
   }
 }
-

@@ -5,8 +5,8 @@ let send = require('../lib/send.js');
 
 module.exports = {
   handle: async function(request, response) {
-    if (request.url.endsWith("/about")) {
-        let path = "client/public/pages/about.html";
+    if (request.url.endsWith("/")) {
+        let path = "client/public/pages/index.html";
         send.sendPage(path, request, response);
     }
   }
