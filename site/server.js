@@ -8,6 +8,7 @@ let picturesC = require('./controllers/pictures.js');
 let productsC = require('./controllers/products.js');
 let testimonialsC = require('./controllers/testimonials.js');
 let frameC = require('./controllers/frame.js');
+let adminC = require('./controllers/admin.js');
 start(8080);
 
 // Provide a service to localhost only.
@@ -21,7 +22,10 @@ function start(port) {
 // Deal with a request.
 async function handle(request, response) {
   await validateURL(request, response);
-  if (request.url.endsWith(".png") || request.url.endsWith(".jpg")) {
+  if (request.url.startsWith("/admin")) {
+    adminC.handle(request, response);
+  }
+  else if (request.url.endsWith(".png") || request.url.endsWith(".jpg")) {
     picturesC.handle(request, response);
   }
   else if (request.url.endsWith(".js") || request.url.endsWith(".css")) {
