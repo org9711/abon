@@ -23,7 +23,7 @@ function displayHeader() {
 function getFooter() {
   let q = new XMLHttpRequest();
   q.onreadystatechange = displayFooter;
-  q.open("GET", 'admin/frame/get_footer', true);
+  q.open("GET", '/admin/frame/get_footer', true);
   q.send();
 }
 

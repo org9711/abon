@@ -28,6 +28,7 @@ function getFooter() {
 }
 
 function displayFooter() {
+  console.log(this.responseURL);
   if(this.readyState != XMLHttpRequest.DONE) return;
   let footer = document.getElementsByTagName("footer")[0];
   footer.innerHTML = this.responseText;

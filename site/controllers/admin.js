@@ -33,15 +33,15 @@ async function getHandler(request, response) {
     let path = "client/admin/components/footer.html";
     send.sendPage(path, request, response);
   }
-  else if (request.url.endsWith("/admin") || request.url.endsWith("/orders")) {
+  else if (request.url.endsWith("/admin") || request.url.endsWith("_orders")) {
     let path = "client/admin/pages/orders.html"
     send.sendPage(path, request, response);
   }
-  else if (request.url.endsWith("/products")) {
+  else if (request.url.endsWith("_products")) {
     let path = "client/admin/pages/products.html"
     send.sendPage(path, request, response);
   }
-  else if (request.url.endsWith("/testimonials")) {
+  else if (request.url.endsWith("_testimonials")) {
     let path = "client/admin/pages/testimonials.html"
     send.sendPage(path, request, response);
   }
