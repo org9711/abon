@@ -16,7 +16,7 @@ module.exports = {
 
 async function getHandler(request, response) {
   if (request.url.endsWith("/products")) {
-      let path = 'static/pages/products.html';
+      let path = 'client/public/pages/products.html';
       send.sendPage(path, request, response);
   }
   else if (request.url.endsWith("/get_products")) {
@@ -25,15 +25,15 @@ async function getHandler(request, response) {
     send.sendObject(statement, list, response);
   }
   else if (request.url.endsWith("/get_product_layout")) {
-    let path = 'static/components/product_tab.html';
+    let path = 'client/public/components/product_tab.html';
     send.sendPage(path, request, response);
   }
   else if (request.url.endsWith("/get_description_layout")) {
-      let path = 'static/components/product_modal.html';
+      let path = 'client/public/components/product_modal.html';
       send.sendPage(path, request, response);
   }
   else if (request.url.endsWith("/get_basket_row_layout")) {
-      let path = 'static/components/product_basket_row.html';
+      let path = 'client/public/components/product_basket_row.html';
       send.sendPage(path, request, response);
   }
 }

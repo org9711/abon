@@ -16,11 +16,7 @@ module.exports = {
 
 async function getHandler(request, response) {
   if (request.url.endsWith("/testimonials")) {
-    let path = 'static/pages/testimonials.html';
-    send.sendPage(path, request, response);
-  }
-  else if (request.url.endsWith(".js")) {
-    let path = 'scripts/testimonials.js';
+    let path = 'client/public/pages/testimonials.html';
     send.sendPage(path, request, response);
   }
   else if (request.url.endsWith("/get_approved")) {
@@ -34,11 +30,11 @@ async function getHandler(request, response) {
     send.sendObject(statement, list, response);
   }
   else if (request.url.endsWith("/get_testimonial_layout")) {
-    let path = 'static/components/testimonial_tab.html';
+    let path = 'client/public/components/testimonial_tab.html';
     send.sendPage(path, request, response);
   }
   else if (request.url.endsWith("/get_testimonial_form")) {
-    let path = 'static/components/testimonial_form.html';
+    let path = 'client/public/components/testimonial_form.html';
     send.sendPage(path, request, response);
   }
 }
