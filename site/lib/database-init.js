@@ -1,6 +1,6 @@
 var sqlite = require("sqlite");
 // createTestimonialsTable();
-createProductsTable();
+// createProductsTable();
 // createCustomersTable();
 // createOrdersTable();
 
@@ -158,7 +158,7 @@ async function createOrdersTable() {
     "product INTEGER NOT NULL, " +
     "quantity INTEGER NOT NULL, " +
     "datetime DATETIME NOT NULL), " +
-    "status INTEGER NOT NULL"
+    "status INTEGER NOT NULL)";
   let insertRowCommand1 =
     "INSERT INTO orders (customer, product, quantity, datetime, status) " +
     "VALUES (0, 0, 2, '2019-05-10 16-05-30', 1)";
