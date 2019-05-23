@@ -71,7 +71,7 @@ function displayProducts() {
     let product = productLayout.cloneNode(true);
     let description = descriptionLayout.cloneNode(true);
 
-    let buttonDiv = product.getElementsByClassName('mask proudct-content')[0]; //product spelt wrong here
+    let buttonDiv = product.getElementsByClassName('mask product-content')[0];
     let productNameTag = product.getElementsByTagName('h1')[0];
     let imageTag = product.getElementsByClassName('product-image')[0];
     let infoButtonTag = product.getElementsByClassName('mt-1 btn btn-lg abon-bg-orange')[0];
@@ -126,7 +126,6 @@ function displayProducts() {
 function addToBasket(cartTag, productId, productName, productPrice) {
   let cartTotalTag = document.getElementById("total");
   let productPriceFloat = parseFloat(productPrice);
-//  addToTotal(cartTotalTag, productPriceFloat);
 
   let rowId = "row-id-" + productId.toString();
   let basketRow = cartTag.getElementsByClassName(rowId)[0];
@@ -145,22 +144,6 @@ function addToBasket(cartTag, productId, productName, productPrice) {
     let plusButton = basketRow.getElementsByClassName("bg-light btn btn-increment btn-outline-secondary")[0];
     let minusButton = basketRow.getElementsByClassName("bg-light btn btn-decrement btn-outline-secondary")[0];
 
-<<<<<<< HEAD
-    plusButton.addEventListener("click", function() {
-      addToTotal(cartTotalTag, productPriceFloat);
-    });
-    minusButton.addEventListener("click", function() {
-      takeFromTotal(cartTotalTag, productPriceFloat);
-    });
-=======
-//    plusButton.addEventListener("click", function() {
-//      addToTotal(cartTotalTag, productPriceFloat);
-//    });
-//    minusButton.addEventListener("click", function() {
-//      takeFromTotal(cartTotalTag, productPriceFloat);
-//    })
->>>>>>> 5fcd4ee518a0f3646eb5b5bc5713ade1ce3b3d7d
-
     basketRow.getElementsByClassName("removeBtn")[0].addEventListener("click", function() {
       let basketRowQuantity = basketRow.getElementsByClassName('form-control text-center')[0];
       currentPrice = parseFloat(cartTotalTag.innerText);
@@ -176,36 +159,23 @@ function addToBasket(cartTag, productId, productName, productPrice) {
     let basketRowQuantity = basketRow.getElementsByClassName('form-control text-center')[0];
     basketRowQuantity.value = parseInt(basketRowQuantity.value) + 1;
   }
-    
+
   subtotal();
 }
 
 function subtotal(){
-    var myCart = document.getElementById("cart");
-    var tableRows = myCart.children;
-    var sum = 0;
+  var myCart = document.getElementById("cart");
+  var tableRows = myCart.children;
+  var sum = 0;
 
-    for(i = 1; i < tableRows.length; i++){
-        var price = parseFloat(tableRows[i].getElementsByClassName("pt-3-half basket-row-product-price")[0].innerHTML);
-        var quantity = parseFloat(tableRows[i].getElementsByTagName("input")[0].value);
-        sum += price * quantity;
-    }
-    sum = sum.toFixed(2);
-    document.getElementById("total").innerHTML = sum;
-    console.log(sum);
+  for(i = 1; i < tableRows.length; i++){
+      var price = parseFloat(tableRows[i].getElementsByClassName("pt-3-half basket-row-product-price")[0].innerHTML);
+      var quantity = parseFloat(tableRows[i].getElementsByTagName("input")[0].value);
+      sum += price * quantity;
+  }
+  sum = sum.toFixed(2);
+  document.getElementById("total").innerHTML = sum;
 }
-
-//function addToTotal(cartTotalTag, productPriceFloat) {
-//  currentPrice = parseFloat(cartTotalTag.innerText);
-//  totalPrice = currentPrice + productPriceFloat;
-//  cartTotalTag.innerText = totalPrice.toFixed(2);
-//}
-
-//function takeFromTotal(cartTotalTag, productPriceFloat) {
-//  currentPrice = parseFloat(cartTotalTag.innerText);
-//  totalPrice = currentPrice - productPriceFloat;
-//  cartTotalTag.innerText = totalPrice.toFixed(2);
-//}
 
 function getHeader() {
   let q = new XMLHttpRequest();
@@ -233,8 +203,4 @@ function displayFooter() {
   if(this.readyState != XMLHttpRequest.DONE) return;
   let footer = document.getElementsByTagName("footer")[0];
   footer.innerHTML = this.responseText;
-}
-
-function kwalidation(){
-    console.log("git here");
 }

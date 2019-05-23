@@ -46,7 +46,6 @@ async function postHandler(object, request, response) {
     send.sendObject(selectStatement, id, response);
   }
   else if (request.url.endsWith("/remove_product")) {
-    console.log(object.id);
     let statement = "DELETE FROM products WHERE id=?";
     database.insertRow(statement, object.id);
     send.sendConfirmation(response);
