@@ -3,12 +3,12 @@
             <h3>Write your own review</h3>
         </div>
         <div class="card-body">
-            <form>
+            <form action="#" onsubmit="postTestimonial();">
                 <div class="form-row mb-2">
-                    <input type="text" class="form-control" placeholder="Name" name="name"/>
+                    <input type="text" class="form-control" placeholder="Name" name="name" required="true" maxlength="20" pattern="[A-Za-z]+"/>
                 </div>
                 <div class="form-row mb-2">
-                    <textarea class="form-control" placeholder="Write your review here" name="review" rows="3"></textarea>
+                    <textarea class="form-control" placeholder="Write your review here" name="review" rows="3" maxlength="300" pattern="[A-Za-z]+"></textarea>
                 </div>
                 <div class="form-row ml-2">
                     <h5 class="form-check-inline">Number of stars: </h5>
@@ -33,7 +33,7 @@
                         <label class="form-check-label" for="inlineRadio5">5</label>
                     </div>
                     <div class="ml-auto">
-                        <button type="button" class="btn btn-lg btn-primary float-right">Submit</button>
+                        <button type="submit" class="btn btn-lg btn-primary float-right">Submit</button>
                     </div>
                 </div>
             </form>

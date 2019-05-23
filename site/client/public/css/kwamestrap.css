@@ -265,7 +265,7 @@ div#all {
 }
                             
 .st0 {
-    animation: shift 0.3s linear infinite;
+    animation: shift 0.6s linear infinite;
 }
 @keyframes shift {
     from {
