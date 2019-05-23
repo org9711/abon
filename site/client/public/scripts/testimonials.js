@@ -71,7 +71,7 @@ function displayTestimonialForm() {
   if(this.readyState != XMLHttpRequest.DONE) return;
   var testimonialForm = document.getElementsByClassName("container my-4")[0];
   testimonialForm.innerHTML = this.responseText;
-  document.getElementsByClassName("btn btn-lg btn-primary float-right")[0].addEventListener("click", postTestimonial);
+//  document.getElementsByClassName("btn btn-lg btn-primary float-right")[0].addEventListener("click", postTestimonial);
 }
 
 function postTestimonial() {
@@ -126,4 +126,19 @@ function displayFooter() {
   if(this.readyState != XMLHttpRequest.DONE) return;
   let footer = document.getElementsByTagName("footer")[0];
   footer.innerHTML = this.responseText;
+}
+
+function kwalidation(){
+//    var constraints = {
+//      username: {
+//        presence: true,
+//        exclusion: {
+//          within: ["nicklas"],
+//          message: "'%{value}' is not allowed"
+//        }
+//      }
+//    };
+//    
+//    validate({username: "nicklas"}, constraints);
+    return false;
 }
