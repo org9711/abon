@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="author" content="Kwame Dogbe and Ollie Ryan-George"/>
-    <title>Abon</title>
+    <meta name="author" content="Kwame Dogbe and Oliver Ryan-George"/>
+    <title>Admin - Products</title>
 
     <!--Scripts-->
     <script src="admin/products.js"></script>
@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="container row">
                     <h1 class="ml-2 abon-red">Products</h1>
-                    <button type="button" class="btn btn-success btn-rounded btn-sm ml-auto">Add New Product</button>
+                    <button type="button" class="btn btn-success btn-rounded btn-sm ml-auto">Add Product</button>
                     <form class="ml-auto" id="file-form" action="" method="POST">
                       <input type="file" id="file-select" name="photos[]" multiple="true"/>
                       <button type="submit" id="upload-button">Upload</button>
@@ -36,42 +36,16 @@
               <div class="card-body">
                 <div class="row"></div>
                 <div id="table" class="table-editable">
-                  <table id="cart" class="table table-responsive-md table-striped text-center">
+                  <table id="table-inside" class="table table-responsive-md table-striped text-center">
                     <tr>
                       <th class="text-center">ID</th>
-                      <th class="text-center">Product Name</th>
-                      <th class="text-center">Price(£)</th>
-                      <th class="text-center">Image_link</th>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">Price</th>
+                      <th class="text-center">Image Name</th>
                       <th class="text-center">Description</th>
-                      <th class="text-center">Stock</th>
                       <th class="text-center">Status</th>
                       <th></th>
                     </tr>
-                    <tr class="' + rowId + '">
-                        <td class="pt-3-half">1</td>
-                        <td class="pt-3-half" contenteditable="true">Superfood Pesto</td>
-                        <td class="pt-3-half" contenteditable="true">2.20</td>
-                        <td class="pt-3-half" contenteditable="false">
-                            <select class="form-control" id="image-selector">
-                              <option>superFood1.png</option>
-                              <option>veg_curry1.jpg</option>
-                              <option>superfood2.png</option>
-                            </select>
-                        </td>
-                        <td class="pt-3-half" contenteditable="true">Blahblahbalh</td>
-                        <td class="pt-3-half" contenteditable="true">34</td>
-                        <td class="pt-3-half" contenteditable="true"><div class="form-group">
-                            <select class="form-control" id="stock-selector">
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                            </select>
-                          </div>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger btn-rounded removeBtn btn-sm my-0">Remove</button>
-                        </td>
-                      </tr>
                   </table>
                 </div>
               </div>

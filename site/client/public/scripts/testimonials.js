@@ -88,7 +88,7 @@ function postTestimonial() {
     review: document.querySelector('textarea[name="review"]').value
   };
   testimonial = JSON.stringify(testimonialObj);
-  var q = new XMLHttpRequest();
+  let q = new XMLHttpRequest();
   q.onreadystatechange = displayTestimonialFormConfirmation;
   q.open("POST", '/testimonials/submit_testimonial', true);
   q.send(testimonial);

@@ -44,7 +44,7 @@ async function postHandler(object, request, response) {
     list = [object.name, object.review, object.stars,0];
     let statement = "INSERT INTO testimonials(name,review,stars,status) VALUES(?,?,?,?)";
     database.insertRow(statement, list);
-    let path = "static/components/testimonial_submitted.html";
+    let path = "client/public/components/testimonial_submitted.html";
     send.sendPage(path, request, response);
   }
 }

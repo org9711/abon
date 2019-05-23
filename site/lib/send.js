@@ -36,7 +36,7 @@ module.exports = {
     respond.reply(response, hdrs, file);
   },
 
-  sendConfirmation: async function(path, response) {
+  sendConfirmation: async function(response) {
     let text = "Post successful.";
     let hdrs = { 'Content-Type': 'text/plain' };
     respond.reply(response, hdrs, text);
@@ -45,9 +45,16 @@ module.exports = {
   sendObject: async function(statement, list, response) {
     let objects;
     try { objects = await database.getRows(statement, list); }
-    catch (err) {
-      return respond.fail(response, BadType, "Database error.\n" + err); }
+    catch (err) { return respond.fail(response, BadType, "Database error.\n" + err); }
     let hdrs = { 'Content-Type': 'application/JSON' };
     respond.reply(response, hdrs, JSON.stringify(objects));
+  },
+
+  sendDirectoryContents: async function(path, response) {
+    let contents;
+    try { contents = await fs.readdir(path); }
+    catch (err) { return respond.fail(response, BadType, "Directory error."); }
+    let hdrs = { 'Content-Type': 'application/JSON' };
+    respond.reply(response, hdrs, JSON.stringify(contents));
   }
 };

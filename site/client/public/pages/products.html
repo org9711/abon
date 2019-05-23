@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="author" content="Kwame Dogbe and Ollie Ryan-George"/>
-    <title>Abon</title>
+    <title>Abon - Products</title>
 
     <!--BootstrapCDN-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -46,7 +46,7 @@
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    
+
                 <form action="#" onsubmit="kwalidation();">
 
                   <div class="modal-header">
@@ -84,7 +84,7 @@
 
                     <hr class="mb-2"/>
 
-                    <h5>Address</h5>
+                    <h5>Delivery Address</h5>
 
                     <div class="col-md-6 mb-3">
                         <input type="text" class="form-control" id="Address1" placeholder="Address Line 1" value="" required="true" maxlength="30"/>
@@ -105,56 +105,10 @@
 
                     <hr class="mb-2"/>
 
-                    <h5>Payment Details</h5>
-
-                    <div class="d-block my-3">
-                      <div class="custom-control custom-radio">
-                        <input id="cash" name="paymentMethod" type="radio" class="custom-control-input"  checked="true" required="true"/>
-                        <label class="custom-control-label" for="cash">Cash</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="true"/>
-                        <label class="custom-control-label" for="paypal">Paypal</label>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-6 mb-3">
-                        <label for="cc-name">Name on card</label>
-                        <input type="text" class="form-control" id="cc-name" placeholder="" required="true" maxlength="30"/>
-                        <small class="text-muted">Full name as displayed on card</small>
-                        <div class="invalid-feedback">
-                          Name on card is required
-                        </div>
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <label for="cc-number">Credit card number</label>
-                        <input type="text" class="form-control" id="cc-number" placeholder="" required="true"/>
-                        <div class="invalid-feedback">
-                          Credit card number is required
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-3 mb-3">
-                        <label for="cc-expiration">Expiration</label>
-                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required="true" pattern="[0-9]{2}/[0-9]{2}" title="eg: 12/34"/>
-                        <div class="invalid-feedback">
-                          Expiration date required
-                        </div>
-                      </div>
-                      <div class="col-md-3 mb-3">
-                        <label for="cc-expiration">CVV</label>
-                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required="true" pattern="[0-9]{3}" title="eg: 123"/>
-                        <div class="invalid-feedback">
-                          Security code required
-                        </div>
-                      </div>
-                    </div>
+                    <h5>Payment Will Be Cash on the Door</h5>
                   </div>
 
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Complete Order</button>
                   </div>
                 </form>

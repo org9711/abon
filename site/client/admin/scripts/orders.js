@@ -3,6 +3,23 @@ addEventListener('load', start);
 function start() {
   getHeader();
   getFooter();
+  getOrderLayout();
+}
+
+let orderLayout;
+
+function getOrderLayout() {
+  let q = new XMLHttpRequest();
+  q.onreadystatechange = storeOrderLayout;
+  q.open("GET", 'admin/orders/get_row_layout', true);
+  q.send();
+}
+
+function storeOrderLayout() {
+  if(this.readyState != XMLHttpRequest.DONE) return;
+  el = document.createElement("html");
+  el.innerHTML = this.responseText;
+  orderLayout = el;
 }
 
 function getHeader() {

@@ -118,7 +118,7 @@ function displayProducts() {
 
     product = product.firstElementChild;
     productDescription = productDescription.firstElementChild;
-    ul.appendChild(product);
+    ul.append(product);
     ul.append(description);
   }
 }
@@ -150,7 +150,7 @@ function addToBasket(cartTag, productId, productName, productPrice) {
     });
     minusButton.addEventListener("click", function() {
       takeFromTotal(cartTotalTag, productPriceFloat);
-    })
+    });
 
     basketRow.getElementsByClassName("removeBtn")[0].addEventListener("click", function() {
       let basketRowQuantity = basketRow.getElementsByClassName('form-control text-center')[0];
