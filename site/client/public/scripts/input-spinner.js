@@ -17,4 +17,5 @@ $(document).on('click', '.number-spinner button', function () {
 		}
 	}
 	btn.closest('.number-spinner').find('input').val(newVal);
+    subtotal();
 });
