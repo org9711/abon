@@ -3,12 +3,12 @@
             <h3>Write your own review</h3>
         </div>
         <div class="card-body">
-            <form action="#" onsubmit="kwalidation();">
+            <form id="check-valid" action="#" onsubmit="kwalidation();">
                 <div class="form-row mb-2">
                     <input type="text" class="form-control" placeholder="Name" name="name" required="true" maxlength="20" pattern="[A-Za-z]+"/>
                 </div>
                 <div class="form-row mb-2">
-                    <textarea class="form-control" placeholder="Write your review here" name="review" rows="3" maxlength="300" pattern="[A-Za-z]+"></textarea>
+                    <textarea id="textCheck" class="form-control" placeholder="Write your review here" name="review" rows="3" maxlength="300" pattern="[A-Za-z]+"></textarea>
                 </div>
                 <div class="form-row ml-2">
                     <h5 class="form-check-inline">Number of stars: </h5>
@@ -29,7 +29,7 @@
                         <label class="form-check-label" for="inlineRadio4">4</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="stars" value="option5"/>
+                        <input class="form-check-input" type="radio" name="stars" value="option5" checked="true"/>
                         <label class="form-check-label" for="inlineRadio5">5</label>
                     </div>
                     <div class="ml-auto">

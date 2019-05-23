@@ -129,16 +129,13 @@ function displayFooter() {
 }
 
 function kwalidation(){
-//    var constraints = {
-//      username: {
-//        presence: true,
-//        exclusion: {
-//          within: ["nicklas"],
-//          message: "'%{value}' is not allowed"
-//        }
-//      }
-//    };
-//    
-//    validate({username: "nicklas"}, constraints);
-    return false;
+    var check = document.getElementById("check-valid");
+    var valid = check.checkValidity();
+        
+    if(valid){
+        postTestimonial();
+    }
 }
+
+
+
