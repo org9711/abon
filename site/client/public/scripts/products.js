@@ -4,7 +4,6 @@ function start() {
   getHeader();
   getFooter();
   getProductLayout();
-  placeOrderListener();
 }
 
 let productLayout;
@@ -218,7 +217,7 @@ function checkoutToggle() {
 }
 
 function placeOrderListener() {
-  document.getElementById("order-button").addEventListener("click", function() {
+//  document.getElementById("order-button").addEventListener("click", function() {
     let tableRows = document.getElementById("cart").children;
     let productQuants = []
     for (let i = 1; i < tableRows.length; i++) {
@@ -253,7 +252,7 @@ function placeOrderListener() {
     q.onreadystatechange = displayOrderConfirmation;
     q.open("POST", '/products/submit_order', true);
     q.send(JSON.stringify(orderDetails));
-  });
+//  });
 }
 
 function displayOrderConfirmation() {
@@ -261,6 +260,8 @@ function displayOrderConfirmation() {
   let modalDiv = document.getElementById("modal-content");
   let modalContentsDiv = document.getElementById("modal-body");
   let modalFooterDiv = document.getElementById("modal-footer");
+  let modalHeaderDiv = document.getElementById("modal-header");
+  modalHeaderDiv.innerHTML = '<h5 class="modal-title" id="exampleModalLongTitle">Order Complete</h5><p><a class="btn btn-block btn-success" href="/products" role="button">Continue</a></p>';
   modalDiv.removeChild(modalFooterDiv);
   modalContentsDiv.innerHTML = this.responseText;
 
@@ -296,4 +297,16 @@ function displayFooter() {
   if(this.readyState != XMLHttpRequest.DONE) return;
   let footer = document.getElementsByTagName("footer")[0];
   footer.innerHTML = this.responseText;
+}
+
+function kwalidation(){
+    
+    var check = document.getElementById("check-valid");
+    var valid = check.checkValidity();
+        
+    if(valid){
+        placeOrderListener();
+    }
+    
+    return false;
 }

@@ -64,7 +64,7 @@ function appendProductToTable(product) {
   let productImageTag = productTag.getElementsByClassName('form-control image-options')[0];
   let productStatusTag = productTag.getElementsByClassName('form-control product-status')[0];
   let productDescriptionTag = productTag.getElementsByClassName('pt-3-half product-description')[0];
-  let confirmButton = productTag.getElementsByClassName('btn btn-danger btn-rounded confirmBtn btn-sm my-0')[0];
+  let confirmButton = productTag.getElementsByClassName('btn btn-success btn-rounded confirmBtn btn-sm my-0')[0];
   let removeButton = productTag.getElementsByClassName('btn btn-danger btn-rounded removeBtn btn-sm my-0')[0];
 
   let productId = product.id;
