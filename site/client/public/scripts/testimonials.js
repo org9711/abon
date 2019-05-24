@@ -71,7 +71,7 @@ function displayTestimonialForm() {
   if(this.readyState != XMLHttpRequest.DONE) return;
   let testimonialForm = document.getElementsByClassName("container my-4")[0];
   testimonialForm.innerHTML = this.responseText;
-  document.getElementsByClassName("btn btn-lg btn-primary float-right")[0].addEventListener("click", postTestimonial);
+//  document.getElementsByClassName("btn btn-lg btn-primary float-right")[0].addEventListener("click", postTestimonial);
 }
 
 function postTestimonial() {
@@ -127,3 +127,15 @@ function displayFooter() {
   let footer = document.getElementsByTagName("footer")[0];
   footer.innerHTML = this.responseText;
 }
+
+function kwalidation(){
+    var check = document.getElementById("check-valid");
+    var valid = check.checkValidity();
+        
+    if(valid){
+        postTestimonial();
+    }
+}
+
+
+
