@@ -29,7 +29,7 @@ module.exports = {
   },
 
   adminOrder: function(object, today) {
-    let subjectCust = "Confirming Your Abon Order";
+    let subjectCust = "New Abon order";
     let productsString = "";
     for (let i = 0; i < object.productQuants.length; i++) {
       productsString += object.productQuants[i].quantity + "x " + object.productQuants[i].productName + " = £" + (parseFloat(object.productQuants[i].productPrice) * parseInt(object.productQuants[i].quantity)).toFixed(2) + "\n"
