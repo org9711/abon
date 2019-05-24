@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/org9711/abon#readme",
   "dependencies": {
+    "nodemailer": "^6.1.1",
     "sqlite": "^3.0.3"
   }
 }

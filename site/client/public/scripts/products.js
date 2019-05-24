@@ -4,11 +4,13 @@ function start() {
   getHeader();
   getFooter();
   getProductLayout();
+  placeOrderListener();
 }
 
 let productLayout;
 let descriptionLayout;
 let basketRowLayout;
+let modalLayout;
 
 function getProductLayout() {
   let q = new XMLHttpRequest();
@@ -146,10 +148,26 @@ function addToBasket(cartTag, productId, productName, productPrice) {
 
     basketRow.getElementsByClassName("removeBtn")[0].addEventListener("click", function() {
       let basketRowQuantity = basketRow.getElementsByClassName('form-control text-center')[0];
-      currentPrice = parseFloat(cartTotalTag.innerText);
-      newPrice = currentPrice - (productPriceFloat * parseInt(basketRowQuantity.value))
-      cartTotalTag.innerText = newPrice.toFixed(2);
       this.parentElement.parentElement.remove();
+      subtotal();
+      checkoutToggle();
+    });
+
+    plusButton.addEventListener("click", function() {
+      let basketRowQuantity = basketRow.getElementsByClassName('form-control text-center')[0];
+      let oldQuantity = parseInt(basketRowQuantity.value);
+      if (oldQuantity < 9) {
+        basketRowQuantity.value = oldQuantity + 1;
+        subtotal();
+      }
+    });
+    minusButton.addEventListener("click", function() {
+      let basketRowQuantity = basketRow.getElementsByClassName('form-control text-center')[0];
+      let oldQuantity = parseInt(basketRowQuantity.value);
+      if (oldQuantity > 1) {
+        basketRowQuantity.value = oldQuantity - 1;
+        subtotal();
+      }
     });
 
     basketRow = basketRow.firstElementChild;
@@ -161,9 +179,10 @@ function addToBasket(cartTag, productId, productName, productPrice) {
   }
 
   subtotal();
+  checkoutToggle();
 }
 
-function subtotal(){
+function subtotal() {
   var myCart = document.getElementById("cart");
   var tableRows = myCart.children;
   var sum = 0;
@@ -175,6 +194,77 @@ function subtotal(){
   }
   sum = sum.toFixed(2);
   document.getElementById("total").innerHTML = sum;
+}
+
+function checkoutToggle() {
+  let orderTableDiv = document.getElementById("order-table-div");
+  let subtotal = parseFloat(document.getElementById("total").innerText);
+  let checkoutButton = document.getElementById('checkout-button');
+  if (checkoutButton == null) {
+    if (subtotal > 0) {
+      checkoutButton = document.createElement("html");
+      checkoutButton.innerHTML = "<button type=\"button\" class=\"btn btn-success ml-2 mb-2 mt-2\" id=\"checkout-button\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">Checkout</button>";
+      orderTableDiv.append(checkoutButton.firstElementChild);
+    }
+  }
+  else {
+    if (subtotal <= 0) {
+      orderTableDiv.removeChild(checkoutButton);
+    }
+  }
+}
+
+function placeOrderListener() {
+  document.getElementById("order-button").addEventListener("click", function() {
+    let tableRows = document.getElementById("cart").children;
+    let productQuants = []
+    for (let i = 1; i < tableRows.length; i++) {
+      let quantityTag = tableRows[i].getElementsByClassName("form-control text-center")[0];
+      let productNameTag = tableRows[i].getElementsByClassName("pt-3-half basket-row-product-name")[0];
+      let productPriceTag = tableRows[i].getElementsByClassName("pt-3-half basket-row-product-price")[0];
+      let classSplit = tableRows[i].className.split("-");
+      let orderObj = {
+        productId: classSplit[classSplit.length - 1],
+        productName: productNameTag.innerText,
+        productPrice: productPriceTag.innerText,
+        quantity: quantityTag.value
+      };
+      productQuants.push(orderObj);
+    }
+    let customerDetails = {
+      firstName: document.querySelector('input[name="firstName"]').value,
+      surname: document.querySelector('input[name="surname"]').value,
+      email: document.querySelector('input[name="email"]').value,
+      addr1: document.querySelector('input[name="address-line1"]').value,
+      addr2: document.querySelector('input[name="address-line2"]').value,
+      county: document.querySelector('input[name="address-county"]').value,
+      town: document.querySelector('input[name="address-town"]').value,
+      postcode: document.querySelector('input[name="address-postcode"]').value
+    };
+    let orderDetails = {
+      productQuants: productQuants,
+      customerDetails: customerDetails,
+      total: document.getElementById("total").innerHTML
+    };
+    let q = new XMLHttpRequest();
+    q.onreadystatechange = displayOrderConfirmation;
+    q.open("POST", '/products/submit_order', true);
+    q.send(JSON.stringify(orderDetails));
+  });
+}
+
+function displayOrderConfirmation() {
+  if(this.readyState != XMLHttpRequest.DONE) return;
+  let modalDiv = document.getElementById("modal-content");
+  let modalContentsDiv = document.getElementById("modal-body");
+  let modalFooterDiv = document.getElementById("modal-footer");
+  modalDiv.removeChild(modalFooterDiv);
+  modalContentsDiv.innerHTML = this.responseText;
+
+  let table = document.getElementById("cart");
+  for (let i = 1; i < table.children.length; i++) {
+    table.removeChild(table.children[i]);
+  }
 }
 
 function getHeader() {
