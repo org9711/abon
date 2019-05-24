@@ -4,7 +4,7 @@ let bcrypt = require("bcryptjs");
 // createProductsTable();
 // createCustomersTable();
 // createOrdersTable();
-// createUsersTable();
+createUsersTable();
 
 async function createTestimonialsTable() {
   let createDbCommand =
@@ -208,10 +208,10 @@ async function createUsersTable() {
   let list3 = [user3,hashPass3];
   try {
     let db = await sqlite.open("./db.sqlite");
-    await db.run(createDbCommand);
-    await db.run(insertRowCommand, list1);
-    await db.run(insertRowCommand, list2);
-    await db.run(insertRowCommand, list3);
+    // await db.run(createDbCommand);
+    // await db.run(insertRowCommand, list1);
+    // await db.run(insertRowCommand, list2);
+    // await db.run(insertRowCommand, list3);
     let as = await db.all("SELECT * FROM users");
     console.log(as);
     db.close();
