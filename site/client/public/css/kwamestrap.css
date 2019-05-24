@@ -177,7 +177,7 @@ div#all {
   padding: 50px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991.98px) {    
+@media only screen and (max-width: 991.98px) {    
     .view-first .mask h1 {
       font-size: 30px;
     }
@@ -189,6 +189,7 @@ div#all {
       padding: 20px;
     }
 }
+
 
 .view-first h2 {
   transform: translateY(-100px);
@@ -276,5 +277,3 @@ div#all {
     }
 }
     
-
-

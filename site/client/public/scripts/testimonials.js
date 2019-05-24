@@ -135,6 +135,8 @@ function kwalidation(){
     if(valid){
         postTestimonial();
     }
+    
+    return false;
 }
 
 

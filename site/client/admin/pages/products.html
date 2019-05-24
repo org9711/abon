@@ -20,37 +20,41 @@
 </head>
 
 <body>
+    <div id="container">
         <header id="header"></header>
-
-        <div class="my-4">
-             <!-- Editable table -->
-            <div class="card">
-                <div class="container row">
-                    <h1 class="ml-2 abon-red">Products</h1>
-                    <button type="button" class="btn btn-success btn-rounded btn-sm ml-auto">Add Product</button>
-                    <form class="ml-auto" id="file-form" action="" method="POST">
-                      <input type="file" id="file-select" name="photos[]" multiple="true"/>
-                      <button type="submit" id="upload-button">Upload</button>
-                    </form>
+        
+        <main>
+            <div class="my-4">
+                 <!-- Editable table -->
+                <div class="card">
+                    <div class="container row">
+                        <h1 class="ml-2 abon-red">Products</h1>
+                        <button type="button" class="btn btn-success btn-rounded btn-sm ml-auto">Add Product</button>
+                        <form class="ml-auto" id="file-form" action="" method="POST">
+                          <input type="file" id="file-select" name="photos[]" multiple="true"/>
+                          <button type="submit" id="upload-button">Upload</button>
+                        </form>
+                    </div>
+                  <div class="card-body">
+                    <div class="row"></div>
+                    <div id="table" class="table-editable">
+                      <table id="table-inside" class="table table-responsive-md table-striped text-center">
+                        <tr>
+                          <th class="text-center">ID</th>
+                          <th class="text-center">Name</th>
+                          <th class="text-center">Price</th>
+                          <th class="text-center">Image Name</th>
+                          <th class="text-center">Description</th>
+                          <th class="text-center">Status</th>
+                          <th></th>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
                 </div>
-              <div class="card-body">
-                <div class="row"></div>
-                <div id="table" class="table-editable">
-                  <table id="table-inside" class="table table-responsive-md table-striped text-center">
-                    <tr>
-                      <th class="text-center">ID</th>
-                      <th class="text-center">Name</th>
-                      <th class="text-center">Price</th>
-                      <th class="text-center">Image Name</th>
-                      <th class="text-center">Description</th>
-                      <th class="text-center">Status</th>
-                      <th></th>
-                    </tr>
-                  </table>
-                </div>
-              </div>
             </div>
-        </div>
+        </main>
         <footer class="footer mt-auto py-3"></footer>
+    </div>
 </body>
 </html>

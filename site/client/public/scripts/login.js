@@ -22,4 +22,9 @@ function checkPassword() {
   success = JSON.parse(this.responseText);
   let userSuccess = success.username;
   let passwordSuccess = success.password;
+    
+  if(!userSuccess || !passwordSuccess){
+      document.getElementById("invalid-text").innerHTML = "Invalid Login Details";
+  }
+    
 }
