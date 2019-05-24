@@ -175,7 +175,10 @@ function addToBasket(cartTag, productId, productName, productPrice) {
   }
   else {
     let basketRowQuantity = basketRow.getElementsByClassName('form-control text-center')[0];
-    basketRowQuantity.value = parseInt(basketRowQuantity.value) + 1;
+    let oldQuantity = parseInt(basketRowQuantity.value);
+    if (oldQuantity < 9) {
+      basketRowQuantity.value = parseInt(basketRowQuantity.value) + 1;
+    }
   }
 
   subtotal();

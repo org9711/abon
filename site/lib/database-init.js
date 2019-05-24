@@ -1,8 +1,8 @@
 var sqlite = require("sqlite");
-createTestimonialsTable();
+// createTestimonialsTable();
 // createProductsTable();
 // createCustomersTable();
-// createOrdersTable();
+createOrdersTable();
 
 async function createTestimonialsTable() {
   let createDbCommand =
