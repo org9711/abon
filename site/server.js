@@ -10,6 +10,7 @@ let testimonialsC = require('./controllers/testimonials.js');
 let aboutC = require('./controllers/about.js');
 let frameC = require('./controllers/frame.js');
 let adminC = require('./controllers/admin.js');
+let loginC = require('./controllers/login.js');
 start(8080);
 
 // Provide a service to localhost only.
@@ -24,13 +25,7 @@ function start(port) {
 async function handle(request, response) {
   await validateURL(request, response);
   if (request.url.startsWith("/admin")) {
-    let isAuthenticated = true;
-    if (isAuthenticated) {
-      adminC.handle(request, response);
-    }
-    else {
-      return respond.fail(response, Unauthorized, "This request is restricted to administrators only.");
-    }
+    adminC.handle(request, response);
   }
   else {
     if (request.url.startsWith("/favicon.ico")) request.url = 'square.png';
@@ -51,6 +46,9 @@ async function handle(request, response) {
     }
     else if (request.url.startsWith("/about")) {
       aboutC.handle(request, response);
+    }
+    else if (request.url.startsWith("/login")) {
+      loginC.handle(request, response);
     }
     else if (request.url == "/") {
       indexC.handle(request, response);

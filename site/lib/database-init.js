@@ -1,8 +1,10 @@
-var sqlite = require("sqlite");
+let sqlite = require("sqlite");
+let bcrypt = require("bcryptjs");
 // createTestimonialsTable();
 // createProductsTable();
 // createCustomersTable();
-createOrdersTable();
+// createOrdersTable();
+// createUsersTable();
 
 async function createTestimonialsTable() {
   let createDbCommand =
@@ -65,7 +67,7 @@ async function createProductsTable() {
     "status INT NOT NULL)";
   let insertRowCommand1 =
     "INSERT INTO products (name, price, image_name, description, status) " +
-    "VALUES ('Superfood Pesto', '2.20', 'pesto.jpg', " +
+    "VALUES ('Superfood Pesto', '2.20', 'superfood-pesto.jpg', " +
     "'This pesto is as vibrant in colour as it is in flavour. It takes " +
     "inspiration from both Japanese and Italian cooking and fuses the best of " +
     "both cuisines. It''s full of spinach, edamame beans, garlic, coriander, " +
@@ -77,7 +79,7 @@ async function createProductsTable() {
     "2)";
   let insertRowCommand2 =
     "INSERT INTO products (name, price, image_name, description, status) " +
-    "VALUES ('Roasted Veg Curry', '2.20', 'curry.jpg', " +
+    "VALUES ('Roasted Veg Curry', '2.20', 'veg-curry.jpg', " +
     "'The roasted veg curry is packed full of the good stuff. It includes " +
     "butternut squash, sweet potato, peppers, mushrooms and tons of " +
     "other veg that will make you feel as good as it tastes. Pimp yours " +
@@ -86,7 +88,7 @@ async function createProductsTable() {
     "2)";
   let insertRowCommand3 =
     "INSERT INTO products (name, price, image_name, description, status) " +
-    "VALUES ('Superfood Pesto', '2.20', 'pesto.jpg', " +
+    "VALUES ('Spicy Noodle Soup', '2.20', 'spicy-noodles.jpg', " +
     "'This pesto is as vibrant in colour as it is in flavour. It takes " +
     "inspiration from both Japanese and Italian cooking and fuses the best of " +
     "both cuisines. It''s full of spinach, edamame beans, garlic, coriander, " +
@@ -98,7 +100,7 @@ async function createProductsTable() {
     "1)";
   let insertRowCommand4 =
     "INSERT INTO products (name, price, image_name, description, status) " +
-    "VALUES ('Superfood Pesto', '2.20', 'pesto.jpg', " +
+    "VALUES ('Aubergine & Tomato Pasta', '2.20', 'tomato-pasta.jpg', " +
     "'This pesto is as vibrant in colour as it is in flavour. It takes " +
     "inspiration from both Japanese and Italian cooking and fuses the best of " +
     "both cuisines. It''s full of spinach, edamame beans, garlic, coriander, " +
@@ -169,12 +171,48 @@ async function createOrdersTable() {
     "INSERT INTO orders (customer, product, quantity, datetime, status)" +
     "VALUES (1, 1, 3, '2019-05-20 17-05-30', 0)";
   try {
-    let db = await sqlite.open("./db.sqlite")
+    let db = await sqlite.open("./db.sqlite");
     await db.run(createDbCommand);
     await db.run(insertRowCommand1);
     await db.run(insertRowCommand2);
     await db.run(insertRowCommand3);
     let as = await db.all("SELECT * FROM orders");
+    console.log(as);
+    db.close();
+  } catch(e) { console.log(e); }
+}
+
+async function createUsersTable() {
+  let createDbCommand =
+  "CREATE TABLE users(" +
+  "username VARCHAR(20) PRIMARY KEY, " +
+  "password VARCHAR(100) NOT NULL)";
+  let salt1 = await bcrypt.genSalt(10);
+  let salt2 = await bcrypt.genSalt(10);
+  let salt3 = await bcrypt.genSalt(10);
+  let user1 = "org-abon";
+  let user2 = "jn-abon";
+  let user3 = "ian-uob";
+  let password1 = "abon-meal!!";
+  let password2 = "abon-meal!!";
+  let password3 = "uob-1595";
+  let hashPass1 = await bcrypt.hash(password1, salt1);
+  let hashPass2 = await bcrypt.hash(password2, salt2);
+  let hashPass3 = await bcrypt.hash(password3, salt3);
+  console.log(user1, password1, salt1, hashPass1);
+  console.log(user2, password2, salt2, hashPass2);
+  console.log(user3, password3, salt3, hashPass3);
+  let insertRowCommand = "INSERT INTO users (username,password) VALUES (?,?)"
+  let list1 = [user1,hashPass1];
+  let list2 = [user2,hashPass2];
+  let list3 = [user3,hashPass3];
+  try {
+    let db = await sqlite.open("./db.sqlite");
+    await db.run(createDbCommand);
+    await db.run(insertRowCommand, list1);
+    await db.run(insertRowCommand, list2);
+    await db.run(insertRowCommand, list3);
+    let as = await db.all("SELECT * FROM users");
     console.log(as);
     db.close();
   } catch(e) { console.log(e); }

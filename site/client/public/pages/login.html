@@ -2,11 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Kwame Dogbe and Ollie Ryan-George"/>
-    <link rel="icon" href="../../../../favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="author" content="Kwame Dogbe and Oliver Ryan-George"/>
 
-    <title>Abon - Products</title>
+    <title>Admin - Login</title>
+
+    <!--Scripts-->
+    <script src="login.js"></script>
+
 
     <!--BootstrapCDN-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -14,24 +17,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-    
-    <!--Scripts-->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="../css/signin.css" rel="stylesheet">
+    <link href="signin.css" rel="stylesheet"/>
 </head>
 
   <body class="text-center">
-    <form class="form-signin">
-      <img class="mb-4" src="../../public/images/logo.png" alt="" width="100%" height="100%">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">© Kwolie 2019-2020</p>
+    <form onsubmit="return postUsernamePassword();">
+      <img class="mb-4" src="logo.png" alt="" width="100%" height="100%"/>
+      <input type="text" id="inputEmail" class="form-control" name="username" placeholder="Username" required="" autofocus=""/>
+      <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required=""/>
+      <button class="btn btn-lg btn-primary btn-block" id="sign-in-button" type="button">Sign In</button>
     </form>
-  
+
 
 </body>
 
