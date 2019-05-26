@@ -39,7 +39,7 @@ module.exports = {
       else if (request.url.startsWith("/admin/testimonials")) {
         testimonialsC.handle(request, response);
       }
-      else if (request.url.endsWith("/admin") || request.url.endsWith("admin_orders")) {
+      else if (request.url.endsWith("admin_orders")) {
         let path = "client/admin/pages/orders.html"
         send.sendPage(path, request, response);
       }

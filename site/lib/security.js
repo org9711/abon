@@ -28,7 +28,7 @@ module.exports = {
     if (usernameSuccess && passwordSuccess) {
       let token = jwt.sign({username: userpass.username},
         config.secret,
-        { expiresIn: '24h' }
+        { expiresIn: '1h' }
       );
       authentication = {
         success: true,
