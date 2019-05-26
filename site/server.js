@@ -2,6 +2,7 @@ let HTTP = require('http');
 let fs = require('fs');
 let OK = 200, Unauthorized = 401, NotFound = 404, BadType = 415;
 let respond = require('./lib/respond.js');
+let security = require('./lib/security.js');
 let indexC = require('./controllers/index.js');
 let filesC = require('./controllers/files.js');
 let picturesC = require('./controllers/pictures.js');
@@ -23,7 +24,7 @@ function start(port) {
 
 // Deal with a request.
 async function handle(request, response) {
-  await validateURL(request, response);
+  await security.validateURL(request, response);
   if (request.url.startsWith("/admin")) {
     adminC.handle(request, response);
   }
@@ -56,15 +57,5 @@ async function handle(request, response) {
     else {
       return respond.fail(response, NotFound, "Request URL not valid.");
     }
-  }
-}
-
-async function validateURL(request, response) {
-  dotDot = request.url.includes("..");
-  slashSlash = request.url.includes("//");
-  dotSlash = request.url.includes("./");
-  slashDot = request.url.includes("/.");
-  if (dotDot || slashSlash || dotSlash || slashDot) {
-    return respond.fail(response, BadType, "Restricted characters used in URL.");
   }
 }

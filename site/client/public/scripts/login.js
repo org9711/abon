@@ -19,12 +19,28 @@ function postUsernamePassword() {
 
 function checkPassword() {
   if (this.readyState != XMLHttpRequest.DONE) return;
-  success = JSON.parse(this.responseText);
-  let userSuccess = success.username;
-  let passwordSuccess = success.password;
-    
-  if(!userSuccess || !passwordSuccess){
-      document.getElementById("invalid-text").innerHTML = "Invalid Login Details";
+  result = JSON.parse(this.responseText);
+
+  if(result.success){
+    let datetime = new Date();
+    datetime.setHours(datetime.getHours() + 2);
+    console.log(datetime);
+    console.log(datetime.toUTCString());
+    document.cookie = "jwt=" + result.token + "; expires=" + datetime.toUTCString() + "; path=/";
+    console.log(window.location.pathname);
+    let q = new XMLHttpRequest();
+    q.onreadystatechange = replacePage;
+    q.open("GET", window.location.pathname, true);
+    // q.setRequestHeader('jwt', document.cookie);
+    q.send();
   }
-    
+  else {
+    document.getElementById("invalid-text").innerHTML = "Invalid Login Details";
+  }
+}
+
+function replacePage() {
+  // document.open();
+  document.write(this.responseText);
+  document.close();
 }

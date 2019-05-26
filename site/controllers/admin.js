@@ -1,5 +1,6 @@
 let receive = require('../lib/receive.js');
 let send = require('../lib/send.js');
+let security = require('../lib/security.js');
 let ordersC = require('./admin_orders.js');
 let productsC = require('./admin_products.js');
 let testimonialsC = require('./admin_testimonials.js');
@@ -7,8 +8,8 @@ let testimonialsC = require('./admin_testimonials.js');
 
 module.exports = {
   handle: async function(request, response) {
-    let isAuthenticated = false;
-    if (isAuthenticated) {
+    let admin = await security.evaluateJWT(request);
+    if (admin) {
       if (request.url.endsWith(".js")) {
         let splits = request.url.split('/');
         let filename = splits[splits.length-1];
