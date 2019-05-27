@@ -65,6 +65,7 @@ function appendOrderToTable(order) {
 
   orderIdTag.innerText = orderId;
   orderCustomerTag.innerText = orderCustomer.id + ': ' + orderCustomer.firstname + '\n' +
+  orderCustomer.email + '\n' +
   orderCustomer.addressLine1 + '\n' + orderCustomer.postcode;
   orderProductTag.innerText = orderProduct.id + ': ' + orderProduct.name + ' (£' + orderProduct.price.toFixed(2) + ')';
   orderQuantityTag.innerText = orderQuantity;
