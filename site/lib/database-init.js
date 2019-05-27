@@ -4,7 +4,7 @@ let bcrypt = require("bcryptjs");
 // createProductsTable();
 // createCustomersTable();
 // createOrdersTable();
-createUsersTable();
+// createUsersTable();
 
 async function createTestimonialsTable() {
   let createDbCommand =
