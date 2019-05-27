@@ -46,8 +46,8 @@ module.exports = {
 
   evaluateJWT: async function(request) {
     let authentication = false;
-    let token = request.headers.cookie.substr(4);
-    if (token) {
+    if (request.headers.cookie) {
+      let token = request.headers.cookie.substr(4);
       jwt.verify(token, config.secret, (err, decoded) => {
         if (err) {
           console.log(err);
