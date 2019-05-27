@@ -28,16 +28,16 @@ async function createTestimonialsTable() {
     "VALUES ('Joe Williams', 'I eat this with a beer while watching the football!', 3, 1)";
   let insertRowCommand5 =
     "INSERT INTO testimonials (name, review, stars, status) " +
-    "VALUES ('Emma Labert', 'Just ordinarily excellent!', 1, 1)";
+    "VALUES ('Emma Labert', 'Just ordinarily excellent!', 3, 1)";
   let insertRowCommand6 =
     "INSERT INTO testimonials (name, review, stars, status) " +
-    "VALUES ('Noah Haran', 'I don''t eat much but when I do, I eat Abon!', 4, 0)";
+    "VALUES ('Noah Haran', 'I don''t eat much but when I do, I eat Abon!', 4, 1)";
   let insertRowCommand7 =
     "INSERT INTO testimonials (name, review, stars, status) " +
-    "VALUES ('James Lace', 'This curry gave me the shits :()', 1, 0)";
+    "VALUES ('James Lace', 'This curry gave me the shits :(', 1, 0)";
   let insertRowCommand8 =
     "INSERT INTO testimonials (name, review, stars, status) " +
-    "VALUES ('Luke Leckie', 'Join windsurfing please!', 1, 1)";
+    "VALUES ('Luke Leckie', 'Join windsurfing please!', 1, 0)";
 
   try {
     let db = await sqlite.open("./db.sqlite")
@@ -166,14 +166,14 @@ async function createOrdersTable() {
     "datetime DATETIME NOT NULL, " +
     "status INTEGER NOT NULL)";
   let insertRowCommand1 =
-    "INSERT INTO orders (customer, product, quantity, datetime, status) " +
-    "VALUES (1, 1, 2, '2019-05-10 16-05-30', 1)";
+    "INSERT INTO orders (customer, product, quantity, datetime, status)" +
+    "VALUES (2, 2, 3, '2019-5-20 17:5:30', 0)";
   let insertRowCommand2 =
     "INSERT INTO orders (customer, product, quantity, datetime, status)" +
-    "VALUES (1, 2, 1, '2019-05-10 16-05-30', 1)";
+    "VALUES (1, 2, 1, '2019-5-10 16:2:30', 1)";
   let insertRowCommand3 =
-    "INSERT INTO orders (customer, product, quantity, datetime, status)" +
-    "VALUES (2, 2, 3, '2019-05-20 17-05-30', 0)";
+    "INSERT INTO orders (customer, product, quantity, datetime, status) " +
+    "VALUES (1, 1, 2, '2019-5-10 16:2:30', 1)";
   try {
     let db = await sqlite.open("./db.sqlite");
     await db.run(createDbCommand);

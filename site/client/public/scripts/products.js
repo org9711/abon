@@ -223,12 +223,13 @@ function placeOrderListener() {
   for (let i = 1; i < tableRows.length; i++) {
     let quantityTag = tableRows[i].getElementsByClassName("form-control text-center")[0];
     let productNameTag = tableRows[i].getElementsByClassName("pt-3-half basket-row-product-name")[0];
-    let productPriceTag = tableRows[i].getElementsByClassName("pt-3-half basket-row-product-price")[0];
+    let priceString = tableRows[i].getElementsByClassName("pt-3-half basket-row-product-price")[0].innerHTML;
+    let price = parseFloat(priceString.substring(1, priceString.length-1));
     let classSplit = tableRows[i].className.split("-");
     let orderObj = {
       productId: classSplit[classSplit.length - 1],
       productName: productNameTag.innerText,
-      productPrice: productPriceTag.innerText,
+      productPrice: price,
       quantity: quantityTag.value
     };
     productQuants.push(orderObj);

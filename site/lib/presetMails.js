@@ -36,7 +36,7 @@ module.exports = {
     }
     productsString += "Total: £" + object.total;
     let messageCust = "An order was placed at " +
-    today.getHours() + ":" + today.getMinutes() + " on " + today.getDate() + "/" + parseInt((parseInt(today.getMonth())+1)) + "/" + today.getFullYear() + ".\n\n" +
+    today.getHours() + ":" + today.getMinutes() + " on " + today.getDate() + "/" + parseInt((parseInt(today.getMonth())+1)) + "/" + today.getFullYear() + ".\n" +
     "The order is as follows:\n" +
     productsString + "\n\n" +
     "The delivery address is:\n" +
@@ -47,7 +47,7 @@ module.exports = {
     object.customerDetails.county + "\n" +
     object.customerDetails.postcode + "\n" +
     "The customer can be contacted at: " + object.customerDetails.email + "\n\n" +
-    "See http://localhost:8080/admin_products for a full list of details."
+    "See http://localhost:8080/admin_products for the full list of orders."
     let receiverCust = "jn98.abon@gmail.com";
     mail.sendMail(receiverCust, subjectCust, messageCust);
   }

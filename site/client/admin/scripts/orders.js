@@ -57,8 +57,26 @@ function appendOrderToTable(order) {
   let orderProduct = order.product[0];
   let orderQuantity = order.quantity;
   let orderStatus = order.status;
-  let orderDate = order.datetime.substr(8,2) + '/' + order.datetime.substr(5,2) + '/' + order.datetime.substr(0,4);
-  let orderTime = order.datetime.substr(11,2) + ':' + order.datetime.substr(14,2);
+  let date = order.datetime.split(' ')[0];
+  let time = order.datetime.split(' ')[1];
+  console.log(date);
+  console.log(time);
+  console.log(date.split('-'));
+  console.log(time.split(':'));
+  dateSplit = date.split('-');
+  timeSplit = time.split(':');
+  for (let i = 0; i < dateSplit.length; i++) {
+    if (dateSplit[i].length == 1) {
+      dateSplit[i] = '0' + dateSplit[i];
+    }
+  }
+  for (let i = 0; i < timeSplit.length; i++) {
+    if (timeSplit[i].length == 1) {
+      timeSplit[i] = '0' + timeSplit[i];
+    }
+  }
+  let orderDate = dateSplit[2] + '/' + dateSplit[1] + '/' + dateSplit[0];
+  let orderTime = timeSplit[0] + ':' + timeSplit[1];
 
   let preselectedOption = orderStatusTag.getElementsByClassName('order-status-' + orderStatus)[0];
   preselectedOption.selected = true;
