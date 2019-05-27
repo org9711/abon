@@ -98,7 +98,7 @@ function findSelectedOption(selector) {
   }
 }
 
-function statusEncoding(status){
+function statusEncoding(status) {
   switch (status) {
     case 'Showing':
       return 1;

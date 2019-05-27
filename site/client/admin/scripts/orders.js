@@ -105,7 +105,7 @@ function findSelectedOption(selector) {
   }
 }
 
-function statusEncoding(status){
+function statusEncoding(status) {
   switch (status) {
     case 'Completed':
       return 1;

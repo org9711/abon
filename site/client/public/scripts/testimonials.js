@@ -128,16 +128,11 @@ function displayFooter() {
   footer.innerHTML = this.responseText;
 }
 
-function kwalidation(){
-    var check = document.getElementById("check-valid");
-    var valid = check.checkValidity();
-        
-    if(valid){
-        postTestimonial();
-    }
-    
-    return false;
+function validation() {
+  let check = document.getElementById("check-valid");
+  let valid = check.checkValidity();
+  if(valid) {
+    postTestimonial();
+  }
+  return false;
 }
-
-
-

@@ -6,7 +6,7 @@ function start() {
 }
 
 function getHeader() {
-  var q = new XMLHttpRequest();
+  let q = new XMLHttpRequest();
   q.onreadystatechange = displayHeader;
   q.open("GET", '/frame/get_header', true);
   q.send();
@@ -21,7 +21,7 @@ function displayHeader() {
 }
 
 function getFooter() {
-  var q = new XMLHttpRequest();
+  let q = new XMLHttpRequest();
   q.onreadystatechange = displayFooter;
   q.open("GET", '/frame/get_footer', true);
   q.send();

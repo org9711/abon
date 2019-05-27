@@ -145,7 +145,7 @@ function addProduct() {
   });
 }
 
-function statusEncoding(status){
+function statusEncoding(status) {
   switch (status) {
     case 'Available':
       return 2;

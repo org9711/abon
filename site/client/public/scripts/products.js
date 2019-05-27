@@ -185,14 +185,15 @@ function addToBasket(cartTag, productId, productName, productPrice) {
 }
 
 function subtotal() {
-  var myCart = document.getElementById("cart");
-  var tableRows = myCart.children;
-  var sum = 0;
+  let myCart = document.getElementById("cart");
+  let tableRows = myCart.children;
+  let sum = 0;
 
-  for(i = 1; i < tableRows.length; i++){
-      var price = parseFloat(tableRows[i].getElementsByClassName("pt-3-half basket-row-product-price")[0].innerHTML);
-      var quantity = parseFloat(tableRows[i].getElementsByTagName("input")[0].value);
-      sum += price * quantity;
+  for(i = 1; i < tableRows.length; i++) {
+    let priceString = tableRows[i].getElementsByClassName("pt-3-half basket-row-product-price")[0].innerHTML;
+    let price = parseFloat(priceString.substring(1, priceString.length-1));
+    let quantity = parseFloat(tableRows[i].getElementsByTagName("input")[0].value);
+    sum += price * quantity;
   }
   sum = sum.toFixed(2);
   document.getElementById("total").innerHTML = sum;
@@ -217,42 +218,40 @@ function checkoutToggle() {
 }
 
 function placeOrderListener() {
-//  document.getElementById("order-button").addEventListener("click", function() {
-    let tableRows = document.getElementById("cart").children;
-    let productQuants = []
-    for (let i = 1; i < tableRows.length; i++) {
-      let quantityTag = tableRows[i].getElementsByClassName("form-control text-center")[0];
-      let productNameTag = tableRows[i].getElementsByClassName("pt-3-half basket-row-product-name")[0];
-      let productPriceTag = tableRows[i].getElementsByClassName("pt-3-half basket-row-product-price")[0];
-      let classSplit = tableRows[i].className.split("-");
-      let orderObj = {
-        productId: classSplit[classSplit.length - 1],
-        productName: productNameTag.innerText,
-        productPrice: productPriceTag.innerText,
-        quantity: quantityTag.value
-      };
-      productQuants.push(orderObj);
-    }
-    let customerDetails = {
-      firstName: document.querySelector('input[name="firstName"]').value,
-      surname: document.querySelector('input[name="surname"]').value,
-      email: document.querySelector('input[name="email"]').value,
-      addr1: document.querySelector('input[name="address-line1"]').value,
-      addr2: document.querySelector('input[name="address-line2"]').value,
-      county: document.querySelector('input[name="address-county"]').value,
-      town: document.querySelector('input[name="address-town"]').value,
-      postcode: document.querySelector('input[name="address-postcode"]').value
+  let tableRows = document.getElementById("cart").children;
+  let productQuants = []
+  for (let i = 1; i < tableRows.length; i++) {
+    let quantityTag = tableRows[i].getElementsByClassName("form-control text-center")[0];
+    let productNameTag = tableRows[i].getElementsByClassName("pt-3-half basket-row-product-name")[0];
+    let productPriceTag = tableRows[i].getElementsByClassName("pt-3-half basket-row-product-price")[0];
+    let classSplit = tableRows[i].className.split("-");
+    let orderObj = {
+      productId: classSplit[classSplit.length - 1],
+      productName: productNameTag.innerText,
+      productPrice: productPriceTag.innerText,
+      quantity: quantityTag.value
     };
-    let orderDetails = {
-      productQuants: productQuants,
-      customerDetails: customerDetails,
-      total: document.getElementById("total").innerHTML
-    };
-    let q = new XMLHttpRequest();
-    q.onreadystatechange = displayOrderConfirmation;
-    q.open("POST", '/products/submit_order', true);
-    q.send(JSON.stringify(orderDetails));
-//  });
+    productQuants.push(orderObj);
+  }
+  let customerDetails = {
+    firstName: document.querySelector('input[name="firstName"]').value,
+    surname: document.querySelector('input[name="surname"]').value,
+    email: document.querySelector('input[name="email"]').value,
+    addr1: document.querySelector('input[name="address-line1"]').value,
+    addr2: document.querySelector('input[name="address-line2"]').value,
+    county: document.querySelector('input[name="address-county"]').value,
+    town: document.querySelector('input[name="address-town"]').value,
+    postcode: document.querySelector('input[name="address-postcode"]').value
+  };
+  let orderDetails = {
+    productQuants: productQuants,
+    customerDetails: customerDetails,
+    total: document.getElementById("total").innerHTML
+  };
+  let q = new XMLHttpRequest();
+  q.onreadystatechange = displayOrderConfirmation;
+  q.open("POST", '/products/submit_order', true);
+  q.send(JSON.stringify(orderDetails));
 }
 
 function displayOrderConfirmation() {
@@ -299,14 +298,11 @@ function displayFooter() {
   footer.innerHTML = this.responseText;
 }
 
-function kwalidation(){
-
-    var check = document.getElementById("check-valid");
-    var valid = check.checkValidity();
-
-    if(valid){
-        placeOrderListener();
-    }
-
-    return false;
+function validation() {
+  let check = document.getElementById("check-valid");
+  let valid = check.checkValidity();
+  if(valid) {
+    placeOrderListener();
+  }
+  return false;
 }

@@ -19,7 +19,7 @@ function checkPassword() {
   if (this.readyState != XMLHttpRequest.DONE) return;
   result = JSON.parse(this.responseText);
 
-  if(result.success){
+  if(result.success) {
     let datetime = new Date();
     datetime.setHours(datetime.getHours() + 2);
     document.cookie = "jwt=" + result.token + "; expires=" + datetime.toUTCString() + "; path=/";
