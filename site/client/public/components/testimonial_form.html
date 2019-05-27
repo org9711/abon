@@ -5,31 +5,31 @@
         <div class="card-body">
             <form id="check-valid" action="#" onsubmit="return validation();">
                 <div class="form-row mb-2">
-                    <input type="text" class="form-control" placeholder="Name" name="name" required="true" maxlength="20" pattern="[A-Za-z]+"/>
+                    <input type="text" class="form-control" placeholder="Name" name="name" required="required" maxlength="20" pattern="[A-Za-z]+"/>
                 </div>
                 <div class="form-row mb-2">
-                    <textarea id="textCheck" class="form-control" placeholder="Write your review here" name="review" rows="3" maxlength="300" pattern="[A-Za-z]+"></textarea>
+                    <textarea id="textCheck" class="form-control" placeholder="Write your review here" name="review" rows="3" maxlength="300"></textarea>
                 </div>
                 <div class="form-row ml-2">
                     <h5 class="form-check-inline">Number of stars: </h5>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="stars" value="option1"/>
+                        <input class="form-check-input" id="inlineRadio1" type="radio" name="stars" value="option1"/>
                         <label class="form-check-label" for="inlineRadio1">1</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="stars" value="option2"/>
+                        <input class="form-check-input" id="inlineRadio2" type="radio" name="stars" value="option2"/>
                         <label class="form-check-label" for="inlineRadio2">2</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="stars" value="option3"/>
+                        <input class="form-check-input" id="inlineRadio3" type="radio" name="stars" value="option3"/>
                         <label class="form-check-label" for="inlineRadio3">3</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="stars" value="option4"/>
+                        <input class="form-check-input" id="inlineRadio4" type="radio" name="stars" value="option4"/>
                         <label class="form-check-label" for="inlineRadio4">4</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="stars" value="option5" checked="true"/>
+                        <input class="form-check-input" id="inlineRadio5" type="radio" name="stars" value="option5" checked="checked"/>
                         <label class="form-check-label" for="inlineRadio5">5</label>
                     </div>
                     <div class="ml-auto">

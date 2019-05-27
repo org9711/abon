@@ -43,7 +43,7 @@
             <h1>Your Basket</h1>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <form  id="check-valid" onsubmit="return validation();">
 
@@ -61,14 +61,14 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">First Name</label>
-                                <input type="text" class="form-control" name="firstName" placeholder="Joe" value="" required="true" maxlength="20" pattern="[A-Za-z]+"/>
+                                <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Joe" value="" required="required" maxlength="20" pattern="[A-Za-z]+"/>
                                 <div class="invalid-feedback">
                                   Valid first name is required.
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="surname">Surname</label>
-                                <input type="text" class="form-control" name="surname" placeholder="Bloggs" value="" required="true" maxlength="30"/>
+                                <input type="text" class="form-control" name="surname" id="surname" placeholder="Bloggs" value="" required="required" maxlength="30"/>
                                 <div class="invalid-feedback">
                                   Valid last name is required.
                                 </div>
@@ -76,7 +76,7 @@
                         </div>
 
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" placeholder="nick@gmail.com" maxlength="50"/>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="nick@gmail.com" maxlength="50" required="required"/>
                         <div class="invalid-feedback">
                             Please enter a valid email address.
                         </div>
@@ -86,19 +86,19 @@
                         <h5>Delivery Address</h5>
 
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" name="address-line1" placeholder="Address Line 1" value="" required="true" maxlength="30"/>
+                            <input type="text" class="form-control" name="address-line1" placeholder="Address Line 1" value="" required="required" maxlength="30"/>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" name="address-line2" placeholder="Address Line 2" value="" required="false" maxlength="30"/>
+                            <input type="text" class="form-control" name="address-line2" placeholder="Address Line 2" value="" maxlength="30"/>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" name="address-town" placeholder="Town" value="" required="false" maxlength="30"/>
+                            <input type="text" class="form-control" name="address-town" placeholder="Town" value="" maxlength="30"/>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" name="address-county" placeholder="County" value="" required="false" maxlength="30"/>
+                            <input type="text" class="form-control" name="address-county" placeholder="County" value="" maxlength="30"/>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" name="address-postcode" placeholder="Postcode" value="" required="true" maxlength="30"/>
+                            <input type="text" class="form-control" name="address-postcode" placeholder="Postcode" value="" required="required" maxlength="30"/>
                         </div>
 
 
