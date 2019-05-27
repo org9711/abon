@@ -16,19 +16,19 @@ async function createTestimonialsTable() {
     "status INT NOT NULL)";
   let insertRowCommand1 =
     "INSERT INTO testimonials (name, review, stars, status) " +
-    "VALUES ('Oliver Ryan-George', 'Superfood pesto? More like superfast pesto!', 5, 2)";
+    "VALUES ('Oliver Ryan-George', 'Superfood pesto? More like superfast pesto!', 5, 1)";
   let insertRowCommand2 =
     "INSERT INTO testimonials (name, review, stars, status) " +
-    "VALUES ('Kwame Dogbe', 'I''m going vega because of these meals!', 5, 2)";
+    "VALUES ('Kwame Dogbe', 'I''m going vegan because of these meals!', 5, 1)";
   let insertRowCommand3 =
     "INSERT INTO testimonials (name, review, stars, status) " +
-    "VALUES ('Bethan Howe', 'Great food, even greater people', 5, 2)";
+    "VALUES ('Bethan Howe', 'Great food, even greater people', 5, 1)";
   let insertRowCommand4 =
     "INSERT INTO testimonials (name, review, stars, status) " +
-    "VALUES ('Joe Williams', 'I eat this with a beer while watching the football!', 3, 2)";
+    "VALUES ('Joe Williams', 'I eat this with a beer while watching the football!', 3, 1)";
   let insertRowCommand5 =
     "INSERT INTO testimonials (name, review, stars, status) " +
-    "VALUES ('Emma Labert', 'Just ordinarily excellent!', 1, 2)";
+    "VALUES ('Emma Labert', 'Just ordinarily excellent!', 1, 1)";
   let insertRowCommand6 =
     "INSERT INTO testimonials (name, review, stars, status) " +
     "VALUES ('Noah Haran', 'I don''t eat much but when I do, I eat Abon!', 4, 0)";
@@ -89,26 +89,30 @@ async function createProductsTable() {
   let insertRowCommand3 =
     "INSERT INTO products (name, price, image_name, description, status) " +
     "VALUES ('Spicy Noodle Soup', '2.20', 'spicy-noodles.jpg', " +
-    "'This pesto is as vibrant in colour as it is in flavour. It takes " +
-    "inspiration from both Japanese and Italian cooking and fuses the best of " +
-    "both cuisines. It''s full of spinach, edamame beans, garlic, coriander, " +
-    "chilli and much more. It also has a bit of white miso which is really " +
-    "good for you and adds a brilliant umami funk to the dish. As it''s a " +
-    "fusion dish you can get away serving it with pasta or noodles. We " +
-    "prefer it with conchiglie, which catches brilliant little puddles of " +
-    "sauce.', " +
+    "'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla " +
+    "tincidunt augue sit amet odio viverra tincidunt. Morbi tellus massa, " +
+    "faucibus in enim eget, porta egestas dui. Orci varius natoque " +
+    "penatibus et magnis dis parturient montes, nascetur  ridiculus mus. " +
+    "Fusce sed mi vel neque tincidunt rhoncus. Vestibulum ante ipsum " +
+    "primis in  faucibus orci luctus et ultrices posuere cubilia Curae; " +
+    "Curabitur eu gravida augue. Praesent sit amet justo eu tellus " +
+    "posuere maximus. Nullam volutpat, nisi in pretium facilisis, turpis " +
+    "urna iaculis lorem, at commodo nibh nibh ut odio. Vestibulum et mi varius, " +
+    "viverra neque vitae, eleifend justo.', " +
     "1)";
   let insertRowCommand4 =
     "INSERT INTO products (name, price, image_name, description, status) " +
     "VALUES ('Aubergine & Tomato Pasta', '2.20', 'tomato-pasta.jpg', " +
-    "'This pesto is as vibrant in colour as it is in flavour. It takes " +
-    "inspiration from both Japanese and Italian cooking and fuses the best of " +
-    "both cuisines. It''s full of spinach, edamame beans, garlic, coriander, " +
-    "chilli and much more. It also has a bit of white miso which is really " +
-    "good for you and adds a brilliant umami funk to the dish. As it''s a " +
-    "fusion dish you can get away serving it with pasta or noodles. We " +
-    "prefer it with conchiglie, which catches brilliant little puddles of " +
-    "sauce.', " +
+    "'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla " +
+    "tincidunt augue sit amet odio viverra tincidunt. Morbi tellus massa, " +
+    "faucibus in enim eget, porta egestas dui. Orci varius natoque " +
+    "penatibus et magnis dis parturient montes, nascetur  ridiculus mus. " +
+    "Fusce sed mi vel neque tincidunt rhoncus. Vestibulum ante ipsum " +
+    "primis in  faucibus orci luctus et ultrices posuere cubilia Curae; " +
+    "Curabitur eu gravida augue. Praesent sit amet justo eu tellus " +
+    "posuere maximus. Nullam volutpat, nisi in pretium facilisis, turpis " +
+    "urna iaculis lorem, at commodo nibh nibh ut odio. Vestibulum et mi varius, " +
+    "viverra neque vitae, eleifend justo.', " +
     "0)";
   try {
     let db = await sqlite.open("./db.sqlite")
@@ -163,13 +167,13 @@ async function createOrdersTable() {
     "status INTEGER NOT NULL)";
   let insertRowCommand1 =
     "INSERT INTO orders (customer, product, quantity, datetime, status) " +
-    "VALUES (0, 0, 2, '2019-05-10 16-05-30', 1)";
+    "VALUES (1, 1, 2, '2019-05-10 16-05-30', 1)";
   let insertRowCommand2 =
     "INSERT INTO orders (customer, product, quantity, datetime, status)" +
-    "VALUES (0, 1, 1, '2019-05-10 16-05-30', 1)";
+    "VALUES (1, 2, 1, '2019-05-10 16-05-30', 1)";
   let insertRowCommand3 =
     "INSERT INTO orders (customer, product, quantity, datetime, status)" +
-    "VALUES (1, 1, 3, '2019-05-20 17-05-30', 0)";
+    "VALUES (2, 2, 3, '2019-05-20 17-05-30', 0)";
   try {
     let db = await sqlite.open("./db.sqlite");
     await db.run(createDbCommand);
@@ -208,10 +212,10 @@ async function createUsersTable() {
   let list3 = [user3,hashPass3];
   try {
     let db = await sqlite.open("./db.sqlite");
-    // await db.run(createDbCommand);
-    // await db.run(insertRowCommand, list1);
-    // await db.run(insertRowCommand, list2);
-    // await db.run(insertRowCommand, list3);
+    await db.run(createDbCommand);
+    await db.run(insertRowCommand, list1);
+    await db.run(insertRowCommand, list2);
+    await db.run(insertRowCommand, list3);
     let as = await db.all("SELECT * FROM users");
     console.log(as);
     db.close();

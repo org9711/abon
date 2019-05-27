@@ -140,7 +140,7 @@ function addToBasket(cartTag, productId, productName, productPrice) {
 
     basketRowTag.className = rowId;
     basketRowNameTag.innerText = productName;
-    basketRowPriceTag.innerText = productPrice.toFixed(2);
+    basketRowPriceTag.innerText = '£' + productPrice.toFixed(2);
 
     let plusButton = basketRow.getElementsByClassName("bg-light btn btn-increment btn-outline-secondary")[0];
     let minusButton = basketRow.getElementsByClassName("bg-light btn btn-decrement btn-outline-secondary")[0];
@@ -300,13 +300,13 @@ function displayFooter() {
 }
 
 function kwalidation(){
-    
+
     var check = document.getElementById("check-valid");
     var valid = check.checkValidity();
-        
+
     if(valid){
         placeOrderListener();
     }
-    
+
     return false;
 }
