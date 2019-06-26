@@ -1,144 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
-<head>
+  <head>
     <meta charset="UTF-8"/>
-    <meta name="author" content="Kwame Dogbe and Oliver Ryan-George"/>
+    <meta name="author" content="Oliver Ryan-George"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
     <title>Abon - Products</title>
 
-    <!--BootstrapCDN-->
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/> -->
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script> -->
-
-     <!-- Custom styles for this template -->
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/> -->
-    <!-- <link href="kwamestrap.css" rel="stylesheet"/> -->
-
-
-    <!--Scripts-->
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script> -->
     <script src="products.js"></script>
-</head>
+    <link href="header.css" rel="stylesheet"/>
 
-<body>
-    <div id="container">
-    <header id="header"></header>
+  </head>
 
+  <body>
+    <header></header>
     <main>
-
-    <!-- MEAL TABS -->
-      <div class="container marketing content-wrap">
-          <h1>Our Products</h1>
-
-        <div class="row" id="product-list"></div>
-
-        <hr class="featurette-divider"/>
-
-        <!-- SHOPPING CART -->
-        <div class="container">
-
-            <h1>Your Basket</h1>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <form  id="check-valid" onsubmit="return validation();">
-
-                    <div class="modal-content" id="modal-content">
-
-                      <div class="modal-header" id="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Checkout</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&#215;</span>
-                        </button>
-                      </div>
-
-                      <div class="modal-body" id="modal-body">
-                        <h5>Details</h5>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName">First Name</label>
-                                <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Joe" value="" required="required" maxlength="20" pattern="[A-Za-z]+"/>
-                                <div class="invalid-feedback">
-                                  Valid first name is required.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="surname">Surname</label>
-                                <input type="text" class="form-control" name="surname" id="surname" placeholder="Bloggs" value="" required="required" maxlength="30"/>
-                                <div class="invalid-feedback">
-                                  Valid last name is required.
-                                </div>
-                            </div>
-                        </div>
-
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="nick@gmail.com" maxlength="50" required="required"/>
-                        <div class="invalid-feedback">
-                            Please enter a valid email address.
-                        </div>
-
-                        <hr class="mb-2"/>
-
-                        <h5>Delivery Address</h5>
-
-                        <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" name="address-line1" placeholder="Address Line 1" value="" required="required" maxlength="30"/>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" name="address-line2" placeholder="Address Line 2" value="" maxlength="30"/>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" name="address-town" placeholder="Town" value="" maxlength="30"/>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" name="address-county" placeholder="County" value="" maxlength="30"/>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" name="address-postcode" placeholder="Postcode" value="" required="required" maxlength="30"/>
-                        </div>
-
-
-                        <hr class="mb-2"/>
-
-                        <h5>Payment will be cash on the door.</h5>
-                      </div>
-
-                  <div class="modal-footer" id="modal-footer">
-                    <button type="submit" id="order-button" class="btn btn-primary">Order</button>
-                  </div>
-                </div>
-              </form>
-
-              </div>
-            </div>
-            <!-- Editable table -->
-            <div class="card" id="order-table-div">
-              <div class="card-body">
-                <div id="table" class="table-editable">
-                  <table id="cart" class="table table-responsive-md table-striped text-center">
-                    <tr class="headers">
-                      <th class="text-center">Product Name</th>
-                      <th class="text-center">Price</th>
-                      <th class="text-center">Quantity</th>
-                      <th></th>
-                    </tr>
-                  </table>
-                  <div class="row float-right mr-4">
-                      <h5>Subtotal: £</h5>
-                      <h5 id="total">0.00</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
+      <p>Products page</p>
     </main>
-
-    <footer class="footer mt-auto py-3"></footer>
-    </div>
-</body>
+    <footer></footer>
+  </body>
 </html>

@@ -282,8 +282,8 @@ function displayHeader() {
   if(this.readyState != XMLHttpRequest.DONE) return;
   let header = document.getElementsByTagName("header")[0];
   header.innerHTML = this.responseText;
-  pageHeading = header.getElementsByClassName("productsHeader")[0];
-  pageHeading.className = "abon-yellow"
+  pageHeading = document.getElementById("productsHeader");
+  pageHeading.className = "active-tab"
 }
 
 function getFooter() {
