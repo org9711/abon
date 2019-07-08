@@ -32,13 +32,11 @@ function displayFooter() {
 }
 
 function addBurgerAnimation() {
-  var burgerMenu = document.getElementsByTagName('nav')[0];
+  var burgerMenu = document.getElementById('burger');
+  var linksTab = document.getElementById('nav-links');
   burgerMenu.addEventListener("click", function() {
-    toggleAnimation(burgerMenu);
+    burgerMenu.classList.toggle("change");
+    linksTab.classList.toggle("show");
+    console.log("hlello");
   });
-}
-
-
-function toggleAnimation(animation) {
-  animation.classList.toggle("change");
 }
