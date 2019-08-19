@@ -1,17 +1,3 @@
-:root {
-  --abon-green: #00cc00;
-  --abon-yellow: #ffa133;
-  --abon-red: #ff3333;
-  --abon-grey: #2b2a24;
-  --abon-orange: #ff6033;
-}
-
-body {
-  position: relative;
-  min-height: 100vh;
-  margin: 0;
-}
-
 header {
   padding: 10px;
   background-color: var(--abon-grey);
@@ -137,18 +123,17 @@ img {
 
 footer {
   position: absolute;
-  bottom: 0;
+  bottom: -70px;
   width: 100%;
   background-color: var(--abon-grey);
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  height: 40px;
-  padding: 0px;
+  height: 60px;
 }
 
 #back-to-top {
-  padding: 10px;
+  padding: 20px;
 }
 
 #back-to-top a {
@@ -160,6 +145,6 @@ footer {
 }
 
 #address {
-  padding: 10px;
+  padding: 20px;
   color: rgba(248, 249, 250);
 }

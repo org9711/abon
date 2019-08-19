@@ -1,0 +1,23 @@
+:root {
+  --abon-green: #00cc00;
+  --abon-yellow: #ffa133;
+  --abon-red: #ff3333;
+  --abon-grey: #2b2a24;
+  --abon-orange: #ff6033;
+}
+
+div.wiggle {
+  display: flex;
+}
+
+svg.wiggle {
+  flex: 1;
+  height: 20px;
+}
+
+path.wiggle {
+  stroke: #000000;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  fill: none;
+}
