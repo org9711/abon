@@ -10,12 +10,17 @@
   width: 100%;
 }
 
+div.cartoon-animation {
+  height: 410px;
+}
+
 @media all and (max-width: 1000px) {
 
 }
 
 @media all and (max-width: 800px) {
   div.cartoon-animation {
+    height: auto;
     text-align: center;
   }
 
