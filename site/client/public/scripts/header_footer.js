@@ -37,6 +37,5 @@ function addBurgerAnimation() {
   burgerMenu.addEventListener("click", function() {
     burgerMenu.classList.toggle("change");
     linksTab.classList.toggle("show");
-    console.log("hlello");
   });
 }

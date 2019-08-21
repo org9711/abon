@@ -5,7 +5,7 @@ for (var i = 0; i < 2000; i++) {
   xs.push(i);
 }
 
-function animate() {
+function animateWigglies() {
   let points = xs.map(x => {
     let y = 10 + 5 * Math.sin((x+t) / 10);
     return [x, y]
@@ -22,5 +22,5 @@ function animate() {
   }
 
   t += 1;
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animateWigglies);
 }

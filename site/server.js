@@ -30,7 +30,7 @@ async function handle(request, response) {
   }
   else {
     if (request.url.startsWith("/favicon.ico")) request.url = 'square.png';
-    if (request.url.endsWith(".png") || request.url.endsWith(".jpg")) {
+    if (request.url.endsWith(".png") || request.url.endsWith(".jpg") || request.url.endsWith(".svg")) {
       picturesC.handle(request, response);
     }
     else if (request.url.endsWith(".js") || request.url.endsWith(".css") || request.url.endsWith(".html")) {

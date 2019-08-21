@@ -9,6 +9,7 @@ let mimeTypes = {
   js: 'application/javascript',
   css: 'text/css',
   png: 'image/webp',
+  svg: 'image/svg+xml',
   jpg: 'image/webp',
   jpeg: 'image/webp'
 }
@@ -18,6 +19,7 @@ let mimeTypesOld = {
   js: 'text/javascript',
   css: 'application/x-pointplus',
   png: 'image/png',
+  svg: 'image/svg+xml',
   jpg: 'image/jpeg',
   jpeg: 'image/jpeg'
 }

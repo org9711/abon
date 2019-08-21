@@ -31,15 +31,29 @@ body {
   width: 100%;
 }
 
+.columns {
+  display: flex;
+}
+
+.column {
+  flex: 1;
+  margin-right: 5px;
+}
+
+.columns :last-child {
+  margin-right: 0px;
+}
+
 p {
   margin-top: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  line-height: 16pt;
   font-family: sans-serif;
 }
 
 h2 {
   margin-top: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   font-family: sans-serif;
   font-size: 2rem;
   font-weight: 500;
@@ -53,11 +67,22 @@ h2 .subtitle {
 }
 
 @media all and (max-width: 1000px) {
+  #content-container {
+    flex: 10;
+  }
 
 }
 
-@media all and (max-width: 700px) {
+@media all and (max-width: 800px) {
   #content-container {
     flex: 20;
+  }
+
+  .columns {
+    display: block;
+  }
+
+  .column {
+    margin-right: 0px;
   }
 }
