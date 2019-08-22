@@ -6,6 +6,10 @@
   --abon-orange: #ff6033;
 }
 
+.desktop-only {
+  display: block;
+}
+
 body {
   position: relative;
   min-height: 100vh;
@@ -22,6 +26,7 @@ body {
   flex: 4;
   flex-direction: column;
 }
+
 
 .vertical-space {
   flex: 1;
@@ -74,10 +79,17 @@ h2 .subtitle {
   #content-container {
     flex: 10;
   }
+}
 
+.mobile-only {
+  display: none;
 }
 
 @media all and (max-width: 800px) {
+  .mobile-only {
+    display: block;
+  }
+
   #content-container {
     flex: 20;
   }
@@ -88,5 +100,9 @@ h2 .subtitle {
 
   .column {
     margin-right: 0px;
+  }
+
+  .desktop-only {
+    display: none;
   }
 }

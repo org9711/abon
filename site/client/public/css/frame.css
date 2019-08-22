@@ -26,10 +26,6 @@ nav {
   align-items: center;
 }
 
-#burger {
-  display: none;
-}
-
 #nav-logo {
   height: 100%;
 }
@@ -94,10 +90,6 @@ img {
     margin-bottom: 10px;
     margin-left: 20px;
     margin-right: 20px;
-  }
-
-  #burger {
-    display: inline-block;
   }
 
   #nav-links {

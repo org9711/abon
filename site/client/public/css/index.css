@@ -11,7 +11,8 @@
 }
 
 div.cartoon-animation {
-  height: 410px;
+  height: auto;
+  text-align: center;
 }
 
 @media all and (max-width: 1000px) {
@@ -19,11 +20,6 @@ div.cartoon-animation {
 }
 
 @media all and (max-width: 800px) {
-  div.cartoon-animation {
-    height: auto;
-    text-align: center;
-  }
-
   svg.cartoon-animation {
     width: 80%;
     padding-top: 0px;
