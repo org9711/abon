@@ -1,16 +1,4 @@
-:root {
-  --abon-green: #00cc00;
-  --abon-yellow: #ffa133;
-  --abon-red: #ff3333;
-  --abon-grey: #2b2a24;
-  --abon-orange: #ff6033;
-}
-
-#head-image {
-  width: 100%;
-}
-
-div.cartoon-animation {
+.cartoon-animation {
   height: auto;
   text-align: center;
 }
@@ -20,8 +8,7 @@ div.cartoon-animation {
 }
 
 @media all and (max-width: 800px) {
-  svg.cartoon-animation {
+  .cartoon-animation svg {
     width: 80%;
-    padding-top: 0px;
   }
 }

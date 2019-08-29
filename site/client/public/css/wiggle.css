@@ -1,13 +1,13 @@
-div.wiggle {
+.wiggle {
   display: flex;
 }
 
-svg.wiggle {
+.wiggle svg {
   flex: 1;
   height: 20px;
 }
 
-path.wiggle {
+.wiggle path {
   stroke: #000000;
   stroke-width: 2px;
   stroke-linecap: round;

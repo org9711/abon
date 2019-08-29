@@ -27,12 +27,12 @@ body {
   flex-direction: column;
 }
 
-
 .vertical-space {
   flex: 1;
 }
 
 #head-image {
+  margin-top: -30px;
   width: 100%;
 }
 
@@ -40,7 +40,7 @@ body {
   display: flex;
 }
 
-.column {
+.columns div {
   flex: 1;
   margin-right: 5px;
 }
@@ -56,7 +56,7 @@ p {
   font-family: sans-serif;
 }
 
-.column p {
+.columns div p {
   margin-left: 10px;
 }
 
@@ -98,7 +98,7 @@ h2 .subtitle {
     display: block;
   }
 
-  .column {
+  .columns div {
     margin-right: 0px;
   }
 

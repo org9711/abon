@@ -15,7 +15,7 @@ function animateWigglies() {
     return p[0] + "," + p[1];
   }).join(" L");
 
-  let wigglies = document.querySelectorAll('path.wiggle');
+  let wigglies = document.querySelectorAll('.wiggle path');
 
   for(let i = 0; i < wigglies.length; i++) {
     wigglies[i].setAttribute("d", path);
