@@ -46,8 +46,27 @@ function displayProducts() {
     console.log(imageTag);
     console.log(nameTag);
 
+
     productDiv = productDiv.firstElementChild;
+
+    productDiv = overlayEffects(productDiv);
+
+    console.log(productDiv);
 
     ul.append(productDiv);
   }
+}
+
+function overlayEffects(productDiv) {
+  let overlay = productDiv.querySelector(".overlay");
+  let picture = productDiv.querySelector("img");
+  productDiv.addEventListener("mouseover", function() {
+    overlay.classList.add("show");
+    picture.classList.add("run");
+  });
+  productDiv.addEventListener("mouseout", function() {
+    overlay.classList.remove("show");
+    picture.classList.remove("run");
+  });
+  return productDiv;
 }

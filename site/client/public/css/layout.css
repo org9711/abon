@@ -74,11 +74,11 @@ h2 .subtitle {
 
 @media all and (max-width: 1200px) {
   #content-container {
-    width: 850px;
+    width: 950px;
   }
 }
 
-@media all and (max-width: 900px) {
+@media all and (max-width: 1000px) {
   #content-container {
     width: 650px;
   }
