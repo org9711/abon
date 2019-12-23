@@ -60,13 +60,45 @@ function displayProducts() {
 function overlayEffects(productDiv) {
   let overlay = productDiv.querySelector(".overlay");
   let picture = productDiv.querySelector("img");
-  productDiv.addEventListener("mouseover", function() {
-    overlay.classList.add("show");
-    picture.classList.add("run");
+  productDiv.addEventListener("mouseenter", function() {
+    if (productDiv.classList.contains("animationEnd")) {
+      productDiv.classList.add("mouseOn");
+      productDiv.classList.remove("mouseOff");
+      productDiv.classList.remove("awaitAnimationEndMouseOff");
+    }
+    else {
+      productDiv.classList.add("awaitAnimationEndMouseOn");
+    }
+    console.log("mouse over");
   });
-  productDiv.addEventListener("mouseout", function() {
-    overlay.classList.remove("show");
-    picture.classList.remove("run");
+  productDiv.addEventListener("mouseleave", function() {
+    if (productDiv.classList.contains("animationEnd")) {
+      productDiv.classList.add("mouseOff");
+      productDiv.classList.remove("mouseOn");
+      productDiv.classList.remove("awaitAnimationEndMouseOn");
+    }
+    else {
+      productDiv.classList.add("awaitAnimationEndMouseOff");
+    }
+    console.log("mouse off");
+  });
+  productDiv.addEventListener("animationstart", function() {
+    productDiv.classList.remove("animationEnd");
+    console.log("animation start");
+  });
+  productDiv.addEventListener("animationend", function() {
+    productDiv.classList.add("animationEnd");
+    if (productDiv.classList.contains("awaitAnimationEndMouseOn")) {
+      productDiv.classList.add("mouseOn");
+      productDiv.classList.remove("mouseOff");
+      productDiv.classList.remove("awaitAnimationEndMouseOn");
+    }
+    if (productDiv.classList.contains("awaitAnimationEndMouseOff")) {
+      productDiv.classList.add("mouseOff");
+      productDiv.classList.remove("mouseOn");
+      productDiv.classList.remove("awaitAnimationEndMouseff");
+    }
+    console.log("animation end");
   });
   return productDiv;
 }
