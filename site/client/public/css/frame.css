@@ -117,7 +117,7 @@ nav {
 
 footer {
   position: absolute;
-  bottom: -70px;
+  bottom: 0px;
   width: 100%;
   background-color: var(--abon-grey);
   display: flex;

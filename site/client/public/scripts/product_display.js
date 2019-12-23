@@ -96,7 +96,7 @@ function overlayEffects(productDiv) {
     if (productDiv.classList.contains("awaitAnimationEndMouseOff")) {
       productDiv.classList.add("mouseOff");
       productDiv.classList.remove("mouseOn");
-      productDiv.classList.remove("awaitAnimationEndMouseff");
+      productDiv.classList.remove("awaitAnimationEndMouseOff");
     }
     console.log("animation end");
   });

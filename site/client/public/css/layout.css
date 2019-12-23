@@ -16,6 +16,10 @@ body {
   margin: 0;
 }
 
+main {
+  padding-bottom: 60px;
+}
+
 #centred-content {
   display: flex;
   justify-content: center;
