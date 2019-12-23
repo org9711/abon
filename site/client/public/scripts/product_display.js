@@ -1,4 +1,5 @@
 let productLayout;
+let basketButton = "<button class='add'><span class='basketEmoji'>&#x1F6D2;</span></button>";
 
 function getProductLayout() {
   let q = new XMLHttpRequest();
@@ -40,24 +41,34 @@ function displayProducts() {
     let nameTag = productDiv.querySelector("div h3");
     let imageTag = productDiv.querySelector("div img");
 
-    nameTag.textContent = name;
+    if (status == 2) {
+      nameTag.textContent = name;
+      let buttonsTag = productDiv.querySelector(".buttons");
+      let wrap = document.createElement("html");
+      wrap.innerHTML = basketButton;
+      buttonsTag.appendChild(wrap.firstElementChild);
+    }
+    else if (status == 1) {
+      nameTag.textContent = "Sold Out"
+    }
+    else if (status == 0) {
+      nameTag.textContent = "Coming Soon"
+    }
+
     imageTag.src = imageName;
-
-    console.log(imageTag);
-    console.log(nameTag);
-
 
     productDiv = productDiv.firstElementChild;
 
-    productDiv = overlayEffects(productDiv);
-
-    console.log(productDiv);
+    productDiv = overlayEffects(productDiv, status);
 
     ul.append(productDiv);
   }
 }
 
-function overlayEffects(productDiv) {
+function overlayEffects(productDiv, status) {
+  if (status == 0 || status == 1) {
+    productDiv.classList.add("NA");
+  }
   let overlay = productDiv.querySelector(".overlay");
   let picture = productDiv.querySelector("img");
   productDiv.addEventListener("mouseenter", function() {
@@ -69,7 +80,6 @@ function overlayEffects(productDiv) {
     else {
       productDiv.classList.add("awaitAnimationEndMouseOn");
     }
-    console.log("mouse over");
   });
   productDiv.addEventListener("mouseleave", function() {
     if (productDiv.classList.contains("animationEnd")) {
@@ -80,11 +90,9 @@ function overlayEffects(productDiv) {
     else {
       productDiv.classList.add("awaitAnimationEndMouseOff");
     }
-    console.log("mouse off");
   });
   productDiv.addEventListener("animationstart", function() {
     productDiv.classList.remove("animationEnd");
-    console.log("animation start");
   });
   productDiv.addEventListener("animationend", function() {
     productDiv.classList.add("animationEnd");
@@ -98,7 +106,6 @@ function overlayEffects(productDiv) {
       productDiv.classList.remove("mouseOn");
       productDiv.classList.remove("awaitAnimationEndMouseOff");
     }
-    console.log("animation end");
   });
   return productDiv;
 }
