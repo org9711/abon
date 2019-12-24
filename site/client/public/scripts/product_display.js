@@ -61,51 +61,67 @@ function displayProducts() {
 
     productDiv = overlayEffects(productDiv, status);
 
+    productDiv = popupFill(productDiv, name, price, description);
+
     ul.append(productDiv);
   }
 }
 
 function overlayEffects(productDiv, status) {
   if (status == 0 || status == 1) {
-    productDiv.classList.add("NA");
+    productDiv.classList.add("na");
   }
   let overlay = productDiv.querySelector(".overlay");
   let picture = productDiv.querySelector("img");
   productDiv.addEventListener("mouseenter", function() {
-    if (productDiv.classList.contains("animationEnd")) {
-      productDiv.classList.add("mouseOn");
-      productDiv.classList.remove("mouseOff");
-      productDiv.classList.remove("awaitAnimationEndMouseOff");
+    if (productDiv.classList.contains("animation-end")) {
+      productDiv.classList.add("mouse-on");
+      productDiv.classList.remove("mouse-off");
+      productDiv.classList.remove("await-animation-end_mouse-off");
     }
     else {
-      productDiv.classList.add("awaitAnimationEndMouseOn");
+      productDiv.classList.add("await-animation-end_mouse-on");
     }
   });
   productDiv.addEventListener("mouseleave", function() {
-    if (productDiv.classList.contains("animationEnd")) {
-      productDiv.classList.add("mouseOff");
-      productDiv.classList.remove("mouseOn");
-      productDiv.classList.remove("awaitAnimationEndMouseOn");
+    if (productDiv.classList.contains("animation-end")) {
+      productDiv.classList.add("mouse-off");
+      productDiv.classList.remove("mouse-on");
+      productDiv.classList.remove("await-animation-end_mouse-on");
     }
     else {
-      productDiv.classList.add("awaitAnimationEndMouseOff");
+      productDiv.classList.add("await-animation-end_mouse-off");
     }
   });
   productDiv.addEventListener("animationstart", function() {
-    productDiv.classList.remove("animationEnd");
+    productDiv.classList.remove("animation-end");
   });
   productDiv.addEventListener("animationend", function() {
-    productDiv.classList.add("animationEnd");
-    if (productDiv.classList.contains("awaitAnimationEndMouseOn")) {
-      productDiv.classList.add("mouseOn");
-      productDiv.classList.remove("mouseOff");
-      productDiv.classList.remove("awaitAnimationEndMouseOn");
+    productDiv.classList.add("animation-end");
+    if (productDiv.classList.contains("await-animation-end_mouse-on")) {
+      productDiv.classList.add("mouse-on");
+      productDiv.classList.remove("mouse-off");
+      productDiv.classList.remove("await-animation-end_mouse-on");
     }
-    if (productDiv.classList.contains("awaitAnimationEndMouseOff")) {
-      productDiv.classList.add("mouseOff");
-      productDiv.classList.remove("mouseOn");
-      productDiv.classList.remove("awaitAnimationEndMouseOff");
+    if (productDiv.classList.contains("await-animation-end_mouse-off")) {
+      productDiv.classList.add("mouse-off");
+      productDiv.classList.remove("mouse-on");
+      productDiv.classList.remove("await-animation-end_mouse-off");
     }
+  });
+  return productDiv;
+}
+
+function popupFill(productDiv, name, price, description) {
+  let popupDiv = popupLayout.cloneNode(true);
+  let popupHeading = popupDiv.querySelector("#popup-title h4");
+  popupHeading.innerText = name;
+  let infoButton = productDiv.querySelector(".info");
+  let bodyTag = document.getElementsByTagName("body")[0];
+  infoButton.addEventListener("click", function () {
+    let popupDivClone = popupDiv.cloneNode(true);
+    popupDivClone = assignClosePopupListener(popupDivClone);
+    bodyTag.appendChild(popupDivClone.firstElementChild);
   });
   return productDiv;
 }

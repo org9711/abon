@@ -10,5 +10,9 @@ module.exports = {
       let path = "client/public/components/footer.html";
       send.sendPage(path, request, response);
     }
+    else if (request.url.endsWith("/get_popup_layout")) {
+      let path = "client/public/components/popup.html";
+      send.sendPage(path, request, response);
+    }
   }
 };

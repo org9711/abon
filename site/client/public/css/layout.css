@@ -50,6 +50,10 @@ main {
   margin-right: 0px;
 }
 
+button {
+  cursor: pointer;
+}
+
 p {
   margin-top: 0px;
   margin-bottom: 15px;

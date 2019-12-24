@@ -11,7 +11,7 @@ function displayHeader() {
   header.innerHTML = this.responseText;
   var path = window.location.pathname;
   if (path != '/') {
-    var headerId = path.substr(1, path.length) + 'Header';
+    var headerId = path.substr(1, path.length) + '-header';
     var pageHeading = document.getElementById(headerId);
     pageHeading.className = "active-tab";
   }

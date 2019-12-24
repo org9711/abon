@@ -30,11 +30,11 @@ div.overlay {
   opacity: 0;
 }
 
-.product.mouseOn div.overlay {
+.product.mouse-on div.overlay {
   animation: 0.4s 1 fadeIn forwards;
 }
 
-.product.mouseOff div.overlay {
+.product.mouse-off div.overlay {
   animation: 0.4s 1 fadeOut forwards;
 }
 
@@ -66,15 +66,15 @@ div.overlay {
   width: 100%;
 }
 
-.product.NA > img {
+.product.na > img {
   filter: brightness(40%);
 }
 
-.product.mouseOn > img {
+.product.mouse-on > img {
   animation: 0.4s 1 growProduct forwards;
 }
 
-.product.mouseOff > img {
+.product.mouse-off > img {
   animation: 0.4s 1 shrinkProduct forwards;
 }
 
@@ -96,7 +96,7 @@ div.overlay {
   }
 }
 
-h3 {
+.overlay h3 {
   color: var(--abon-orange);
   text-decoration: none;
   font-family: sans-serif;
@@ -118,7 +118,7 @@ h3 {
   background-color: var(--abon-orange);
 }
 
-.basketEmoji {
+.basket-emoji {
   filter: grayscale(100%);
 }
 
@@ -133,7 +133,7 @@ h3 {
 }
 
 @media all and (max-width: 400px) {
-  h3 {
+  .overlay h3 {
     font-size: 25px;
   }
 }
