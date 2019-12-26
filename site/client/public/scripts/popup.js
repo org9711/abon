@@ -25,10 +25,14 @@ function assignClosePopupListener(popupLayout) {
 
 function assignClosePopupRefreshListener(popupLayout) {
   let closeButton = popupLayout.querySelector("#popup-x");
+  let popupScreen = document.querySelector("#popup-screen");
   closeButton.addEventListener("click", function() {
-    let popupScreen = document.querySelector("#popup-screen");
     popupScreen.parentNode.removeChild(popupScreen);
     window.location.reload(true);
   });
   return popupLayout;
+}
+
+function addFadeInFadeOut(popupLayout) {
+  let popupScreen = popupLayout.querySelector("#popup-screen");
 }
