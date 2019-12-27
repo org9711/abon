@@ -31,14 +31,14 @@ div.overlay {
 }
 
 .product.mouse-on div.overlay {
-  animation: 0.4s 1 fadeIn forwards;
+  animation: 0.4s 1 productFadeIn forwards;
 }
 
 .product.mouse-off div.overlay {
-  animation: 0.4s 1 fadeOut forwards;
+  animation: 0.4s 1 productFadeOut forwards;
 }
 
-@keyframes fadeIn {
+@keyframes productFadeIn {
   0% {
     opacity: 0;
   }
@@ -50,7 +50,7 @@ div.overlay {
   }
 }
 
-@keyframes fadeOut {
+@keyframes productFadeOut {
   0% {
     opacity: 1;
   }

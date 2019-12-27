@@ -151,10 +151,8 @@ function popupFill(productDiv, name, price, description) {
 
 function priceToString(price) {
   let priceString = price.toString();
-  console.log(price, priceString, priceString.split(".")[1].length);
   for (i = 0; i < price.toString().split(".")[1].length; i++) {
     priceString += '0';
-    console.log(priceString);
   }
   return priceString;
 }
