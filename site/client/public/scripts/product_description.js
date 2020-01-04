@@ -20,8 +20,15 @@ function popupFill(productDiv, product, popupLayout, productDescriptionPopupLayo
 
 function priceToString(price) {
   let priceString = price.toString();
-  for (i = 0; i < price.toString().split(".")[1].length; i++) {
-    priceString += '0';
+  if(priceString.includes(".")) {
+    let integer = priceString.split(".")[0];
+    let decimal = priceString.split(".")[1];
+    decimal += '00';
+    decimal = decimal.substring(0,2);
+    priceString = integer + "." + decimal;
+  }
+  else {
+    priceString += '.00';
   }
   return priceString;
 }
