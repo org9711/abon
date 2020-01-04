@@ -1,8 +1,8 @@
 addEventListener('load', start);
 
 function start() {
-  getHeader();
-  getFooter();
+  displayHeader();
+  displayFooter();
   getTestimonialLayout();
   getTestimonialForm();
 }

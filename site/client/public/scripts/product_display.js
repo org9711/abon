@@ -1,86 +1,30 @@
-let productLayout;
-let productDescriptionPopupLayout;
-let basketButton = "<button class='add'><span class='basketEmoji'>&#x1F6D2;</span></button>";
-
-function getProductLayout() {
-  let q = new XMLHttpRequest();
-  q.onreadystatechange = storeProductLayout;
-  q.open("GET", '/products/get_product_layout', true);
-  q.send();
-}
-
-function storeProductLayout() {
-  if(this.readyState != XMLHttpRequest.DONE) return;
-  el = document.createElement("html");
-  el.innerHTML = this.responseText;
-  productLayout = el;
-  getProductDescriptionPopupLayout();
-}
-
-function getProductDescriptionPopupLayout() {
-  let q = new XMLHttpRequest();
-  q.onreadystatechange = storeProductDescriptionPopupLayout;
-  q.open("GET", '/products/get_product_description_popup_layout', true);
-  q.send();
-}
-
-function storeProductDescriptionPopupLayout() {
-  if(this.readyState != XMLHttpRequest.DONE) return;
-  el = document.createElement("html");
-  el.innerHTML = this.responseText;
-  productDescriptionPopupLayout = el;
-  getProducts();
-}
-
-function getProducts() {
-  let q = new XMLHttpRequest();
-  q.onreadystatechange = displayProducts;
-  q.open("GET", '/products/get_products', true);
-  q.send();
-}
-
-function displayProducts() {
-  if (this.readyState != XMLHttpRequest.DONE) return;
-  products = JSON.parse(this.responseText);
-  let ul = document.getElementById("products");
-
-  for (let i = 0; i < products.length; i++) {
-    let id = products[i].id;
-    let name = products[i].name;
-    let price = products[i].price;
-    let imageName = products[i].image_name;
-    let status = products[i].status;
-    let description = products[i].description;
-
+function displayProducts(product, productLayout) {
+  return new Promise(function(resolve, reject) {
     let productDiv = productLayout.cloneNode(true);
 
     let nameTag = productDiv.querySelector("div h3");
     let imageTag = productDiv.querySelector("div img");
 
-    if (status == 2) {
-      nameTag.textContent = name;
-      let buttonsTag = productDiv.querySelector(".buttons");
-      let wrap = document.createElement("html");
-      wrap.innerHTML = basketButton;
-      buttonsTag.appendChild(wrap.firstElementChild);
+    let basketButton = productDiv.querySelector(".add");
+
+    if (product.status == 2) {
+      nameTag.textContent = product.name;
     }
-    else if (status == 1) {
+    else if (product.status == 1) {
       nameTag.textContent = "Sold Out"
+      basketButton.parentNode.removeChild(basketButton);
     }
-    else if (status == 0) {
+    else if (product.status == 0) {
       nameTag.textContent = "Coming Soon"
+      basketButton.parentNode.removeChild(basketButton);
     }
 
-    imageTag.src = imageName;
+    imageTag.src = product.image_name;
+    productDiv.id = "product-no-" + product.id;
+    productDiv = overlayEffects(productDiv, product.status);
 
-    productDiv = productDiv.firstElementChild;
-
-    productDiv = overlayEffects(productDiv, status);
-
-    productDiv = popupFill(productDiv, name, price, description);
-
-    ul.append(productDiv);
-  }
+    resolve(productDiv);
+  });
 }
 
 function overlayEffects(productDiv, status) {
@@ -126,33 +70,4 @@ function overlayEffects(productDiv, status) {
     }
   });
   return productDiv;
-}
-
-function popupFill(productDiv, name, price, description) {
-  let popupDiv = popupLayout.cloneNode(true);
-  let popupHeading = popupDiv.querySelector("#popup-title h4");
-  let popupBody = popupDiv.querySelector("#popup-body");
-  let popupBodyContents = productDescriptionPopupLayout.cloneNode(true);
-  let pricePlace = popupBodyContents.querySelector("#popup-product-price span");
-  let descriptionPlace = popupBodyContents.querySelector("#popup-product-description p");
-  popupHeading.innerText = name;
-  pricePlace.innerText = priceToString(price);
-  descriptionPlace.innerText = description;
-  popupBody.appendChild(popupBodyContents);
-  let infoButton = productDiv.querySelector(".info");
-  let bodyTag = document.getElementsByTagName("body")[0];
-  infoButton.addEventListener("click", function () {
-    let popupDivClone = popupDiv.cloneNode(true);
-    popupDivClone = assignClosePopupListener(popupDivClone);
-    bodyTag.appendChild(popupDivClone.firstElementChild);
-  });
-  return productDiv;
-}
-
-function priceToString(price) {
-  let priceString = price.toString();
-  for (i = 0; i < price.toString().split(".")[1].length; i++) {
-    priceString += '0';
-  }
-  return priceString;
 }

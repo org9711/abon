@@ -1,7 +1,7 @@
 let xs = [];
 let t = 0;
 
-for (var i = 0; i < 2000; i++) {
+for (let i = 0; i < 2000; i++) {
   xs.push(i);
 }
 

@@ -1,39 +1,27 @@
-function getHeader() {
-  let q = new XMLHttpRequest();
-  q.onreadystatechange = displayHeader;
-  q.open("GET", '/frame/get_header', true);
-  q.send();
-}
-
 function displayHeader() {
-  if(this.readyState != XMLHttpRequest.DONE) return;
   let header = document.getElementsByTagName("header")[0];
-  header.innerHTML = this.responseText;
-  var path = window.location.pathname;
-  if (path != '/') {
-    var headerId = path.substr(1, path.length) + '-header';
-    var pageHeading = document.getElementById(headerId);
-    pageHeading.className = "active-tab";
-  }
-  addBurgerAnimation();
-}
-
-function getFooter() {
-  let q = new XMLHttpRequest();
-  q.onreadystatechange = displayFooter;
-  q.open("GET", '/frame/get_footer', true);
-  q.send();
+  getHTML('/frame/get_header')
+    .then(res => header.appendChild(res))
+    .then(() => {
+      let path = window.location.pathname;
+      addBurgerAnimation();
+      if (path != '/') {
+        let headerId = path.substr(1, path.length) + '-header';
+        let pageHeading = document.getElementById(headerId);
+        pageHeading.className = "active-tab";
+      }
+    });
 }
 
 function displayFooter() {
-  if(this.readyState != XMLHttpRequest.DONE) return;
   let footer = document.getElementsByTagName("footer")[0];
-  footer.innerHTML = this.responseText;
+  getHTML('/frame/get_footer')
+    .then(res => footer.appendChild(res));
 }
 
 function addBurgerAnimation() {
-  var burgerMenu = document.getElementById('burger');
-  var linksTab = document.getElementById('nav-links');
+  let burgerMenu = document.getElementById('burger');
+  let linksTab = document.getElementById('nav-links');
   burgerMenu.addEventListener("click", function() {
     burgerMenu.classList.toggle("change");
     linksTab.classList.toggle("show");

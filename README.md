@@ -5,6 +5,20 @@ This project is to build a website for local environmentally conscious food star
 
 Customers will be able to learn about the company and its products as well as purchase the products directly online. The administrator will be able to edit the website's information as well as manage orders from their own user interface after logging on.
 
-## To-do
-* Footer
-* Index page
+## Areas Left
+* Products - Basket
+* Products - Checkout
+* Testimonials
+* About
+* Admin pages
+
+## Performance Improvements
+* Add catches for errors in Promises
+
+## Further Feature Ideas
+* Products - Checkout - Bing Maps API to verify address is within suitable distance before order
+* Products - Display - Stock counter
+* Admin - Order summary - how many of each product sold
+* Admin - Group close orders / map of where orders are
+* Products - Checkout - PayPal payments
+* Products/Testimonials - CAPTCHA forms

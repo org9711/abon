@@ -1,17 +1,15 @@
-let popupLayout;
+function getPopupLaylout() {
+  getHTML('/frame/get_popup_layout')
+    .then(res => {
 
-function getPopupLayout() {
-  let q = new XMLHttpRequest();
-  q.onreadystatechange = storePopupLaylout;
-  q.open("GET", '/frame/get_popup_layout', true);
-  q.send();
-}
-
-function storePopupLaylout() {
-  if(this.readyState != XMLHttpRequest.DONE) return;
-  el = document.createElement("html");
-  el.innerHTML = this.responseText;
-  popupLayout = el;
+    })
+  return fetch('/frame/get_popup_layout')
+    .then(res => res.text())
+    .then(res => {
+      el = document.createElement("html");
+      el.innerHTML = res;
+      return el;
+    })
 }
 
 function assignClosePopupListener(popupLayout) {

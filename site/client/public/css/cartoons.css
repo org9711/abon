@@ -1,4 +1,4 @@
-#heart.run {
+#heart-container.run #heart {
   transform-origin: center;
   animation: 1.5s 2 beatHeart;
 }
@@ -15,7 +15,7 @@
   }
 }
 
-#earth.run #plant {
+#earth-container.run #plant {
   animation: 2s 1 shiftPlant;
 }
 
@@ -34,14 +34,14 @@
   }
 }
 
-#piggy-bank.run #coin {
+#pig-container.run #coin {
   transform-box: fill-box;
   transform-origin: center;
   animation: 3s 1 spinCoin;
 }
 
-#piggy-bank.run #pig {
- animation: 0.5s 6 shakePig; */
+#pig-container.run #pig {
+ animation: 0.5s 6 shakePig;
 }
 
 @keyframes spinCoin {
