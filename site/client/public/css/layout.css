@@ -50,6 +50,14 @@ main {
   margin-right: 0px;
 }
 
+.horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 button {
   cursor: pointer;
 }

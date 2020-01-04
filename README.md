@@ -15,6 +15,10 @@ Customers will be able to learn about the company and its products as well as pu
 ## Performance Improvements
 * Add catches for errors in Promises
 
+## UI Improvements
+* Make popups wider for smaller screens
+* Different unicode icons for each product, stored in Database
+
 ## Further Feature Ideas
 * Products - Checkout - Bing Maps API to verify address is within suitable distance before order
 * Products - Display - Stock counter
@@ -22,3 +26,4 @@ Customers will be able to learn about the company and its products as well as pu
 * Admin - Group close orders / map of where orders are
 * Products - Checkout - PayPal payments
 * Products/Testimonials - CAPTCHA forms
+* Accessibility features

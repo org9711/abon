@@ -1,32 +1,38 @@
 addEventListener('load', start);
 
-
 function start() {
   displayHeader();
   displayFooter();
   addDynamicContent();
-
+  animateWigglies();
 }
 
 function addDynamicContent() {
   let ul = document.getElementById("products");
 
-  let products = getJSON('/products/get_products');
-  let productLayout = getHTML('/products/get_product_layout');
+  let productsReq = getJSON('/products/get_products');
 
-  Promise.all([products, productLayout])
-  .then((prodRes) => {
+  productsReq.then((products) => {
     let popupLayout = getHTML('/frame/get_popup_layout');
     let productDescriptionPopupLayout = getHTML('/products/get_product_description_popup_layout');
-    for(let i = 0; i < prodRes[0].length; i++) {
-      displayProducts(prodRes[0][i], prodRes[1])
-        .then(div => {
-          Promise.all([popupLayout, productDescriptionPopupLayout])
+    let basketRowLayout = getHTML('/products/get_basket_row_layout');
+    getHTML('/products/get_product_layout')
+      .then(productLayout => {
+        for(let i = 0; i < products.length; i++) {
+          displayProducts(products[i], productLayout)
+          .then(div => {
+            ul.appendChild(div);
+            Promise.all([popupLayout, productDescriptionPopupLayout])
             .then((popRes) => {
-              popupFill(div, prodRes[0][i], popRes[0], popRes[1]);
-              ul.appendChild(div);
+              popupFill(div, products[i], popRes[0], popRes[1]);
             });
+            if(div.querySelector(".add")) {
+              basketRowLayout.then(basRes => {
+                basketFill(div, products[i], basRes);
+              });
+            }
         });
-    }
+      }
+    });
   });
 }
