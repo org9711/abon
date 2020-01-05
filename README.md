@@ -17,6 +17,9 @@ Customers will be able to learn about the company and its products as well as pu
 
 ## UI Improvements
 * Make popups wider for smaller screens
+* Popup bodies should have scrollbars if necessary
+* Products - Basket - Information button next to "Your Basket" to inform on how to add to basket
+* Products - Baket - Grey out button and information on  why customer can't add more product
 * Different unicode icons for each product, stored in Database
 
 ## Further Feature Ideas
@@ -25,5 +28,6 @@ Customers will be able to learn about the company and its products as well as pu
 * Admin - Order summary - how many of each product sold
 * Admin - Group close orders / map of where orders are
 * Products - Checkout - PayPal payments
+* Products - Basket - Discounts
 * Products/Testimonials - CAPTCHA forms
 * Accessibility features

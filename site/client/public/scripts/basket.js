@@ -12,29 +12,43 @@ function basketFill(productDiv, product, basketRowLayout) {
         console.log("first basket row, add checkout button");
         let headingWiggle = document.getElementById("heading-wiggle");
         headingWiggle.classList.remove("hide");
+        let totalAmountContainer = document.getElementById("total-amount-container");
+        totalAmountContainer.classList.remove("hide");
       }
       basketRow.id = "basket-row-" + product.id;
       let productNameDiv = basketRow.querySelector(".product-name");
       let productPriceSpan = basketRow.querySelector(".product-unit-price span");
       productNameDiv.innerText = product.name;
       productPriceSpan.innerText = priceToString(product.price);
-      calculateProductTotalPrice(basketRow, product.price);
       addIncrementDecrementEventListerners(basketRow, product.price);
       basketContents.appendChild(basketRow);
+      reinsertProductTotalPrice(basketRow, product.price);
+      reinsertOverallPrice();
     }
   });
 }
 
-function calculateProductTotalPrice(basketRow, price) {
+function reinsertProductTotalPrice(basketRow, price) {
   let quantityEl = basketRow.querySelector(".product-quantity");
   let quantity = parseInt(quantityEl.value);
 
   let productTotalPriceSpan = basketRow.querySelector(".product-total-price span");
-  console.log(price + " * " + quantity + " = " + priceToString(price * quantity));
   productTotalPriceSpan.innerText = priceToString(price * quantity);
 }
 
-function addIncrementDecrementEventListerners(basketRow, price) {
+function reinsertOverallPrice() {
+  let basketContents = document.getElementById("basket-contents");
+  let total = 0;
+  for(let i = 0; i < basketContents.childNodes.length; i++) {
+    let productPriceSpan = basketContents.childNodes[i].querySelector(".product-total-price span");
+    let price = parseFloat(productPriceSpan.innerText);
+    total += price;
+  }
+  let totalPriceSpan = document.querySelector("#total-amount-container .amount span");
+  totalPriceSpan.innerText = priceToString(total);
+}
+
+function addIncrementDecrementEventListerners(basketRow, price, basketContents) {
   let decrementButton = basketRow.querySelector(".decrement");
   let incrementButton = basketRow.querySelector(".increment");
   decrementButton.addEventListener("click", function(){decrementQuantity(basketRow, price)});
@@ -46,7 +60,8 @@ function incrementQuantity(basketRow, price) {
   let oldQuantity = parseInt(quantity.value);
   if(oldQuantity < 9) {
     quantity.value = oldQuantity + 1;
-    calculateProductTotalPrice(basketRow, price);
+    reinsertProductTotalPrice(basketRow, price);
+    reinsertOverallPrice();
   }
 }
 
@@ -60,10 +75,13 @@ function decrementQuantity(basketRow, price) {
       console.log("last basket removed, please remove checkout button");
       let headingWiggle = document.getElementById("heading-wiggle");
       headingWiggle.classList.add("hide");
+      let totalAmountContainer = document.getElementById("total-amount-container");
+      totalAmountContainer.classList.add("hide");
     }
   }
   else {
     quantityEl.value = oldQuantity - 1;
-    calculateProductTotalPrice(basketRow, price);
+    reinsertProductTotalPrice(basketRow, price);
   }
+  reinsertOverallPrice();
 }

@@ -1,17 +1,18 @@
+#basket {
+  font-family: sans-serif;
+  font-size: 1.3rem;
+}
+
 #basket-heading {
   margin-bottom: 0px;
 }
 
 .basket-row {
-  font-family: sans-serif;
-  font-size: 1.2rem;
+  width: 100%;
 }
 
-.product-label {
-  width: 400px;
-}
-
-.product-icon {
+.basket-row .product-icon {
+  flex: 1;
   margin-right: 20px;
   text-align: center;
   vertical-align: middle;
@@ -19,18 +20,104 @@
 }
 
 .basket-row .product-name {
+  flex: 5;
   text-align: left;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.basket-row .product-unit-price {
+  flex: 2;
+  text-align: center;
   vertical-align: middle;
 }
 
-.basket-row .product-price {
+.basket-row .product-total-price {
+  flex: 2;
   text-align: center;
   vertical-align: middle;
 }
 
 .product-quantity-bar {
+  flex: 3;
   display: flex;
   flex-direction: row;
   justify-content: center;
   vertical-align: middle;
+  margin-right: 5px;
+}
+
+.product-quantity-bar button {
+  height: 40px;
+  width: 40px;
+}
+
+.product-quantity-bar input {
+  width: 40px;
+  text-align: center;
+}
+
+#total-amount-container.hide {
+  display: none;
+}
+
+#total-amount-container .total {
+  text-align: right;
+  flex: 11;
+}
+
+#total-amount-container .amount {
+  text-align: center;
+  flex: 2;
+}
+
+@media all and (max-width: 1000px) {
+  #basket {
+    font-size: 1.1rem;
+  }
+
+  .product-quantity-bar button {
+    height: 35px;
+    width: 35px;
+  }
+
+  .product-quantity-bar input {
+    width: 35px;
+  }
+}
+
+@media all and (max-width: 700px) {
+  .basket-row .product-unit-price {
+    display: none;
+  }
+
+  #total-amount-container .total {
+    flex: 9;
+  }
+  /* Disable desktop checkout and enable mobile checkout */
+}
+
+@media all and (max-width: 600px) {
+  .basket-row .product-icon {
+    display: none;
+  }
+
+  #total-amount-container .total {
+    flex: 8;
+  }
+}
+
+@media all and (max-width: 400px) {
+  #basket {
+    font-size: 1.0rem;
+  }
+
+  .product-quantity-bar button {
+    height: 30px;
+    width: 30px;
+  }
+
+  .product-quantity-bar input {
+    width: 30px;
+  }
 }

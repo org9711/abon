@@ -54,11 +54,22 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items:center;
   padding: 10px;
 }
 
 button {
   cursor: pointer;
+}
+
+.small-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  color: black;
+  font-size: 25px;
+  background-color: var(--abon-orange);
 }
 
 p {

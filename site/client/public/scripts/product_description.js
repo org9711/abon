@@ -17,18 +17,3 @@ function popupFill(productDiv, product, popupLayout, productDescriptionPopupLayo
     bodyTag.appendChild(popupDivClone);
   });
 }
-
-function priceToString(price) {
-  let priceString = price.toString();
-  if(priceString.includes(".")) {
-    let integer = priceString.split(".")[0];
-    let decimal = priceString.split(".")[1];
-    decimal += '00';
-    decimal = decimal.substring(0,2);
-    priceString = integer + "." + decimal;
-  }
-  else {
-    priceString += '.00';
-  }
-  return priceString;
-}
