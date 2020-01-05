@@ -71,6 +71,17 @@
   flex: 2;
 }
 
+#basket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-button.mobile-only {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 @media all and (max-width: 1000px) {
   #basket {
     font-size: 1.1rem;

@@ -11,11 +11,7 @@ function createCheckoutPopup(popupLayout, checkoutPopupLayout) {
 }
 
 function fillCheckoutPopup(div) {
-  console.log("1");
-}
-
-function bla(div) {
-  console.log("2")
+  // let basketContents = document.getElementById("basket-contents");
 }
 
 function createCheckoutButton() {
@@ -32,6 +28,7 @@ function addCheckoutButtonEventListeners(checkoutButton, popupDiv) {
   let bodyTag = document.getElementsByTagName("body")[0]
   checkoutButton.addEventListener("click", function () {
     let popupDivClone = popupDiv.cloneNode(true);
+    // popupDivClone = fillCheckoutPopup(popupDivClone);
     popupDivClone = assignClosePopupListener(popupDivClone);
     bodyTag.appendChild(popupDivClone);
   });

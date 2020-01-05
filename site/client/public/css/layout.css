@@ -72,6 +72,17 @@ button {
   background-color: var(--abon-orange);
 }
 
+.long-button {
+  width: 120px;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 5px;
+  background-color: var(--abon-green);
+}
+
 p {
   margin-top: 0px;
   margin-bottom: 15px;
