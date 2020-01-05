@@ -1,4 +1,4 @@
-function basketFill(productDiv, product, basketRowLayout) {
+function basketFill(productDiv, product, basketRowLayout, checkoutButtonLayout, checkoutPopupDiv) {
   let basketButton = productDiv.querySelector(".add");
   let basketContents = document.getElementById("basket-contents");
   basketButton.addEventListener("click", function () {
@@ -8,12 +8,13 @@ function basketFill(productDiv, product, basketRowLayout) {
     }
     else {
       basketRow = basketRowLayout.cloneNode(true);
+
       if(basketContents.children.length == 0) {
-        console.log("first basket row, add checkout button");
         let headingWiggle = document.getElementById("heading-wiggle");
         headingWiggle.classList.remove("hide");
         let totalAmountContainer = document.getElementById("total-amount-container");
         totalAmountContainer.classList.remove("hide");
+        insertCheckoutButtons(checkoutButtonLayout, checkoutPopupDiv);
       }
       basketRow.id = "basket-row-" + product.id;
       let productNameDiv = basketRow.querySelector(".product-name");
@@ -48,6 +49,29 @@ function reinsertOverallPrice() {
   totalPriceSpan.innerText = priceToString(total);
 }
 
+function insertCheckoutButtons(checkoutButtonLayout, checkoutPopupDiv) {
+  let basket = document.getElementById("basket");
+  let basketHeader = document.getElementById("basket-header");
+
+  let checkoutButtonDesktop = checkoutButtonLayout.cloneNode(true);
+  checkoutButtonDesktop.classList.add("desktop-only");
+  let checkoutButtonMobile = checkoutButtonLayout.cloneNode(true);
+  checkoutButtonMobile.classList.add("mobile-only");
+
+  addCheckoutButtonEventListeners(checkoutButtonDesktop, checkoutPopupDiv);
+  addCheckoutButtonEventListeners(checkoutButtonMobile, checkoutPopupDiv);
+
+  basket.appendChild(checkoutButtonMobile);
+  basketHeader.appendChild(checkoutButtonDesktop);
+}
+
+function removeCheckoutButtons() {
+  let checkoutButtonDesktop = document.querySelector(".checkout-button.desktop-only");
+  checkoutButtonDesktop.parentNode.removeChild(checkoutButtonDesktop);
+  let checkoutButtonMobile = document.querySelector(".checkout-button.mobile-only");
+  checkoutButtonMobile.parentNode.removeChild(checkoutButtonMobile);
+}
+
 function addIncrementDecrementEventListerners(basketRow, price, basketContents) {
   let decrementButton = basketRow.querySelector(".decrement");
   let incrementButton = basketRow.querySelector(".increment");
@@ -72,11 +96,11 @@ function decrementQuantity(basketRow, price) {
     basketRow.parentNode.removeChild(basketRow);
     let basketContents = document.getElementById("basket-contents");
     if(basketContents.children.length == 0) {
-      console.log("last basket removed, please remove checkout button");
       let headingWiggle = document.getElementById("heading-wiggle");
       headingWiggle.classList.add("hide");
       let totalAmountContainer = document.getElementById("total-amount-container");
       totalAmountContainer.classList.add("hide");
+      removeCheckoutButtons();
     }
   }
   else {

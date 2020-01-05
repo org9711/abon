@@ -37,8 +37,8 @@ async function getHandler(request, response) {
     let path = 'client/public/components/product_basket_row.html';
     send.sendPage(path, request, response);
   }
-  else if (request.url.endsWith("/get_modal_layout")) {
-    let path = 'client/public/components/order_modal.html';
+  else if (request.url.endsWith("/get_checkout_popup_layout")) {
+    let path = 'client/public/components/checkout_popup.html';
     send.sendPage(path, request, response);
   }
 }

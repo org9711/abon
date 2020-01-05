@@ -1,8 +1,8 @@
-function popupFill(productDiv, product, popupLayout, productDescriptionPopupLayout) {
+function popupProductDescriptionFill(productDiv, product, popupLayout, productDescriptionPopupLayout) {
   let popupDiv = popupLayout.cloneNode(true);
+  let popupBodyContents = productDescriptionPopupLayout.cloneNode(true);
   let popupHeading = popupDiv.querySelector("#popup-title h4");
   let popupBody = popupDiv.querySelector("#popup-body");
-  let popupBodyContents = productDescriptionPopupLayout.cloneNode(true);
   let pricePlace = popupBodyContents.querySelector("#popup-product-price span");
   let descriptionPlace = popupBodyContents.querySelector("#popup-product-description p");
   popupHeading.innerText = product.name;

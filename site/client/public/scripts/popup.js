@@ -1,17 +1,3 @@
-function getPopupLaylout() {
-  getHTML('/frame/get_popup_layout')
-    .then(res => {
-
-    })
-  return fetch('/frame/get_popup_layout')
-    .then(res => res.text())
-    .then(res => {
-      el = document.createElement("html");
-      el.innerHTML = res;
-      return el;
-    })
-}
-
 function assignClosePopupListener(popupLayout) {
   let closeButton = popupLayout.querySelector("#popup-x");
   closeButton.addEventListener("click", function() {

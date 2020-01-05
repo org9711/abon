@@ -8,33 +8,15 @@ function start() {
 }
 
 function addDynamicContent() {
-  let ul = document.getElementById("products");
-
-  let productsReq = getJSON('/products/get_products');
-
-  productsReq.then((products) => {
-    let popupLayout = getHTML('/frame/get_popup_layout');
-    let productDescriptionPopupLayout = getHTML('/products/get_product_description_popup_layout');
-    let basketRowLayout = getHTML('/products/get_basket_row_layout');
-    getHTML('/products/get_product_layout')
-      .then(productLayout => {
-        for(let i = 0; i < products.length; i++) {
-          displayProducts(products[i], productLayout)
-          .then(div => {
-            ul.appendChild(div);
-            Promise.all([popupLayout, productDescriptionPopupLayout])
-            .then((popRes) => {
-              popupFill(div, products[i], popRes[0], popRes[1]);
-            });
-            if(div.querySelector(".add")) {
-              basketRowLayout.then(basRes => {
-                basketFill(div, products[i], basRes);
-              });
-            }
-        });
-      }
-    });
-  });
+  let popupLayout = getHTML('/frame/get_popup_layout');
+  let products = getJSON('/products/get_products');
+  let productDescriptionPopupLayout = getHTML('/products/get_product_description_popup_layout');
+  let basketRowLayout = getHTML('/products/get_basket_row_layout');
+  let productLayout = getHTML('/products/get_product_layout');
+  let checkoutPopupBodyLayout = getHTML('/products/get_checkout_popup_layout');
+  let checkoutButtonLayout = createCheckoutButton();
+  let checkoutPopupLayout = createCheckoutPopup(popupLayout, checkoutPopupBodyLayout);
+  fillContent(products, productLayout, popupLayout, productDescriptionPopupLayout, basketRowLayout, checkoutButtonLayout, checkoutPopupLayout);
 }
 
 function priceToString(price) {
@@ -50,4 +32,26 @@ function priceToString(price) {
     priceString += '.00';
   }
   return priceString;
+}
+
+function fillContent(products, productLayout, popupLayout, productDescriptionPopupLayout, basketRowLayout, checkoutButtonLayout, checkoutPopupLayout) {
+  let ul = document.getElementById("products");
+
+  Promise.all([products, productLayout]).then((prodRes) => {
+    for(let i = 0; i < prodRes[0].length; i++) {
+      displayProducts(prodRes[0][i], prodRes[1]).then(div => {
+        ul.appendChild(div);
+
+        Promise.all([popupLayout, productDescriptionPopupLayout]).then((prodPopRes) => {
+          popupProductDescriptionFill(div, prodRes[0][i], prodPopRes[0], prodPopRes[1]);
+        });
+
+        if(div.querySelector(".add")) {
+          Promise.all([basketRowLayout, checkoutButtonLayout, checkoutPopupLayout]).then((basRes) => {
+            basketFill(div, prodRes[0][i], basRes[0], basRes[1], basRes[2]);
+          });
+        }
+      });
+    }
+  });
 }
