@@ -17,8 +17,10 @@ function basketFill(productDiv, product, basketRowLayout, checkoutButtonLayout, 
         insertCheckoutButtons(checkoutButtonLayout, checkoutPopupDiv);
       }
       basketRow.id = "basket-row-" + product.id;
+      let productIdInput = basketRow.querySelector("input[name='product-id']");
       let productNameDiv = basketRow.querySelector(".product-name");
       let productPriceSpan = basketRow.querySelector(".product-unit-price span");
+      productIdInput.value = product.id;
       productNameDiv.innerText = product.name;
       productPriceSpan.innerText = priceToString(product.price);
       addIncrementDecrementEventListerners(basketRow, product.price);

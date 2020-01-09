@@ -11,7 +11,37 @@ function createCheckoutPopup(popupLayout, checkoutPopupLayout) {
 }
 
 function fillCheckoutPopup(div) {
-  // let basketContents = document.getElementById("basket-contents");
+  let basketContents = document.getElementById("basket-contents");
+  let match = true;
+
+  let allRowsJSON = {
+    unitOrders: []
+  };
+  for(let i = 0; i < basketContents.childNodes.length; i++) {
+    let rowProductIdInput = basketContents.childNodes[i].querySelector("input[name='product-id']");
+    let rowProductId = parseInt(rowProductIdInput.value);
+
+    let rowProductQuantityInput = basketContents.childNodes[i].querySelector("input[name='product-quantity']");
+    let rowProductQuantity = parseInt(rowProductQuantityInput.value);
+
+    let rowTotalPriceSpan = basketContents.childNodes[i].querySelector("input[name='product-quantity']");
+    let rowTotalPrice = parseFloat(rowTotalPriceSpan.value);
+
+    let rowJSON = {
+      id: rowProductId,
+      quantity: rowProductQuantity,
+      totalPrice: rowTotalPrice
+    };
+    allRowsJSON['unitOrders'].push(rowJSON);
+
+    postJSON('/basket/check_basket', rowJSON);
+    console.log(basketContents.childNodes[i]);
+  }
+  // Make request to check if all products are still avaialble
+  // if they are, send back id, product image, quantity of order product name and total price for each product
+  // then construct the checkout with this information
+  // if they aren't send back a message informing of the differences and to click the x and try again
+  return div;
 }
 
 function createCheckoutButton() {
@@ -24,11 +54,11 @@ function createCheckoutButton() {
   });
 }
 
-function addCheckoutButtonEventListeners(checkoutButton, popupDiv) {
+function addCheckoutButtonEventListeners(checkoutButton, popupDiv, products) {
   let bodyTag = document.getElementsByTagName("body")[0]
   checkoutButton.addEventListener("click", function () {
     let popupDivClone = popupDiv.cloneNode(true);
-    // popupDivClone = fillCheckoutPopup(popupDivClone);
+    popupDivClone = fillCheckoutPopup(popupDivClone, products);
     popupDivClone = assignClosePopupListener(popupDivClone);
     bodyTag.appendChild(popupDivClone);
   });

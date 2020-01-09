@@ -7,6 +7,8 @@ let indexC = require('./controllers/index.js');
 let filesC = require('./controllers/files.js');
 let picturesC = require('./controllers/pictures.js');
 let productsC = require('./controllers/products.js');
+let basketC = require('./controllers/basket.js');
+let checkoutC = require('./controllers/checkout.js');
 let testimonialsC = require('./controllers/testimonials.js');
 let aboutC = require('./controllers/about.js');
 let frameC = require('./controllers/frame.js');
@@ -41,6 +43,12 @@ async function handle(request, response) {
     }
     else if (request.url.startsWith("/products")) {
       productsC.handle(request, response);
+    }
+    else if (request.url.startsWith("/basket")) {
+      basketC.handle(request, response);
+    }
+    else if (request.url.startsWith("/checkout")) {
+      checkoutC.handle(request, response);
     }
     else if (request.url.startsWith("/testimonials")) {
       testimonialsC.handle(request, response);

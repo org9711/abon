@@ -31,6 +31,8 @@
 }
 
 #popup {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   max-height: 90vh;
   max-width: 90vw;
@@ -75,14 +77,12 @@
   justify-content: space-between;
   align-items: center;
   height: 30px;
-  width: auto;
   padding: 10px;
   background-color: var(--abon-orange);
 }
 
 #popup-heading h4 {
   text-decoration: none;
-  font-family: sans-serif;
   font-size: 20px;
   font-weight: 500;
   line-height: normal;
@@ -97,9 +97,14 @@
   border: 0;
   background-color: var(--abon-orange);
   font-size: 100%;
-  font-family: sans-serif;
 }
 
 #popup-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#popup-body-container {
   padding: 20px;
 }

@@ -11,9 +11,9 @@ function addDynamicContent() {
   let popupLayout = getHTML('/frame/get_popup_layout');
   let products = getJSON('/products/get_products');
   let productDescriptionPopupLayout = getHTML('/products/get_product_description_popup_layout');
-  let basketRowLayout = getHTML('/products/get_basket_row_layout');
+  let basketRowLayout = getHTML('/basket/get_basket_row_layout');
   let productLayout = getHTML('/products/get_product_layout');
-  let checkoutPopupBodyLayout = getHTML('/products/get_checkout_popup_layout');
+  let checkoutPopupBodyLayout = getHTML('/checkout/get_checkout_popup_layout');
   let checkoutButtonLayout = createCheckoutButton();
   let checkoutPopupLayout = createCheckoutPopup(popupLayout, checkoutPopupBodyLayout);
   fillContent(products, productLayout, popupLayout, productDescriptionPopupLayout, basketRowLayout, checkoutButtonLayout, checkoutPopupLayout);
