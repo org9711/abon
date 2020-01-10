@@ -6,7 +6,6 @@ let preMail = require('../lib/presetMails.js');
 
 module.exports = {
   handle: async function(request, response) {
-    console.log(request.method);
     if (request.method == 'POST') {
       receive.readBody(postHandler, request, response)
     }
@@ -26,5 +25,9 @@ async function getHandler(request, response) {
 async function postHandler(object, request, response) {
   if (request.url.endsWith("/check_basket")) {
     console.log(object);
+    let statement = "";
+    let list = [];
+    let unitOrder = {hi: "hello"};
+    send.sendObject(unitOrder, response);
   }
 }

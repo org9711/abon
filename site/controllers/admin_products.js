@@ -26,8 +26,8 @@ async function getHandler(request, response) {
   }
   else if (request.url.endsWith("/get_products")) {
     list = [];
-    let statement = "SELECT id,name,price,image_name,description,status FROM products";
-    send.sendObject(statement, list, response);
+    let statement = "SELECT id,name,price,image_name,description,stock,status FROM products";
+    send.sendObjectFromDB(statement, list, response);
   }
 }
 
@@ -42,8 +42,8 @@ async function postHandler(object, request, response) {
     list = [object.name, object.price, object.imageName, object.description, object.status];
     let insertStatement = "INSERT INTO products (name,price,image_name,description,status) VALUES(?,?,?,?,?)";
     let id = await database.insertRow(insertStatement, list);
-    let selectStatement = "SELECT id,name,price,image_name,description,status FROM products WHERE id=?";
-    send.sendObject(selectStatement, id, response);
+    let selectStatement = "SELECT id,name,price,image_name,description,stock,status FROM products WHERE id=?";
+    send.sendObjectFromDB(selectStatement, id, response);
   }
   else if (request.url.endsWith("/remove_product")) {
     let statement = "DELETE FROM products WHERE id=?";

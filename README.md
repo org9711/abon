@@ -12,8 +12,12 @@ Customers will be able to learn about the company and its products as well as pu
 * About
 * Admin pages
 
+## Code Readability Improvements
+* Change name of sendObject to sendObjectFromDatabase
+
 ## Performance Improvements
 * Add catches for errors in Promises
+* Give backend appropriate Promise functionality
 
 ## UI Improvements
 * Make popups wider for smaller screens
@@ -23,10 +27,8 @@ Customers will be able to learn about the company and its products as well as pu
 * Different unicode icons for each product, stored in Database
 
 ## Further Feature Ideas
-* Products - Checkout - Don't erase popup entries when closing
 * Products - Checkout - Bing Maps API to verify address is within suitable distance before order
 * Products - Basket - Add warning for the above
-* Products - Display - Stock counter
 * Admin - Order summary - how many of each product sold
 * Admin - Group close orders / map of where orders are
 * Products - Checkout - PayPal payments

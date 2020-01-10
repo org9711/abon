@@ -44,12 +44,17 @@ module.exports = {
     respond.reply(response, hdrs, text);
   },
 
-  sendObject: async function(statement, list, response) {
+  sendObjectFromDB: async function(statement, list, response) {
     let objects;
     try { objects = await database.getRows(statement, list); }
     catch (err) { return respond.fail(response, BadType, "Database error.\n" + err); }
     let hdrs = { 'Content-Type': 'application/JSON' };
     respond.reply(response, hdrs, JSON.stringify(objects));
+  },
+
+  sendObject: async function(object, response) {
+    let hdrs = { 'Content-Type': 'application/JSON' };
+    respond.reply(response, hdrs, JSON.stringify(object));
   },
 
   sendDirectoryContents: async function(path, response) {

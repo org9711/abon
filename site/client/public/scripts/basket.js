@@ -4,7 +4,7 @@ function basketFill(productDiv, product, basketRowLayout, checkoutButtonLayout, 
   basketButton.addEventListener("click", function () {
     let basketRow = basketContents.querySelector("#basket-row-" + product.id);
     if(basketRow) {
-      incrementQuantity(basketRow, product.price);
+      incrementQuantity(basketRow, product.price, product.stock);
     }
     else {
       basketRow = basketRowLayout.cloneNode(true);
@@ -23,7 +23,7 @@ function basketFill(productDiv, product, basketRowLayout, checkoutButtonLayout, 
       productIdInput.value = product.id;
       productNameDiv.innerText = product.name;
       productPriceSpan.innerText = priceToString(product.price);
-      addIncrementDecrementEventListerners(basketRow, product.price);
+      addIncrementDecrementEventListerners(basketRow, product.price, product.stock);
       basketContents.appendChild(basketRow);
       reinsertProductTotalPrice(basketRow, product.price);
       reinsertOverallPrice();
@@ -74,17 +74,17 @@ function removeCheckoutButtons() {
   checkoutButtonMobile.parentNode.removeChild(checkoutButtonMobile);
 }
 
-function addIncrementDecrementEventListerners(basketRow, price, basketContents) {
+function addIncrementDecrementEventListerners(basketRow, price, stock) {
   let decrementButton = basketRow.querySelector(".decrement");
   let incrementButton = basketRow.querySelector(".increment");
   decrementButton.addEventListener("click", function(){decrementQuantity(basketRow, price)});
-  incrementButton.addEventListener("click", function(){incrementQuantity(basketRow, price)});
+  incrementButton.addEventListener("click", function(){incrementQuantity(basketRow, price, stock)});
 }
 
-function incrementQuantity(basketRow, price) {
+function incrementQuantity(basketRow, price, stock) {
   let quantity = basketRow.querySelector(".product-quantity");
   let oldQuantity = parseInt(quantity.value);
-  if(oldQuantity < 9) {
+  if(oldQuantity < 9 && oldQuantity < stock) {
     quantity.value = oldQuantity + 1;
     reinsertProductTotalPrice(basketRow, price);
     reinsertOverallPrice();

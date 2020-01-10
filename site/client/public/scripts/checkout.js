@@ -17,6 +17,7 @@ function fillCheckoutPopup(div) {
   let allRowsJSON = {
     unitOrders: []
   };
+
   for(let i = 0; i < basketContents.childNodes.length; i++) {
     let rowProductIdInput = basketContents.childNodes[i].querySelector("input[name='product-id']");
     let rowProductId = parseInt(rowProductIdInput.value);
@@ -24,8 +25,8 @@ function fillCheckoutPopup(div) {
     let rowProductQuantityInput = basketContents.childNodes[i].querySelector("input[name='product-quantity']");
     let rowProductQuantity = parseInt(rowProductQuantityInput.value);
 
-    let rowTotalPriceSpan = basketContents.childNodes[i].querySelector("input[name='product-quantity']");
-    let rowTotalPrice = parseFloat(rowTotalPriceSpan.value);
+    let rowTotalPriceSpan = basketContents.childNodes[i].querySelector(".product-total-price span");
+    let rowTotalPrice = parseFloat(rowTotalPriceSpan.innerText);
 
     let rowJSON = {
       id: rowProductId,
@@ -34,8 +35,9 @@ function fillCheckoutPopup(div) {
     };
     allRowsJSON['unitOrders'].push(rowJSON);
 
-    postJSON('/basket/check_basket', rowJSON);
-    console.log(basketContents.childNodes[i]);
+    postJSON('/basket/check_basket', rowJSON).then(res => {
+      console.log(res);
+    });
   }
   // Make request to check if all products are still avaialble
   // if they are, send back id, product image, quantity of order product name and total price for each product
@@ -59,7 +61,7 @@ function addCheckoutButtonEventListeners(checkoutButton, popupDiv, products) {
   checkoutButton.addEventListener("click", function () {
     let popupDivClone = popupDiv.cloneNode(true);
     popupDivClone = fillCheckoutPopup(popupDivClone, products);
-    popupDivClone = assignClosePopupListener(popupDivClone);
+    // popupDivClone = assignClosePopupListener(popupDivClone); - do this when we know the event of check
     bodyTag.appendChild(popupDivClone);
   });
 }

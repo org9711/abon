@@ -21,5 +21,5 @@ function postJSON(url, body) {
     },
     body: JSON.stringify(body)
   }
-  return fetch(url, options);
+  return fetch(url, options).then(res => res.json());
 }

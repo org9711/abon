@@ -21,7 +21,7 @@ async function getHandler(request, response) {
   else if (request.url.endsWith("/get_testimonials")) {
     list = [];
     let statement = "SELECT id,name,review,stars,status FROM testimonials";
-    send.sendObject(statement, list, response);
+    send.sendObjectFromDB(statement, list, response);
   }
 }
 

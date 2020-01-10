@@ -22,12 +22,12 @@ async function getHandler(request, response) {
   else if (request.url.endsWith("/get_approved")) {
     list = [];
     let statement = "SELECT id,name,review,stars FROM testimonials WHERE status=1";
-    send.sendObject(statement, list, response);
+    send.sendObjectFromDB(statement, list, response);
   }
   else if (request.url.endsWith("/get_all")) {
     list = [];
     let statement = "SELECT id,name,review,stars,status FROM testimonials";
-    send.sendObject(statement, list, response);
+    send.sendObjectFromDB(statement, list, response);
   }
   else if (request.url.endsWith("/get_testimonial_layout")) {
     let path = 'client/public/components/testimonial_tab.html';

@@ -1,7 +1,7 @@
 let sqlite = require("sqlite");
 let bcrypt = require("bcryptjs");
 // createTestimonialsTable();
-// createProductsTable();
+createProductsTable();
 // createCustomersTable();
 // createOrdersTable();
 // createUsersTable();
@@ -64,9 +64,10 @@ async function createProductsTable() {
     "price DECIMAL(18,2), " +
     "image_name VARCHAR(255), " +
     "description VARCHAR (2047), " +
+    "stock INT NOT NULL, " +
     "status INT NOT NULL)";
   let insertRowCommand1 =
-    "INSERT INTO products (name, price, image_name, description, status) " +
+    "INSERT INTO products (name, price, image_name, description, stock, status) " +
     "VALUES ('Superfood Pesto', '2.20', 'superfood-pesto.jpg', " +
     "'This pesto is as vibrant in colour as it is in flavour. It takes " +
     "inspiration from both Japanese and Italian cooking and fuses the best of " +
@@ -76,18 +77,18 @@ async function createProductsTable() {
     "fusion dish you can get away serving it with pasta or noodles. We " +
     "prefer it with conchiglie, which catches brilliant little puddles of " +
     "sauce.', " +
-    "2)";
+    "6, 2)";
   let insertRowCommand2 =
-    "INSERT INTO products (name, price, image_name, description, status) " +
+    "INSERT INTO products (name, price, image_name, description, stock, status) " +
     "VALUES ('Roasted Veg Curry', '2.20', 'veg-curry.jpg', " +
     "'The roasted veg curry is packed full of the good stuff. It includes " +
     "butternut squash, sweet potato, peppers, mushrooms and tons of " +
     "other veg that will make you feel as good as it tastes. Pimp yours " +
     "at home with extra chilli if you like it spicy, or just enjoy the " +
     "zing from all the spices, lime and coriander.', " +
-    "2)";
+    "12, 2)";
   let insertRowCommand3 =
-    "INSERT INTO products (name, price, image_name, description, status) " +
+    "INSERT INTO products (name, price, image_name, description, stock, status) " +
     "VALUES ('Spicy Noodle Soup', '2.20', 'spicy-noodles.jpg', " +
     "'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla " +
     "tincidunt augue sit amet odio viverra tincidunt. Morbi tellus massa, " +
@@ -99,9 +100,9 @@ async function createProductsTable() {
     "posuere maximus. Nullam volutpat, nisi in pretium facilisis, turpis " +
     "urna iaculis lorem, at commodo nibh nibh ut odio. Vestibulum et mi varius, " +
     "viverra neque vitae, eleifend justo.', " +
-    "1)";
+    "0, 1)";
   let insertRowCommand4 =
-    "INSERT INTO products (name, price, image_name, description, status) " +
+    "INSERT INTO products (name, price, image_name, description, stock, status) " +
     "VALUES ('Aubergine & Tomato Pasta', '2.20', 'tomato-pasta.jpg', " +
     "'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla " +
     "tincidunt augue sit amet odio viverra tincidunt. Morbi tellus massa, " +
@@ -113,7 +114,7 @@ async function createProductsTable() {
     "posuere maximus. Nullam volutpat, nisi in pretium facilisis, turpis " +
     "urna iaculis lorem, at commodo nibh nibh ut odio. Vestibulum et mi varius, " +
     "viverra neque vitae, eleifend justo.', " +
-    "0)";
+    "0, 0)";
   try {
     let db = await sqlite.open("./db.sqlite")
     await db.run(createDbCommand);
