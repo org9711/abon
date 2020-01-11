@@ -28,7 +28,7 @@ Customers will be able to learn about the company and its products as well as pu
 
 ## Further Feature Ideas
 * Products - Checkout - Bing Maps API to verify address is within suitable distance before order
-* Products - Basket - Add warning for the above
+* Products - Basket - Add warning for product sold out/can't buy more than 9
 * Admin - Order summary - how many of each product sold
 * Admin - Group close orders / map of where orders are
 * Products - Checkout - PayPal payments

@@ -108,3 +108,7 @@
 #popup-body-container {
   padding: 20px;
 }
+
+#popup-body-container > p:last-child {
+  margin-bottom: 0px;
+}

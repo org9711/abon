@@ -23,7 +23,13 @@ async function getHandler(request, response) {
   else if (request.url.endsWith("/get_products")) {
     list = [];
     let statement = "SELECT id,name,price,image_name,description,stock,status FROM products";
-    send.sendObjectFromDB(statement, list, response);
+    let products = await database.getRows(statement, list);
+    for(let i = 0; i < products.length; i++){
+      if(products[i]["stock"] > 9) {
+        products[i]["stock"] = 10;
+      }
+    }
+    send.sendObject(products, response);
   }
   else if (request.url.endsWith("/get_product_layout")) {
     let path = 'client/public/components/product_tab.html';
