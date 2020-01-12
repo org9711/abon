@@ -104,7 +104,6 @@
   #total-amount-container .total {
     flex: 9;
   }
-  /* Disable desktop checkout and enable mobile checkout */
 }
 
 @media all and (max-width: 600px) {

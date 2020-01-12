@@ -27,11 +27,11 @@ async function handle(request, response) {
     adminC.handle(request, response);
   }
   else {
-    if (request.url.startsWith("/favicon.ico")) request.url = 'square.png';
-    if (request.url == "/") request.url = 'index.html';
-    if (request.url == "/products") request.url = 'products.html';
-    if (request.url == "/testimonials") request.url = 'testimonials.html';
-    if (request.url == "/about") request.url = 'about.html';
+    if (request.url.startsWith("/favicon.ico")) request.url = '/square.png';
+    if (request.url == "/") request.url = '/index.html';
+    if (request.url == "/products") request.url = '/products.html';
+    if (request.url == "/testimonials") request.url = '/testimonials.html';
+    if (request.url == "/about") request.url = '/about.html';
     if (request.url.endsWith(".png") || request.url.endsWith(".jpg") || request.url.endsWith(".svg")) {
       picturesC.handle(request, response);
     }
@@ -41,7 +41,7 @@ async function handle(request, response) {
     else if (request.url.startsWith("/products")) {
       productsC.handle(request, response);
     }
-    else if (request.url.startsWith("/orrder")) {
+    else if (request.url.startsWith("/order")) {
       orderC.handle(request, response);
     }
     else if (request.url.startsWith("/testimonials")) {

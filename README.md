@@ -6,29 +6,24 @@ This project is to build a website for local environmentally conscious food star
 Customers will be able to learn about the company and its products as well as purchase the products directly online. The administrator will be able to edit the website's information as well as manage orders from their own user interface after logging on.
 
 ## Areas Left
-* Products - Basket
 * Products - Checkout
 * Testimonials
 * About
 * Admin pages
 
-## Code Readability Improvements
-* Change name of sendObject to sendObjectFromDatabase
-
 ## Performance Improvements
 * Add catches for errors in Promises
 * Give backend appropriate Promise functionality
 
-## UI Improvements
+## UI/UX Improvements
 * Make popups wider for smaller screens
-* Popup bodies should have scrollbars if necessary
 * Products - Basket - Information button next to "Your Basket" to inform on how to add to basket
-* Products - Baket - Grey out button and information on  why customer can't add more product
+* Products - Basket - Grey out button and information on  why customer can't add more product
+* Products - Basket - Add warning to say no selling outside 5 miles
 * Different unicode icons for each product, stored in Database
 
 ## Further Feature Ideas
 * Products - Checkout - Bing Maps API to verify address is within suitable distance before order
-* Products - Basket - Add warning for product sold out/can't buy more than 9
 * Admin - Order summary - how many of each product sold
 * Admin - Group close orders / map of where orders are
 * Products - Checkout - PayPal payments

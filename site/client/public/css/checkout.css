@@ -14,7 +14,7 @@
   flex-direction: row;
 }
 
-#customer-form {
+#customer-forms {
   flex: 1;
   padding: 20px;
 }
@@ -46,6 +46,56 @@
 
 #mismatches {
   margin-bottom: 15px;
+}
+
+.entry {
+  margin-bottom: 5px;
+}
+
+#customer-forms .entry:last-child {
+  margin-bottom: 0px;
+}
+
+#customer-details-form {
+  margin-bottom: 20px;
+}
+
+#customer-forms input {
+  font-size: 14pt;
+}
+
+.checkout-basket-row {
+  border-bottom: 1px solid rgb(43,42,36,0.20); /* Abon Grey but with added transparency*/
+  flex-wrap: wrap;
+}
+
+.checkout-product-image {
+  flex: 1;
+  height: 35px;
+  width: 80px;
+  overflow: hidden;
+  margin-right: 5px;
+  text-align: center;
+}
+
+.checkout-product-image img {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 80px;
+}
+
+.checkout-product-quantity {
+  margin-right: 5px;
+}
+
+.checkout-product-name {
+  flex: 3;
+  text-align: left;
+}
+
+.checkout-product-total-price {
+  flex: 1;
 }
 
 li {

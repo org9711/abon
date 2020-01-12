@@ -14,13 +14,15 @@ function basketFill(productDiv, product, basketRowLayout, popupLayout) {
         headingWiggle.classList.remove("hide");
         let totalAmountContainer = document.getElementById("total-amount-container");
         totalAmountContainer.classList.remove("hide");
-        createCheckoutButton().then(res => insertCheckoutButtons(res, popupLayout));
+        getHTML('components/checkout_button.html').then(res => insertCheckoutButtons(res, popupLayout));
       }
       basketRow.id = "basket-row-" + product.id;
-      let productIdInput = basketRow.querySelector("input[name='product-id']");
+      let productIdInput = basketRow.querySelector(".product-id");
+      let productImageInput = basketRow.querySelector(".product-image-name");
       let productNameDiv = basketRow.querySelector(".product-name");
       let productPriceSpan = basketRow.querySelector(".product-unit-price span");
-      productIdInput.value = product.id;
+      productIdInput.innerText = product.id;
+      productImageInput.innerText = product.image_name;
       productNameDiv.innerText = product.name;
       productPriceSpan.innerText = priceToString(product.price);
       addIncrementDecrementEventListerners(basketRow, product.price, product.stock);
