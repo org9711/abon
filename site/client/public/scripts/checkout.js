@@ -1,18 +1,16 @@
-function createCheckoutPopup(popupLayout, checkoutPopupLayout) {
-  return Promise.all([popupLayout, checkoutPopupLayout]).then((checkPopRes) => {
-    let popupDiv = checkPopRes[0].cloneNode(true);
-    let popupBodyContents = checkPopRes[1].cloneNode(true);
-    let popupHeading = popupDiv.querySelector("#popup-title h4");
-    let popupBody = popupDiv.querySelector("#popup-body");
-    popupHeading.innerText = "Checkout";
-    popupBody.appendChild(popupBodyContents);
-    return popupDiv;
-  });
+function createCheckoutPopup(popupLayout, popupBodyContents) {
+  let popupDiv = popupLayout.cloneNode(true);
+  let popupHeading = popupDiv.querySelector("#popup-title h4");
+  let popupBody = popupDiv.querySelector("#popup-body");
+  popupHeading.innerText = "Checkout";
+  popupBody.appendChild(popupBodyContents);
+  return popupDiv;
 }
 
-function fillCheckoutPopup(div) {
+function fillCheckoutPopupBody(popupLayout, checkoutPopupBodyLayout) {
+  let popupBodyDiv;
+  let popupDiv;
   let basketContents = document.getElementById("basket-contents");
-  let match = true;
 
   let allRowsJSON = {
     unitOrders: []
@@ -34,16 +32,22 @@ function fillCheckoutPopup(div) {
       totalPrice: rowTotalPrice
     };
     allRowsJSON['unitOrders'].push(rowJSON);
-
-    postJSON('/basket/check_basket', rowJSON).then(res => {
-      console.log(res);
-    });
   }
-  // Make request to check if all products are still avaialble
-  // if they are, send back id, product image, quantity of order product name and total price for each product
-  // then construct the checkout with this information
-  // if they aren't send back a message informing of the differences and to click the x and try again
-  return div;
+
+  return postJSON('/basket/check_basket', allRowsJSON).then(res => {
+    if(res["match"]) {
+      popupBodyDiv = checkoutPopupBodyLayout.cloneNode(true);
+      popupDiv = createCheckoutPopup(popupLayout, popupBodyDiv);
+      popupDiv = assignClosePopupListener(popupDiv);
+    }
+    else {
+      popupBodyDiv = createNoMatchDiv(res);
+      popupDiv = createCheckoutPopup(popupLayout, popupBodyDiv);
+      popupDiv.classList.remove("checkout");
+      popupDiv = assignClosePopupRefreshListener(popupDiv);
+    }
+    return popupDiv;
+  });
 }
 
 function createCheckoutButton() {
@@ -56,12 +60,26 @@ function createCheckoutButton() {
   });
 }
 
-function addCheckoutButtonEventListeners(checkoutButton, popupDiv, products) {
-  let bodyTag = document.getElementsByTagName("body")[0]
+function addCheckoutButtonEventListeners(checkoutButton, popupLayout, checkoutPopupBodyLayout) {
+  let bodyTag = document.getElementsByTagName("body")[0];
   checkoutButton.addEventListener("click", function () {
-    let popupDivClone = popupDiv.cloneNode(true);
-    popupDivClone = fillCheckoutPopup(popupDivClone, products);
-    // popupDivClone = assignClosePopupListener(popupDivClone); - do this when we know the event of check
-    bodyTag.appendChild(popupDivClone);
+    fillCheckoutPopupBody(popupLayout, checkoutPopupBodyLayout)
+      .then(res => bodyTag.appendChild(res));
   });
+}
+
+function createNoMatchDiv(res) {
+  let popupBodyDiv = document.createElement("div");
+  popupBodyDiv.id = "popup-body-container";
+  let intro = document.createElement("p");
+  intro.innerText = "Sorry! It appears that something has changed since you loaded the page. See below:";
+  popupBodyDiv.appendChild(intro);
+  for(let i = 0; i < res.info.length; i++) {
+    let mismatch = document.createElement("li");
+    mismatch.innerText = "hello " + i;
+    popupBodyDiv.appendChild(mismatch)
+  }
+  let outro = document.createElement("p");
+  outro.innerText = "Please close this popup to use updated information and order."
+  return popupBodyDiv;
 }

@@ -44,6 +44,10 @@
   background-color: rgb(0,204,0,0.55); /* Abon Green but with added transparency*/
 }
 
+li {
+    list-style-position:inside;
+}
+
 @media all and (max-width: 1000px) {
   #checkout-main {
     flex-direction: column;

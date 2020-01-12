@@ -1,4 +1,4 @@
-function basketFill(productDiv, product, basketRowLayout, checkoutButtonLayout, checkoutPopupDiv) {
+function basketFill(productDiv, product, basketRowLayout, popupLayout, checkoutButtonLayout, checkoutPopupBodyLayout) {
   let basketButton = productDiv.querySelector(".add");
   let basketContents = document.getElementById("basket-contents");
   basketButton.addEventListener("click", function () {
@@ -14,7 +14,7 @@ function basketFill(productDiv, product, basketRowLayout, checkoutButtonLayout, 
         headingWiggle.classList.remove("hide");
         let totalAmountContainer = document.getElementById("total-amount-container");
         totalAmountContainer.classList.remove("hide");
-        insertCheckoutButtons(checkoutButtonLayout, checkoutPopupDiv);
+        insertCheckoutButtons(checkoutButtonLayout, popupLayout, checkoutPopupBodyLayout);
       }
       basketRow.id = "basket-row-" + product.id;
       let productIdInput = basketRow.querySelector("input[name='product-id']");
@@ -51,7 +51,7 @@ function reinsertOverallPrice() {
   totalPriceSpan.innerText = priceToString(total);
 }
 
-function insertCheckoutButtons(checkoutButtonLayout, checkoutPopupDiv) {
+function insertCheckoutButtons(checkoutButtonLayout, popupLayout, checkoutPopupBodyLayout) {
   let basket = document.getElementById("basket");
   let basketHeader = document.getElementById("basket-header");
 
@@ -60,8 +60,8 @@ function insertCheckoutButtons(checkoutButtonLayout, checkoutPopupDiv) {
   let checkoutButtonMobile = checkoutButtonLayout.cloneNode(true);
   checkoutButtonMobile.classList.add("mobile-only");
 
-  addCheckoutButtonEventListeners(checkoutButtonDesktop, checkoutPopupDiv);
-  addCheckoutButtonEventListeners(checkoutButtonMobile, checkoutPopupDiv);
+  addCheckoutButtonEventListeners(checkoutButtonDesktop, popupLayout, checkoutPopupBodyLayout);
+  addCheckoutButtonEventListeners(checkoutButtonMobile, popupLayout, checkoutPopupBodyLayout);
 
   basket.appendChild(checkoutButtonMobile);
   basketHeader.appendChild(checkoutButtonDesktop);

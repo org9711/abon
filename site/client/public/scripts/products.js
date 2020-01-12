@@ -15,8 +15,7 @@ function addDynamicContent() {
   let productLayout = getHTML('/products/get_product_layout');
   let checkoutPopupBodyLayout = getHTML('/checkout/get_checkout_popup_layout');
   let checkoutButtonLayout = createCheckoutButton();
-  let checkoutPopupLayout = createCheckoutPopup(popupLayout, checkoutPopupBodyLayout);
-  fillContent(products, productLayout, popupLayout, productDescriptionPopupLayout, basketRowLayout, checkoutButtonLayout, checkoutPopupLayout);
+  fillContent(products, productLayout, popupLayout, productDescriptionPopupLayout, basketRowLayout, checkoutButtonLayout, checkoutPopupBodyLayout);
 }
 
 function priceToString(price) {
@@ -34,7 +33,7 @@ function priceToString(price) {
   return priceString;
 }
 
-function fillContent(products, productLayout, popupLayout, productDescriptionPopupLayout, basketRowLayout, checkoutButtonLayout, checkoutPopupLayout) {
+function fillContent(products, productLayout, popupLayout, productDescriptionPopupLayout, basketRowLayout, checkoutButtonLayout, checkoutPopupBodyLayout) {
   let ul = document.getElementById("products");
 
   Promise.all([products, productLayout]).then((prodRes) => {
@@ -47,8 +46,8 @@ function fillContent(products, productLayout, popupLayout, productDescriptionPop
         });
 
         if(div.querySelector(".add")) {
-          Promise.all([basketRowLayout, checkoutButtonLayout, checkoutPopupLayout]).then((basRes) => {
-            basketFill(div, prodRes[0][i], basRes[0], basRes[1], basRes[2]);
+          Promise.all([basketRowLayout, popupLayout, checkoutButtonLayout, checkoutPopupBodyLayout]).then((basRes) => {
+            basketFill(div, prodRes[0][i], basRes[0], basRes[1], basRes[2], basRes[3]);
           });
         }
       });

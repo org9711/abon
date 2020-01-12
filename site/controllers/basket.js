@@ -3,6 +3,7 @@ let send = require('../lib/send.js');
 let respond = require('../lib/respond.js');
 let database = require('../lib/database.js');
 let preMail = require('../lib/presetMails.js');
+let productLib = require('../lib/products.js')
 
 module.exports = {
   handle: async function(request, response) {
@@ -24,10 +25,7 @@ async function getHandler(request, response) {
 
 async function postHandler(object, request, response) {
   if (request.url.endsWith("/check_basket")) {
-    console.log(object);
-    let statement = "";
-    let list = [];
-    let unitOrder = {hi: "hello"};
-    send.sendObject(unitOrder, response);
+    let result = await productLib.compareOrderWithProductDB(object);
+    send.sendObject(result, response);
   }
 }

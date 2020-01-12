@@ -2,7 +2,7 @@ let sqlite = require("sqlite");
 
 module.exports = {
   getRows: async function(statement, list) {
-    let object
+    let object;
     let db = await sqlite.open("./db.sqlite");
     try { object = await db.all(statement, list); }
     catch(err) { console.log(err); }
