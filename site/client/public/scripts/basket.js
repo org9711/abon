@@ -1,4 +1,4 @@
-function basketFill(productDiv, product, basketRowLayout, popupLayout, checkoutButtonLayout, checkoutPopupBodyLayout) {
+function basketFill(productDiv, product, basketRowLayout, popupLayout) {
   let basketButton = productDiv.querySelector(".add");
   let basketContents = document.getElementById("basket-contents");
   basketButton.addEventListener("click", function () {
@@ -14,7 +14,7 @@ function basketFill(productDiv, product, basketRowLayout, popupLayout, checkoutB
         headingWiggle.classList.remove("hide");
         let totalAmountContainer = document.getElementById("total-amount-container");
         totalAmountContainer.classList.remove("hide");
-        insertCheckoutButtons(checkoutButtonLayout, popupLayout, checkoutPopupBodyLayout);
+        createCheckoutButton().then(res => insertCheckoutButtons(res, popupLayout));
       }
       basketRow.id = "basket-row-" + product.id;
       let productIdInput = basketRow.querySelector("input[name='product-id']");
@@ -51,7 +51,7 @@ function reinsertOverallPrice() {
   totalPriceSpan.innerText = priceToString(total);
 }
 
-function insertCheckoutButtons(checkoutButtonLayout, popupLayout, checkoutPopupBodyLayout) {
+function insertCheckoutButtons(checkoutButtonLayout, popupLayout) {
   let basket = document.getElementById("basket");
   let basketHeader = document.getElementById("basket-header");
 
@@ -60,8 +60,10 @@ function insertCheckoutButtons(checkoutButtonLayout, popupLayout, checkoutPopupB
   let checkoutButtonMobile = checkoutButtonLayout.cloneNode(true);
   checkoutButtonMobile.classList.add("mobile-only");
 
-  addCheckoutButtonEventListeners(checkoutButtonDesktop, popupLayout, checkoutPopupBodyLayout);
-  addCheckoutButtonEventListeners(checkoutButtonMobile, popupLayout, checkoutPopupBodyLayout);
+  getHTML('components/checkout_popup.html').then(res => {
+    addCheckoutButtonEventListener(checkoutButtonDesktop, res, popupLayout);
+    addCheckoutButtonEventListener(checkoutButtonMobile, res, popupLayout);
+  });
 
   basket.appendChild(checkoutButtonMobile);
   basketHeader.appendChild(checkoutButtonDesktop);

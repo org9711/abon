@@ -1,16 +1,31 @@
 let database = require('../lib/database.js');
 
 module.exports = {
-  compareOrderWithProductDB: async function(orders) {
+  compareOrderWithProductDB: async function(order) {
     let result = {};
     let prov = {
       matches: [],
       mismatches: []
     };
+
+    let match = true;
+    if(order.customerDetails) {
+      // verify that the postcode is within distance
+      let distance = 5.6;
+      if(distance > 5) {
+        let distanceMismatch = {
+          difference: "distance",
+          postcode: order.customerDetails.postcode,
+          distance: distance
+        }
+        prov.mismatches.push(distanceMismatch);
+        match = false;
+      }
+    }
+
     let statement = "SELECT id,name,image_name,stock,price FROM products WHERE id=?";
-    for(let i = 0; i < orders.unitOrders.length; i++) {
-      let match = true;
-      let userOrder = orders.unitOrders[i];
+    for(let i = 0; i < order.unitOrders.length; i++) {
+      let userOrder = order.unitOrders[i];
       let product = await database.getRows(statement, userOrder.id);
       product = product[0];
       if(userOrder.quantity > product.stock) {

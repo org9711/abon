@@ -44,6 +44,10 @@
   background-color: rgb(0,204,0,0.55); /* Abon Green but with added transparency*/
 }
 
+#mismatches {
+  margin-bottom: 15px;
+}
+
 li {
     list-style-position:inside;
 }

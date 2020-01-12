@@ -1,6 +1,6 @@
 function displayHeader() {
   let header = document.getElementsByTagName("header")[0];
-  getHTML('/frame/get_header')
+  getHTML('/components/header.html')
     .then(res => header.appendChild(res))
     .then(() => {
       let path = window.location.pathname;
@@ -15,7 +15,7 @@ function displayHeader() {
 
 function displayFooter() {
   let footer = document.getElementsByTagName("footer")[0];
-  getHTML('/frame/get_footer')
+  getHTML('/components/footer.html')
     .then(res => footer.appendChild(res));
 }
 

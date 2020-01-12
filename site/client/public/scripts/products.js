@@ -8,14 +8,12 @@ function start() {
 }
 
 function addDynamicContent() {
-  let popupLayout = getHTML('/frame/get_popup_layout');
+  let popupLayout = getHTML('/components/popup.html');
   let products = getJSON('/products/get_products');
-  let productDescriptionPopupLayout = getHTML('/products/get_product_description_popup_layout');
-  let basketRowLayout = getHTML('/basket/get_basket_row_layout');
-  let productLayout = getHTML('/products/get_product_layout');
-  let checkoutPopupBodyLayout = getHTML('/checkout/get_checkout_popup_layout');
-  let checkoutButtonLayout = createCheckoutButton();
-  fillContent(products, productLayout, popupLayout, productDescriptionPopupLayout, basketRowLayout, checkoutButtonLayout, checkoutPopupBodyLayout);
+  let productDescriptionPopupLayout = getHTML('/components/product_description_popup.html');
+  let basketRowLayout = getHTML('/components/product_basket_row.html');
+  let productLayout = getHTML('/components/product_tab.html');
+  fillContent(products, productLayout, popupLayout, productDescriptionPopupLayout, basketRowLayout);
 }
 
 function priceToString(price) {
@@ -33,7 +31,7 @@ function priceToString(price) {
   return priceString;
 }
 
-function fillContent(products, productLayout, popupLayout, productDescriptionPopupLayout, basketRowLayout, checkoutButtonLayout, checkoutPopupBodyLayout) {
+function fillContent(products, productLayout, popupLayout, productDescriptionPopupLayout, basketRowLayout) {
   let ul = document.getElementById("products");
 
   Promise.all([products, productLayout]).then((prodRes) => {
@@ -46,8 +44,8 @@ function fillContent(products, productLayout, popupLayout, productDescriptionPop
         });
 
         if(div.querySelector(".add")) {
-          Promise.all([basketRowLayout, popupLayout, checkoutButtonLayout, checkoutPopupBodyLayout]).then((basRes) => {
-            basketFill(div, prodRes[0][i], basRes[0], basRes[1], basRes[2], basRes[3]);
+          Promise.all([basketRowLayout, popupLayout]).then((basRes) => {
+            basketFill(div, prodRes[0][i], basRes[0], basRes[1]);
           });
         }
       });

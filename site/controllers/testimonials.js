@@ -15,11 +15,7 @@ module.exports = {
 };
 
 async function getHandler(request, response) {
-  if (request.url.endsWith("/testimonials")) {
-    let path = 'client/public/pages/testimonials.html';
-    send.sendPage(path, request, response);
-  }
-  else if (request.url.endsWith("/get_approved")) {
+  if (request.url.endsWith("/get_approved")) {
     list = [];
     let statement = "SELECT id,name,review,stars FROM testimonials WHERE status=1";
     send.sendObjectFromDB(statement, list, response);
@@ -28,14 +24,6 @@ async function getHandler(request, response) {
     list = [];
     let statement = "SELECT id,name,review,stars,status FROM testimonials";
     send.sendObjectFromDB(statement, list, response);
-  }
-  else if (request.url.endsWith("/get_testimonial_layout")) {
-    let path = 'client/public/components/testimonial_tab.html';
-    send.sendPage(path, request, response);
-  }
-  else if (request.url.endsWith("/get_testimonial_form")) {
-    let path = 'client/public/components/testimonial_form.html';
-    send.sendPage(path, request, response);
   }
 }
 

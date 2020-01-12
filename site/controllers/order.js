@@ -9,18 +9,8 @@ module.exports = {
     if (request.method == 'POST') {
       receive.readBody(postHandler, request, response)
     }
-    else if (request.method  == 'GET') {
-      getHandler(request, response);
-    }
   }
 };
-
-async function getHandler(request, response) {
-  if (request.url.endsWith("/get_checkout_popup_layout")) {
-    let path = 'client/public/components/checkout_popup.html';
-    send.sendPage(path, request, response);
-  }
-}
 
 async function postHandler(object, request, response) {
   if (request.url.endsWith("/submit_order")) {

@@ -17,7 +17,13 @@ module.exports = {
     else if (request.url.endsWith(".html")) {
       let splits = request.url.split('/');
       filename = splits[splits.length-1];
-      let path = 'client/public/pages/' + filename;
+      let path;
+      if(request.url.startsWith("/components")) {
+        path = 'client/public/pages/components/' + filename;
+      }
+      else {
+        let path = 'client/public/pages/' + filename;
+      }
       send.sendPage(path, request, response);
     }
   }

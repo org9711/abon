@@ -16,11 +16,7 @@ module.exports = {
 };
 
 async function getHandler(request, response) {
-  if (request.url.endsWith("/products")) {
-      let path = 'client/public/pages/products.html';
-      send.sendPage(path, request, response);
-  }
-  else if (request.url.endsWith("/get_products")) {
+  if (request.url.endsWith("/get_products")) {
     list = [];
     let statement = "SELECT id,name,price,image_name,description,stock,status FROM products";
     let products = await database.getRows(statement, list);
@@ -30,13 +26,5 @@ async function getHandler(request, response) {
       }
     }
     send.sendObject(products, response);
-  }
-  else if (request.url.endsWith("/get_product_layout")) {
-    let path = 'client/public/components/product_tab.html';
-    send.sendPage(path, request, response);
-  }
-  else if (request.url.endsWith("/get_product_description_popup_layout")) {
-    let path = 'client/public/components/product_description_popup.html';
-    send.sendPage(path, request, response);
   }
 }
