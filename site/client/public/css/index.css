@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.animation-text {
+  margin-bottom: 15px;
+}
+
 @media all and (max-width: 1000px) {
 
 }

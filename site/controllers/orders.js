@@ -3,6 +3,7 @@ let send = require('../lib/send.js');
 let respond = require('../lib/respond.js');
 let database = require('../lib/database.js');
 let preMail = require('../lib/presetMails.js');
+let orders = require('../lib/orders.js');
 
 module.exports = {
   handle: async function(request, response) {
@@ -13,6 +14,11 @@ module.exports = {
 };
 
 async function postHandler(object, request, response) {
+  if (request.url.endsWith("/verify_order")) {
+    let payload = await orders.compareOrderWithDB(object);
+    send.sendObject(payload, response);
+  }
+
   if (request.url.endsWith("/submit_order")) {
     let today = new Date();
     let date = today.getFullYear() + '-' + parseInt((parseInt(today.getMonth())+1)) + '-' + today.getDate();

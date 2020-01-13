@@ -90,6 +90,10 @@ p {
   line-height: 16pt;
 }
 
+p:last-child {
+  margin-bottom: 0px;
+}
+
 .columns div p {
   margin-left: 10px;
 }
@@ -106,6 +110,10 @@ h2 {
 h2 .subtitle {
   font-size: 1.8rem;
   color: rgba(108, 117, 125);
+}
+
+.mandatory-form {
+  color: red;
 }
 
 @media all and (max-width: 1200px) {

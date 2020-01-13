@@ -1,7 +1,7 @@
 function fillCheckoutPopupBody(checkoutPopupBodyLayout) {
   let rowLayout = getHTML('components/checkout_basket_row.html');
   let checkoutPopupBodyDiv = checkoutPopupBodyLayout.cloneNode(true);
-  let basketOverviewDiv = checkoutPopupBodyDiv.querySelector("#basket-overview");
+  let basketOverviewDiv = checkoutPopupBodyDiv.querySelector("#basket-overview-container");
   let basketContents = document.getElementById("basket-contents");
   for(let i = 0; i < basketContents.childNodes.length; i++) {
     let basRowProductIdInput = basketContents.childNodes[i].querySelector(".product-id");
@@ -10,8 +10,12 @@ function fillCheckoutPopupBody(checkoutPopupBodyLayout) {
     let basRowProductQuantityInput = basketContents.childNodes[i].querySelector("input[name='product-quantity']");
     let basRowTotalPriceSpan = basketContents.childNodes[i].querySelector(".product-total-price span");
 
+
     rowLayout.then(res => {
       rowDiv = res.cloneNode(true);
+      let checkRowId = rowDiv.querySelector(".checkout-product-id");
+      checkRowId.innerText = basRowProductIdInput.innerText;
+
       let checkRowImage = rowDiv.querySelector(".checkout-product-image img");
       checkRowImage.src = basRowImageNameInput.innerText;
 
@@ -25,9 +29,14 @@ function fillCheckoutPopupBody(checkoutPopupBodyLayout) {
       checkRowTotalPriceSpan.innerText = basRowTotalPriceSpan.innerText;
 
       basketOverviewDiv.append(rowDiv);
-    })
+    });
   }
-  console.log(checkoutPopupBodyDiv);
+
+  let basketTotalPriceSpan = document.querySelector("#total-amount-container .amount span");
+  let checkoutTotalPriceSpan = checkoutPopupBodyDiv.querySelector("#checkout-total-amount-container span");
+  checkoutTotalPriceSpan.innerText = basketTotalPriceSpan.innerText;
+
+  checkoutPopupBodyDiv = addPayButtonEventListeners(checkoutPopupBodyDiv);
   return checkoutPopupBodyDiv;
 }
 

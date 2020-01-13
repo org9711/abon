@@ -20,13 +20,17 @@ Customers will be able to learn about the company and its products as well as pu
 * Products - Basket - Information button next to "Your Basket" to inform on how to add to basket
 * Products - Basket - Grey out button and information on  why customer can't add more product
 * Products - Basket - Add warning to say no selling outside 5 miles
+* Testimonials - Stars animated
 * Different unicode icons for each product, stored in Database
 
 ## Further Feature Ideas
+* Products - Checkout - Input validation frontend and backend
+* Products - Checkout - Allow users to select ideal delivery time for orders
 * Products - Checkout - Bing Maps API to verify address is within suitable distance before order
+* Products - Checkout - PayPal payments
+* Admin - Products - Upload image to server
 * Admin - Order summary - how many of each product sold
 * Admin - Group close orders / map of where orders are
-* Products - Checkout - PayPal payments
 * Products - Basket - Discounts
 * Products/Testimonials - CAPTCHA forms
 * Accessibility features

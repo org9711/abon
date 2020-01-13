@@ -6,7 +6,7 @@ let security = require('./lib/security.js');
 let filesC = require('./controllers/files.js');
 let picturesC = require('./controllers/pictures.js');
 let productsC = require('./controllers/products.js');
-let orderC = require('./controllers/order.js');
+let ordersC = require('./controllers/orders.js');
 let testimonialsC = require('./controllers/testimonials.js');
 let adminC = require('./controllers/admin.js');
 let loginC = require('./controllers/login.js');
@@ -41,8 +41,8 @@ async function handle(request, response) {
     else if (request.url.startsWith("/products")) {
       productsC.handle(request, response);
     }
-    else if (request.url.startsWith("/order")) {
-      orderC.handle(request, response);
+    else if (request.url.startsWith("/orders")) {
+      ordersC.handle(request, response);
     }
     else if (request.url.startsWith("/testimonials")) {
       testimonialsC.handle(request, response);
