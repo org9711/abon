@@ -16,25 +16,24 @@ module.exports = {
 async function postHandler(object, request, response) {
   if (request.url.endsWith("/initiate_order")) {
     let result = await orders.compareOrderWithDB(object);
-    send.sendObject(result, response);
-  }
+    if(result.success) {
+      let today = new Date();
+      let date = today.getFullYear() + '-' + parseInt((parseInt(today.getMonth())+1)) + '-' + today.getDate();
+      let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      let datetime = date + ' ' + time;
+      let orderList = [datetime, 'pending', 'pending', 'initiated'];
+      let orderStatement = "INSERT INTO orders(time_initiated,distance_check,payment_status,order_status) VALUES(?,?,?,?)";
+      let orderId = await database.insertRow(orderStatement, orderList);
+      for(let i = 0; i < result.prodBreakdown.length; i++) {
+        let unitList = [result.prodBreakdown[i].id, result.prodBreakdown[i].quantity, result.prodBreakdown[i].totalPrice];
+        let unitStatement = "INSERT INTO units(product,quantity,total_price) VALUES(?,?,?)";
+        let unitId = await database.insertRow(unitStatement, unitList);
 
-  if (request.url.endsWith("/submit_order")) {
-    let today = new Date();
-    let date = today.getFullYear() + '-' + parseInt((parseInt(today.getMonth())+1)) + '-' + today.getDate();
-    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let datetime = date + ' ' + time;
-    preMail.customerOrder(object, today);
-    preMail.adminOrder(object, today);
-    let customerList = [object.customerDetails.firstName, object.customerDetails.surname, object.customerDetails.email, object.customerDetails.addr1, object.customerDetails.addr2, object.customerDetails.town, object.customerDetails.county, object.customerDetails.postcode];
-    let customerStatement = "INSERT INTO customers(firstname,surname,email,addressLine1,addressLine2,town,county,postcode) VALUES(?,?,?,?,?,?,?,?)";
-    let customerId = await database.insertRow(customerStatement, customerList);
-    for (let i = 0; i < object.productQuants.length; i++) {
-      let orderList = [customerId, object.productQuants[i].productId, object.productQuants[i].quantity, datetime, 0];
-      let orderStatement = "INSERT INTO orders(customer,product,quantity,datetime,status) VALUES(?,?,?,?,?)";
-      database.insertRow(orderStatement, orderList);
+        let orderUnitList = [orderId, unitId];
+        let orderUnitStatement = "INSERT INTO orderUnits(orderId,unit) VALUES(?,?)";
+        await database.insertRow(orderUnitStatement, orderUnitList);
+      }
     }
-    let path = 'client/public/components/order_submitted.html';
-    send.sendPage(path, request, response);
+    send.sendObject(result, response);
   }
 }

@@ -54,8 +54,8 @@ module.exports = {
           id: product.id,
           name: product.name,
           image_name: product.image_name,
-          quantity: prodBreak[i].quantity,
-          totalPrice: prodBreak[i].totalPrice
+          quantity: parseInt(prodBreak[i].quantity),
+          totalPrice: parseFloat(prodBreak[i].totalPrice)
         };
         matches.push(match);
       }

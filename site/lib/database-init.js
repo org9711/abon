@@ -231,15 +231,15 @@ async function createOrdersTable() {
   let createDbCommand =
     "CREATE TABLE orders(" +
     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-    "customer INTEGER NOT NULL, " +
-    "address INTEGER NOT NULL, " +
+    "customer INTEGER, " +
+    "address INTEGER, " +
     "time_initiated DATETIME NOT NULL, " +
     "time_ordered DATETIME, " +
     "time_acknowledged DATETIME, " +
     "time_prepared DATETIME, " +
     "time_delivered DATETIME, " +
     "distance_check VARCHAR(31) NOT NULL, " +
-    "payment_method VARCHAR(31) NOT NULL, " +
+    "payment_method VARCHAR(31), " +
     "payment_status VARCHAR(31) NOT NULL, " +
     "order_status VARCHAR(31) NOT NULL)";
   let insertRowCommand1 =
