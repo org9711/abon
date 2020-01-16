@@ -24,13 +24,16 @@ Customers will be able to learn about the company and its products as well as pu
 * Different unicode icons for each product, stored in Database
 
 ## Further Feature Ideas
-* Products - Checkout - Input validation frontend and backend
+* Products - All - Input validation frontend and backend
+* Products - Display - Order on display order in database
 * Products - Checkout - Allow users to select ideal delivery time for orders
 * Products - Checkout - Bing Maps API to verify address is within suitable distance before order
 * Products - Checkout - PayPal payments
 * Admin - Products - Upload image to server
-* Admin - Order summary - how many of each product sold
-* Admin - Group close orders / map of where orders are
+* Admin - Products - How many of each product sold
+* Admin - Orders - How long each stage of the process takes
+* Admin - Orders - Common times for orders
+* Admin - Orders - Map of where orders are
 * Products - Basket - Discounts
 * Products/Testimonials - CAPTCHA forms
 * Accessibility features
