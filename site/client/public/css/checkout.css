@@ -113,10 +113,6 @@
   flex: 3;
 }
 
-li {
-    list-style-position:inside;
-}
-
 @media all and (max-width: 1000px) {
   #checkout-main {
     flex-direction: column;

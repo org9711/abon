@@ -14,9 +14,9 @@ module.exports = {
 };
 
 async function postHandler(object, request, response) {
-  if (request.url.endsWith("/verify_order")) {
-    let payload = await orders.compareOrderWithDB(object);
-    send.sendObject(payload, response);
+  if (request.url.endsWith("/initiate_order")) {
+    let result = await orders.compareOrderWithDB(object);
+    send.sendObject(result, response);
   }
 
   if (request.url.endsWith("/submit_order")) {

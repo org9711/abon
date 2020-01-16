@@ -110,7 +110,7 @@ async function createProductsTable() {
     "fusion dish you can get away serving it with pasta or noodles. We " +
     "prefer it with conchiglie, which catches brilliant little puddles of " +
     "sauce.', " +
-    "6, 1, 'On Sale')";
+    "6, 1, 'on_sale')";
   let insertRowCommand2 =
     "INSERT INTO products (name, price, image_name, description, stock, display_position, status) " +
     "VALUES ('Roasted Veg Curry', '2.20', 'veg-curry.jpg', " +
@@ -119,7 +119,7 @@ async function createProductsTable() {
     "other veg that will make you feel as good as it tastes. Pimp yours " +
     "at home with extra chilli if you like it spicy, or just enjoy the " +
     "zing from all the spices, lime and coriander.', " +
-    "12, 2, 'On Sale')";
+    "12, 2, 'on_sale')";
   let insertRowCommand3 =
     "INSERT INTO products (name, price, image_name, description, stock, display_position, status) " +
     "VALUES ('Spicy Noodle Soup', '2.20', 'spicy-noodles.jpg', " +
@@ -133,7 +133,7 @@ async function createProductsTable() {
     "posuere maximus. Nullam volutpat, nisi in pretium facilisis, turpis " +
     "urna iaculis lorem, at commodo nibh nibh ut odio. Vestibulum et mi varius, " +
     "viverra neque vitae, eleifend justo.', " +
-    "0, 3, 'Sold Out')";
+    "0, 3, 'sold_out')";
   let insertRowCommand4 =
     "INSERT INTO products (name, price, image_name, description, stock, display_position, status) " +
     "VALUES ('Aubergine & Tomato Pasta', '2.20', 'tomato-pasta.jpg', " +
@@ -147,7 +147,7 @@ async function createProductsTable() {
     "posuere maximus. Nullam volutpat, nisi in pretium facilisis, turpis " +
     "urna iaculis lorem, at commodo nibh nibh ut odio. Vestibulum et mi varius, " +
     "viverra neque vitae, eleifend justo.', " +
-    "0, 4, 'Coming Soon')";
+    "0, 4, 'coming_soon')";
   try {
     let db = await sqlite.open("./db.sqlite")
     await db.run(createDbCommand);
@@ -176,10 +176,10 @@ async function createCustomersTable() {
     "VALUES ('Jimmy', 'Kebe', 'org.9712@hotmail.co.uk')";
   let insertRowCommand3 =
     "INSERT INTO customers (firstname, surname, email) " +
-    "VALUES ('Andy', 'Kebe', 'org.9713@hotmail.co.uk')";
+    "VALUES ('Andy', 'Griffin', 'org.9713@hotmail.co.uk')";
   let insertRowCommand4 =
     "INSERT INTO customers (firstname, surname, email) " +
-    "VALUES ('Jimmy', 'Kebe', 'org.9714@hotmail.co.uk')";
+    "VALUES ('Peter', 'Capaldi', 'org.9714@hotmail.co.uk')";
   try {
     let db = await sqlite.open("./db.sqlite")
     await db.run(createDbCommand);

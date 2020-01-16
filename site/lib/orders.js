@@ -1,93 +1,74 @@
 let database = require('../lib/database.js');
 
 module.exports = {
-  compareOrderWithDB: async function(order) {
-    let success = true;
+  compareOrderWithDB: async function(payload) {
 
-    let result;
+    let result = {
+      success: false,
+      nameMis: [],
+      stockMis: [],
+      priceMis: []
+    };
+
+    let matches = [];
+
+    let prodBreak = payload.productBreakdown
+
+    let statement = "SELECT id,name,image_name,stock,price FROM products WHERE id=?";
+    let success = true;
+    for(let i = 0; i < prodBreak.length; i++) {
+      let product = await database.getRows(statement, prodBreak[i].id);
+      product = product[0];
+
+      if(prodBreak[i].name != product.name) {
+        let mismatch = {
+          productName: product.name,
+          wrongValue: prodBreak[i].name,
+        };
+        result.nameMis.push(mismatch);
+        success = false;
+      }
+
+      if(prodBreak[i].quantity > product.stock) {
+        let mismatch = {
+          productName: product.name,
+          wrongValue: prodBreak[i].quantity,
+          rightValue: product.stock
+        };
+        result.stockMis.push(mismatch);
+        success = false;
+      }
+
+      if(priceToString(prodBreak[i].totalPrice) != priceToString(prodBreak[i].quantity * product.price)) {
+        let mismatch = {
+          productName: product.name,
+          wrongValue: prodBreak[i].totalPrice,
+          rightValue: prodBreak[i].quantity * product.price
+        };
+        result.priceMis.push(mismatch);
+        success = false;
+      }
+
+      if(success) {
+        let match = {
+          id: product.id,
+          name: product.name,
+          image_name: product.image_name,
+          quantity: prodBreak[i].quantity,
+          totalPrice: prodBreak[i].totalPrice
+        };
+        matches.push(match);
+      }
+    }
 
     if(success) {
       result = {
         success: true,
-        details: order
+        prodBreakdown: matches
       };
     }
-    else {
-      result = {
-        success: false,
-        problems: mismatches
-      };
-    }
-
 
     return result;
-
-
-
-    // let prov = {
-    //   matches: [],
-    //   mismatches: []
-    // };
-    //
-    // let match = true;
-    // if(order.addressDetails) {
-    //   // verify that the postcode is within distance
-    //   let distance = 5.6;
-    //   if(distance > 5) {
-    //     let distanceMismatch = {
-    //       difference: "distance",
-    //       postcode: order.customerDetails.postcode,
-    //       distance: distance
-    //     }
-    //     prov.mismatches.push(distanceMismatch);
-    //     match = false;
-    //   }
-    // }
-    //
-    // let statement = "SELECT id,name,image_name,stock,price FROM products WHERE id=?";
-    // for(let i = 0; i < order.order.orderUnits.length; i++) {
-    //   let unit = order.orderUnits[i];
-    //   let product = await database.getRows(statement, unit.id);
-    //   product = product[0];
-    //   if(unit.quantity > product.stock) {
-    //     let stockMismatch = {
-    //       productName: product.name,
-    //       difference: "stock",
-    //       oldValue: unit.quantity,
-    //       newValue: product.stock
-    //     };
-    //     prov.mismatches.push(stockMismatch);
-    //     match = false;
-    //   }
-    //   if(priceToString(unit.totalPrice) != priceToString(unit.quantity * product.price)) {
-    //     let priceMismatch = {
-    //       productName: product.name,
-    //       difference: "price",
-    //       oldValue: unit.totalPrice,
-    //       newValue: unit.quantity * product.price
-    //     };
-    //     prov.mismatches.push(priceMismatch);
-    //     match = false;
-    //   }
-    //   if(match) {
-    //     let orderInfo = {
-    //       productId: product.id,
-    //       productName: product.name,
-    //       productImageName: product.image_name,
-    //       orderQuantiy: unit.quantity,
-    //       orderPrice: unit.totalPrice
-    //     };
-    //     prov.matches.push(orderInfo);
-    //   }
-    // }
-    // if(prov.mismatches.length > 0) {
-    //   result["match"] = false;
-    //   result["info"] = prov.mismatches;
-    // }
-    // else {
-    //   result["match"] = true;
-    //   result["info"] = prov.matches;
-    // }
   }
 }
 

@@ -112,6 +112,14 @@ h2 .subtitle {
   color: rgba(108, 117, 125);
 }
 
+li {
+  list-style-position:inside;
+}
+
+li:last-child {
+  margin-bottom: 15px;
+}
+
 .mandatory-form {
   color: red;
 }

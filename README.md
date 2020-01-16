@@ -14,6 +14,7 @@ Customers will be able to learn about the company and its products as well as pu
 ## Performance Improvements
 * Add catches for errors in Promises
 * Give backend appropriate Promise functionality
+* Use enum tables rather than strings for statuses
 
 ## UI/UX Improvements
 * Make popups wider for smaller screens

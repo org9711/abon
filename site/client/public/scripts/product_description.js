@@ -12,10 +12,10 @@ function popupProductDescriptionFill(productDiv, product, popupLayout, productDe
   if(productStockNumber == 10) {
     productStockString = "9+ units";
   }
-  if(product.status == 0) {
+  if(product.status == "coming_soon") {
     productStockString = "Coming Soon"
   }
-  if(product.status == 1) {
+  if(product.status == "sold_out") {
     productStockString = "Out of Stock"
   }
   pricePlace.innerText = priceToString(product.price);

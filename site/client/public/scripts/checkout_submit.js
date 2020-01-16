@@ -6,16 +6,16 @@ function addPayButtonEventListeners(checkoutPopupBodyDiv) {
 
   cashButton.addEventListener("click", function () {
     order = extractFromCheckoutForms(checkoutPopupBodyDiv, "cash");
+    let popup = document.getElementById("popup");
+    popup = unassignClosePopupListener(popup);
+    popup = assignClosePopupRefreshListener(popup);
+    let checkoutLeft = popup.querySelector("#checkout-left");
+    let checkoutPaymentButtons = popup.querySelector("#checkout-payment-buttons");
+    checkoutPaymentButtons.parentNode.removeChild(checkoutPaymentButtons);
     postJSON('orders/verify_order', order).then(res => {
-      let popup = document.getElementById("popup");
-      let customerFormsContainer = popup.querySelector("#customer-forms");
-      let checkoutPaymentButtons = popup.querySelector("#checkout-payment-buttons");
-      let checkoutLeft = popup.querySelector("#checkout-left");
       if(res.success == true) {
-        popup = unassignClosePopupListener(popup);
-        popup = assignClosePopupRefreshListener(popup);
+        let customerFormsContainer = popup.querySelector("#customer-forms");
         customerFormsContainer.parentNode.removeChild(customerFormsContainer);
-        checkoutPaymentButtons.parentNode.removeChild(checkoutPaymentButtons);
         getHTML('components/checkout_confirmation.html').then(lay => {
           let paypalPaymentP = lay.querySelector("#checkout-confirmation-paypal-payment");
           paypalPaymentP.parentNode.removeChild(paypalPaymentP);
@@ -25,13 +25,19 @@ function addPayButtonEventListeners(checkoutPopupBodyDiv) {
           let addressP = lay.querySelector("#checkout-confirmation-address");
           addressP.innerHTML = customerDet.firstname + " " + customerDet.surname + "<br />" + deliveryDet.addr1 + "<br />" + deliveryDet.addr2 + "<br />" + deliveryDet.town + "<br />" + deliveryDet.county + "<br />" + deliveryDet.postcode;
           let emailSpan = lay.querySelector("span#checkout-confirmation-email");
-          console.log(lay);
           emailSpan.innerText = customerDet.email;
           checkoutLeft.appendChild(lay);
         });
       }
       else {
-        console.log("no");
+        getHTML('components/checkout_fail.html').then(lay => {
+          let basketOverview = popup.querySelector("#basket-overview");
+          basketOverview.parentNode.removeChild(basketOverview);
+          checkoutLeft.parentNode.removeChild(checkoutLeft);
+          let checkoutMainBody = popup.querySelector("#checkout-main");
+          checkoutMainBody.appendChild(lay);
+
+        });
       }
     });
   });

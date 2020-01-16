@@ -7,14 +7,14 @@ function displayProducts(product, productLayout) {
 
     let basketButton = productDiv.querySelector(".add");
 
-    if (product.status == 2) {
+    if (product.status == "on_sale") {
       nameTag.textContent = product.name;
     }
-    else if (product.status == 1) {
+    else if (product.status == "sold_out") {
       nameTag.textContent = "Sold Out"
       basketButton.parentNode.removeChild(basketButton);
     }
-    else if (product.status == 0) {
+    else if (product.status == "coming_soon") {
       nameTag.textContent = "Coming Soon"
       basketButton.parentNode.removeChild(basketButton);
     }
