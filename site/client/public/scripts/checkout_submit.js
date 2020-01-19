@@ -10,21 +10,24 @@ function addPayButtonEventListeners(checkoutPopupBodyDiv) {
     popup = unassignClosePopupListener(popup);
     popup = assignClosePopupRefreshListener(popup);
     let checkoutLeft = popup.querySelector("#checkout-left");
-    console.log(popup);
     let checkoutPaymentButtons = popup.querySelector("#checkout-payment-buttons");
     checkoutPaymentButtons.parentNode.removeChild(checkoutPaymentButtons);
     postJSON('orders/verify_customer', order).then(res => {
-      if(res.success == true) {
+      if(res.success) {
         let customerFormsContainer = popup.querySelector("#customer-forms");
         customerFormsContainer.parentNode.removeChild(customerFormsContainer);
         getHTML('components/checkout_confirmation.html').then(lay => {
           let paypalPaymentP = lay.querySelector("#checkout-confirmation-paypal-payment");
           paypalPaymentP.parentNode.removeChild(paypalPaymentP);
-          console.log(res);
           let customerDet = res.details.customer.customerDetails;
           let deliveryDet = res.details.customer.deliveryDetails;
+          let delList = addressToString(deliveryDet);
           let addressP = lay.querySelector("#checkout-confirmation-address");
-          addressP.innerHTML = customerDet.firstname + " " + customerDet.surname + "<br />" + deliveryDet.addr1 + "<br />" + deliveryDet.addr2 + "<br />" + deliveryDet.town + "<br />" + deliveryDet.county + "<br />" + deliveryDet.postcode;
+          addressP.innerHTML += customerDet.firstname + " " + customerDet.surname;
+          for(let i = 0; i < delList.length; i++) {
+            addressP.innerHTML += "<br />";
+            addressP.innerHTML += delList[i];
+          }
           let emailSpan = lay.querySelector("span#checkout-confirmation-email");
           emailSpan.innerText = customerDet.email;
           checkoutLeft.appendChild(lay);
@@ -45,7 +48,7 @@ function addPayButtonEventListeners(checkoutPopupBodyDiv) {
   paypalButton.addEventListener("click", function () {
     order = extractFromCheckoutForms(checkoutPopupBodyDiv, "paypal");
     postJSON('orders/verify_order', order).then(res => {
-      if(res.match == true) {
+      if(res.success) {
         console.loh("not yet");
       }
       else {
@@ -88,7 +91,19 @@ function extractFromCheckoutForms(checkoutPopupBodyDiv, payment) {
     }
   };
 
-  console.log(payload);
-
   return payload;
+}
+
+function addressToList(delDet) {
+
+}
+
+function addressToString(delDetails) {
+  let delList = [];
+  for(let i = 0; i < Object.keys(delDetails).length; i++) {
+    if(delDetails[Object.keys(delDetails)[i]] != "") {
+      delList.push(delDetails[Object.keys(delDetails)[i]])
+    }
+  }
+  return delList;
 }

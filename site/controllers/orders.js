@@ -3,6 +3,7 @@ let send = require('../lib/send.js');
 let respond = require('../lib/respond.js');
 let database = require('../lib/database.js');
 let preMail = require('../lib/presetMails.js');
+let distance = require('../lib/distance.js');
 let orders = require('../lib/orders.js');
 
 module.exports = {
@@ -42,6 +43,27 @@ async function postHandler(object, request, response) {
     }
     send.sendObject(result, response);
   }
+
+  if (request.url.endsWith("/verify_customer")) {
+    let delStr = addressToString(object.customer.deliveryDetails);
+    let baseAddress = "Broad+Weir+Bristol+BS1+3XB";
+    distance.checkAddressDistance(baseAddress, delStr).then(res => {
+      let result;
+      if(res < 5.1) {
+        result = {
+          success: true,
+          details: object
+        };
+      }
+      else {
+        result = {
+          success: false,
+          details: object
+        }
+      }
+      return result;
+    }).then(res => send.sendObject(res, response));
+  }
 }
 
 async function changeProductStatus(id) {
@@ -59,4 +81,17 @@ function timeUnitToString(time) {
     timeString = '0' + timeString;
   }
   return timeString;
+}
+
+function addressToString(delDetails) {
+  let delString = "";
+  for(let i = 0; i < Object.keys(delDetails).length; i++) {
+    if(delDetails[Object.keys(delDetails)[i]] != "") {
+      if(i != 0) {
+        delString += "+"
+      }
+      delString += delDetails[Object.keys(delDetails)[i]].replace(/ /g, "+");
+    }
+  }
+  return delString;
 }
