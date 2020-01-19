@@ -17,7 +17,8 @@ Customers will be able to learn about the company and its products as well as pu
 
 * Bulk SQL statements rather than for loops in js
 * Use enum tables rather than strings for statuses
-* Microservices
+* Use const keyword when possible instead of let
+* Microservices#
 
 ## UI/UX Improvements
 * Testimonials - Stars animated
@@ -37,7 +38,9 @@ Customers will be able to learn about the company and its products as well as pu
 * Admin - Orders - Consider splitting/filtering/sorting
 * Admin - Orders - How long each stage of the process takes
 * Admin - Orders - Map of where orders are
+* Products - Checkout - Remove all database changes when user closes popup or page
 
+* Products - Checkout - Use cookies to store order id
 * Admin - Products - Upload image to server
 * Products - Checkout - Allow users to select ideal delivery time for orders
 * Admin - Orders - Common times for orders

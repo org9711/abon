@@ -61,9 +61,11 @@ async function handle(request, response) {
 }
 
 async function scheduler() {
-  var minutes = 3, interval = minutes * 60 * 1000;
+  let removalMinutes = 5;
+  let schedulerMinutes = 1
+  let interval = schedulerMinutes * 60 * 1000;
   setInterval(function() {
-  console.log("I am doing my 1 minute check");
-  ordersL.removeOldInitiatedOrders(3);
+    console.log("Routine (every " + schedulerMinutes + " minutes) removal call");
+    ordersL.removeOldInitiatedOrders(removalMinutes);
   }, interval);
 }

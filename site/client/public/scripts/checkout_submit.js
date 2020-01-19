@@ -10,9 +10,10 @@ function addPayButtonEventListeners(checkoutPopupBodyDiv) {
     popup = unassignClosePopupListener(popup);
     popup = assignClosePopupRefreshListener(popup);
     let checkoutLeft = popup.querySelector("#checkout-left");
+    console.log(popup);
     let checkoutPaymentButtons = popup.querySelector("#checkout-payment-buttons");
     checkoutPaymentButtons.parentNode.removeChild(checkoutPaymentButtons);
-    postJSON('orders/verify_order', order).then(res => {
+    postJSON('orders/verify_customer', order).then(res => {
       if(res.success == true) {
         let customerFormsContainer = popup.querySelector("#customer-forms");
         customerFormsContainer.parentNode.removeChild(customerFormsContainer);
@@ -36,7 +37,6 @@ function addPayButtonEventListeners(checkoutPopupBodyDiv) {
           checkoutLeft.parentNode.removeChild(checkoutLeft);
           let checkoutMainBody = popup.querySelector("#checkout-main");
           checkoutMainBody.appendChild(lay);
-
         });
       }
     });
@@ -84,26 +84,9 @@ function extractFromCheckoutForms(checkoutPopupBodyDiv, payment) {
       }
     },
     order: {
-      orderDetails: {
-        paymentMethod: payment,
-        totalPrice: parseFloat(totalPriceDiv.innerText)
-      },
-      productBreakdown: []
+      paymentMethod: payment,
     }
   };
-
-  let basketOverview = checkoutPopupBodyDiv.querySelector("#basket-overview-container");
-  for(let i = 0; i < basketOverview.childNodes.length; i++) {
-    let idDiv = basketOverview.childNodes[i].querySelector(".checkout-product-id");
-    let quantDiv = basketOverview.childNodes[i].querySelector(".checkout-product-quantity span");
-    let priceSpan = basketOverview.childNodes[i].querySelector(".checkout-product-total-price span");
-    let unit = {
-      productId: parseInt(idDiv.innerText),
-      quantity: parseInt(quantDiv.innerText),
-      totalPrice: parseFloat(priceSpan.innerText)
-    };
-    payload.order.productBreakdown.push(unit);
-  }
 
   console.log(payload);
 

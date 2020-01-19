@@ -72,8 +72,6 @@ function addCheckoutButtonEventListener(checkoutButton, checkoutPopupBodyLayout,
         popupDiv = createCheckoutPopup(popupLayout, popupBodyContents);
         popupDiv = assignClosePopupListener(popupDiv);
         bodyTag.appendChild(popupDiv);
-        // ensure that if user closes popup or leaves web page then database items are deleted
-        // or delete all items that have had status 'initiated' for more than five minutes
       }
       else {
         getHTML('components/initiate_fail.html').then(failPopupLayout => {
