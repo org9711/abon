@@ -1,6 +1,7 @@
 let HTTP = require('http');
 let fs = require('fs');
 let OK = 200, Unauthorized = 401, NotFound = 404, BadType = 415;
+let databaseInit = require('./lib/database-init.js');
 let respond = require('./lib/respond.js');
 let security = require('./lib/security.js');
 let filesC = require('./controllers/files.js');
@@ -18,6 +19,7 @@ function start(port) {
   try { service.listen(port, 'localhost'); }
   catch (err) { throw err; }
   console.log("Visit localhost:" + port);
+  databaseInit.resetDatabase();
 }
 
 // Deal with a request.

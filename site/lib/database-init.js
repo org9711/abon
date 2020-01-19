@@ -1,18 +1,18 @@
 let sqlite = require("sqlite");
 let bcrypt = require("bcryptjs");
 
-start();
-
-async function start() {
-  await removeAllTables();
-  await createTestimonialsTable();
-  await createProductsTable();
-  await createCustomersTable();
-  await createAddressTable();
-  await createUnitsTable();
-  await createOrdersTable();
-  await createOrderUnitsTable();
-  await createUsersTable();
+module.exports = {
+  resetDatabase: async function() {
+    await removeAllTables();
+    await createTestimonialsTable();
+    await createProductsTable();
+    await createCustomersTable();
+    await createAddressTable();
+    await createUnitsTable();
+    await createOrdersTable();
+    await createOrderUnitsTable();
+    await createUsersTable();
+  }
 }
 
 async function removeAllTables() {
