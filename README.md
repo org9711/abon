@@ -15,20 +15,22 @@ Customers will be able to learn about the company and its products as well as pu
 * Add catches for errors in Promises
 * Give backend appropriate Promise functionality
 
+* Bulk SQL statements rather than for loops in js
 * Use enum tables rather than strings for statuses
 * Microservices
 
 ## UI/UX Improvements
 * Testimonials - Stars animated
 
+* Products - Checkout - Add timer to warn how long customer has left to order
 * Products - Basket - Information button next to "Your Basket" to inform on how to add to basket
 * Products - Basket - Grey out button and information on  why customer can't add more product
 * Products - Basket - Add warning to say no selling outside 5 miles
-* Different unicode icons for each product, stored in Database
+* Products - Basket - Different unicode icons for each product, stored in Database
 
 ## Further Feature Ideas
 * Products - All - Input validation frontend and backend
-* Products - Display - Order on display order in database
+* Products - Display - Order on status then display order in database
 * Products - Checkout - Bing Maps API to verify address is within suitable distance before order
 * Products - Checkout - PayPal payments
 * Admin - Products - How many of each product sold

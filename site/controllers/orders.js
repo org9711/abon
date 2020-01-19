@@ -18,11 +18,11 @@ async function postHandler(object, request, response) {
     let result = await orders.compareOrderWithDB(object);
     if(result.success) {
       let today = new Date();
-      let date = today.getFullYear() + '-' + parseInt((parseInt(today.getMonth())+1)) + '-' + today.getDate();
-      let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      let date = today.getFullYear() + '-' + timeUnitToString(parseInt((parseInt(today.getMonth())+1))) + '-' + timeUnitToString(today.getDate());
+      let time = timeUnitToString(today.getHours()) + ":" + timeUnitToString(today.getMinutes()) + ":" + timeUnitToString(today.getSeconds());
       let datetime = date + ' ' + time;
       let orderList = [datetime, 'pending', 'pending', 'initiated'];
-      let orderStatement = "INSERT INTO orders(time_initiated,distance_check,payment_status,order_status) VALUES(?,?,?,?)";
+      let orderStatement = "INSERT INTO orders(time_initiated,distance_check,payment_status,status) VALUES(?,?,?,?)";
       let orderId = await database.insertRow(orderStatement, orderList);
       for(let i = 0; i < result.prodBreakdown.length; i++) {
         let unitList = [result.prodBreakdown[i].id, result.prodBreakdown[i].quantity, result.prodBreakdown[i].totalPrice];
@@ -30,10 +30,33 @@ async function postHandler(object, request, response) {
         let unitId = await database.insertRow(unitStatement, unitList);
 
         let orderUnitList = [orderId, unitId];
-        let orderUnitStatement = "INSERT INTO orderUnits(orderId,unit) VALUES(?,?)";
+        let orderUnitStatement = "INSERT INTO orderUnits(orderId,unitId) VALUES(?,?)";
         await database.insertRow(orderUnitStatement, orderUnitList);
+
+        let stockUpdateList = [result.prodBreakdown[i].quantity, result.prodBreakdown[i].id];
+        let stockUpdateStatement = "UPDATE products SET stock=(stock-?) WHERE id=?";
+        await database.updateRow(stockUpdateStatement, stockUpdateList);
+
+        changeProductStatus(result.prodBreakdown[i].id);
       }
     }
     send.sendObject(result, response);
   }
+}
+
+async function changeProductStatus(id) {
+  let productStockCheckStatement = "SELECT stock FROM products WHERE id=?";
+  let stockObj = await database.getRows(productStockCheckStatement, id);
+  if(stockObj[0].stock == 0) {
+    let productStatusUpdateStatement = "UPDATE products SET status='sold_out' WHERE id=?";
+    await database.updateRow(productStatusUpdateStatement, id);
+  }
+}
+
+function timeUnitToString(time) {
+  timeString = time.toString();
+  if(timeString.length == 1) {
+    timeString = '0' + timeString;
+  }
+  return timeString;
 }

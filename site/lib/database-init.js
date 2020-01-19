@@ -241,19 +241,19 @@ async function createOrdersTable() {
     "distance_check VARCHAR(31) NOT NULL, " +
     "payment_method VARCHAR(31), " +
     "payment_status VARCHAR(31) NOT NULL, " +
-    "order_status VARCHAR(31) NOT NULL)";
+    "status VARCHAR(31) NOT NULL)";
   let insertRowCommand1 =
-    "INSERT INTO orders (customer, address, time_initiated, time_ordered, time_acknowledged, time_prepared, time_delivered, distance_check, payment_method, payment_status, order_status)" +
-    "VALUES (1, 1, '2019-12-20 17:5:30', '2019-12-20 17:7:22', '2019-12-20 19:29:48', '2019-12-21 14:34:16', '2019-12-22 11:56:35', 'pass', 'cash', 'paid', 'delivered')";
+    "INSERT INTO orders (customer, address, time_initiated, time_ordered, time_acknowledged, time_prepared, time_delivered, distance_check, payment_method, payment_status, status)" +
+    "VALUES (1, 1, '2019-12-20 17:05:30', '2019-12-20 17:07:22', '2019-12-20 19:29:48', '2019-12-21 14:34:16', '2019-12-22 11:56:35', 'pass', 'cash', 'paid', 'delivered')";
     let insertRowCommand2 =
-    "INSERT INTO orders (customer, address, time_initiated, time_ordered, time_acknowledged, time_prepared, distance_check, payment_method, payment_status, order_status)" +
-    "VALUES (2, 2, '2020-01-03 12:24:27', '2020-01-03 12:26:48', '2020-01-04 10:22:28', '2020-01-04 15:51:8', 'pass', 'cash', 'pending', 'prepared')";
+    "INSERT INTO orders (customer, address, time_initiated, time_ordered, time_acknowledged, time_prepared, distance_check, payment_method, payment_status, status)" +
+    "VALUES (2, 2, '2020-01-03 12:24:27', '2020-01-03 12:26:48', '2020-01-04 10:22:28', '2020-01-04 15:51:08', 'pass', 'cash', 'pending', 'prepared')";
     let insertRowCommand3 =
-    "INSERT INTO orders (customer, address, time_initiated, time_ordered, time_acknowledged, distance_check, payment_method, payment_status, order_status)" +
+    "INSERT INTO orders (customer, address, time_initiated, time_ordered, time_acknowledged, distance_check, payment_method, payment_status, status)" +
     "VALUES (3, 3, '2020-01-05 20:45:21', '2020-01-05 20:49:22', '2020-01-07 21:49:48', 'pass', 'paypal', 'paid', 'acknowledged')";
   let insertRowCommand4 =
-    "INSERT INTO orders (customer, address, time_initiated, time_ordered, distance_check, payment_method, payment_status, order_status)" +
-    "VALUES (4, 4, '2020-01-11 9:11:12', '2020-01-11 10:2:56', 'pass', 'cash', 'pending', 'ordered')";
+    "INSERT INTO orders (customer, address, time_initiated, time_ordered, distance_check, payment_method, payment_status, status)" +
+    "VALUES (4, 4, '2020-01-11 09:11:12', '2020-01-11 10:02:56', 'pass', 'cash', 'pending', 'ordered')";
   try {
     let db = await sqlite.open("./db.sqlite");
     await db.run(createDbCommand);
@@ -320,30 +320,30 @@ async function createOrderUnitsTable() {
     "CREATE TABLE orderUnits(" +
     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
     "orderId INTEGER NOT NULL, " +
-    "unit INTEGER NOT NULL)";
+    "unitId INTEGER NOT NULL)";
   let insertRowCommand1 =
-    "INSERT INTO orderUnits (orderId, unit)" +
+    "INSERT INTO orderUnits (orderId, unitId)" +
     "VALUES (1, 1)";
   let insertRowCommand2 =
-    "INSERT INTO orderUnits (orderId, unit)" +
+    "INSERT INTO orderUnits (orderId, unitId)" +
     "VALUES (1, 2)";
   let insertRowCommand3 =
-    "INSERT INTO orderUnits (orderId, unit)" +
+    "INSERT INTO orderUnits (orderId, unitId)" +
     "VALUES (1, 3)";
   let insertRowCommand4 =
-    "INSERT INTO orderUnits (orderId, unit)" +
+    "INSERT INTO orderUnits (orderId, unitId)" +
     "VALUES (2, 4)";
   let insertRowCommand5 =
-    "INSERT INTO orderUnits (orderId, unit)" +
+    "INSERT INTO orderUnits (orderId, unitId)" +
     "VALUES (2, 5)";
   let insertRowCommand6 =
-    "INSERT INTO orderUnits (orderId, unit)" +
+    "INSERT INTO orderUnits (orderId, unitId)" +
     "VALUES (3, 6)";
   let insertRowCommand7 =
-    "INSERT INTO orderUnits (orderId, unit)" +
+    "INSERT INTO orderUnits (orderId, unitId)" +
     "VALUES (3, 7)";
   let insertRowCommand8 =
-    "INSERT INTO orderUnits (orderId, unit)" +
+    "INSERT INTO orderUnits (orderId, unitId)" +
     "VALUES (4, 8)";
   try {
     let db = await sqlite.open("./db.sqlite");

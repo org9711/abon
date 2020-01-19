@@ -6,6 +6,7 @@ module.exports = {
     let db = await sqlite.open("./db.sqlite");
     try { object = await db.all(statement, list); }
     catch(err) { console.log(err); }
+    db.close();
     return object;
   },
 
@@ -13,7 +14,26 @@ module.exports = {
     let db = await sqlite.open("./db.sqlite");
     try { await db.run(statement, list); }
     catch(err) { console.log(err); }
-    return getLastInsertRowId(db);
+    let id = getLastInsertRowId(db)
+    db.close();
+    return id;
+  },
+
+  updateRow: async function(statement, list) {
+    let object;
+    let db = await sqlite.open("./db.sqlite");
+    try { object = await db.run(statement, list); }
+    catch(err) { console.log(err); }
+    db.close();
+    return object;
+  },
+
+  deleteRows: async function(statement) {
+    let db = await sqlite.open("./db.sqlite");
+    try { await db.run(statement, []); }
+    catch(err) { console.log(err); }
+    db.close();
+    return 1;
   }
 };
 

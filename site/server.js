@@ -4,6 +4,7 @@ let OK = 200, Unauthorized = 401, NotFound = 404, BadType = 415;
 let databaseInit = require('./lib/database-init.js');
 let respond = require('./lib/respond.js');
 let security = require('./lib/security.js');
+let ordersL = require('./lib/orders.js');
 let filesC = require('./controllers/files.js');
 let picturesC = require('./controllers/pictures.js');
 let productsC = require('./controllers/products.js');
@@ -20,6 +21,7 @@ function start(port) {
   catch (err) { throw err; }
   console.log("Visit localhost:" + port);
   databaseInit.resetDatabase();
+  scheduler();
 }
 
 // Deal with a request.
@@ -56,4 +58,12 @@ async function handle(request, response) {
       return respond.fail(response, NotFound, "Request URL not valid.");
     }
   }
+}
+
+async function scheduler() {
+  var minutes = 3, interval = minutes * 60 * 1000;
+  setInterval(function() {
+  console.log("I am doing my 1 minute check");
+  ordersL.removeOldInitiatedOrders(3);
+  }, interval);
 }

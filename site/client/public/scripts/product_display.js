@@ -12,10 +12,12 @@ function displayProducts(product, productLayout) {
     }
     else if (product.status == "sold_out") {
       nameTag.textContent = "Sold Out"
+      productDiv.classList.add("na");
       basketButton.parentNode.removeChild(basketButton);
     }
     else if (product.status == "coming_soon") {
-      nameTag.textContent = "Coming Soon"
+      nameTag.textContent = "Coming Soon";
+      productDiv.classList.add("na");
       basketButton.parentNode.removeChild(basketButton);
     }
 

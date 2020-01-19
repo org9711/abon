@@ -55,6 +55,7 @@ module.exports = {
           name: product.name,
           image_name: product.image_name,
           quantity: parseInt(prodBreak[i].quantity),
+          stock: product.stock,
           totalPrice: parseFloat(prodBreak[i].totalPrice)
         };
         matches.push(match);
@@ -69,6 +70,49 @@ module.exports = {
     }
 
     return result;
+  },
+
+  removeOldInitiatedOrders: async function(minutes) {
+    let orderList = [minutes];
+    let orderStatement =
+      "SELECT id FROM orders WHERE " +
+      "status = 'initiated' AND " +
+      "(julianday(datetime('now'))-julianday(datetime(time_initiated)))" +
+      " * 24 * 60 > ?";
+    let orderIds = await database.getRows(orderStatement, orderList);
+
+    orderDeleteList = [];
+    unitDeleteList = [];
+    orderUnitsDeleteList = [];
+    for(let i = 0; i < orderIds.length; i++) {
+      orderDeleteList.push(orderIds[i].id)
+      let orderUnitsList = [orderIds[i].id]
+      let orderUnitsStatement =
+        "SELECT id,unitId FROM orderUnits WHERE orderId=?";
+      let unitIds = await database.getRows(orderUnitsStatement, orderUnitsList);
+      for(let j = 0; j < unitIds.length; j++) {
+        unitDeleteList.push(unitIds[j].unitId);
+        orderUnitsDeleteList.push(unitIds[j].id);
+        let unitList = [unitIds[j].unitId];
+        let unitStatement = "SELECT product,quantity FROM units WHERE id=?";
+        let unit = await database.getRows(unitStatement, unitList);
+
+        let updateStockList = [unit[0].quantity, unit[0].product];
+        let updateStockStatement = "UPDATE products SET stock=(stock+?) WHERE id=?";
+        await database.updateRow(updateStockStatement, updateStockList);
+      }
+    }
+
+    if(orderDeleteList.length > 0) {
+      let orderDeleteStatement = "DELETE FROM orders WHERE id IN (" + orderDeleteList.join(",") + ")";
+      await database.deleteRows(orderDeleteStatement);
+
+      let unitDeleteStatement = "DELETE FROM units WHERE id IN (" + unitDeleteList.join(",") + ")";
+      await database.deleteRows(unitDeleteStatement);
+
+      let orderUnitsDeleteStatement = "DELETE FROM orderUnits WHERE id IN (" + orderUnitsDeleteList.join(",") + ")";
+      await database.deleteRows(orderUnitsDeleteStatement);
+    }
   }
 }
 
