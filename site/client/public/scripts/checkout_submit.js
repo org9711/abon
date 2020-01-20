@@ -9,37 +9,46 @@ function addPayButtonEventListeners(checkoutPopupBodyDiv) {
     let popup = document.getElementById("popup");
     popup = unassignClosePopupListener(popup);
     popup = assignClosePopupRefreshListener(popup);
-    let checkoutLeft = popup.querySelector("#checkout-left");
-    let checkoutPaymentButtons = popup.querySelector("#checkout-payment-buttons");
-    checkoutPaymentButtons.parentNode.removeChild(checkoutPaymentButtons);
     postJSON('orders/verify_customer', order).then(res => {
+      let deliveryDet = res.details.customer.deliveryDetails;
+      let delList = addressToString(deliveryDet);
+      let customerDet = res.details.customer.customerDetails;
       if(res.success) {
+        let checkoutLeft = popup.querySelector("#checkout-left");
+        let checkoutPaymentButtons = popup.querySelector("#checkout-payment-buttons");
+        checkoutPaymentButtons.parentNode.removeChild(checkoutPaymentButtons);
         let customerFormsContainer = popup.querySelector("#customer-forms");
         customerFormsContainer.parentNode.removeChild(customerFormsContainer);
         getHTML('components/checkout_confirmation.html').then(lay => {
-          let paypalPaymentP = lay.querySelector("#checkout-confirmation-paypal-payment");
+          let confirmationDiv = lay.cloneNode(true);
+          let paypalPaymentP = confirmationDiv.querySelector("#checkout-confirmation-paypal-payment");
           paypalPaymentP.parentNode.removeChild(paypalPaymentP);
-          let customerDet = res.details.customer.customerDetails;
-          let deliveryDet = res.details.customer.deliveryDetails;
-          let delList = addressToString(deliveryDet);
-          let addressP = lay.querySelector("#checkout-confirmation-address");
+          let addressP = confirmationDiv.querySelector("#checkout-confirmation-address");
           addressP.innerHTML += customerDet.firstname + " " + customerDet.surname;
           for(let i = 0; i < delList.length; i++) {
             addressP.innerHTML += "<br />";
             addressP.innerHTML += delList[i];
           }
-          let emailSpan = lay.querySelector("span#checkout-confirmation-email");
+          let emailSpan = confirmationDiv.querySelector("span#checkout-confirmation-email");
           emailSpan.innerText = customerDet.email;
-          checkoutLeft.appendChild(lay);
+          checkoutLeft.appendChild(confirmationDiv);
         });
       }
       else {
-        getHTML('components/checkout_fail.html').then(lay => {
-          let basketOverview = popup.querySelector("#basket-overview");
-          basketOverview.parentNode.removeChild(basketOverview);
-          checkoutLeft.parentNode.removeChild(checkoutLeft);
-          let checkoutMainBody = popup.querySelector("#checkout-main");
-          checkoutMainBody.appendChild(lay);
+        getHTML('components/delivery_fail.html').then(lay => {
+          let popupBody = popup.querySelector("#popup-body");
+          let popupBodyDivOld = popup.querySelector("#popup-body-container");
+          popupBodyDivOld.parentNode.removeChild(popupBodyDivOld);
+          let popupBodyDiv = lay.cloneNode(true);
+          let addressP = popupBodyDiv.querySelector("#delivery-fail-address");
+          addressP.innerHTML += customerDet.firstname + " " + customerDet.surname;
+          for(let i = 0; i < delList.length; i++) {
+            addressP.innerHTML += "<br />";
+            addressP.innerHTML += delList[i];
+          }
+          let milesSpan = popupBodyDiv.querySelector("#miles-from-base");
+          milesSpan.innerText = priceToString(res.distance);
+          popupBody.appendChild(popupBodyDiv);
         });
       }
     });

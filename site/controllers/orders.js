@@ -45,19 +45,23 @@ async function postHandler(object, request, response) {
   }
 
   if (request.url.endsWith("/verify_customer")) {
+    let maxDistanceMiles = 5.1;
     let delStr = addressToString(object.customer.deliveryDetails);
     let baseAddress = "Broad+Weir+Bristol+BS1+3XB";
     distance.checkAddressDistance(baseAddress, delStr).then(res => {
       let result;
-      if(res < 5.1) {
+      if(res < maxDistanceMiles) {
         result = {
           success: true,
           details: object
         };
+
+
       }
       else {
         result = {
           success: false,
+          distance: res,
           details: object
         }
       }
