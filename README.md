@@ -42,8 +42,9 @@ Customers will be able to learn about the company and its products as well as pu
 * Admin - Orders - Consider splitting/filtering/sorting
 * Admin - Orders - How long each stage of the process takes
 * Admin - Orders - Map of where orders are
-* Products - Checkout - Remove all database changes when user closes popup or page
 
+* Validation to allow users to change their form answers
+* Products - Checkout - Remove all database changes when user closes popup or page
 * Admin - Orders - Ability to change order contents
 * Admin - Products - Upload image to server
 * Products - Checkout - Allow users to select ideal delivery time for orders

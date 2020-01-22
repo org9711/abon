@@ -95,11 +95,12 @@ async function postHandler(object, request, response) {
     let time = timeUnitToString(today.getHours()) + ":" + timeUnitToString(today.getMinutes()) + ":" + timeUnitToString(today.getSeconds());
     let datetime = date + ' ' + time;
     let orderId = token.evaluateJWT(request.headers.cookie, 'orderId')
-      .then(res => res.orderId)
+      .then(res => res.token)
       .then(res => {
         let orderUpdateList = [datetime, 'ordered', res];
-          let orderUpdateStatement = "UPDATE orders SET time_ordered=?, status=? WHERE id=?";
+        let orderUpdateStatement = "UPDATE orders SET time_ordered=?, status=? WHERE id=?";
         database.updateRow(orderUpdateStatement, orderUpdateList);
+        send.sendObject({success: true}, response);
       })
       .catch(err => console.error(err));
   }

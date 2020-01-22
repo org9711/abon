@@ -7,21 +7,12 @@ module.exports = {
 
     return jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
-        return err;
+        throw err;
       }
       else {
         return decoded;
       }
     });
-
-
-    return jwt.verify(token, config.secret)
-      .then(decoded => {
-        return decoded;
-      })
-      .catch(err => {
-        return err;
-      });
   },
 
   signJWT: async function(tok, exp) {

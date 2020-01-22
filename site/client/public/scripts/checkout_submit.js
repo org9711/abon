@@ -14,11 +14,13 @@ function addPayButtonEventListeners(checkoutPopupBodyDiv) {
       let delList = addressToString(deliveryDet);
       let customerDet = res.details.customer.customerDetails;
       if(res.success) {
+        let object = { success: true };
         let checkoutLeft = popup.querySelector("#checkout-left");
         let checkoutPaymentButtons = popup.querySelector("#checkout-payment-buttons");
-        checkoutPaymentButtons.parentNode.removeChild(checkoutPaymentButtons);
         let customerFormsContainer = popup.querySelector("#customer-forms");
+        checkoutPaymentButtons.parentNode.removeChild(checkoutPaymentButtons);
         customerFormsContainer.parentNode.removeChild(customerFormsContainer);
+        postJSON('orders/order_confirmed', object);
         getHTML('components/checkout_confirmation.html').then(lay => {
           let confirmationDiv = lay.cloneNode(true);
           let paypalPaymentP = confirmationDiv.querySelector("#checkout-confirmation-paypal-payment");
