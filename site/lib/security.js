@@ -26,10 +26,11 @@ module.exports = {
       passwordSuccess = await bcrypt.compare(userpass.password, userPass[0].password);
     }
     if (usernameSuccess && passwordSuccess) {
-      let token = jwt.sign({username: userpass.username},
+      let token =
+        jwt.sign({username: userpass.username},
         config.secret,
-        { expiresIn: '1h' }
-      );
+        { expiresIn: '1h' });
+
       authentication = {
         success: true,
         token: token
@@ -48,11 +49,12 @@ module.exports = {
     let authentication = false;
     let cookie = request.headers.cookie;
     if (cookie) {
-      let token = cookie.split('jwt=')[1];
-      
+      let token = request.headers.cookie.split('pass=')[1].split(';')[0];
+
       jwt.verify(token, config.secret, (err, decoded) => {
+        console.log(decoded);
         if (err) {
-          console.log(err);
+          console.error(err);
         }
         else {
           authentication = true;

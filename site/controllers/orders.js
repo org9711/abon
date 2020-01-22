@@ -4,6 +4,7 @@ let respond = require('../lib/respond.js');
 let database = require('../lib/database.js');
 let preMail = require('../lib/presetMails.js');
 let distance = require('../lib/distance.js');
+let token = require('../lib/token.js');
 let orders = require('../lib/orders.js');
 
 module.exports = {
@@ -16,47 +17,66 @@ module.exports = {
 
 async function postHandler(object, request, response) {
   if (request.url.endsWith("/initiate_order")) {
-    let result = await orders.compareOrderWithDB(object);
-    if(result.success) {
-      let today = new Date();
-      let date = today.getFullYear() + '-' + timeUnitToString(parseInt((parseInt(today.getMonth())+1))) + '-' + timeUnitToString(today.getDate());
-      let time = timeUnitToString(today.getHours()) + ":" + timeUnitToString(today.getMinutes()) + ":" + timeUnitToString(today.getSeconds());
-      let datetime = date + ' ' + time;
-      let orderList = [datetime, 'pending', 'pending', 'initiated'];
-      let orderStatement = "INSERT INTO orders(time_initiated,distance_check,payment_status,status) VALUES(?,?,?,?)";
-      let orderId = await database.insertRow(orderStatement, orderList);
-      for(let i = 0; i < result.prodBreakdown.length; i++) {
-        let unitList = [result.prodBreakdown[i].id, result.prodBreakdown[i].quantity, result.prodBreakdown[i].totalPrice];
-        let unitStatement = "INSERT INTO units(product,quantity,total_price) VALUES(?,?,?)";
-        let unitId = await database.insertRow(unitStatement, unitList);
-
-        let orderUnitList = [orderId, unitId];
-        let orderUnitStatement = "INSERT INTO orderUnits(orderId,unitId) VALUES(?,?)";
-        await database.insertRow(orderUnitStatement, orderUnitList);
-
-        let stockUpdateList = [result.prodBreakdown[i].quantity, result.prodBreakdown[i].id];
-        let stockUpdateStatement = "UPDATE products SET stock=(stock-?) WHERE id=?";
-        await database.updateRow(stockUpdateStatement, stockUpdateList);
-
-        changeProductStatus(result.prodBreakdown[i].id);
+    orders.compareOrderWithDB(object).then(result => {
+      if(result.success) {
+        let today = new Date();
+        let date = today.getFullYear() + '-' + timeUnitToString(parseInt((parseInt(today.getMonth())+1))) + '-' + timeUnitToString(today.getDate());
+        let time = timeUnitToString(today.getHours()) + ":" + timeUnitToString(today.getMinutes()) + ":" + timeUnitToString(today.getSeconds());
+        let datetime = date + ' ' + time;
+        let orderList = [datetime, 'pending', 'pending', 'initiated'];
+        let orderStatement = "INSERT INTO orders(time_initiated,distance_check,payment_status,status) VALUES(?,?,?,?)";
+        return database.insertRow(orderStatement, orderList).then(orderId => {
+          for(let i = 0; i < result.prodBreakdown.length; i++) {
+            let unitList = [result.prodBreakdown[i].id, result.prodBreakdown[i].quantity, result.prodBreakdown[i].totalPrice];
+            let unitStatement = "INSERT INTO units(product,quantity,total_price) VALUES(?,?,?)";
+            database.insertRow(unitStatement, unitList).then(unitId => {
+              let orderUnitList = [orderId, unitId];
+              let orderUnitStatement = "INSERT INTO orderUnits(orderId,unitId) VALUES(?,?)";
+              database.insertRow(orderUnitStatement, orderUnitList).then(orderUnitId => {
+                let stockUpdateList = [result.prodBreakdown[i].quantity, result.prodBreakdown[i].id];
+                let stockUpdateStatement = "UPDATE products SET stock=(stock-?) WHERE id=?";
+                database.updateRow(stockUpdateStatement, stockUpdateList).then(obj => {
+                  changeProductStatus(result.prodBreakdown[i].id);
+                });
+              });
+            });
+          }
+          return token.signJWT(orderId, '5m')
+            .then(tok => {
+              result["orderToken"] = tok;
+              return result;
+            });
+        });
       }
-    }
-    send.sendObject(result, response);
+      return result;
+    }).then(result => send.sendObject(result, response));
   }
 
   if (request.url.endsWith("/verify_customer")) {
+    let orderId = token.evaluateJWT(request.headers.cookie, 'orderId')
+      .then(res => res.token)
+      .catch(err => console.error(err));
+
     let maxDistanceMiles = 5.1;
-    let delStr = addressToString(object.customer.deliveryDetails);
     let baseAddress = "Broad+Weir+Bristol+BS1+3XB";
+    let delStr = addressToString(object.customer.deliveryDetails);
+
     distance.checkAddressDistance(baseAddress, delStr).then(res => {
       let result;
+
       if(res < maxDistanceMiles) {
+        let addrId = addDeliveryAddressToDatabase(object.customer.deliveryDetails);
+        let custId = addCustomerDetailsToDatabase(object.customer.customerDetails);
+        Promise.all([orderId, addrId, custId]).then(res => {
+          let orderUpdateList = [res[2], res[1], object.order.paymentMethod, res[0]];
+          let orderUpdateStatement = "UPDATE orders SET customer=?, address=?, payment_method=? WHERE id=?";
+          database.updateRow(orderUpdateStatement, orderUpdateList);
+        });
+
         result = {
           success: true,
           details: object
         };
-
-
       }
       else {
         result = {
@@ -67,6 +87,21 @@ async function postHandler(object, request, response) {
       }
       return result;
     }).then(res => send.sendObject(res, response));
+  }
+
+  if (request.url.endsWith("/order_confirmed")) {
+    let today = new Date();
+    let date = today.getFullYear() + '-' + timeUnitToString(parseInt((parseInt(today.getMonth())+1))) + '-' + timeUnitToString(today.getDate());
+    let time = timeUnitToString(today.getHours()) + ":" + timeUnitToString(today.getMinutes()) + ":" + timeUnitToString(today.getSeconds());
+    let datetime = date + ' ' + time;
+    let orderId = token.evaluateJWT(request.headers.cookie, 'orderId')
+      .then(res => res.orderId)
+      .then(res => {
+        let orderUpdateList = [datetime, 'ordered', res];
+          let orderUpdateStatement = "UPDATE orders SET time_ordered=?, status=? WHERE id=?";
+        database.updateRow(orderUpdateStatement, orderUpdateList);
+      })
+      .catch(err => console.error(err));
   }
 }
 
@@ -98,4 +133,41 @@ function addressToString(delDetails) {
     }
   }
   return delString;
+}
+
+
+async function addDeliveryAddressToDatabase(delDetails) {
+  let deliveryCheckList = [delDetails.addr1,delDetails.addr2,delDetails.postcode];
+  let deliveryCheckStatement = "SELECT id FROM addresses WHERE addressLine1=? AND addressLine2=? AND postcode=?";
+  return Promise.all([deliveryCheckList, deliveryCheckStatement])
+    .then(checkRes => database.getRows(checkRes[1], checkRes[0]))
+    .then(delId => {
+      if(delId == "") {
+        let deliveryList = [delDetails.addr1,delDetails.addr2,delDetails.town,delDetails.county,delDetails.postcode];
+        let deliveryStatement = "INSERT INTO addresses (addressLine1, addressLine2, town, county, postcode) VALUES (?,?,?,?,?)";
+        return Promise.all([deliveryList, deliveryStatement])
+          .then(insRes => database.insertRow(deliveryStatement, deliveryList));
+      }
+      else {
+        return delId[0].id;
+      }
+  });
+}
+
+async function addCustomerDetailsToDatabase(custDetails) {
+  let customerCheckList = [custDetails.firstname,custDetails.surname,custDetails.email];
+  let customerCheckStatement = "SELECT id FROM customers WHERE firstname=? AND surname=? AND email=?";
+  return Promise.all([customerCheckList, customerCheckStatement])
+    .then(checkRes => database.getRows(checkRes[1], checkRes[0]))
+    .then(custId => {
+      if(custId == "") {
+        let customerList = [custDetails.firstname,custDetails.surname,custDetails.email];
+        let customerStatement = "INSERT INTO customers (firstname, surname, email) VALUES (?,?,?)";
+        return Promise.all([customerList, customerStatement])
+          .then(insRes => database.insertRow(insRes[1], insRes[0]));
+      }
+      else {
+        return custId[0].id;
+      }
+    });
 }

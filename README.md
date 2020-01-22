@@ -6,7 +6,9 @@ This project is to build a website for local environmentally conscious food star
 Customers will be able to learn about the company and its products as well as purchase the products directly online. The administrator will be able to edit the website's information as well as manage orders from their own user interface after logging on.
 
 ## Areas Left
-* Products - Checkout
+* Products - Cookie behaviour
+* Products - Request order (initialise -> verify -> confirm)
+* Products - PayPal payment process
 * Testimonials
 * About
 * Admin pages
@@ -14,11 +16,12 @@ Customers will be able to learn about the company and its products as well as pu
 ## Performance Improvements
 * Add catches for errors in Promises
 * Give backend appropriate Promise functionality
+* Send details of errors to users
 
 * Bulk SQL statements rather than for loops in js
 * Use enum tables rather than strings for statuses
 * Use const keyword when possible instead of let
-* Microservices#
+* Microservices
 
 ## UI/UX Improvements
 * Testimonials - Stars animated
@@ -31,6 +34,7 @@ Customers will be able to learn about the company and its products as well as pu
 
 ## Further Feature Ideas
 * Products - All - Input validation frontend and backend
+* Products - Checkout - Error message for user when cookie expires
 * Products - Display - Order on status then display order in database
 * Products - Checkout - Bing Maps API to verify address is within suitable distance before order
 * Products - Checkout - PayPal payments
@@ -40,7 +44,7 @@ Customers will be able to learn about the company and its products as well as pu
 * Admin - Orders - Map of where orders are
 * Products - Checkout - Remove all database changes when user closes popup or page
 
-* Products - Checkout - Use cookies to store order id
+* Admin - Orders - Ability to change order contents
 * Admin - Products - Upload image to server
 * Products - Checkout - Allow users to select ideal delivery time for orders
 * Admin - Orders - Common times for orders

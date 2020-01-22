@@ -3,8 +3,6 @@ const fetch = require("node-fetch");
 module.exports = {
   checkAddressDistance: async function(baseAddress, toAddress) {
     let hereAPIkey = "eGJQg0yEBZLVZFew4FyoBOchLYSUcNxyScYaJZ6Nb5I";
-    console.log(baseAddress);
-    console.log(toAddress);
     const fromURL =
       "https://geocoder.ls.hereapi.com/6.2/geocode.json" +
       "?apiKey=" + hereAPIkey +

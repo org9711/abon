@@ -68,6 +68,9 @@ function addCheckoutButtonEventListener(checkoutButton, checkoutPopupBodyLayout,
     let order = extractOrder();
     postJSON('orders/initiate_order', order).then(res => {
       if(res.success) {
+        let datetime = new Date();
+        datetime.setMinutes(datetime.getMinutes() + 6);
+        document.cookie = "orderId=" + res.orderToken + "; expires=" + datetime.toUTCString() + "; path=/";
         popupBodyContents = fillCheckoutPopupBody(res, checkoutPopupBodyLayout);
         popupDiv = createCheckoutPopup(popupLayout, popupBodyContents);
         popupDiv = assignClosePopupListener(popupDiv);

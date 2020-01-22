@@ -22,7 +22,7 @@ function checkPassword() {
   if(result.success) {
     let datetime = new Date();
     datetime.setHours(datetime.getHours() + 2);
-    document.cookie = "jwt=" + result.token + "; expires=" + datetime.toUTCString() + "; path=/";
+    document.cookie = "pass=" + result.token + "; expires=" + datetime.toUTCString() + "; path=/";
     window.location.reload(true);
   }
   else {

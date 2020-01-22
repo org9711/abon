@@ -7,7 +7,7 @@ module.exports = {
     await createTestimonialsTable();
     await createProductsTable();
     await createCustomersTable();
-    await createAddressTable();
+    await createAddressesTable();
     await createUnitsTable();
     await createOrdersTable();
     await createOrderUnitsTable();
@@ -19,7 +19,7 @@ async function removeAllTables() {
   let deleteTestimonialsTableCommand = "DROP TABLE IF EXISTS testimonials";
   let deleteProductsTableCommand = "DROP TABLE IF EXISTS products";
   let deleteCustomersTableCommand = "DROP TABLE IF EXISTS customers";
-  let deleteAddressTableCommand = "DROP TABLE IF EXISTS address";
+  let deleteAddressesTableCommand = "DROP TABLE IF EXISTS addresses";
   let deleteOrdersTableCommand = "DROP TABLE IF EXISTS orders";
   let deleteUnitsTableCommand = "DROP TABLE IF EXISTS units";
   let deleteOrderUnitsTableCommand = "DROP TABLE IF EXISTS orderUnits";
@@ -29,7 +29,7 @@ async function removeAllTables() {
     await db.run(deleteTestimonialsTableCommand);
     await db.run(deleteProductsTableCommand);
     await db.run(deleteCustomersTableCommand);
-    await db.run(deleteAddressTableCommand);
+    await db.run(deleteAddressesTableCommand);
     await db.run(deleteOrdersTableCommand);
     await db.run(deleteUnitsTableCommand);
     await db.run(deleteOrderUnitsTableCommand);
@@ -193,9 +193,9 @@ async function createCustomersTable() {
   } catch(e) { console.log(e); }
 }
 
-async function createAddressTable() {
+async function createAddressesTable() {
   let createDbCommand =
-    "CREATE TABLE address(" +
+    "CREATE TABLE addresses(" +
     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
     "addressLine1 VARCHAR(127) NOT NULL, " +
     "addressLine2 VARCHAR(127), " +
@@ -203,16 +203,16 @@ async function createAddressTable() {
     "county VARCHAR(127), " +
     "postcode VARCHAR(127) NOT NULL)";
   let insertRowCommand1 =
-    "INSERT INTO address (addressLine1, town, postcode) " +
+    "INSERT INTO addresses (addressLine1, town, postcode) " +
     "VALUES ('35 Brighton Road', 'Bristol', 'BS6 6NU')";
   let insertRowCommand2 =
-    "INSERT INTO address (addressLine1, addressLine2, town, postcode) " +
+    "INSERT INTO addresses (addressLine1, addressLine2, town, postcode) " +
     "VALUES ('Flat 1', '39 Park Street', 'Bristol', 'BS1 5NH')";
   let insertRowCommand3 =
-    "INSERT INTO address (addressLine1, addressLine2, town, postcode) " +
-    "VALUES ('Flat 704F', 'Waverley House', 'Bristol', 'BS1 1WH')";
+    "INSERT INTO addresses (addressLine1, addressLine2, town, postcode) " +
+    "VALUES ('704F Waverley House', 'Queen Charlotte Street', 'Bristol', 'BS1 1WH')";
   let insertRowCommand4 =
-    "INSERT INTO address (addressLine1, town, postcode) " +
+    "INSERT INTO addresses (addressLine1, town, postcode) " +
     "VALUES ('65 Jacob Wells Road', 'Bristol', 'BS8 1DU')";
   try {
     let db = await sqlite.open("./db.sqlite")
