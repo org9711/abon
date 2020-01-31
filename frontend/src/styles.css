@@ -1,1 +1,181 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --abon-green: #00cc00;
+  --abon-yellow: #ffa133;
+  --abon-red: #ff3333;
+  --abon-grey: #2b2a24;
+  --abon-orange: #ff6033;
+}
+
+.desktop-only {
+  display: block;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  position: relative;
+  min-height: 100vh;
+}
+
+main {
+  padding-bottom: 60px;
+}
+
+#centred-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#content-container {
+  width: 1150px;
+  display: flex;
+  flex-direction: column;
+}
+
+#head-image {
+  margin-top: -30px;
+  width: 100%;
+}
+
+.columns {
+  display: flex;
+}
+
+.columns div {
+  flex: 1;
+  margin-right: 5px;
+}
+
+.columns div:last-child {
+  margin-right: 0px;
+}
+
+.horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items:center;
+  padding: 10px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.small-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  color: black;
+  font-size: 25px;
+  background-color: var(--abon-orange);
+}
+
+.long-button {
+  width: 120px;
+  height: 35px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 5px;
+  background-color: var(--abon-green);
+}
+
+p {
+  margin-top: 0px;
+  margin-bottom: 15px;
+  line-height: 16pt;
+}
+
+p:last-child {
+  margin-bottom: 0px;
+}
+
+.columns div p {
+  margin-left: 10px;
+}
+
+h2 {
+  margin-top: 0px;
+  margin-bottom: 15px;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: rgba(33,37,41);
+}
+
+h2 .subtitle {
+  font-size: 1.8rem;
+  color: rgba(108, 117, 125);
+}
+
+li {
+  list-style-position:inside;
+}
+
+li:last-child {
+  margin-bottom: 15px;
+}
+
+.mandatory-form {
+  color: red;
+}
+
+@media all and (max-width: 1200px) {
+  #content-container {
+    width: 950px;
+  }
+}
+
+@media all and (max-width: 100px) {
+  #content-container {
+    width: 650px;
+  }
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media all and (max-width: 700px) {
+  .mobile-only {
+    display: block;
+  }
+
+  #content-container {
+    width: 550px;
+  }
+
+  .columns {
+    display: block;
+  }
+
+  .columns div {
+    margin-right: 0px;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+}
+
+@media all and (max-width: 600px) {
+  #content-container {
+    width: 450px;
+  }
+}
+
+@media all and (max-width: 500px) {
+  #content-container {
+    width: 375px;
+  }
+}
+
+@media all and (max-width: 400px) {
+  #content-container {
+    width: 300px;
+  }
+}

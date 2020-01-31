@@ -1,0 +1,143 @@
+header {
+  padding: 10px;
+  background-color: var(--abon-grey);
+  margin-bottom: 30px;
+}
+
+nav {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  height: auto;
+}
+
+#nav-links {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  width: 660px;
+}
+
+#nav-extending-bar {
+  height: 80px;
+  margin-left: 20px;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#nav-logo {
+  height: 100%;
+  width: auto;
+}
+
+#nav-logo img {
+  height: 100%;
+}
+
+#nav-links a {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 33px;
+  font-weight: 500;
+}
+
+#nav-links a.active-tab {
+  color: var(--abon-yellow);
+}
+
+#nav-links a:hover:not(.active-tab) {
+  color: rgba(255, 255, 255, 1.0);
+}
+
+@media all and (max-width: 1000px) {
+  nav {
+    flex-flow: column;
+  }
+
+  #nav-extending-bar {
+    justify-content: center;
+    margin-left: 0px;
+  }
+
+  #nav-links {
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  #nav-links a {
+    margin-right: 0px;
+  }
+}
+
+@media all and (max-width: 700px) {
+  nav {
+    justify-content: center;
+  }
+
+  header {
+    padding: 0px;
+  }
+
+  #nav-extending-bar {
+    height: 60px;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  #nav-links {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 1s ease;
+  }
+
+  #nav-links.show {
+    max-height: 400px;
+    transform: translateY(0);
+  }
+
+  #nav-links a {
+    width: 100%;
+    padding: 10px;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+
+#footer-container {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  background-color: var(--abon-grey);
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  height: 60px;
+}
+
+#back-to-top {
+  padding: 20px;
+}
+
+#back-to-top a {
+  color: rgba(248, 249, 250);
+}
+
+#back-to-top a:hover {
+  color: rgba(248, 249, 250, 0.7);
+}
+
+#address {
+  padding: 20px;
+  color: rgba(248, 249, 250);
+}

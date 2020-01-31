@@ -1,0 +1,18 @@
+<header>
+  <nav>
+    <div id="nav-extending-bar">
+      <div id="nav-logo">
+        <a href="/">
+          <img src="assets/logo.png" alt="Abon Logo"/>
+        </a>
+      </div>
+      <app-burger></app-burger>
+    </div>
+
+    <div id="nav-links" [ngClass]="{show: this.burgerComponent.open}">
+      <a href="/products" id="products-header">Products</a>
+      <a href="/testimonials" id="testimonials-header">Testimonials</a>
+      <a href="/about" id="about-header">About Us</a>
+    </div>
+  </nav>
+</header>
