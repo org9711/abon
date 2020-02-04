@@ -2,7 +2,7 @@
   <nav>
     <div id="nav-extending-bar">
       <div id="nav-logo">
-        <a href="/">
+        <a routerLink="/">
           <img src="assets/logo.png" alt="Abon Logo"/>
         </a>
       </div>
@@ -10,9 +10,9 @@
     </div>
 
     <div id="nav-links" [ngClass]="{show: this.burgerComponent.open}">
-      <a href="/products" id="products-header">Products</a>
-      <a href="/testimonials" id="testimonials-header">Testimonials</a>
-      <a href="/about" id="about-header">About Us</a>
+      <a routerLink="/products" routerLinkActive="active-tab" id="products-header">Products</a>
+      <a routerLink="/testimonials" routerLinkActive="active-tab" id="testimonials-header">Testimonials</a>
+      <a routerLink="/about" routerLinkActive="active-tab" id="about-header">About Us</a>
     </div>
   </nav>
 </header>
