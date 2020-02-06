@@ -1,0 +1,26 @@
+<div>
+  <div class="columns">
+    <div *ngFor="let animation of animations" animation="animation">
+      <div id="{{animation.id}}"
+        class="cartoon-animation"
+        inlineSVG="{{animation.src}}"
+        (mouseover)="addRun($event)"
+        (animationend)="remRun($event)">
+      </div>
+      <div class="animation-text mobile-only">
+        <h2>{{animation.heading}}</h2>
+        <p>{{animation.text}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="animation-text columns desktop-only">
+    <div *ngFor="let animation of animations" animation="animation">
+      <h2>{{animation.heading}}</h2>
+    </div>
+  </div>
+  <div class="animation-text columns desktop-only">
+    <div *ngFor="let animation of animations" animation="animation">
+      <p>{{animation.text}}</p>
+    </div>
+  </div>
+</div>

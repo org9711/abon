@@ -130,7 +130,7 @@ li:last-child {
   }
 }
 
-@media all and (max-width: 100px) {
+@media all and (max-width: 1000px) {
   #content-container {
     width: 650px;
   }

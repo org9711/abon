@@ -1,0 +1,103 @@
+.cartoon-animation {
+  height: auto;
+  text-align: center;
+}
+
+.animation-text {
+  margin-bottom: 15px;
+}
+
+@media all and (max-width: 1000px) {
+
+}
+
+@media all and (max-width: 700px) {
+  .cartoon-animation svg {
+    width: 80%;
+  }
+}
+
+::ng-deep #heart-container.run #heart {
+  transform-origin: center;
+  animation: 1.5s 2 beatHeart;
+}
+
+@keyframes beatHeart {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+::ng-deep #earth-container.run #plant {
+  animation: 2s 1 shiftPlant;
+}
+
+@keyframes shiftPlant {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(-100px);
+  }
+  75% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+::ng-deep #pig-container.run #coin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: 3s 1 spinCoin;
+}
+
+::ng-deep #pig-container.run #pig {
+ animation: 0.5s 6 shakePig;
+}
+
+@keyframes spinCoin {
+  0% {
+    transform: rotate(0deg);
+  }
+  21% {
+    transform: rotate(1580deg);
+  }
+  26% {
+    transform: rotate(1580deg)
+  }
+  68% {
+    transform: rotate(-1580deg);
+  }
+  74% {
+    transform: rotate(-1580deg);
+  }
+  95% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes shakePig {
+  0% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}

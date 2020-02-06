@@ -23,9 +23,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/global/layout.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/global/wigglies.js"
+            ]
           },
           "configurations": {
             "production": {
