@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "express": "*"
+    "cors": "^2.8.5",
+    "express": "*",
+    "mongoose": "^5.8.11"
   },
   "repository": {
     "type": "git",

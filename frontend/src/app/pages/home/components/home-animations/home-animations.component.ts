@@ -17,12 +17,10 @@ export class HomeAnimationsComponent implements OnInit {
 
   addRun(event) {
     event.currentTarget.classList.add("run");
-    console.log("hover " + JSON.stringify(event.currentTarget.id))
   }
 
   remRun(event) {
     event.currentTarget.classList.remove("run");
-    console.log("hover " + JSON.stringify(event.currentTarget.id))
   }
 
 }
