@@ -1,0 +1,15 @@
+<div class="product animation-end"
+  [ngClass]="{'na': checkOffsale()}"
+  (mouseenter)=mouseEnter($event)
+  (mouseleave)=mouseLeave($event)
+  (animationstart)=animationStart($event)
+  (animationend)=animationEnd($event)>
+  <img src="assets/products/{{product.image_name}}" alt="Image of {{product.name}} product"/>
+  <div class="overlay">
+    <h3>{{product.name}}</h3>
+    <div class="buttons">
+      <button class="info small-button">&#x24D8;</button>
+      <button class="add small-button"><span class='basketEmoji'>🛒</span></button>
+    </div>
+  </div>
+</div>

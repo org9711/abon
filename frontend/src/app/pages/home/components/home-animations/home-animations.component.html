@@ -3,7 +3,7 @@
     <div *ngFor="let animation of animations" animation="animation">
       <div id="{{animation.id}}"
         class="cartoon-animation"
-        inlineSVG="{{animation.src}}"
+        inlineSVG="assets/animations/{{animation.src}}"
         (mouseover)="addRun($event)"
         (animationend)="remRun($event)">
       </div>

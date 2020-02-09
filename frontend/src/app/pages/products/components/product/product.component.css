@@ -1,0 +1,127 @@
+:host {
+  position: relative;
+  overflow: hidden;
+  max-width: 49.75%;
+  border-radius: 30px;
+  line-height: 0;
+  margin-bottom: 3px;
+}
+
+.product.mouse-on div.overlay {
+  animation: 0.4s 1 productFadeIn forwards;
+}
+
+.product.mouse-off div.overlay {
+  animation: 0.4s 1 productFadeOut forwards;
+}
+
+@keyframes productFadeIn {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes productFadeOut {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.product > img {
+  width: 100%;
+}
+
+.product.na > img {
+  filter: brightness(40%);
+}
+
+.product.mouse-on > img {
+  animation: 0.4s 1 growProduct forwards;
+}
+
+.product.mouse-off > img {
+  animation: 0.4s 1 shrinkProduct forwards;
+}
+
+@keyframes growProduct {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes shrinkProduct {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.buttons > .small-button {
+  margin-right: 5px
+}
+
+.buttons > .small-button:last-child {
+  margin-right: 0px;
+}
+
+div.overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  background-color: rgb(43,42,36,0.85); /* Abon Grey but with added transparency*/
+  opacity: 0;
+}
+
+.overlay h3 {
+  color: var(--abon-orange);
+  text-decoration: none;
+  font-size: 33px;
+  font-weight: 500;
+  line-height: normal;
+  overflow-wrap: normal;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.basket-emoji {
+  filter: grayscale(100%);
+}
+
+@media all and (max-width: 1000px) {
+  .product {
+    max-width: 100%;
+  }
+}
+
+@media all and (max-width: 700px) {
+
+}
+
+@media all and (max-width: 400px) {
+  .overlay h3 {
+    font-size: 25px;
+  }
+}
