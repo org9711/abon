@@ -1,0 +1,5 @@
+<div>
+  <div *ngFor="let product of products">
+    <product-info *ngIf="popupVis['product-'+product._id]" [product]="product"></product-info>
+  </div>
+</div>

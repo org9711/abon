@@ -1,20 +1,24 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { PopupService } from '../../../services/popup/popup.service';
+import { IProduct } from '../../../models/product.model';
+
+
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  selector: 'product-display',
+  templateUrl: './product-display.component.html',
+  styleUrls: ['./product-display.component.css']
 })
-export class ProductComponent implements OnInit {
+export class ProductDisplayComponent implements OnInit {
 
-  icon = "&#x1F6D2;"
+  @Input() product:IProduct;
+  popupVis = {};
 
-  constructor() { }
+  constructor(private popupService:PopupService) { }
 
   ngOnInit() {
+    this.popupService.popupVisObs.subscribe(res => this.popupVis = res);
   }
-
-  @Input() product:any
 
   checkOffsale() {
     return (this.product.status == "sold_out" || this.product.status == "coming_soon");
@@ -62,6 +66,11 @@ export class ProductComponent implements OnInit {
       cl.remove("mouse-on");
       cl.remove("await-animation-end_mouse-off");
     }
+  }
+
+  infoClicked() {
+    this.popupVis["product-" + this.product._id] = !this.popupVis["product-" + this.product._id];
+    this.popupService.updatePopupVis(this.popupVis);
   }
 
 }

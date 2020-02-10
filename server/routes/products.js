@@ -5,8 +5,15 @@ const Product = require('../models/product');
 
 // Get products
 router.get('', (req, res, next) => {
-  const products = Product.getAllProducts()
-    .then(result => res.send(result))
+  let products = Product.getAllProducts()
+    .then(products => {
+      for(let i = 0; i < products.length; i++) {
+        if(products[i].stock > 9) {
+          products[i].stock = 9;
+        }
+      }
+      res.send(products);
+    })
     .catch(err => console.error("issue getting products: " + err))
 });
 

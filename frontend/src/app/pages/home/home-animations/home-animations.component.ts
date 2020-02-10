@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AnimationsService } from './animations.service'
+
+import { AnimationService } from '../../../services/animations/animation.service'
+
 
 @Component({
   selector: 'home-animations',
@@ -9,10 +11,10 @@ import { AnimationsService } from './animations.service'
 export class HomeAnimationsComponent implements OnInit {
   animations:any[]
 
-  constructor(private AnimationsService: AnimationsService) { }
+  constructor(private AnimationService: AnimationService) { }
 
   ngOnInit() {
-    this.animations = this.AnimationsService.getAnimations();
+    this.animations = this.AnimationService.getAnimations();
   }
 
   addRun(event) {

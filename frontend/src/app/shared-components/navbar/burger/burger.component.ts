@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-burger',
+  selector: 'nav-burger',
   templateUrl: './burger.component.html',
   styleUrls: ['./burger.component.css']
 })

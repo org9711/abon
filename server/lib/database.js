@@ -19,7 +19,7 @@ function removeAll() {
   }
 
 function addProducts() {
-  for(let i = 0; i < names.length; i++) {
+  for(let i = 0; i < data.products.length; i++) {
     let newProduct = new Product(data.products[i]);
 
     Product.addProduct(newProduct)

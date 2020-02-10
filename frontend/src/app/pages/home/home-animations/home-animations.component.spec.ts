@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AboutPageComponent } from './about.component';
+import { HomeAnimationsComponent } from './home-animations.component';
 
-describe('AboutPageComponent', () => {
-  let component: AboutPageComponent;
-  let fixture: ComponentFixture<AboutPageComponent>;
+describe('HomeAnimationsComponent', () => {
+  let component: HomeAnimationsComponent;
+  let fixture: ComponentFixture<HomeAnimationsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AboutPageComponent ]
+      declarations: [ AnimationDesktopComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AboutPageComponent);
+    fixture = TestBed.createComponent(HomeAnimationsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,7 @@
+<div>
+  <popup-layout [title]="product.name" [closeKey]="'product-' + product._id">
+    <p>{{product.description}}</p>
+    <p>Price: £{{priceToString(product.price)}} (serves 1)</p>
+    <p>Stock: {{product.stock}}</p>
+  </popup-layout>
+</div>

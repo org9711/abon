@@ -1,0 +1,14 @@
+<div id="popup-screen" [ngClass]="{'exit': this.closing}">
+  <div id="opaque-screen"></div>
+  <div id="popup">
+    <div id="popup-heading">
+      <div id="popup-title">
+        <h4>{{title}}</h4>
+      </div>
+      <button id="popup-x" (click)=closePopup()>&#xd7;</button>
+    </div>
+    <div id="popup-body">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

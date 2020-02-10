@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeAnimationsComponent } from './home-animations.component';
+import { ProductInfoComponent } from './product-info.component';
 
-describe('AnimationDesktopComponent', () => {
-  let component: HomeAnimationsComponent;
-  let fixture: ComponentFixture<HomeAnimationsComponent>;
+describe('ProductInfoComponent', () => {
+  let component: ProductInfoComponent;
+  let fixture: ComponentFixture<ProductInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AnimationDesktopComponent ]
+      declarations: [ ProductInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeAnimationsComponent);
+    fixture = TestBed.createComponent(ProductInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
