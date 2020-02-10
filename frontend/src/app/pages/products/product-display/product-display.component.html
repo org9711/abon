@@ -9,7 +9,7 @@
     <h3>{{product.name}}</h3>
     <div class="buttons">
       <button class="info small-button" (click)="infoClicked()">&#x24D8;</button>
-      <button class="add small-button"><span class='basketEmoji'>🛒</span></button>
+      <button class="add small-button" *ngIf="!checkOffsale()" (click)="basketClicked()"><span class='basketEmoji'>🛒</span></button>
     </div>
   </div>
 </div>

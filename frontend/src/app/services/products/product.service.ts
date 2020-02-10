@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable, of, BehaviorSubject, Subject, ReplaySubject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, share } from 'rxjs/operators';
 
 import { IProduct } from "../../models/product.model";

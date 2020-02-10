@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { PopupService } from '../../../services/popup/popup.service';
 import { IProduct } from '../../../models/product.model';
+import { OrderService } from '../../../services/orders/order.service';
 
 
 @Component({
@@ -14,10 +15,15 @@ export class ProductDisplayComponent implements OnInit {
   @Input() product:IProduct;
   popupVis = {};
 
-  constructor(private popupService:PopupService) { }
+  constructor(private popupService:PopupService,
+    private orderService:OrderService) { }
 
   ngOnInit() {
     this.popupService.popupVisObs.subscribe(res => this.popupVis = res);
+  }
+
+  basketClicked() {
+    this.orderService.incrementOrder(this.product);
   }
 
   checkOffsale() {
