@@ -18,19 +18,12 @@ export class ProductInfoComponent implements OnInit {
   ngOnInit() {
   }
 
-  priceToString(price) {
-    let priceString = price.toString();
-    if(priceString.includes(".")) {
-      let integer = priceString.split(".")[0];
-      let decimal = priceString.split(".")[1];
-      decimal += '00';
-      decimal = decimal.substring(0,2);
-      priceString = integer + "." + decimal;
-    }
-    else {
-      priceString += '.00';
-    }
-    return priceString;
+  stockText() {
+    let text;
+    if(this.product.status == "sold_out") text = "Back Soon";
+    if(this.product.status == "coming_soon") text = "Coming Soon";
+    if(this.product.status == "on_sale") text = this.product.stock + " units";
+    return text;
   }
 
 }

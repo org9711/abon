@@ -12,65 +12,79 @@ import { IProduct } from "../../models/product.model";
 })
 export class OrderService {
 
-  ordersObs = new BehaviorSubject<IOrder[]>(null);
+  private orders = new BehaviorSubject<IOrder[]>([]);
+  public ordersObs = this.orders.asObservable();
 
   constructor(private http:HttpClient) { }
 
-  incrementOrder(product:IProduct) {
+  incrementOrder(productId, productName, productPrice, productStock) {
 
     let newObj = [];
 
-    if(this.ordersObs.getValue() == null) {
+    const productPriceRound = parseFloat(productPrice).toFixed(2);
+
+    if(this.orders.getValue() == null) {
       newObj.push({
-        productId: product._id,
-        productName: product.name,
+        productId: productId,
+        productName: productName,
         quantity: 1,
-        price: product.price
+        productPrice: parseFloat(productPriceRound),
+        totalPrice: parseFloat(productPriceRound),
+        productStock: productStock
       });
     }
     else {
       let alreadyOrdered = false;
-      newObj = this.ordersObs.getValue();
+      newObj = this.orders.getValue();
       for(let i = 0; i < newObj.length; i++) {
-        if(product._id == newObj[i].productId) {
+        if(productId == newObj[i].productId) {
+          const totalPriceRound = parseFloat(newObj[i].totalPrice).toFixed(2);
           alreadyOrdered = true;
-          newObj[i].quantity += 1;
-          newObj[i].price += product.price
+          if(newObj[i].quantity < productStock) {
+            newObj[i].quantity += 1;
+            newObj[i].totalPrice = parseFloat(productPriceRound) + parseFloat(totalPriceRound)
+          }
           break;
         }
       }
       if(!alreadyOrdered) {
         newObj.push({
-          productId: product._id,
-          productName: product.name,
+          productId: productId,
+          productName: productName,
           quantity: 1,
-          price: product.price
+          productPrice: parseFloat(productPriceRound),
+          totalPrice: parseFloat(productPriceRound),
+          productStock: productStock
         });
       }
     }
     this.updateOrders(newObj);
   }
 
-  decrementOrder(product:IProduct) {
+  decrementOrder(productId, productPrice) {
 
-    let newObj = this.ordersObs.getValue();
+    let newObj = this.orders.getValue();
+
+    const productPriceRound = parseFloat(productPrice).toFixed(2);
 
     for(let i = 0; i < newObj.length; i++) {
-      if(product._id == newObj[i].productId) {
+      if(productId == newObj[i].productId) {
+        const totalPriceRound = newObj[i].totalPrice.toFixed(2);
         if(newObj[i].quantity == 1) {
-          delete(newObj[i]);
+          newObj.splice(i,1);
         }
         else {
           newObj[i].quantity -= 1;
+          newObj[i].totalPrice = parseFloat(totalPriceRound) - parseFloat(productPriceRound);
         }
-        this.ordersObs.next(newObj);
+        this.orders.next(newObj);
         break;
       }
     }
   }
 
   private updateOrders(obj) {
-    this.ordersObs.next(obj);
+    this.orders.next(obj);
   }
 
 }

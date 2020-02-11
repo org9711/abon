@@ -1,0 +1,53 @@
+#basket {
+  font-size: 1.3rem;
+}
+
+#total-amount-container .total {
+  text-align: right;
+  flex: 11;
+}
+
+#total-amount-container .amount {
+  text-align: center;
+  flex: 2;
+}
+
+#basket-header {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#basket-header h2 {
+  margin-bottom: 0px;
+}
+
+.checkout-button.mobile-only {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+@media all and (max-width: 1000px) {
+  #basket {
+    font-size: 1.1rem;
+  }
+}
+
+@media all and (max-width: 700px) {
+  #total-amount-container .total {
+    flex: 9;
+  }
+}
+
+@media all and (max-width: 600px) {
+  #total-amount-container .total {
+    flex: 8;
+  }
+}
+
+@media all and (max-width: 400px) {
+  #basket {
+    font-size: 1.0rem;
+  }
+}

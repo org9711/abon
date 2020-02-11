@@ -1,7 +1,7 @@
 <div>
   <popup-layout [title]="product.name" [closeKey]="'product-' + product._id">
     <p>{{product.description}}</p>
-    <p>Price: £{{priceToString(product.price)}} (serves 1)</p>
-    <p>Stock: {{product.stock}}</p>
+    <p>Price: £{{product.price.toFixed(2)}} (serves 1)</p>
+    <p>Stock: {{stockText()}}</p>
   </popup-layout>
 </div>

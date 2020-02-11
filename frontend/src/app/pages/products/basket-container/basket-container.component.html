@@ -1,0 +1,17 @@
+<div>
+  <div id="basket-header">
+    <h2>Your Basket</h2>
+    <button class="checkout-button long-button desktop-only" *ngIf="this.orders.length > 0">Checkout</button>
+  </div>
+  <div id="basket">
+    <app-wiggle *ngIf="this.orders.length > 0"></app-wiggle>
+    <div id="basket-contents">
+      <basket-row *ngFor="let order of orders" [order]="order"></basket-row>
+    </div>
+    <div id="total-amount-container" class="horizontal" *ngIf="this.orders.length > 0">
+      <div class="total">Total: </div>
+      <div class="amount">£{{totalPrice.toFixed(2)}}</div>
+    </div>
+    <button class="checkout-button long-button mobile-only" *ngIf="this.orders.length > 0">Checkout</button>
+  </div>
+</div>

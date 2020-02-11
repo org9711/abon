@@ -111,7 +111,7 @@ div.overlay {
 }
 
 @media all and (max-width: 1000px) {
-  .product {
+  :host {
     max-width: 100%;
   }
 }

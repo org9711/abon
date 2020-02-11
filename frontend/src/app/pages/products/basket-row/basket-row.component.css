@@ -1,0 +1,96 @@
+.basket-row {
+  width: 100%;
+}
+
+.product-icon {
+  flex: 1;
+  margin-right: 20px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 20px;
+}
+
+.product-name {
+  flex: 5;
+  text-align: left;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.product-unit-price {
+  flex: 2;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.product-total-price {
+  flex: 2;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.product-quantity-bar {
+  flex: 3;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.product-quantity-bar button {
+  height: 40px;
+  width: 40px;
+}
+
+.product-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 100%;
+  width: 50px;
+  text-align: center;
+  vertical-align: ;
+  background-color: #F0F0F0;
+  border-radius: 5px;
+  font-size: 15px;
+  border-width: 1px;
+  border-color: #DBDBDB;
+  border-style: solid;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+@media all and (max-width: 1000px) {
+  .product-quantity-bar button {
+    height: 35px;
+    width: 35px;
+  }
+
+  .product-quantity-bar input {
+    width: 35px;
+  }
+}
+
+@media all and (max-width: 700px) {
+  .product-unit-price {
+    display: none;
+  }
+}
+
+@media all and (max-width: 600px) {
+  .product-icon {
+    display: none;
+  }
+}
+
+@media all and (max-width: 400px) {
+  .product-quantity-bar button {
+    height: 30px;
+    width: 30px;
+  }
+
+  .product-quantity-bar input {
+    width: 30px;
+  }
+}

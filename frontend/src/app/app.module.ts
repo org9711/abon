@@ -18,6 +18,8 @@ import { ProductDisplayComponent } from './pages/products/product-display/produc
 import { PopupLayoutComponent } from './shared-components/popup-layout/popup-layout.component';
 import { ProductInfoComponent } from './pages/products/product-info/product-info.component';
 import { PopupManagerComponent } from './shared-components/popup-manager/popup-manager.component';
+import { BasketContainerComponent } from './pages/products/basket-container/basket-container.component';
+import { BasketRowComponent } from './pages/products/basket-row/basket-row.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { PopupManagerComponent } from './shared-components/popup-manager/popup-m
     PopupLayoutComponent,
     ProductInfoComponent,
     PopupManagerComponent,
+    BasketContainerComponent,
+    BasketRowComponent,
   ],
   imports: [
     BrowserModule,

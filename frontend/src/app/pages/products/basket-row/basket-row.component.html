@@ -1,0 +1,14 @@
+<div class="basket-row">
+  <div class="horizontal">
+    <div class="product-icon">🍜</div>
+    <div class="product-name">{{order.productName}}</div>
+    <div class="product-unit-price">£{{priceToTwoDec(order.productPrice)}}</div>
+    <div class="product-quantity-bar">
+      <button class="decrement small-button" (click)="decrementClick()">-</button>
+      <div class="product-quantity">{{order.quantity}}</div>
+      <button class="increment small-button" (click)="incrementClick()">+</button>
+    </div>
+    <div class="product-total-price">£{{priceToTwoDec(order.totalPrice)}}</div>
+  </div>
+  <app-wiggle></app-wiggle>
+</div>
