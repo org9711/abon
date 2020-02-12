@@ -45,7 +45,7 @@ module.exports.getProductById = function(id) {
 }
 
 module.exports.getAllProducts = function() {
-  return Product.find();
+  return Product.find().sort({display_position: 1});
 }
 
 module.exports.addProduct = function(newProduct) {

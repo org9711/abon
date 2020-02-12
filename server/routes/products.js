@@ -7,6 +7,7 @@ const Product = require('../models/product');
 router.get('', (req, res, next) => {
   let products = Product.getAllProducts()
     .then(products => {
+      console.log(products);
       for(let i = 0; i < products.length; i++) {
         if(products[i].stock > 9) {
           products[i].stock = 9;
