@@ -20,6 +20,8 @@ import { ProductInfoComponent } from './pages/products/product-info/product-info
 import { PopupManagerComponent } from './shared-components/popup-manager/popup-manager.component';
 import { BasketContainerComponent } from './pages/products/basket-container/basket-container.component';
 import { BasketRowComponent } from './pages/products/basket-row/basket-row.component';
+import { CheckoutComponent } from './pages/products/checkout/checkout.component';
+import { CheckoutRowComponent } from './pages/products/checkout-row/checkout-row.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { BasketRowComponent } from './pages/products/basket-row/basket-row.compo
     PopupManagerComponent,
     BasketContainerComponent,
     BasketRowComponent,
+    CheckoutComponent,
+    CheckoutRowComponent,
   ],
   imports: [
     BrowserModule,

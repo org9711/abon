@@ -17,70 +17,59 @@ export class OrderService {
 
   constructor(private http:HttpClient) { }
 
-  incrementOrder(productId, productName, productPrice, productStock) {
-
+  basOrder(product) {
     let newObj = [];
 
-    const productPriceRound = parseFloat(productPrice).toFixed(2);
-
-    if(this.orders.getValue() == null) {
-      newObj.push({
-        productId: productId,
-        productName: productName,
-        quantity: 1,
-        productPrice: parseFloat(productPriceRound),
-        totalPrice: parseFloat(productPriceRound),
-        productStock: productStock
-      });
-    }
+    if(this.orders.getValue() == null) newObj = this.newOrder(newObj, product);
     else {
-      let alreadyOrdered = false;
       newObj = this.orders.getValue();
+
+      let alreadyExists = false;
+      let ind;
       for(let i = 0; i < newObj.length; i++) {
-        if(productId == newObj[i].productId) {
-          const totalPriceRound = parseFloat(newObj[i].totalPrice).toFixed(2);
-          alreadyOrdered = true;
-          if(newObj[i].quantity < productStock) {
-            newObj[i].quantity += 1;
-            newObj[i].totalPrice = parseFloat(productPriceRound) + parseFloat(totalPriceRound)
-          }
-          break;
+        if(newObj[i].product._id === product._id) {
+          alreadyExists = true;
+          newObj = this.incrementQuantity(newObj, i);
+          break
         }
       }
-      if(!alreadyOrdered) {
-        newObj.push({
-          productId: productId,
-          productName: productName,
-          quantity: 1,
-          productPrice: parseFloat(productPriceRound),
-          totalPrice: parseFloat(productPriceRound),
-          productStock: productStock
-        });
-      }
+      if(!alreadyExists) newObj = this.newOrder(newObj, product);
     }
+
     this.updateOrders(newObj);
   }
 
-  decrementOrder(productId, productPrice) {
-
+  incrementOrder(order) {
     let newObj = this.orders.getValue();
+    const ind = newObj.indexOf(order);
+    if(ind === -1) newObj = this.newOrder(newObj, order.product);
+    else newObj = this.incrementQuantity(newObj, ind);
+    this.updateOrders(newObj);
+  }
 
-    const productPriceRound = parseFloat(productPrice).toFixed(2);
+  decrementOrder(order) {
+    let newObj = this.orders.getValue();
+    const ind = newObj.indexOf(order);
 
-    for(let i = 0; i < newObj.length; i++) {
-      if(productId == newObj[i].productId) {
-        const totalPriceRound = newObj[i].totalPrice.toFixed(2);
-        if(newObj[i].quantity == 1) {
-          newObj.splice(i,1);
-        }
-        else {
-          newObj[i].quantity -= 1;
-          newObj[i].totalPrice = parseFloat(totalPriceRound) - parseFloat(productPriceRound);
-        }
-        this.orders.next(newObj);
-        break;
-      }
+    if(ind !== -1) {
+      if(newObj[ind].quantity == 1) newObj.splice(ind,1);
+      else newObj[ind].quantity -= 1;
     }
+
+    this.updateOrders(newObj);
+  }
+
+  private newOrder(obj, product) {
+    obj.push({
+      product: product,
+      quantity: 1,
+    });
+    return obj;
+  }
+
+  private incrementQuantity(obj, ind) {
+    if(obj[ind].quantity < obj[ind].product.stock) obj[ind].quantity += 1;
+    return obj;
   }
 
   private updateOrders(obj) {

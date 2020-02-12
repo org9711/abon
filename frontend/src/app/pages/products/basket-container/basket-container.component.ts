@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { OrderService } from '../../../services/orders/order.service';
+import { PopupService } from '../../../services/popup/popup.service';
 
 
 @Component({
@@ -10,25 +11,32 @@ import { OrderService } from '../../../services/orders/order.service';
 })
 export class BasketContainerComponent implements OnInit {
 
-    orders
-    totalPrice
+    orders;
+    popupVis = {};
 
-    constructor(private orderService:OrderService) { }
+    constructor(private orderService:OrderService,
+      private popupService:PopupService) { }
 
     ngOnInit() {
       this.orderService.ordersObs
         .subscribe(res => {
-          this.orders = res
+          this.orders = res;
           this.calculateTotalPrice();
         });
+      this.popupService.popupVisObs.subscribe(res => this.popupVis = res);
+    }
+
+    initiateOrder() {
+      this.popupVis["checkout"] = 1;
+      this.popupService.updatePopupVis(this.popupVis);
     }
 
     private calculateTotalPrice() {
       let totalPrice = 0;
       for(let i = 0; i < this.orders.length; i++) {
-        totalPrice += this.orders[i].totalPrice;
+        totalPrice += this.orders[i].quantity * this.orders[i].product.price;
       }
-      this.totalPrice = totalPrice;
+      return totalPrice.toFixed(2);
     }
 
 }

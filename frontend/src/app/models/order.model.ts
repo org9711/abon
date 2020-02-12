@@ -1,8 +1,10 @@
+import { IProduct } from './product.model';
+
+
 export interface IOrder {
-  productId: string,
-  productName: string,
+  product: IProduct,
   quantity: number,
   productPrice: number,
   totalPrice: number,
-  productStock: number
+  productStock: number,
 };

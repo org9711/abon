@@ -23,7 +23,7 @@ export class ProductDisplayComponent implements OnInit {
   }
 
   basketClicked() {
-    this.orderService.incrementOrder(this.product._id, this.product.name, this.product.price, this.product.stock);
+    this.orderService.basOrder(this.product);
   }
 
   checkOffsale() {

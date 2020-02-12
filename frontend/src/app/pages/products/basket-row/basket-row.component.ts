@@ -19,15 +19,19 @@ export class BasketRowComponent implements OnInit {
   }
 
   incrementClick() {
-    this.orderService.incrementOrder(this.order.productId, this.order.productName, this.order.productPrice, this.order.productStock);
+    this.orderService.incrementOrder(this.order);
   }
 
   decrementClick() {
-    this.orderService.decrementOrder(this.order.productId, this.order.productPrice);
+    this.orderService.decrementOrder(this.order);
   }
 
   priceToTwoDec(price) {
-    return parseFloat(price).toFixed(2)
+    return price.toFixed(2);
+  }
+
+  totalPriceCalc() {
+    return this.priceToTwoDec(this.order.quantity * this.order.product.price);
   }
 
 }
