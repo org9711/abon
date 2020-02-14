@@ -26,12 +26,8 @@ export class BasketRowComponent implements OnInit {
     this.orderService.decrementOrder(this.order);
   }
 
-  priceToTwoDec(price) {
-    return price.toFixed(2);
-  }
-
   totalPriceCalc() {
-    return this.priceToTwoDec(this.order.quantity * this.order.product.price);
+    return this.order.quantity * this.order.product.price;
   }
 
 }

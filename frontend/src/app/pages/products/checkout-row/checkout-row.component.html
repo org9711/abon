@@ -4,5 +4,5 @@
   </div>
   <div class="checkout-product-quantity">{{order.quantity}}x</div>
   <div class="checkout-product-name">{{order.product.name}}</div>
-  <div class="checkout-product-total-price">£{{totalPriceCalc()}}</div>
+  <div class="checkout-product-total-price">£{{totalPriceCalc() | number:'1.2-2'}}</div>
 </div>

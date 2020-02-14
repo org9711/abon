@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+// import { HttpClient } from "@angular/common/http";
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { catchError, share } from 'rxjs/operators';
 
+import { HttpService } from '../http/http.service'
 import { IProduct } from "../../models/product.model";
+import { IHttp } from "../../models/http.model";
 
 
 @Injectable({
@@ -13,25 +16,11 @@ export class ProductService {
 
   productObs: Observable<IProduct[]>;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpService) { }
 
-  getProducts() {
-    if(this.productObs) {
-      return this.productObs;
-    }
-    else {
-      this.productObs = this.http.get<IProduct[]>("http://localhost:8080/products")
-        .pipe(catchError(this.handleError<IProduct[]>('getProducts', [])))
-        .pipe(share());
-      return this.productObs;
-    }
-  }
-
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
-    }
+  getProducts():Observable<IProduct[]> {
+    return this.http.get("products")
+      .pipe(map((res:IHttp) => {return res.body}))
   }
 
 }

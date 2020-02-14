@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { catchError, share } from 'rxjs/operators';
 
+import { HttpService } from "../http/http.service";
 import { IOrder } from "../../models/order.model";
 import { IProduct } from "../../models/product.model";
 
@@ -15,7 +15,20 @@ export class OrderService {
   private orders = new BehaviorSubject<IOrder[]>([]);
   public ordersObs = this.orders.asObservable();
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpService) { }
+
+  initiateOrder() {
+    let orders = [];
+    let orderUnits = this.orders.getValue();
+    for(let i = 0; i < orderUnits.length; i++) {
+      orders.push({
+        productId: orderUnits[i].product._id,
+        productPrice: orderUnits[i].product.price,
+        quantity: orderUnits[i].quantity
+      });
+    }
+    return this.http.post("orders/initiate", orders);
+  }
 
   basOrder(product) {
     let newObj = [];

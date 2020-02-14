@@ -18,7 +18,7 @@ export class CheckoutRowComponent implements OnInit {
   }
 
   totalPriceCalc() {
-    return (this.order.quantity * this.order.product.price).toFixed(2);
+    return this.order.quantity * this.order.product.price;
   }
 
 }

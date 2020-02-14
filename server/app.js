@@ -20,6 +20,7 @@ mongoose.connection.on('err', (err) => {
 const app = express();
 
 const products = require('./routes/products');
+const orders = require('./routes/orders');
 
 // Port Number
 const port = 8080;
@@ -32,6 +33,7 @@ app.use(bodyParser.json());
 
 // Routing
 app.use('/products', products);
+app.use('/orders', orders);
 
 // Index Route
 app.get('/', (req, res) => {

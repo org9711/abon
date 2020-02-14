@@ -12,7 +12,7 @@
     </div>
     <div id="total-amount-container" class="horizontal" *ngIf="this.orders.length > 0">
       <div class="total">Total: </div>
-      <div class="amount">£{{calculateTotalPrice()}}</div>
+      <div class="amount">£{{calculateTotalPrice() | number:'1.2-2'}}</div>
     </div>
     <button class="checkout-button long-button mobile-only"
       *ngIf="this.orders.length > 0"

@@ -23,7 +23,7 @@ export class PopupLayoutComponent implements OnInit {
   closePopup() {
     this.closing = true;
     setTimeout(() => {
-      this.popupVis[this.closeKey] = !this.popupVis[this.closeKey]
+      this.popupVis[this.closeKey] = !this.popupVis[this.closeKey];
       this.popupService.updatePopupVis(this.popupVis);
     }, 300)
   }

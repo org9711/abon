@@ -24,7 +24,7 @@ export class CheckoutComponent implements OnInit {
     for(let i = 0; i < this.orders.length; i++) {
       totalPrice += this.orders[i].quantity * this.orders[i].product.price;
     }
-    return totalPrice.toFixed(2);
+    return totalPrice;
   }
 
 }

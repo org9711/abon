@@ -27,8 +27,15 @@ export class BasketContainerComponent implements OnInit {
     }
 
     initiateOrder() {
-      this.popupVis["checkout"] = 1;
-      this.popupService.updatePopupVis(this.popupVis);
+      this.orderService.initiateOrder().subscribe(res => {
+        if(res.status == 201) {
+          this.popupVis["checkout"] = true;
+          this.popupService.updatePopupVis(this.popupVis);
+        }
+        else {
+          console.log("error popup");
+        }
+      });
     }
 
     private calculateTotalPrice() {
@@ -36,7 +43,7 @@ export class BasketContainerComponent implements OnInit {
       for(let i = 0; i < this.orders.length; i++) {
         totalPrice += this.orders[i].quantity * this.orders[i].product.price;
       }
-      return totalPrice.toFixed(2);
+      return totalPrice;
     }
 
 }

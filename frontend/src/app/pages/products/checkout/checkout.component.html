@@ -1,5 +1,5 @@
 <div>
-  <popup-layout [title]="'Checkout'" [closeKey]="checkout">
+  <popup-layout [title]="'Checkout'" [closeKey]="'checkout'">
     <div id="popup-body-container" class="checkout">
       <div id="checkout-main">
         <div id="checkout-left">
@@ -49,7 +49,7 @@
           <checkout-row *ngFor="let order of orders" [order]="order"></checkout-row>
           <div id="checkout-total-amount-container" class="horizontal">
             <div class="total">Total:</div>
-            <div class="amount">£{{calculateTotalPrice()}}</div>
+            <div class="amount">£{{calculateTotalPrice() | number:'1.2-2'}}</div>
           </div>
         </div>
       </div>
