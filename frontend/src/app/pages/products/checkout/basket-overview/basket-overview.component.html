@@ -1,0 +1,8 @@
+<div>
+  <h2>Your Order</h2>
+  <checkout-row *ngFor="let order of orders" [order]="order"></checkout-row>
+  <div id="checkout-total-amount-container" class="horizontal">
+    <div class="total">Total:</div>
+    <div class="amount">£{{calculateTotalPrice() | number:'1.2-2'}}</div>
+  </div>
+</div>

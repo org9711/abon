@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators'
 
+import { IOrder } from '../../../models/order.model';
 import { OrderService } from '../../../services/orders/order.service';
 
 
@@ -11,20 +12,18 @@ import { OrderService } from '../../../services/orders/order.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  orders;
+  withinTime:boolean = true;
+  maxTimeSecs:number = 0.1 * 60;
+  orders:IOrder[];
 
   constructor(private orderService:OrderService) { }
 
   ngOnInit() {
-    this.orderService.ordersObs.pipe(take(1)).subscribe(res => this.orders = res)
+    this.orderService.ordersObs.pipe(take(1)).subscribe(res => this.orders = res);
   }
 
-  private calculateTotalPrice() {
-    let totalPrice = 0;
-    for(let i = 0; i < this.orders.length; i++) {
-      totalPrice += this.orders[i].quantity * this.orders[i].product.price;
-    }
-    return totalPrice;
+  timesUpRes() {
+    this.withinTime = false;
   }
 
 }

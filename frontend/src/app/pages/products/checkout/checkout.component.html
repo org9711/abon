@@ -1,62 +1,20 @@
 <div>
   <popup-layout [title]="'Checkout'" [closeKey]="'checkout'">
-    <div id="popup-body-container" class="checkout">
-      <div id="checkout-main">
-        <div id="checkout-left">
-          <div id="customer-forms">
-            <h2>Customer Details</h2>
-            <div id="customer-details-form">
-              <div class="entry">
-                <div class="form-label">First name<span class="mandatory-form">*</span></div>
-                <input type="text" name="fname"/>
-              </div>
-              <div class="entry">
-                <div class="form-label">Surname<span class="mandatory-form">*</span></div>
-                <input type="text" name="sname"/>
-              </div>
-              <div class="entry">
-                <div class="form-label">Email<span class="mandatory-form">*</span></div>
-                <input type="text" name="email"/>
-              </div>
-            </div>
-            <h2>Delivery Details</h2>
-            <div id="delivery-details-form">
-              <div class="entry">
-                <div class="form-label">Line 1<span class="mandatory-form">*</span></div>
-                <input type="text" name="1addr"/>
-              </div>
-              <div class="entry">
-                <div class="form-label">Line 2</div>
-                <input type="text" name="2addr"/>
-              </div>
-              <div class="entry">
-                <div class="form-label">Town<span class="mandatory-form">*</span></div>
-                <input type="text" name="town"/>
-              </div>
-              <div class="entry">
-                <div class="form-label">County</div>
-                <input type="text" name="county"/>
-              </div>
-              <div class="entry">
-                <div class="form-label">Postcode<span class="mandatory-form">*</span></div>
-                <input type="text" name="postcode"/>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="basket-overview">
-          <h2>Your Order</h2>
-          <checkout-row *ngFor="let order of orders" [order]="order"></checkout-row>
-          <div id="checkout-total-amount-container" class="horizontal">
-            <div class="total">Total:</div>
-            <div class="amount">£{{calculateTotalPrice() | number:'1.2-2'}}</div>
-          </div>
-        </div>
+  <div id="popup-body-container" class="checkout">
+    <div id="checkout-main">
+      <div id="checkout-left">
+        <customer-forms></customer-forms>
       </div>
-      <div id="checkout-payment-buttons">
-        <button id="cash-button" class="checkout-buttons">Pay with Cash</button>
-        <button id="paypal-button" class="checkout-buttons">Pay by Paypal</button>
+      <div id="checkout-right">
+        <basket-overview [orders]="this.orders"></basket-overview>
+        <checkout-timer [timeLeftSecs]="this.maxTimeSecs" (timesUp)=timesUpRes()></checkout-timer>
       </div>
     </div>
+    <div id="checkout-payment-buttons" *ngIf="this.withinTime">
+      <button id="cash-button" class="checkout-buttons">Pay with Cash</button>
+      <button id="paypal-button" class="checkout-buttons">Pay by Paypal</button>
+    </div>
+    <time-checkout-error *ngIf="!this.withinTime"></time-checkout-error>
+  </div>
   </popup-layout>
 </div>

@@ -1,0 +1,13 @@
+.timerContainer {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.timerContainer h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0px;
+}
+
+.timerContainer h2 .subtitle {
+  font-size: 1.1rem;
+}

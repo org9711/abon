@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { IOrder } from '../../../models/order.model';
+import { IOrder } from '../../../../models/order.model';
 
 
 @Component({

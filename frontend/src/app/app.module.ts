@@ -21,9 +21,13 @@ import { PopupManagerComponent } from './shared-components/popup-manager/popup-m
 import { BasketContainerComponent } from './pages/products/basket-container/basket-container.component';
 import { BasketRowComponent } from './pages/products/basket-row/basket-row.component';
 import { CheckoutComponent } from './pages/products/checkout/checkout.component';
-import { CheckoutRowComponent } from './pages/products/checkout-row/checkout-row.component';
+import { CheckoutRowComponent } from './pages/products/checkout/checkout-row/checkout-row.component';
 import { ErrorMessageComponent } from './shared-components/error-message/error-message.component';
 import { InitiateOrderErrorComponent } from './pages/products/initiate-order-error/initiate-order-error.component';
+import { TimeCheckoutErrorComponent } from './pages/products/checkout/time-checkout-error/time-checkout-error.component';
+import { CustomerFormsComponent } from './pages/products/checkout/customer-forms/customer-forms.component';
+import { BasketOverviewComponent } from './pages/products/checkout/basket-overview/basket-overview.component';
+import { CheckoutTimerComponent } from './pages/products/checkout/checkout-timer/checkout-timer.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +51,10 @@ import { InitiateOrderErrorComponent } from './pages/products/initiate-order-err
     CheckoutRowComponent,
     ErrorMessageComponent,
     InitiateOrderErrorComponent,
+    TimeCheckoutErrorComponent,
+    CustomerFormsComponent,
+    BasketOverviewComponent,
+    CheckoutTimerComponent,
   ],
   imports: [
     BrowserModule,
