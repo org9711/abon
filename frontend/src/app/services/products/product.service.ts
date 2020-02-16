@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import { HttpClient } from "@angular/common/http";
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError, share } from 'rxjs/operators';
@@ -19,8 +18,8 @@ export class ProductService {
   constructor(private http:HttpService) { }
 
   getProducts():Observable<IProduct[]> {
-    return this.http.get("products")
-      .pipe(map((res:IHttp) => {return res.body}))
+    return this.http.get("products");
+      // .pipe(map((res:IHttp) => {return res.body}))
   }
 
 }

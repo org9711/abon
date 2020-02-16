@@ -15,23 +15,13 @@ export class HttpService {
 
   constructor(private http:HttpClient) { }
 
-  get(path):Observable<IHttp> {
-    let options = { observe: 'response' as 'body'};
-    return this.http.get<HttpResponse<IHttp>>(this.baseUrl + path, options).pipe(map(res => {
-      return {
-        status: res.status,
-        body: res.body
-      };
-    }))
+  get(path):Observable<any> {
+    let options = {  };
+    return this.http.get<HttpResponse<any>>(this.baseUrl + path, options);
   }
 
-  post(path, body):Observable<IHttp> {
-    let options = { headers: new HttpHeaders({'Content-Type': 'application/json'}), observe: 'response' as 'body'};
-    return this.http.post<HttpResponse<IHttp>>(this.baseUrl + path, body, options).pipe(map(res => {
-      return {
-        status: res.status,
-        body: res.body
-      };
-    }));
+  post(path, body):Observable<any> {
+    let options = { headers: new HttpHeaders({'Content-Type': 'application/json'})};
+    return this.http.post<HttpResponse<any>>(this.baseUrl + path, body, options);
   }
 }

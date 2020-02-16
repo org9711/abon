@@ -28,7 +28,7 @@ export class BasketContainerComponent implements OnInit {
 
     initiateOrder() {
       this.orderService.initiateOrder().subscribe(res => {
-        if(res.status == 201) {
+        if(res.success) {
           this.popupVis["checkout"] = true;
           this.popupService.updatePopupVis(this.popupVis);
         }
