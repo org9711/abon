@@ -49,10 +49,8 @@ const initiateOrderValidator = async(order) => {
       });
     }
     else {
-      console.log("id: " + order[i].productId + " given price: " + await calculatePrice(order[i].productPrice, order[i].quantity) + " calculated price: " + await calculatePrice(order[i].quantity, product.price));
       let priceNEqual = await calculatePrice(order[i].productPrice, order[i].quantity) != await calculatePrice(order[i].quantity, product.price);
       let quantityMTstock = order[i].quantity > product.stock;
-      console.log("id: " + order[i].productId + " order quant: " + order[i].quantity + " product stock: " + product.stock);
       if(priceNEqual) {
         result.success = false;
         result.errors.push({

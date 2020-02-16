@@ -15,11 +15,6 @@ const getAllProducts = async() => {
     .catch(err => {throw new Error(e.message)})
 }
 
-// Initiates an order by posting the information on what the user wants to buy
-const initiateOrder = async() => {
-
-}
-
 module.exports = {
   getAllProducts
 }

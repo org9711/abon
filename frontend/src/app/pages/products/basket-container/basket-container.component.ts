@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { IOrder } from '../../../models/order.model';
 import { OrderService } from '../../../services/orders/order.service';
 import { PopupService } from '../../../services/popup/popup.service';
 
@@ -11,7 +12,9 @@ import { PopupService } from '../../../services/popup/popup.service';
 })
 export class BasketContainerComponent implements OnInit {
 
-    orders;
+    orders:IOrder[];
+    initiationError:boolean = false;
+    initiationErrors = [];
     popupVis = {};
 
     constructor(private orderService:OrderService,
@@ -27,15 +30,17 @@ export class BasketContainerComponent implements OnInit {
     }
 
     initiateOrder() {
-      this.orderService.initiateOrder().subscribe(res => {
-        if(res.success) {
+      this.orderService.initiateOrder().subscribe(
+        res => {
+          console.log(res);
           this.popupVis["checkout"] = true;
           this.popupService.updatePopupVis(this.popupVis);
+        },
+        err => {
+          this.initiationErrors = err.errors;
+          this.initiationError = true;
         }
-        else {
-          console.log("error popup");
-        }
-      });
+      );
     }
 
     private calculateTotalPrice() {

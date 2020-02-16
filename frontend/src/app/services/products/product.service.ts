@@ -5,7 +5,6 @@ import { catchError, share } from 'rxjs/operators';
 
 import { HttpService } from '../http/http.service'
 import { IProduct } from "../../models/product.model";
-import { IHttp } from "../../models/http.model";
 
 
 @Injectable({
@@ -19,7 +18,6 @@ export class ProductService {
 
   getProducts():Observable<IProduct[]> {
     return this.http.get("products");
-      // .pipe(map((res:IHttp) => {return res.body}))
   }
 
 }

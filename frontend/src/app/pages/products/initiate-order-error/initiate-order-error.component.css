@@ -1,0 +1,17 @@
+li {
+  color: #C40233;
+  margin-left: 10px;
+}
+
+li:last-child {
+  margin-bottom: 5px;
+}
+
+p {
+  color: #C40233;
+  margin-bottom: 5px;
+}
+
+p:last-child {
+  margin-bottom: 0px;
+}

@@ -22,6 +22,8 @@ import { BasketContainerComponent } from './pages/products/basket-container/bask
 import { BasketRowComponent } from './pages/products/basket-row/basket-row.component';
 import { CheckoutComponent } from './pages/products/checkout/checkout.component';
 import { CheckoutRowComponent } from './pages/products/checkout-row/checkout-row.component';
+import { ErrorMessageComponent } from './shared-components/error-message/error-message.component';
+import { InitiateOrderErrorComponent } from './pages/products/initiate-order-error/initiate-order-error.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { CheckoutRowComponent } from './pages/products/checkout-row/checkout-row
     BasketRowComponent,
     CheckoutComponent,
     CheckoutRowComponent,
+    ErrorMessageComponent,
+    InitiateOrderErrorComponent,
   ],
   imports: [
     BrowserModule,
