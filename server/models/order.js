@@ -80,11 +80,11 @@ const OrderSchema = mongoose.Schema({
 const Order = module.exports = mongoose.model('Order', OrderSchema);
 
 module.exports.getOrderById = function(id) {
-  return Product.findById(id);
+  return Order.findById(id);
 }
 
 module.exports.getAllOrders = function() {
-  return Product.find();
+  return Order.find();
 }
 
 module.exports.addOrder = function(newOrder) {
@@ -93,4 +93,21 @@ module.exports.addOrder = function(newOrder) {
 
 module.exports.removeAllOrders = function() {
   return Order.deleteMany();
+}
+
+module.exports.removeById = function(id) {
+  return Order.deleteOne( { '_id': id } );
+}
+
+module.exports.removeByIds = function(ids) {
+  return Order.deleteMany( { '_id': { $in: ids } } );
+}
+
+module.exports.findOldInitiatedOrders = async function(minutes) {
+  const dateComp = new Date(Date.now() - 1000 * 60 * minutes);
+  return Order.find( {
+    $and : [
+      { 'status': 'initiated' },
+      { 'timestamps.time_initiated': { $lt: dateComp } }
+    ] } );
 }

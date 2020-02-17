@@ -45,7 +45,7 @@ module.exports.getProductById = function(id) {
 }
 
 module.exports.getAllProducts = function() {
-  return Product.find().sort({display_position: 1});
+  return Product.find().sort( { display_position: 1 } );
 }
 
 module.exports.addProduct = function(newProduct) {
@@ -54,4 +54,11 @@ module.exports.addProduct = function(newProduct) {
 
 module.exports.removeAllProducts = function() {
   return Product.deleteMany();
+}
+
+module.exports.updateStock = function(id, change) {
+  return Product.updateOne(
+    { '_id': id },
+    { $inc: { 'stock': change } }
+  )
 }

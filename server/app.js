@@ -4,13 +4,13 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const config = require('./config/database');
-const databaseLib = require('./lib/database');
+const scheduler = require('./services/scheduler');
 
 mongoose.connect(config.database, { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.on('connected', () => {
   console.log('Connected to database: ' + config.database);
-  databaseLib.resetData();
+  scheduler.run();
 });
 
 mongoose.connection.on('err', (err) => {

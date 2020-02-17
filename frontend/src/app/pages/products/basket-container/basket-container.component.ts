@@ -32,6 +32,7 @@ export class BasketContainerComponent implements OnInit {
     initiateOrder() {
       this.orderService.initiateOrder().subscribe(
         res => {
+          sessionStorage.setItem('orderToken', res.orderToken);
           this.popupVis["checkout"] = true;
           this.popupService.updatePopupVis(this.popupVis);
         },

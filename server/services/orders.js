@@ -1,6 +1,8 @@
 const Order = require('../models/order');
 const Product = require('../models/product');
 
+const token = require('../services/token');
+
 
 // Initiates an order by posting the information on what the user wants to buy
 const initiateOrder = async(order) => {
@@ -13,6 +15,7 @@ const initiateOrder = async(order) => {
         'quantity': order[i].quantity,
         'price': order[i].productPrice
       });
+      Product.updateStock(order[i].productId, order[i].quantity * -1).catch(console.error);
     }
     let orderDb = new Order({
       'units': units,
@@ -23,6 +26,7 @@ const initiateOrder = async(order) => {
     });
     Order.addOrder(orderDb);
     console.log(orderDb);
+    response["orderToken"] = await token.signJWT(orderDb._id, '6m');
   }
   return response;
 }
