@@ -1,40 +1,91 @@
-<div id="customer-forms">
+<form
+  [formGroup]="form"
+  id="customerForm"
+  #customerFormRef="ngForm" novalidate>
   <h2>Customer Details</h2>
   <div id="customer-details-form">
-    <div class="entry">
-      <div class="form-label">First name<span class="mandatory-form-star">*</span></div>
-      <input type="text" name="fname"/>
+    <div
+      class="entry"
+      [ngClass]="{'invalid': !formValidationService.checkIfValid(form.controls.fname)}">
+      <div class="guidance-text">
+        <div class="form-label">Firstname<span class="mandatory-form-star">*</span></div>
+        <em *ngIf="!formValidationService.checkIfValid(form.controls.fname)">
+          {{formValidationService.getInvalidText(form.controls.fname)}}</em>
+      </div>
+      <input type="text" formControlName="fname"/>
     </div>
-    <div class="entry">
-      <div class="form-label">Surname<span class="mandatory-form-star">*</span></div>
-      <input type="text" name="sname"/>
+    <div
+      class="entry"
+      [ngClass]="{'invalid': !formValidationService.checkIfValid(form.controls.sname)}">
+      <div class="guidance-text">
+        <div class="form-label">Surname<span class="mandatory-form-star">*</span></div>
+        <em *ngIf="!formValidationService.checkIfValid(form.controls.sname)">
+          {{formValidationService.getInvalidText(form.controls.sname)}}</em>
+      </div>
+      <input type="text" formControlName="sname"/>
     </div>
-    <div class="entry">
-      <div class="form-label">Email<span class="mandatory-form-star">*</span></div>
-      <input type="text" name="email"/>
+    <div
+      class="entry"
+      [ngClass]="{'invalid': !formValidationService.checkIfValid(form.controls.email)}">
+      <div class="guidance-text">
+        <div class="form-label">email<span class="mandatory-form-star">*</span></div>
+        <em *ngIf="!formValidationService.checkIfValid(form.controls.email)">
+          {{formValidationService.getInvalidText(form.controls.email)}}</em>
+      </div>
+      <input type="text" formControlName="email"/>
     </div>
   </div>
   <h2>Delivery Details</h2>
   <div id="delivery-details-form">
-    <div class="entry">
-      <div class="form-label">Line 1<span class="mandatory-form-star">*</span></div>
-      <input type="text" name="1addr"/>
+    <div
+      class="entry"
+      [ngClass]="{'invalid': !formValidationService.checkIfValid(form.controls.addr1)}">
+      <div class="guidance-text">
+        <div class="form-label">Line 1<span class="mandatory-form-star">*</span></div>
+        <em *ngIf="!formValidationService.checkIfValid(form.controls.addr1)">
+          {{formValidationService.getInvalidText(form.controls.addr1)}}</em>
+      </div>
+      <input type="text" formControlName="addr1"/>
     </div>
-    <div class="entry">
-      <div class="form-label">Line 2</div>
-      <input type="text" name="2addr"/>
+    <div
+      class="entry"
+      [ngClass]="{'invalid': !formValidationService.checkIfValid(form.controls.addr2)}">
+      <div class="guidance-text">
+        <div class="form-label">Line 2</div>
+        <em *ngIf="!formValidationService.checkIfValid(form.controls.addr2)">
+          {{formValidationService.getInvalidText(form.controls.addr2)}}</em>
+      </div>
+      <input type="text" formControlName="addr2"/>
     </div>
-    <div class="entry">
-      <div class="form-label">Town<span class="mandatory-form-star">*</span></div>
-      <input type="text" name="town"/>
+    <div
+      class="entry"
+      [ngClass]="{'invalid': !formValidationService.checkIfValid(form.controls.town)}">
+      <div class="guidance-text">
+        <div class="form-label">Town<span class="mandatory-form-star">*</span></div>
+        <em *ngIf="!formValidationService.checkIfValid(form.controls.town)">
+          {{formValidationService.getInvalidText(form.controls.town)}}</em>
+      </div>
+      <input type="text" formControlName="town"/>
     </div>
-    <div class="entry">
-      <div class="form-label">County</div>
-      <input type="text" name="county"/>
+    <div
+      class="entry"
+      [ngClass]="{'invalid': !formValidationService.checkIfValid(form.controls.county)}">
+      <div class="guidance-text">
+        <div class="form-label">County</div>
+        <em *ngIf="!formValidationService.checkIfValid(form.controls.county)">
+          {{formValidationService.getInvalidText(form.controls.county)}}</em>
+      </div>
+      <input type="text" formControlName="county"/>
     </div>
-    <div class="entry">
-      <div class="form-label">Postcode<span class="mandatory-form-star">*</span></div>
-      <input type="text" name="postcode"/>
+    <div
+      class="entry"
+      [ngClass]="{'invalid': !formValidationService.checkIfValid(form.controls.postcode)}">
+      <div class="guidance-text">
+        <div class="form-label">Postcode<span class="mandatory-form-star">*</span></div>
+        <em *ngIf="!formValidationService.checkIfValid(form.controls.postcode)">
+          {{formValidationService.getInvalidText(form.controls.postcode)}}</em>
+      </div>
+      <input type="text" formControlName="postcode"/>
     </div>
   </div>
-</div>
+</form>

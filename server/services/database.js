@@ -27,11 +27,11 @@ const removeOldInitiatedOrders = async(minutes) => {
 
 const removeAll = async() => {
   Product.removeAllProducts()
-  .then(res => console.log("successfully deleted: " + res))
-  .catch(err => console.error("error deleting: " + err));
+    .then(res => console.log("successfully deleted: " + res))
+    .catch(err => console.error("error deleting: " + err));
   Order.removeAllOrders()
-  .then(res => console.log("successfully deleted: " + res))
-  .catch(err => console.error("error deleting: " + err));
+    .then(res => console.log("successfully deleted: " + res))
+    .catch(err => console.error("error deleting: " + err));
 }
 
 const addProducts = async() => {

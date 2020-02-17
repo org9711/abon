@@ -11,8 +11,8 @@ const resetDatabase = async() => {
 }
 
 const orderClean = async() => {
-  const removalMinutes = 1;
-  const schedulerMinutes = 0.5;
+  const removalMinutes = 5;
+  const schedulerMinutes = 2;
   const interval = schedulerMinutes * 60 * 1000;
   setInterval(() => {
     console.log("Routine (every " + schedulerMinutes + " minutes) removal call");

@@ -11,9 +11,17 @@
       </div>
     </div>
     <div id="checkout-payment-buttons" *ngIf="this.withinTime">
-      <button id="cash-button" class="checkout-buttons">Pay with Cash</button>
-      <button id="paypal-button" class="checkout-buttons">Pay by Paypal</button>
-    </div>
+      <button id="cash-button"
+        class="checkout-buttons"
+        (click)="formSubmitted($event)"
+        [ngClass]="{disabled: !this.validForm}"
+        [disabled]="!this.validForm">Pay with Cash</button>
+      <button id="paypal-button"
+        class="checkout-buttons"
+        (click)="formSubmitted($event)"
+        [ngClass]="{disabled: !this.validForm}"
+        [disabled]="!this.validForm">Pay by Paypal</button>
+      </div>
     <time-checkout-error *ngIf="!this.withinTime"></time-checkout-error>
   </div>
   </popup-layout>

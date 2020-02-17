@@ -23,6 +23,7 @@ export class HttpService {
 
   post(path, body):Observable<any> {
     let options = { headers: new HttpHeaders({'Content-Type': 'application/json'})};
+    console.log(path, body)
     return this.http.post<HttpResponse<any>>(this.baseUrl + path, body, options)
       .pipe(catchError(this.handleError<any>('post', [])));
   }
@@ -31,7 +32,6 @@ export class HttpService {
     return (error: any): Observable<T> => {
       console.error(error);
       return throwError(error.error)
-      // return of(result as T);
     }
   }
 }

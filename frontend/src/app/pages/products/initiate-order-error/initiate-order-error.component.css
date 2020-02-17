@@ -1,5 +1,5 @@
 li {
-  color: #C40233;
+  color: var(--error-text);
   margin-left: 10px;
 }
 
@@ -8,7 +8,7 @@ li:last-child {
 }
 
 p {
-  color: #C40233;
+  color: var(--error-text);
   margin-bottom: 5px;
 }
 

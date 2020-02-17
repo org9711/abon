@@ -7,17 +7,19 @@ const CustomerSchema = mongoose.Schema({
     type: {
       firstname: {
         type: String,
+        regex: /([ A-Za-zÀ-ÖØ-öø-ÿ\-]*)/,
         maxlength: 30,
         required: true
       },
       surname: {
         type: String,
+        regex: /([ A-Za-zÀ-ÖØ-öø-ÿ\-]*)/,
         maxlength: 30,
         required: true
       },
       email: {
         type: String,
-        regex: /([\w\W]+@[\w\W]+\.[\w\W]+)/,
+        regex: /([\w\W]+@[\w\W]+)/,
         maxlength: 100,
         required: true
       }
@@ -30,12 +32,12 @@ const CustomerSchema = mongoose.Schema({
         type: {
           line1: {
             type: String,
-            maxlength: 30,
+            maxlength: 50,
             required: true
           },
           line2: {
             type: String,
-            maxlength: 30,
+            maxlength: 50,
             required: false
           },
           town: {
@@ -50,7 +52,7 @@ const CustomerSchema = mongoose.Schema({
           },
           postcode: {
             type: String,
-            maxlength: 10,
+            maxlength: 20,
             required: true
           }
         },

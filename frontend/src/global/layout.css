@@ -4,6 +4,8 @@
   --abon-red: #ff3333;
   --abon-grey: #2b2a24;
   --abon-orange: #ff6033;
+  --error-text: #C40233;
+  --error-background: #FFE0DF;
 }
 
 .desktop-only {
@@ -118,6 +120,44 @@ li {
 
 li:last-child {
   margin-bottom: 15px;
+}
+
+.entry {
+  margin-bottom: 5px;
+}
+
+.entry:last-child {
+  margin-bottom: 0px;
+}
+
+.form-label {
+  margin-bottom: 2px;
+}
+
+input[type=text] {
+  font-size: 14pt;
+  border-radius: 3px;
+  width: 100%;
+  padding: 2px 4px;
+  box-sizing: border-box;
+}
+
+.invalid em {
+  float: right;
+  color: var(--error-text);
+  padding-left: 10px;
+  font-size: 10pt;
+}
+
+.invalid input {
+  background-color: var(--error-background);
+}
+
+.guidance-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .mandatory-form-star {

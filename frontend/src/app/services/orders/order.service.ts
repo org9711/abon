@@ -5,6 +5,7 @@ import { catchError, share } from 'rxjs/operators';
 import { HttpService } from "../http/http.service";
 import { IOrder } from "../../models/order.model";
 import { IProduct } from "../../models/product.model";
+import { IOrderCust } from "../../models/orderCust.model";
 
 
 @Injectable({
@@ -30,7 +31,11 @@ export class OrderService {
     return this.http.post("orders/initiate", orders);
   }
 
-  basOrder(product) {
+  addCustomerToOrder(details:IOrderCust) {
+    return this.http.post("orders/add_customer", details);
+  }
+
+  basOrder(product:IProduct) {
     let newObj = [];
 
     if(this.orders.getValue() == null) newObj = this.newOrder(newObj, product);
@@ -52,7 +57,7 @@ export class OrderService {
     this.updateOrders(newObj);
   }
 
-  incrementOrder(order) {
+  incrementOrder(order:IOrder) {
     let newObj = this.orders.getValue();
     const ind = newObj.indexOf(order);
     if(ind === -1) newObj = this.newOrder(newObj, order.product);
@@ -60,7 +65,7 @@ export class OrderService {
     this.updateOrders(newObj);
   }
 
-  decrementOrder(order) {
+  decrementOrder(order:IOrder) {
     let newObj = this.orders.getValue();
     const ind = newObj.indexOf(order);
 

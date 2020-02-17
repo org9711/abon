@@ -35,9 +35,9 @@ app.use(bodyParser.json());
 app.use('/products', products);
 app.use('/orders', orders);
 
-// Index Route
-app.get('/', (req, res) => {
-  res.send("Entry Endpoint");
+// 404
+app.use('*', (req, res) => {
+  res.status(404).send();
 });
 
 // Start Server
