@@ -3,13 +3,14 @@ let config = require('../config/jwt.js');
 
 
 const evaluateJWT = async(token) => {
-  return jwt.verify(token, config.secret)
-    .then(decoded => {
-      return decoded;
-    })
-    .catch(err => {
+  return jwt.verify(token, config.secret, (err, decoded) => {
+    if (err) {
       return err;
-    });
+    }
+    else {
+      return decoded.token;
+    }
+  });
 }
 
 const signJWT = async(token, expires) => {

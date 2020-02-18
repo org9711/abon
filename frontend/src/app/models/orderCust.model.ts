@@ -3,7 +3,8 @@ import { IAddress } from './address.model';
 
 
 export interface IOrderCust {
+  order_token: string,
   payment_method: string,
   customer_details: ICustomer,
-  address_details: IAddress
+  address: IAddress
 };

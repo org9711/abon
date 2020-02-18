@@ -8,13 +8,11 @@ const data = require('../config/data');
 const resetDatabase = async() => {
   removeAll();
   let products = await addProducts()
-  console.log(products);
   addOrders(products);
 }
 
 const removeOldInitiatedOrders = async(minutes) => {
   let oldOrders = await Order.findOldInitiatedOrders(minutes);
-  console.log(oldOrders);
 
   for(let i = 0; i < oldOrders.length; i++) {
     units = oldOrders[i].units;
@@ -27,10 +25,8 @@ const removeOldInitiatedOrders = async(minutes) => {
 
 const removeAll = async() => {
   Product.removeAllProducts()
-    .then(res => console.log("successfully deleted: " + res))
     .catch(err => console.error("error deleting: " + err));
   Order.removeAllOrders()
-    .then(res => console.log("successfully deleted: " + res))
     .catch(err => console.error("error deleting: " + err));
 }
 
@@ -57,7 +53,6 @@ const addOrders = async(products) => {
     let newOrder = new Order(dumOrder);
 
     Order.addOrder(newOrder)
-      .then(console.log)
       .catch(console.error);
   }
 }

@@ -10,7 +10,8 @@
     "cors": "^2.8.5",
     "express": "*",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.11"
+    "mongoose": "^5.8.11",
+    "node-fetch": "^2.6.0"
   },
   "repository": {
     "type": "git",

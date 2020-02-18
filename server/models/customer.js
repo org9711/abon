@@ -82,11 +82,3 @@ const CustomerSchema = mongoose.Schema({
 
 
 const Customer = module.exports = mongoose.model('Customer', CustomerSchema);
-
-module.exports.addOrder = function(newOrder) {
-  return newOrder.save();
-}
-
-module.exports.removeAllCustomers = function(newCustomer) {
-  return Customer.deleteMany();
-}

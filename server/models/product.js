@@ -33,7 +33,7 @@ const ProductSchema = mongoose.Schema({
   },
   status: {
     type: String,
-    maxlength: 20,
+    enum: ['on_sale', 'sold_out', 'coming_soon'],
     required: true
   }
 });

@@ -172,6 +172,7 @@ module.exports = {
       },
       timestamps: {
         time_initiated: new Date("2019-12-20 17:05:30"),
+        time_customer_submitted: new Date("2019-12-20 17:07:22"),
         time_ordered: new Date("2019-12-20 17:07:22"),
         time_acknowledged: new Date("2019-12-20 19:29:48"),
         time_prepared: new Date("2019-12-21 14:34:16"),
@@ -199,6 +200,7 @@ module.exports = {
       },
       timestamps: {
         time_initiated: new Date("2020-01-03 12:24:27"),
+        time_customer_submitted: new Date("2020-01-03 12:26:48"),
         time_ordered: new Date("2020-01-03 12:26:48"),
         time_acknowledged: new Date("2020-01-04 10:22:28"),
         time_prepared: new Date("2020-01-04 15:51:08")
@@ -225,6 +227,7 @@ module.exports = {
       },
       timestamps: {
         time_initiated: new Date("2020-01-05 20:45:21"),
+        time_customer_submitted: new Date("2020-01-05 20:47:00"),
         time_ordered: new Date("2020-01-05 20:49:22"),
         time_acknowledged: new Date("2020-01-07 21:49:48")
       },
@@ -245,6 +248,7 @@ module.exports = {
       },
       timestamps: {
         time_initiated: new Date("2020-01-11 09:11:12"),
+        time_customer_submitted: new Date("2020-01-11 10:02:56"),
         time_ordered: new Date("2020-01-11 10:02:56")
       },
       status: "ordered"

@@ -33,6 +33,8 @@ export class InitiateOrderErrorComponent implements OnInit {
         }
       }
       switch(this.errors[i].errorCode) {
+        case "valuesWrong":
+          this.errorMessages.push(productName + " had some bad data entered with it.");
         case "productNull":
           this.errorMessages.push(productName + " has been moved in or removed from our database.");
           break;

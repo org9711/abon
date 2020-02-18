@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { catchError, share } from 'rxjs/operators';
+import {  BehaviorSubject } from 'rxjs';
 
 import { HttpService } from "../http/http.service";
 import { IOrder } from "../../models/order.model";
@@ -43,7 +42,6 @@ export class OrderService {
       newObj = this.orders.getValue();
 
       let alreadyExists = false;
-      let ind;
       for(let i = 0; i < newObj.length; i++) {
         if(newObj[i].product._id === product._id) {
           alreadyExists = true;
@@ -77,7 +75,7 @@ export class OrderService {
     this.updateOrders(newObj);
   }
 
-  private newOrder(obj, product) {
+  private newOrder(obj, product:IProduct) {
     obj.push({
       product: product,
       quantity: 1,
@@ -85,12 +83,12 @@ export class OrderService {
     return obj;
   }
 
-  private incrementQuantity(obj, ind) {
+  private incrementQuantity(obj:IOrder[], ind:number) {
     if(obj[ind].quantity < obj[ind].product.stock) obj[ind].quantity += 1;
     return obj;
   }
 
-  private updateOrders(obj) {
+  private updateOrders(obj:IOrder[]) {
     this.orders.next(obj);
   }
 

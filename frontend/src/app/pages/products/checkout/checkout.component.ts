@@ -22,6 +22,8 @@ export class CheckoutComponent implements OnInit {
   constructor(private orderService:OrderService) { }
 
   @ViewChild(CustomerFormsComponent, { static: false }) customerForms:CustomerFormsComponent;
+  addCustomerError:boolean = false;
+  addCustomerErrors = [];
 
   ngOnInit() {
     this.orderService.ordersObs.pipe(take(1)).subscribe(res => this.orders = res);
@@ -42,13 +44,14 @@ export class CheckoutComponent implements OnInit {
     const formValues = this.customerForms.form.value;
 
     const details:IOrderCust = {
+      order_token: sessionStorage.getItem('orderToken'),
       payment_method: paymentMethod,
       customer_details: {
         firstname: formValues.fname,
         surname: formValues.sname,
         email: formValues.email
       },
-      address_details: {
+      address: {
         line1: formValues.addr1,
         line2: formValues.addr2,
         town: formValues.town,
@@ -59,10 +62,18 @@ export class CheckoutComponent implements OnInit {
 
     this.orderService.addCustomerToOrder(details).subscribe(
       res => {
-        console.log(res);
+        this.addCustomerError = false;
+        if(res.payment_method == "cash") {
+          console.log("show order summary screen");
+        }
+        else if(res.payment_method == "paypal") {
+          console.log("make request to paypal api");
+        }
       },
       err => {
-        console.log(err);
+        this.addCustomerErrors = err.errors;
+        console.log(this.addCustomerErrors);
+        this.addCustomerError = true;
       }
     );
   }

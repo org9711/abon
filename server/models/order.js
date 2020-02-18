@@ -31,24 +31,26 @@ const OrderSchema = mongoose.Schema({
     type: {
       method: {
         type: String,
-        maxlength: 10,
         enum: ['cash', 'paypal'],
         required: false
       },
       status: {
         type: String,
-        maxlength: 10,
         enum: ['pending', 'paid'],
         required: true
       }
     },
-    required: false
+    required: true
   },
   timestamps: {
     type: {
       time_initiated: {
         type: Date,
         required: true
+      },
+      time_customer_submitted: {
+        type: Date,
+        required: false
       },
       time_ordered: {
         type: Date,
@@ -71,8 +73,7 @@ const OrderSchema = mongoose.Schema({
   },
   status: {
     type: String,
-    maxlength: 15,
-    enum: ['initiated', 'ordered', 'acknowledged', 'prepared', 'delivered'],
+    enum: ['initiated', 'customer_submitted', 'ordered', 'acknowledged', 'prepared', 'delivered'],
     required: true
   }
 });
@@ -89,6 +90,10 @@ module.exports.getAllOrders = function() {
 
 module.exports.addOrder = function(newOrder) {
   return newOrder.save();
+}
+
+module.exports.updateOrder = function(order) {
+  return order.save();
 }
 
 module.exports.removeAllOrders = function() {

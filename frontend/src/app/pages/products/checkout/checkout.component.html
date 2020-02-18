@@ -10,6 +10,9 @@
         <checkout-timer [timeLeftSecs]="this.maxTimeSecs" (timesUp)=timesUpRes()></checkout-timer>
       </div>
     </div>
+    <add-customer-error *ngIf="this.addCustomerError"
+      [errors]="this.addCustomerErrors">
+    </add-customer-error>
     <div id="checkout-payment-buttons" *ngIf="this.withinTime">
       <button id="cash-button"
         class="checkout-buttons"
