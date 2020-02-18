@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { IOrder } from '../../../models/order.model';
 import { OrderService } from '../../../services/orders/order.service';
 import { PopupService } from '../../../services/popup/popup.service';
+import { IPopupVis } from '../../../models/popupVis.model';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class BasketContainerComponent implements OnInit {
     orders:IOrder[];
     initiationError:boolean = false;
     initiationErrors = [];
-    popupVis = {};
+    popupVis:IPopupVis;
 
     constructor(private orderService:OrderService,
       private popupService:PopupService) { }
@@ -33,7 +34,7 @@ export class BasketContainerComponent implements OnInit {
       this.orderService.initiateOrder().subscribe(
         res => {
           sessionStorage.setItem('orderToken', res.orderToken);
-          this.popupVis["checkout"] = true;
+          this.popupVis["order_checkout"] = true;
           this.popupService.updatePopupVis(this.popupVis);
         },
         err => {

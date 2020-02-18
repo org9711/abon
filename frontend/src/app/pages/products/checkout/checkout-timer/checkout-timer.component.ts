@@ -11,14 +11,13 @@ export class CheckoutTimerComponent implements OnInit {
   @Output() timesUp = new EventEmitter();
   minuteCounter:string;
   secondCounter:string;
-  interval;
 
   constructor() { }
 
   ngOnInit() {
     this.minuteCounter = this.zeroPad(Math.floor(this.timeLeftSecs / 60), 2);
     this.secondCounter = this.zeroPad(Math.floor(this.timeLeftSecs % 60), 2);
-    this.interval = setInterval(() => {
+    let interval = setInterval(() => {
       if(this.timeLeftSecs > 0) {
         this.timeLeftSecs--;
         this.minuteCounter = this.zeroPad(Math.floor(this.timeLeftSecs / 60), 2);
@@ -26,12 +25,12 @@ export class CheckoutTimerComponent implements OnInit {
       }
       else {
         this.timesUp.emit(true);
-        clearInterval(this.interval);
+        clearInterval(interval);
       }
     },1000);
   }
 
-  private zeroPad(inpNum, digitsShown) {
+  private zeroPad(inpNum:number, digitsShown:number) {
     let padding = "0".repeat(digitsShown);
     let whole = padding + inpNum.toString();
     let final = whole.substr(whole.length - digitsShown, whole.length);

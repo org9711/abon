@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PopupService } from '../../../services/popup/popup.service';
 import { IProduct } from '../../../models/product.model';
 import { OrderService } from '../../../services/orders/order.service';
+import { IPopupVis } from '../../../models/popupVis.model';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { OrderService } from '../../../services/orders/order.service';
 export class ProductDisplayComponent implements OnInit {
 
   @Input() product:IProduct;
-  popupVis = {};
+  popupVis:IPopupVis;
 
   constructor(private popupService:PopupService,
     private orderService:OrderService) { }
@@ -75,7 +76,7 @@ export class ProductDisplayComponent implements OnInit {
   }
 
   infoClicked() {
-    this.popupVis["product-" + this.product._id] = !this.popupVis["product-" + this.product._id];
+    this.popupVis.products[this.product._id] = !this.popupVis.products[this.product._id];
     this.popupService.updatePopupVis(this.popupVis);
   }
 

@@ -7,4 +7,6 @@ router.post('/initiate', orders.initiateOrder);
 
 router.post('/add_customer', orders.addCustomer);
 
+router.post('/inactive_order', orders.inactiveOrder);
+
 module.exports = router;

@@ -178,7 +178,10 @@ module.exports = {
         time_prepared: new Date("2019-12-21 14:34:16"),
         time_delivered: new Date("2019-12-22 11:56:35")
       },
-      status: "delivered"
+      status: {
+        stage: "delivered",
+        active: true
+      }
     },
     {
       units: [
@@ -205,7 +208,10 @@ module.exports = {
         time_acknowledged: new Date("2020-01-04 10:22:28"),
         time_prepared: new Date("2020-01-04 15:51:08")
       },
-      status: "prepared"
+      status: {
+        stage: "prepared",
+        active: true
+      }
     },
     {
       units: [
@@ -231,7 +237,10 @@ module.exports = {
         time_ordered: new Date("2020-01-05 20:49:22"),
         time_acknowledged: new Date("2020-01-07 21:49:48")
       },
-      status: "acknowledged"
+      status: {
+        stage: "acknowledged",
+        active: true
+      }
     },
     {
       units: [
@@ -251,7 +260,10 @@ module.exports = {
         time_customer_submitted: new Date("2020-01-11 10:02:56"),
         time_ordered: new Date("2020-01-11 10:02:56")
       },
-      status: "ordered"
+      status: {
+        stage: "ordered",
+        active: true
+      }
     }
   ]
 }

@@ -16,8 +16,10 @@ export class CheckoutComponent implements OnInit {
 
   withinTime:boolean = true;
   maxTimeSecs:number = 5 * 60;
+  orderToken:string = sessionStorage.getItem('orderToken');
   orders:IOrder[];
   validForm:boolean = false;
+  customerAddedRes:boolean = false;
 
   constructor(private orderService:OrderService) { }
 
@@ -27,12 +29,18 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     this.orderService.ordersObs.pipe(take(1)).subscribe(res => this.orders = res);
+    window.addEventListener('beforeunload', this.inactiveOrder);
   }
 
   ngAfterViewInit() {
     this.customerForms.form.statusChanges.subscribe(status => {
       this.validForm = status == "VALID";
     });
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('beforeunload', this.inactiveOrder);
+    this.inactiveOrder();
   }
 
   timesUpRes() {
@@ -62,6 +70,7 @@ export class CheckoutComponent implements OnInit {
 
     this.orderService.addCustomerToOrder(details).subscribe(
       res => {
+        this.customerAddedRes = true;
         this.addCustomerError = false;
         if(res.payment_method == "cash") {
           console.log("show order summary screen");
@@ -72,10 +81,17 @@ export class CheckoutComponent implements OnInit {
       },
       err => {
         this.addCustomerErrors = err.errors;
-        console.log(this.addCustomerErrors);
         this.addCustomerError = true;
       }
     );
+  }
+
+  inactiveOrder() {
+    const orderTokenJSON = { order_token: this.orderToken }
+    if(!this.customerAddedRes) {
+      this.orderService.inactiveOrder(orderTokenJSON).subscribe(
+        res => sessionStorage.removeItem('orderToken'));
+    }
   }
 
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProductService } from '../../services/products/product.service';
 import { PopupService } from '../../services/popup/popup.service';
+import { IProduct } from '../../models/product.model';
+import { IPopupVis } from '../../models/popupVis.model';
 
 
 @Component({
@@ -11,8 +13,8 @@ import { PopupService } from '../../services/popup/popup.service';
 })
 export class PopupManagerComponent implements OnInit {
 
-  products
-  popupVis
+  products:IProduct[];
+  popupVis:IPopupVis;
 
   constructor(private productService:ProductService,
       private popupService:PopupService) { }
@@ -24,13 +26,13 @@ export class PopupManagerComponent implements OnInit {
       .subscribe(res => {
         this.products = res;
 
-        let popupVis = {};
-        popupVis["checkout"] = false;
+        delete(this.popupVis.products.placeholder);
+
         for(let i = 0; i < res.length; i++) {
-          popupVis["product-"+res[i]._id] = false;
+          this.popupVis.products[res[i]._id] = false;
         }
 
-        this.popupService.updatePopupVis(popupVis);
+        this.popupService.updatePopupVis(this.popupVis);
       });
   }
 

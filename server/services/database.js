@@ -11,15 +11,16 @@ const resetDatabase = async() => {
   addOrders(products);
 }
 
-const removeOldInitiatedOrders = async(minutes) => {
+const inactiveOldInitiatedOrders = async(minutes) => {
   let oldOrders = await Order.findOldInitiatedOrders(minutes);
 
   for(let i = 0; i < oldOrders.length; i++) {
     units = oldOrders[i].units;
     for(let j = 0; j < units.length; j++) {
-      Product.updateStock(units[j].productId, units[j].quantity).catch(console.error);
+      Product.updateStock(units[j].productId, units[j].quantity);
     }
-    Order.removeById(oldOrders[i]._id).catch(console.error);
+    oldOrders[i].status.active = false;
+    Order.updateOrder(oldOrders[i]);
   }
 }
 
@@ -59,5 +60,5 @@ const addOrders = async(products) => {
 
 module.exports = {
   resetDatabase,
-  removeOldInitiatedOrders
+  inactiveOldInitiatedOrders
 }

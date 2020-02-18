@@ -107,11 +107,29 @@ const addCustomer = async(details) => {
   return result;
 }
 
+// !orderNull: the token must belong to an existing orderId
+const inactiveOrder = async(orderId) => {
+  let result = {
+    success: true,
+    errors: []
+  };
+
+  const orderNull = orderId instanceof Error || !orderId;
+  if(orderNull) {
+    result.success = false;
+    result.errors.push({
+      errorCode: "orderNull"
+    })
+  };
+  return result;
+}
+
 const calculatePrice = (quantity, prodPrice) => {
   return (quantity * prodPrice).toFixed(2);
 }
 
 module.exports = {
   initiateOrder,
-  addCustomer
+  addCustomer,
+  inactiveOrder
 }

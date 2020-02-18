@@ -72,9 +72,17 @@ const OrderSchema = mongoose.Schema({
     required: true
   },
   status: {
-    type: String,
-    enum: ['initiated', 'customer_submitted', 'ordered', 'acknowledged', 'prepared', 'delivered'],
-    required: true
+    type: {
+      stage: {
+        type: String,
+        enum: ['initiated', 'customer_submitted', 'ordered', 'acknowledged', 'prepared', 'delivered'],
+        required: true
+      },
+      active: {
+        type: Boolean,
+        required: true
+      }
+    }
   }
 });
 
@@ -112,7 +120,8 @@ module.exports.findOldInitiatedOrders = async function(minutes) {
   const dateComp = new Date(Date.now() - 1000 * 60 * minutes);
   return Order.find( {
     $and : [
-      { 'status': 'initiated' },
+      { 'status.stage': 'initiated' },
+      { 'status.active': 'true' },
       { 'timestamps.time_initiated': { $lt: dateComp } }
     ] } );
 }

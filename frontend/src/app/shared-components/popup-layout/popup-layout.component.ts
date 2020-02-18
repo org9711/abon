@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { PopupService } from '../../services/popup/popup.service';
+import { IPopupVis } from '../../models/popupVis.model';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { PopupService } from '../../services/popup/popup.service';
 export class PopupLayoutComponent implements OnInit {
   @Input() title: string;
   @Input() closeKey: string;
-  popupVis
+  popupVis:IPopupVis;
   closing = false;
 
   constructor(private popupService:PopupService) { }
@@ -23,7 +24,12 @@ export class PopupLayoutComponent implements OnInit {
   closePopup() {
     this.closing = true;
     setTimeout(() => {
-      this.popupVis[this.closeKey] = !this.popupVis[this.closeKey];
+      if(this.closeKey.startsWith("product.")) {
+        this.popupVis.products[this.closeKey.split(".")[1]] = !this.popupVis.products[this.closeKey.split(".")[1]];
+      }
+      else {
+        this.popupVis[this.closeKey] = !this.popupVis[this.closeKey];
+      }
       this.popupService.updatePopupVis(this.popupVis);
     }, 300);
   }

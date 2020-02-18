@@ -30,7 +30,10 @@ const initiateOrder = async(order) => {
       'timestamps': {
         time_initiated: new Date()
       },
-      'status': "initiated"
+      'status': {
+        stage: 'initiated',
+        active: 'true'
+      }
     });
     Order.addOrder(orderDb);
     response["orderToken"] = await token.signJWT(orderDb._id, '6m');
@@ -78,8 +81,27 @@ const addCustomer = async(details) => {
   return response;
 }
 
+// Marks a requested case as inactive and restocks the corresponding products
+const inactiveOrder = async(orderToken) => {
+  let response = { success: false };
+  const orderId = await token.evaluateJWT(orderToken.order_token);
+  let validation = await validator.inactiveOrder(orderId);
+  if(validation.success) {
+    response.success = true;
+    let order = await Order.getOrderById(orderId);
+    for(let i = 0; i < order.units.length; i++) {
+      Product.updateStock(order.units[i].productId, order.units[i].quantity);
+    }
+    order.status.active = false;
+    Order.updateOrder(order);
+  }
+  else response = validation;
+  return response;
+}
+
 
 module.exports = {
   initiateOrder,
-  addCustomer
+  addCustomer,
+  inactiveOrder
 }

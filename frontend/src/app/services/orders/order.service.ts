@@ -34,6 +34,10 @@ export class OrderService {
     return this.http.post("orders/add_customer", details);
   }
 
+  inactiveOrder(orderToken) {
+    return this.http.post("orders/inactive_order", orderToken);
+  }
+
   basOrder(product:IProduct) {
     let newObj = [];
 

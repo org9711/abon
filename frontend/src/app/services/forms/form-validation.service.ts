@@ -23,7 +23,6 @@ export class FormValidationService {
         invalidText = "Required";
         break;
       }
-      console.log(formControl);
       switch(Object.keys(formControl.errors)[i]) {
         case "pattern":
           const actual = formControl.errors[Object.keys(formControl.errors)[i]].actualValue;

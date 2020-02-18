@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { catchError, share } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { share } from 'rxjs/operators';
 
-import { HttpService } from '../http/http.service'
+import { HttpService } from '../http/http.service';
 import { IProduct } from "../../models/product.model";
 
 
@@ -17,7 +16,11 @@ export class ProductService {
   constructor(private http:HttpService) { }
 
   getProducts():Observable<IProduct[]> {
-    return this.http.get("products");
+    if(!this.productObs) {
+      this.productObs = this.http.get("products")
+        .pipe(share());
+    }
+    return this.productObs;
   }
 
 }

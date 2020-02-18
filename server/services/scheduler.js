@@ -16,7 +16,7 @@ const orderClean = async() => {
   const interval = schedulerMinutes * 60 * 1000;
   setInterval(() => {
     console.log("Routine (every " + schedulerMinutes + " minutes) removal call");
-    database.removeOldInitiatedOrders(removalMinutes);
+    database.inactiveOldInitiatedOrders(removalMinutes);
   }, interval);
 }
 
