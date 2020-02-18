@@ -1,0 +1,16 @@
+<div id="checkout-confirmation">
+  <h2>Order Submitted!</h2>
+  <p>Your order has been placed and will be delivered to the below address in the next five days.</p>
+  <p>
+    {{this.orderSummary.customer.customer_details.firstname}} {{this.orderSummary.customer.customer_details.surname}}<br/>
+    {{this.orderSummary.customer.address_details.line1}}<br/>
+    <span *ngIf="this.orderSummary.customer.address_details.line2">{{this.orderSummary.customer.address_details.line2}}<br/></span>
+    {{this.orderSummary.customer.address_details.town}}<br/>
+    <span *ngIf="this.orderSummary.customer.address_details.county">{{this.orderSummary.customer.address_details.county}}<br/></span>
+    {{this.orderSummary.customer.address_details.postcode}}
+  </p>
+  <p *ngIf="this.orderSummary.payment_method == 'cash'">Since you are paying by cash, please have the full amount ready at the door upon delivery.</p>
+  <p *ngIf="this.orderSummary.payment_method == 'paypal'">Your payment has been confirmed by PayPal, so you don't need to worry about being in when we come.</p>
+  <p>We have emailed you at the email you provided, {{this.orderSummary.customer.customer_details.email}}, with a receipt and will email you again on the day of delivery.</p>
+  <p>Please contact jn98.abon@gmail.com if you would like to specify a delivery date and time.</p>
+</div>

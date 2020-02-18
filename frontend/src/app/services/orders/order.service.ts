@@ -79,6 +79,10 @@ export class OrderService {
     this.updateOrders(newObj);
   }
 
+  clearOrders() {
+    this.updateOrders([]);
+  }
+
   private newOrder(obj, product:IProduct) {
     obj.push({
       product: product,

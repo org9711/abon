@@ -20,6 +20,8 @@ export class CheckoutComponent implements OnInit {
   orders:IOrder[];
   validForm:boolean = false;
   customerAddedRes:boolean = false;
+  paymentSuccess:boolean = false;
+  orderSummary;
 
   constructor(private orderService:OrderService) { }
 
@@ -73,7 +75,9 @@ export class CheckoutComponent implements OnInit {
         this.customerAddedRes = true;
         this.addCustomerError = false;
         if(res.payment_method == "cash") {
-          console.log("show order summary screen");
+          this.orderSummary = res;
+          this.paymentSuccess = true;
+          this.orderService.clearOrders();
         }
         else if(res.payment_method == "paypal") {
           console.log("make request to paypal api");

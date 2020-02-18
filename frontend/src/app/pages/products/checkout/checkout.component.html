@@ -1,31 +1,36 @@
 <div>
-  <popup-layout [title]="'Checkout'" [closeKey]="'checkout'">
-  <div id="popup-body-container" class="checkout">
-    <div id="checkout-main">
-      <div id="checkout-left">
-        <customer-forms></customer-forms>
+  <popup-layout [title]="'Checkout'" [closeKey]="'order_checkout'">
+    <div id="popup-body-container" class="checkout">
+      <div id="checkout-main">
+        <div id="checkout-left">
+          <checkout-success *ngIf="this.paymentSuccess" [orderSummary]="this.orderSummary"></checkout-success>
+          <customer-forms *ngIf="!this.paymentSuccess"></customer-forms>
+        </div>
+        <div id="checkout-right">
+          <basket-overview [orders]="this.orders"></basket-overview>
+          <checkout-timer
+            [timeLeftSecs]="this.maxTimeSecs"
+            (timesUp)=timesUpRes()
+            *ngIf="!this.paymentSuccess">
+          </checkout-timer>
+        </div>
       </div>
-      <div id="checkout-right">
-        <basket-overview [orders]="this.orders"></basket-overview>
-        <checkout-timer [timeLeftSecs]="this.maxTimeSecs" (timesUp)=timesUpRes()></checkout-timer>
-      </div>
+      <add-customer-error *ngIf="this.addCustomerError"
+        [errors]="this.addCustomerErrors">
+      </add-customer-error>
+      <div id="checkout-payment-buttons" *ngIf="this.withinTime && !this.paymentSuccess">
+        <button id="cash-button"
+          class="checkout-buttons"
+          (click)="formSubmitted($event)"
+          [ngClass]="{disabled: !this.validForm}"
+          [disabled]="!this.validForm">Pay with Cash</button>
+        <button id="paypal-button"
+          class="checkout-buttons"
+          (click)="formSubmitted($event)"
+          [ngClass]="{disabled: !this.validForm}"
+          [disabled]="!this.validForm">Pay by Paypal</button>
+        </div>
+      <time-checkout-error *ngIf="!this.withinTime"></time-checkout-error>
     </div>
-    <add-customer-error *ngIf="this.addCustomerError"
-      [errors]="this.addCustomerErrors">
-    </add-customer-error>
-    <div id="checkout-payment-buttons" *ngIf="this.withinTime">
-      <button id="cash-button"
-        class="checkout-buttons"
-        (click)="formSubmitted($event)"
-        [ngClass]="{disabled: !this.validForm}"
-        [disabled]="!this.validForm">Pay with Cash</button>
-      <button id="paypal-button"
-        class="checkout-buttons"
-        (click)="formSubmitted($event)"
-        [ngClass]="{disabled: !this.validForm}"
-        [disabled]="!this.validForm">Pay by Paypal</button>
-      </div>
-    <time-checkout-error *ngIf="!this.withinTime"></time-checkout-error>
-  </div>
   </popup-layout>
 </div>

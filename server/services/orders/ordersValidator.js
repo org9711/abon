@@ -60,6 +60,7 @@ const initiateOrder = async(order) => {
 // Conditions:
 // !valuesWrong: all required values must have a value and payment_method must be enum
 // !orderNull: the token must belong to an existing orderId
+// !addressNotFound: the address must be found by the API
 // !tooFar: the address must be within maxMiles of originLatLon
 const addCustomer = async(details) => {
   let result = {
@@ -94,14 +95,23 @@ const addCustomer = async(details) => {
     return result;
   }
 
-  let tooFar = details.location.distance > location.maxMiles + 0.5;
-  if(tooFar) {
+  let addressNotFound = details.location instanceof Error || !details.location;
+  if(addressNotFound) {
     result.success = false;
     result.errors.push({
-      errorCode: "tooFar",
-      actDistance: details.location.distance,
-      maxDistance: location.maxMiles
+      errorCode: "addressNotFound"
     });
+  }
+  else {
+    let tooFar = details.location.distance > location.maxMiles + 0.5;
+    if(tooFar) {
+      result.success = false;
+      result.errors.push({
+        errorCode: "tooFar",
+        actDistance: details.location.distance,
+        maxDistance: location.maxMiles
+      });
+    }
   }
 
   return result;
@@ -124,6 +134,14 @@ const inactiveOrder = async(orderId) => {
   return result;
 }
 
+const payPaypal = async(body) => {
+  let result = {
+    success: true,
+    errors: []
+  };
+  return result;
+}
+
 const calculatePrice = (quantity, prodPrice) => {
   return (quantity * prodPrice).toFixed(2);
 }
@@ -131,5 +149,6 @@ const calculatePrice = (quantity, prodPrice) => {
 module.exports = {
   initiateOrder,
   addCustomer,
-  inactiveOrder
+  inactiveOrder,
+  payPaypal
 }

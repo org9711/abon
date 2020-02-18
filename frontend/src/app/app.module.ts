@@ -30,6 +30,7 @@ import { CustomerFormsComponent } from './pages/products/checkout/customer-forms
 import { BasketOverviewComponent } from './pages/products/checkout/basket-overview/basket-overview.component';
 import { CheckoutTimerComponent } from './pages/products/checkout/checkout-timer/checkout-timer.component';
 import { AddCustomerErrorComponent } from './pages/products/checkout/add-customer-error/add-customer-error.component';
+import { CheckoutSuccessComponent } from './pages/products/checkout/checkout-success/checkout-success.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { AddCustomerErrorComponent } from './pages/products/checkout/add-custome
     BasketOverviewComponent,
     CheckoutTimerComponent,
     AddCustomerErrorComponent,
+    CheckoutSuccessComponent,
   ],
   imports: [
     BrowserModule,

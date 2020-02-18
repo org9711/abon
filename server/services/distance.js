@@ -16,15 +16,17 @@ const checkDistance = async(toAddressObj) => {
     .then(res => res.Response.View[0].Result[0].Location.NavigationPosition[0])
     .catch(err => {return err});
   return Promise.all([latlonFrom, latlonTo]).then(res => {
-    const url =
+    if(res[1].Longitude && res[1].Latitude) {
+      const url =
       "https://route.ls.hereapi.com/routing/7.2/calculateroute.json" +
       "?apiKey=" + apis.here +
       "&waypoint0=geo!" + res[0].Latitude + "," + res[0].Longitude +
       "&waypoint1=geo!" + res[1].Latitude + "," + res[1].Longitude +
       "&mode=shortest;pedestrian";
-    return fetch(url)
+      return fetch(url)
       .then(dis => dis.json())
       .then(dis => dis.response.route[0].summary.distance)
+      .catch(err => {return err})
       .then(dis => dis * 0.000621)
       .then(dis => {
         return {
@@ -34,6 +36,8 @@ const checkDistance = async(toAddressObj) => {
         };
       })
       .catch(err => {return err});
+    }
+    else return new Error();
   });
 }
 

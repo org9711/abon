@@ -13,8 +13,6 @@ export class AddCustomerErrorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.errors);
-    console.log(this.errorMessages);
     for(let i = 0; i < this.errors.length; i++) {
       switch(this.errors[i].errorCode) {
         case "valuesWrong":
@@ -28,6 +26,8 @@ export class AddCustomerErrorComponent implements OnInit {
             " miles of Castle Park and your address was calculated to be " + this.errors[i].actDistance.toFixed(1) +
             " miles away. It would be great if you could find a more local delivery point.");
           break;
+        case "addressNotFound":
+          this.errorMessages.push("We can't find your address. Please check over the address you've enetered and try again.")
       }
     }
   }
