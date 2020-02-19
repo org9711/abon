@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const config = require('./config/database');
 const scheduler = require('./services/scheduler');
@@ -34,6 +35,10 @@ app.use(bodyParser.json());
 // Routing
 app.use('/products', products);
 app.use('/orders', orders);
+
+app.get("/close", (req, res) => {
+  res.sendFile(path.join(__dirname + '/static/close.html'));
+});
 
 // 404
 app.use('*', (req, res) => {

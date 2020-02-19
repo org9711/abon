@@ -11,7 +11,8 @@
     "express": "*",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.11",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "paypal-rest-sdk": "^1.8.1"
   },
   "repository": {
     "type": "git",

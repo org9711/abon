@@ -1,6 +1,5 @@
 const Product = require('../../models/product');
 
-const token = require('../token');
 const distance = require('../distance');
 const location = require('../../config/location');
 
@@ -139,6 +138,15 @@ const payPaypal = async(body) => {
     success: true,
     errors: []
   };
+  return result;
+}
+
+const successPaypal = async(body) => {
+  let result = {
+    success: ture,
+    errors: []
+  };
+
   return result;
 }
 

@@ -36,8 +36,12 @@ const OrderSchema = mongoose.Schema({
       },
       status: {
         type: String,
-        enum: ['pending', 'paid'],
+        enum: ['pending', 'abandoned', 'paid'],
         required: true
+      },
+      paypalPaymentId: {
+        type: String,
+        required: false
       }
     },
     required: true
@@ -116,10 +120,47 @@ module.exports.removeByIds = function(ids) {
   return Order.deleteMany( { '_id': { $in: ids } } );
 }
 
+module.exports.updateAddCustomer = function(id, orderUpdates) {
+  return Order.updateOne(
+    { '_id': id },
+    { $set: { 'customer': orderUpdates.customer,
+              'payment': orderUpdates.payment,
+              'timestamps': orderUpdates.timestamps,
+              'status': orderUpdates.stats } }
+  );
+}
+
+module.exports.updatePaymentId = function(id, paymentId) {
+  return Order.updateOne(
+    { '_id': id },
+    { $set: { 'payment.paypalPaymentId': paymentId } }
+  );
+}
+
+module.exports.updatePaymentStatus = function(id, status) {
+  return Order.updateOne(
+    { '_id': id },
+    { $set: { 'payment.status': status } }
+  );
+}
+
+module.exports.getByPaymentId = function(paymentId) {
+  return Order.find(
+    { 'payment.paypalPaymentId': { $eq: paymentId } }
+  );
+}
+
+module.exports.updateActivityStatus = function(id, status) {
+  return Order.updateOne(
+    { '_id': id },
+    { $set: { 'status.active': status } }
+  );
+}
+
 module.exports.findOldInitiatedOrders = async function(minutes) {
   const dateComp = new Date(Date.now() - 1000 * 60 * minutes);
-  return Order.find( {
-    $and : [
+  return Order.find(
+    { $and : [
       { 'status.stage': 'initiated' },
       { 'status.active': 'true' },
       { 'timestamps.time_initiated': { $lt: dateComp } }
