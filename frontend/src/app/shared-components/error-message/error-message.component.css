@@ -2,6 +2,6 @@
   padding: 7px;
   text-align: left;
   border-radius: 5px;
-  border: 1px solid var(--error-text);
+  border: 2px solid var(--error-text);
   background-color: var(--error-background);
 }

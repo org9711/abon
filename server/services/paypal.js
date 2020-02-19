@@ -1,84 +1,81 @@
-const paypal = require('paypal-rest-sdk');
-const apis = require('../config/apis');
-const url = require('../config/url');
+const Product = require('../models/product');
+const Order = require('../models/order');
+
+const paypal = require('./lib/paypal');
+const token = require('./lib/token');
 
 
-paypal.configure({
-  'mode': 'sandbox', //sandbox or live
-  'client_id': apis.paypal.client_id,
-  'client_secret': apis.paypal.client_secret
-});
-
-const paymentInitiation = (totalPrice) => {
-  const create_payment_json = {
-    "intent": "sale",
-    "payer": {
-      "payment_method": "paypal"
-    },
-    "redirect_urls": {
-      "return_url": url.domain + '/orders/success_paypal',
-      "cancel_url": url.domain + '/orders/cancel_paypal'
-    },
-    // Needs to be replaced with a call and an id?
-    // "experience": {
-    //   "name": "profile???",
-    //   "input_fields": {
-    //     "no_shipping": 1,
-    //     "address_override": 0
-    //   }
-    // },
-    "transactions": [{
-      "amount": {
-        "currency": "GBP",
-        "total": totalPrice.toFixed(2)
-      },
-      "description": "Order of Abon products"
-    }]
-  };
-
-  return new Promise((resolve, reject) => {
-    paypal.payment.create(create_payment_json, function(error, payment) {
-      if(error) {
-        reject(error);
-      }
-      else {
-        // console.log(payment);
-        for(let i = 0; i < payment.links.length; i++) {
-          if(payment.links[i].rel === 'approval_url') {
-            resolve({
-              paymentId: payment.id,
-              redirectLink: payment.links[i].href
-            });
-          }
-        }
+// Initiate the user's Paypal payment
+const pay = async(orderToken) => {
+  const orderId = await token.evaluateJWT(orderToken.order_token);
+  let totalPrice = 0;
+  let order = await Order.getOrderById(orderId);
+  for(let i = 0; i < order.units.length; i++) {
+    let product = await Product.getProductById(order.units[i].productId);
+    totalPrice += (product.price * order.units[i].quantity);
+  }
+  let response = paypal.paymentInitiation(totalPrice)
+    .then(paymentDetails => {
+      return Order.updatePaymentId(orderId, paymentDetails.paymentId).then(() => {
+        return {
+          success: true,
+          paymentDetails: paymentDetails
+        };
+      });
+    })
+    .catch(err => {
+      return {
+        success: false,
+        errors: [{
+          errorCode: "paymentInitiationError"
+        }]
       }
     });
-  });
+  return await response;
 }
 
-const paymentCompletion = (paymentId, payerId) => {
-  payerId = { 'payer_id': payerId };
-  return new Promise((resolve, reject) => {
-    paypal.payment.execute(paymentId, payerId, function(error, payment) {
-      console.log(payment);
-      if(error) {
-        console.log(JSON.stringify(error));
-        reject(error);
-      }
-      else {
-        console.log("yay");
-        if(payment.state == 'approved') {
-          resolve(true);
-        }
-        else {
-          resolve(false);
-        }
-      }
-    })
-  });
+const success = async(details, Stream) => {
+  let paymentSuccess = await paypal.paymentCompletion(details.paymentId, details.PayerID)
+  let order = await Order.getByPaymentId(details.paymentId);
+  if(paymentSuccess) {
+    await Order.updatePaymentStatus(order._id, 'paid');
+    await Order.updateTimeOrdered(order._id, new Date());
+    let orderConfirmation = {
+      success: true,
+      payment_method: "paypal",
+      customer: order.customer
+    }
+    await Stream.emit('push', 'message', orderConfirmation);
+    return {
+      success: true
+    }
+  }
+  else {
+    let result = {
+      success: false,
+      errors: [{
+        errorCode: "paymentNotApproved"
+      }]
+    };
+    await Stream.emit('push', 'message', result);
+    return result;
+  }
+}
+
+const cancel = async(details) => {
+  await Order.updatePaymentStatus(order._id, 'abandoned');
+  let result = {
+    success: false,
+    errors: [{
+      errorCode: "paymentAbandoned"
+    }]
+  };
+  await Stream.emit('push', 'message', result);
+  return result;
 }
 
 module.exports = {
-  paymentInitiation,
-  paymentCompletion
+  pay,
+  success,
+  cancel
 }

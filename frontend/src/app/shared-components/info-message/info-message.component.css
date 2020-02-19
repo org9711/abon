@@ -1,0 +1,7 @@
+.info-message {
+  padding: 7px;
+  text-align: center;
+  border-radius: 5px;
+  border: 2px solid var(--info-text);
+  background-color: var(--info-background);
+}

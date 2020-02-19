@@ -3,11 +3,11 @@
   <p>Your order has been placed and will be delivered to the below address in the next five days.</p>
   <p>
     {{this.orderSummary.customer.customer_details.firstname}} {{this.orderSummary.customer.customer_details.surname}}<br/>
-    {{this.orderSummary.customer.address_details.line1}}<br/>
-    <span *ngIf="this.orderSummary.customer.address_details.line2">{{this.orderSummary.customer.address_details.line2}}<br/></span>
-    {{this.orderSummary.customer.address_details.town}}<br/>
-    <span *ngIf="this.orderSummary.customer.address_details.county">{{this.orderSummary.customer.address_details.county}}<br/></span>
-    {{this.orderSummary.customer.address_details.postcode}}
+    {{this.orderSummary.customer.address_details.address.line1}}<br/>
+    <span *ngIf="this.orderSummary.customer.address_details.address.line2">{{this.orderSummary.customer.address_details.address.line2}}<br/></span>
+    {{this.orderSummary.customer.address_details.address.town}}<br/>
+    <span *ngIf="this.orderSummary.customer.address_details.address.county">{{this.orderSummary.customer.address_details.address.county}}<br/></span>
+    {{this.orderSummary.customer.address_details.address.postcode}}
   </p>
   <p *ngIf="this.orderSummary.payment_method == 'cash'">Since you are paying by cash, please have the full amount ready at the door upon delivery.</p>
   <p *ngIf="this.orderSummary.payment_method == 'paypal'">Your payment has been confirmed by PayPal, so you don't need to worry about being in when we come.</p>

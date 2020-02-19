@@ -126,7 +126,7 @@ module.exports.updateAddCustomer = function(id, orderUpdates) {
     { $set: { 'customer': orderUpdates.customer,
               'payment': orderUpdates.payment,
               'timestamps': orderUpdates.timestamps,
-              'status': orderUpdates.stats } }
+              'status': orderUpdates.status } }
   );
 }
 
@@ -145,7 +145,7 @@ module.exports.updatePaymentStatus = function(id, status) {
 }
 
 module.exports.getByPaymentId = function(paymentId) {
-  return Order.find(
+  return Order.findOne(
     { 'payment.paypalPaymentId': { $eq: paymentId } }
   );
 }
@@ -154,6 +154,13 @@ module.exports.updateActivityStatus = function(id, status) {
   return Order.updateOne(
     { '_id': id },
     { $set: { 'status.active': status } }
+  );
+}
+
+module.exports.updateTimeOrdered = function(id, time) {
+  return Order.updateOne(
+    { '_id': id },
+    { $set: { 'timestamps.time_ordered': time } }
   );
 }
 

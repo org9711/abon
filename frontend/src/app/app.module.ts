@@ -31,6 +31,9 @@ import { BasketOverviewComponent } from './pages/products/checkout/basket-overvi
 import { CheckoutTimerComponent } from './pages/products/checkout/checkout-timer/checkout-timer.component';
 import { AddCustomerErrorComponent } from './pages/products/checkout/add-customer-error/add-customer-error.component';
 import { CheckoutSuccessComponent } from './pages/products/checkout/checkout-success/checkout-success.component';
+import { InfoMessageComponent } from './shared-components/info-message/info-message.component';
+import { OrderDistanceInfoComponent } from './pages/products/order-distance-info/order-distance-info.component';
+import { PaypalWaitInfoComponent } from './pages/products/checkout/paypal-wait-info/paypal-wait-info.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,9 @@ import { CheckoutSuccessComponent } from './pages/products/checkout/checkout-suc
     CheckoutTimerComponent,
     AddCustomerErrorComponent,
     CheckoutSuccessComponent,
+    InfoMessageComponent,
+    OrderDistanceInfoComponent,
+    PaypalWaitInfoComponent,
   ],
   imports: [
     BrowserModule,

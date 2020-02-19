@@ -5,6 +5,7 @@
       *ngIf="this.orders.length > 0"
       (click)="initiateOrder()">Checkout</button>
   </div>
+  <order-distance-info *ngIf="this.orders.length == 0"></order-distance-info>
   <initiate-order-error *ngIf="this.initiationError"
     [errors]="this.initiationErrors"
     [orders]="this.orders">

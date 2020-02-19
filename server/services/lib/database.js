@@ -1,8 +1,8 @@
-const Product = require('../models/product');
-const Order = require('../models/order');
-const Customer = require('../models/customer');
+const Product = require('../../models/product');
+const Order = require('../../models/order');
+const Customer = require('../../models/customer');
 
-const data = require('../config/data');
+const data = require('../../config/data');
 
 
 const resetDatabase = async() => {
@@ -17,7 +17,7 @@ const inactiveOldInitiatedOrders = async(minutes) => {
   for(let i = 0; i < oldOrders.length; i++) {
     units = oldOrders[i].units;
     for(let j = 0; j < units.length; j++) {
-      Product.updateStock(units[j].productId, units[j].quantity);
+      Product.incrementStock(units[j].productId, units[j].quantity);
     }
     oldOrders[i].status.active = false;
     Order.updateOrder(oldOrders[i]);

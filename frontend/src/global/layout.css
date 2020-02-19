@@ -4,8 +4,10 @@
   --abon-red: #ff3333;
   --abon-grey: #2b2a24;
   --abon-orange: #ff6033;
-  --error-text: #C40233;
-  --error-background: #FFE0DF;
+  --error-text: #c40233;
+  --error-background: #ffe0df;
+  --info-text: #2b2a24;
+  --info-background: #f2f2f2
 }
 
 .desktop-only {
@@ -162,6 +164,10 @@ input[type=text] {
 
 .mandatory-form-star {
   color: red;
+}
+
+.waiting * {
+  cursor: wait;
 }
 
 @media all and (max-width: 1200px) {

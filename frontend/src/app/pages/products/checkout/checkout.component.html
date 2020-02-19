@@ -1,5 +1,8 @@
 <div>
-  <popup-layout [title]="'Checkout'" [closeKey]="'order_checkout'">
+  <popup-layout
+    [title]="'Checkout'"
+    [closeKey]="'order_checkout'"
+    [ngClass]="{waiting: this.waitingOnPaypal}">
     <div id="popup-body-container" class="checkout">
       <div id="checkout-main">
         <div id="checkout-left">
@@ -18,6 +21,7 @@
       <add-customer-error *ngIf="this.addCustomerError"
         [errors]="this.addCustomerErrors">
       </add-customer-error>
+      <paypal-wait-info *ngIf="this.waitingOnPaypal"></paypal-wait-info>
       <div id="checkout-payment-buttons" *ngIf="this.withinTime && !this.paymentSuccess">
         <button id="cash-button"
           class="checkout-buttons"
@@ -31,6 +35,7 @@
           [disabled]="!this.validForm">Pay by Paypal</button>
         </div>
       <time-checkout-error *ngIf="!this.withinTime"></time-checkout-error>
+
     </div>
   </popup-layout>
 </div>

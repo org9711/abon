@@ -4,9 +4,9 @@ const Order = require('../../models/order');
 const Customer = require('../../models/customer');
 
 const validator = require('./ordersValidator');
-const token = require('../token');
-const distance = require('../distance');
-const paypal = require('../paypal');
+const token = require('../lib/token');
+const distance = require('../lib/distance');
+const paypal = require('../lib/paypal');
 
 
 // Initiates an order by posting the information on what the user wants to buy
@@ -22,7 +22,7 @@ const initiateOrder = async(order) => {
         'quantity': order[i].quantity,
         'price': order[i].productPrice
       });
-      Product.updateStock(order[i].productId, order[i].quantity * -1).catch(console.error);
+      Product.incrementStock(order[i].productId, order[i].quantity * -1).catch(console.error);
     }
     let orderDb = new Order({
       'units': units,
@@ -79,6 +79,11 @@ const addCustomer = async(details) => {
       orderUpdates.timestamps["time_ordered"] = timeOfRequest;
       orderUpdates.status.stage = 'ordered'
     }
+    response = {
+      success: true,
+      payment_method: orderUpdates.payment.method,
+      customer: orderUpdates.customer
+    };
     await Order.updateAddCustomer(details.orderId, orderUpdates);
   }
   else response = validation;
@@ -94,7 +99,7 @@ const inactiveOrder = async(orderToken) => {
     response.success = true;
     let order = await Order.getOrderById(orderId);
     for(let i = 0; i < order.units.length; i++) {
-      Product.updateStock(order.units[i].productId, order.units[i].quantity);
+      Product.incrementStock(order.units[i].productId, order.units[i].quantity).catch(console.error);
     }
     await Order.updateActivityStatus(orderId, false);
   }
@@ -102,68 +107,9 @@ const inactiveOrder = async(orderToken) => {
   return response;
 }
 
-// Initiate the user's Paypal payment
-const payPaypal = async(orderToken) => {
-  const orderId = await token.evaluateJWT(orderToken.order_token);
-  let totalPrice = 0;
-  let order = await Order.getOrderById(orderId);
-  for(let i = 0; i < order.units.length; i++) {
-    let product = await Product.getProductById(order.units[i].productId);
-    totalPrice += (product.price * order.units[i].quantity);
-  }
-  let response = paypal.paymentInitiation(totalPrice)
-    .then(paymentDetails => {
-      console.log(paymentDetails.redirectLink);
-      return Order.updatePaymentId(orderId, paymentDetails.paymentId).then(() => {
-        return {
-          success: true,
-          paymentDetails: paymentDetails
-        };
-      });
-    })
-    .catch(err => {
-      console.log(err);
-      return {
-        success: false,
-        errors: [{
-          errorCode: "paymentInitiationError"
-        }]
-      }
-    });
-  return await response;
-}
-
-const successPaypal = async(details) => {
-  console.log(details);
-  let paymentSuccess = await paypal.paymentCompletion(details.paymentId, details.PayerID)
-  let order = await Order.getByPaymentId(details.paymentId);
-  console.log("hello")
-  if(paymentSuccess) {
-    console.log("success")
-    await Order.updatePaymentStatus(order._id, 'paid');
-    return {
-      success: true
-    }
-  }
-  else {
-    console.log("fail");
-    return {
-      success: false,
-      errors: [{
-        errorCode: "paymentNotApproved"
-      }]
-    }
-  }
-}
-
-const cancelPaypal = async(details) => {
-
-}
 
 module.exports = {
   initiateOrder,
   addCustomer,
-  inactiveOrder,
-  payPaypal,
-  successPaypal
+  inactiveOrder
 }

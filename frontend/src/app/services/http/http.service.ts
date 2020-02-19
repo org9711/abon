@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 
 
 @Injectable({
@@ -12,7 +11,7 @@ export class HttpService {
 
   baseUrl = "http://localhost:8080/"
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private zone: NgZone) { }
 
   get(path:string):Observable<any> {
     let options = {  };
@@ -26,10 +25,40 @@ export class HttpService {
       .pipe(catchError(this.handleError<any>('post', [])));
   }
 
+
+  getServerSentEvent(url:string) {
+    return Observable.create(observer => {
+      const eventSource = this.getEventSource(this.baseUrl + url);
+
+      eventSource.onopen = event => {
+        this.zone.run(() => {
+          console.log("connection opened");
+        });
+      };
+
+      eventSource.onmessage = event => {
+        this.zone.run(() => {
+          observer.next(event.data);
+        });
+      };
+
+      eventSource.onerror = error => {
+        this.zone.run(() => {
+          observer.error(error)
+        });
+      };
+    });
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       return throwError(error.error)
     }
   }
+
+  private getEventSource(url:string):EventSource {
+    return new EventSource(url);
+  }
+
 }

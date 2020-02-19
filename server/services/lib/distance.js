@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
-const location = require('../config/location');
-const apis = require('../config/apis');
+const location = require('../../config/location');
+const apis = require('../../config/apis');
 
 
 const checkDistance = async(toAddressObj) => {

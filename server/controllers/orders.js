@@ -40,8 +40,7 @@ const payPaypal = async(req, res, next) => {
 const successPaypal = async(req, res, next) => {
   orders.successPaypal(req.query)
     .then(body => {
-      console.log(body);
-      if(body.success) res.status(200).redirect("/close");
+      if(body.success) res.status(200);
       else res.status(400).send(body);
     })
     .catch(next);

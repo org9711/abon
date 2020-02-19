@@ -56,9 +56,24 @@ module.exports.removeAllProducts = function() {
   return Product.deleteMany();
 }
 
-module.exports.updateStock = function(id, change) {
-  return Product.updateOne(
+module.exports.incrementStock = function(id, change) {
+  return Product.findOneAndUpdate(
     { '_id': id },
-    { $inc: { 'stock': change } }
-  )
+    { $inc: { 'stock': change } },
+    { new: true, useFindAndModify: false }
+  ).then( productUpdate => {
+    if(productUpdate.stock == 0 && productUpdate.status == "on_sale") {
+      return Product.updateOne(
+        { '_id': id },
+        { 'status': 'sold_out' }
+      );
+    }
+    else if(productUpdate.stock > 0 && productUpdate.status == "sold_out") {
+      return Product.updateOne(
+        { '_id': id },
+        { 'status': 'on_sale' }
+      );
+    }
+    return productUpdate;
+  });
 }

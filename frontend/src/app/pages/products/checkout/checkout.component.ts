@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { take } from 'rxjs/operators'
+import { first } from 'rxjs/operators'
 
 import { IOrder } from '../../../models/order.model';
 import { OrderService } from '../../../services/orders/order.service';
+import { PaypalService } from '../../../services/paypal/paypal.service';
 import { CustomerFormsComponent } from './customer-forms/customer-forms.component';
 import { IOrderCust } from '../../../models/orderCust.model';
 
@@ -20,18 +21,19 @@ export class CheckoutComponent implements OnInit {
   orders:IOrder[];
   validForm:boolean = false;
   customerAddedRes:boolean = false;
+  waitingOnPaypal:boolean = false;
   paymentSuccess:boolean = false;
   orderSummary;
 
-  constructor(private orderService:OrderService) { }
+  constructor(private orderService:OrderService,
+    private paypalService:PaypalService) { }
 
   @ViewChild(CustomerFormsComponent, { static: false }) customerForms:CustomerFormsComponent;
   addCustomerError:boolean = false;
   addCustomerErrors = [];
 
   ngOnInit() {
-    this.orderService.ordersObs.pipe(take(1)).subscribe(res => this.orders = res);
-    window.addEventListener('beforeunload', this.inactiveOrder);
+    this.orderService.ordersObs.pipe(first()).subscribe(res => this.orders = res);
   }
 
   ngAfterViewInit() {
@@ -72,15 +74,36 @@ export class CheckoutComponent implements OnInit {
 
     this.orderService.addCustomerToOrder(details).subscribe(
       res => {
+        let paypalTab:Window;
         this.customerAddedRes = true;
         this.addCustomerError = false;
         if(res.payment_method == "cash") {
+          this.waitingOnPaypal = false;
           this.orderSummary = res;
           this.paymentSuccess = true;
           this.orderService.clearOrders();
         }
         else if(res.payment_method == "paypal") {
-          console.log("make request to paypal api");
+          this.waitingOnPaypal = true;
+          const orderTokenJSON = { order_token: this.orderToken };
+          this.paypalService.payPaypal(orderTokenJSON).subscribe(res => {
+            paypalTab = window.open(res.paymentDetails.redirectLink, "_blank");
+          });
+          this.paypalService.listenForCompletion()
+            .pipe(first())
+            .subscribe(res => {
+              let jsonRes = JSON.parse(res);
+              if(jsonRes.success) {
+                this.orderSummary = JSON.parse(res);
+                this.paymentSuccess = true;
+                this.orderService.clearOrders();
+              }
+              else {
+                console.error(jsonRes.errors);
+              }
+              this.waitingOnPaypal = false;
+              paypalTab.close();
+          });
         }
       },
       err => {
@@ -91,7 +114,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   inactiveOrder() {
-    const orderTokenJSON = { order_token: this.orderToken }
+    const orderTokenJSON = { order_token: this.orderToken };
     if(!this.customerAddedRes) {
       this.orderService.inactiveOrder(orderTokenJSON).subscribe(
         res => sessionStorage.removeItem('orderToken'));

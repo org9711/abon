@@ -53,7 +53,7 @@ export class OrderService {
           break
         }
       }
-      if(!alreadyExists) newObj = this.newOrder(newObj, product);
+      if(!alreadyExists && product.stock) newObj = this.newOrder(newObj, product);
     }
 
     this.updateOrders(newObj);

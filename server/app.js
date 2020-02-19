@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const config = require('./config/database');
-const scheduler = require('./services/scheduler');
+const scheduler = require('./services/lib/scheduler');
 
 mongoose.connect(config.database, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -22,6 +22,7 @@ const app = express();
 
 const products = require('./routes/products');
 const orders = require('./routes/orders');
+const paypal = require('./routes/paypal');
 
 // Port Number
 const port = 8080;
@@ -35,10 +36,7 @@ app.use(bodyParser.json());
 // Routing
 app.use('/products', products);
 app.use('/orders', orders);
-
-app.get("/close", (req, res) => {
-  res.sendFile(path.join(__dirname + '/static/close.html'));
-});
+app.use('/paypal', paypal);
 
 // 404
 app.use('*', (req, res) => {

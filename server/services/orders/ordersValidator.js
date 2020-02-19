@@ -1,6 +1,6 @@
 const Product = require('../../models/product');
 
-const distance = require('../distance');
+const distance = require('../lib/distance');
 const location = require('../../config/location');
 
 

@@ -1,9 +1,9 @@
 :host {
-  margin: 10px;
+  margin-bottom: 10px
 }
 
 p {
-  color: var(--error-text);
+  color: var(--info-text);
   margin-bottom: 5px;
 }
 
