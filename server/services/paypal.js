@@ -38,6 +38,7 @@ const success = async(details, Stream) => {
   let paymentSuccess = await paypal.paymentCompletion(details.paymentId, details.PayerID)
   let order = await Order.getByPaymentId(details.paymentId);
   if(paymentSuccess) {
+    await Order.updatePaymentMethod(order._id, 'paypal');
     await Order.updatePaymentStatus(order._id, 'paid');
     await Order.updateTimeOrdered(order._id, new Date());
     let orderConfirmation = {
@@ -58,6 +59,7 @@ const success = async(details, Stream) => {
       }]
     };
     await Stream.emit('push', 'message', result);
+    email.sendOrderConfirmationEmails(order._id).catch(console.error);
     return result;
   }
 }

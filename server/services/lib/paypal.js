@@ -16,8 +16,8 @@ const paymentInitiation = (totalPrice) => {
       "payment_method": "paypal"
     },
     "redirect_urls": {
-      "return_url": url.domain + '/paypal/success',
-      "cancel_url": url.domain + '/paypal/cancel'
+      "return_url": url.server + '/paypal/success',
+      "cancel_url": url.server + '/paypal/cancel'
     },
     // Needs to be replaced with a call and an id?
     // "experience": {

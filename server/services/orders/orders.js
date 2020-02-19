@@ -7,6 +7,7 @@ const validator = require('./ordersValidator');
 const token = require('../lib/token');
 const distance = require('../lib/distance');
 const paypal = require('../lib/paypal');
+const email = require('../lib/email/applications');
 
 
 // Initiates an order by posting the information on what the user wants to buy
@@ -63,8 +64,9 @@ const addCustomer = async(details) => {
         }
       },
       payment: {
-        status: order.payment.status,
-        method: details.payment_method
+        status: 'pending',
+        method: details.payment_method,
+        paypalPaymentId: order.payment.paypalPaymentId
       },
       timestamps: {
         time_initiated: order.timestamps.time_initiated,
@@ -72,12 +74,13 @@ const addCustomer = async(details) => {
       },
       status: {
         stage: 'customer_submitted',
-        active: order.status.active
+        active: true
       }
     };
     if(details.payment_method == "cash") {
+      orderUpdates.payment.status = 'paid';
       orderUpdates.timestamps["time_ordered"] = timeOfRequest;
-      orderUpdates.status.stage = 'ordered'
+      orderUpdates.status.stage = 'ordered';
     }
     response = {
       success: true,
@@ -85,6 +88,7 @@ const addCustomer = async(details) => {
       customer: orderUpdates.customer
     };
     await Order.updateAddCustomer(details.orderId, orderUpdates);
+    if(details.payment_method == "cash") email.sendOrderConfirmationEmails(details.orderId).catch(console.error);
   }
   else response = validation;
   return response;
@@ -106,7 +110,6 @@ const inactiveOrder = async(orderToken) => {
   else response = validation;
   return response;
 }
-
 
 module.exports = {
   initiateOrder,

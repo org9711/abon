@@ -144,6 +144,13 @@ module.exports.updatePaymentStatus = function(id, status) {
   );
 }
 
+module.exports.updatePaymentMethod = function(id, method) {
+  return Order.updateOne(
+    { '_id': id },
+    { $set: { 'payment.method': method } }
+  );
+}
+
 module.exports.getByPaymentId = function(paymentId) {
   return Order.findOne(
     { 'payment.paypalPaymentId': { $eq: paymentId } }
