@@ -1,5 +1,5 @@
 let jwt = require('jsonwebtoken');
-let config = require('../../config/jwt.js');
+let config = require('../../config/secret.js');
 
 
 const evaluateJWT = async(token) => {

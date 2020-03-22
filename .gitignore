@@ -1,3 +1,7 @@
 node_modules
 script
 dist
+
+# API keys and passwords
+server/config/apis.js
+server/config/secret.js

@@ -38,6 +38,8 @@ The high-level requirements for the website are as follows:
 * Install mongodb locally on your computer and run it using `mongod`
 * Install angular-cli using `npm install -g @angular/cli`
 * Download or pull this git repository
+* Add a file `server/config/apis.js` for HERE Maps and PayPal APIs
+* Add a file `server/config/sercret.js` for JWT and datbase secret password
 * Build using `npm run build`
 * Run the server using `npm run start:local`
-* Open localhost:4200 in a browser
+* Open localhost:8080 in a browser
