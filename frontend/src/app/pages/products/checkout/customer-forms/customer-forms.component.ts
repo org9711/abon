@@ -13,7 +13,7 @@ export class CustomerFormsComponent implements OnInit {
 
   form:FormGroup;
 
-  constructor(private formValidationService:FormValidationService) { }
+  constructor(public formValidationService:FormValidationService) { }
 
   ngOnInit() {
     const firstname = new FormControl("", [Validators.required, Validators.pattern('[ A-Za-zÀ-ÖØ-öø-ÿ\-]*'), Validators.maxLength(30)]);

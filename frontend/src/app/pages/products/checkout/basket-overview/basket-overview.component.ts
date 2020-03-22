@@ -16,7 +16,7 @@ export class BasketOverviewComponent implements OnInit {
   ngOnInit() {
   }
 
-  private calculateTotalPrice() {
+  public calculateTotalPrice() {
     let totalPrice = 0;
     for(let i = 0; i < this.orders.length; i++) {
       totalPrice += this.orders[i].quantity * this.orders[i].product.price;

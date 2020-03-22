@@ -13,7 +13,7 @@ export class ProductInfoComponent implements OnInit {
 
   @Input() product:IProduct
 
-  constructor(private productService:ProductService) { }
+  constructor(public productService:ProductService) { }
 
   ngOnInit() {
   }

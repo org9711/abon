@@ -8,7 +8,7 @@ import { HttpService } from "../http/http.service";
 })
 export class PaypalService {
 
-  constructor(private http:HttpService) { }
+  constructor(public http:HttpService) { }
 
   payPaypal(orderToken) {
     return this.http.post("paypal/pay", orderToken);

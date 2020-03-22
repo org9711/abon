@@ -13,7 +13,7 @@ export class ProductService {
 
   productObs: Observable<IProduct[]>;
 
-  constructor(private http:HttpService) { }
+  constructor(public http:HttpService) { }
 
   getProducts():Observable<IProduct[]> {
     if(!this.productObs) {

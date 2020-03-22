@@ -9,9 +9,9 @@ import { Injectable, NgZone } from '@angular/core';
 })
 export class HttpService {
 
-  baseUrl = "http://localhost:8080/"
+  baseUrl = "http://localhost:8080/api/"
 
-  constructor(private http:HttpClient, private zone: NgZone) { }
+  constructor(public http:HttpClient, public zone: NgZone) { }
 
   get(path:string):Observable<any> {
     let options = {  };
@@ -50,14 +50,14 @@ export class HttpService {
     });
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  public handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       return throwError(error.error)
     }
   }
 
-  private getEventSource(url:string):EventSource {
+  public getEventSource(url:string):EventSource {
     return new EventSource(url);
   }
 

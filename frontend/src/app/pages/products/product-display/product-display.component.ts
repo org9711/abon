@@ -16,8 +16,8 @@ export class ProductDisplayComponent implements OnInit {
   @Input() product:IProduct;
   popupVis:IPopupVis;
 
-  constructor(private popupService:PopupService,
-    private orderService:OrderService) { }
+  constructor(public popupService:PopupService,
+    public orderService:OrderService) { }
 
   ngOnInit() {
     this.popupService.popupVisObs.subscribe(res => this.popupVis = res);

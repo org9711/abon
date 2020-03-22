@@ -16,8 +16,8 @@ export class PopupManagerComponent implements OnInit {
   products:IProduct[];
   popupVis:IPopupVis;
 
-  constructor(private productService:ProductService,
-      private popupService:PopupService) { }
+  constructor(public productService:ProductService,
+      public popupService:PopupService) { }
 
   ngOnInit() {
     this.popupService.popupVisObs.subscribe(res => this.popupVis = res);

@@ -13,7 +13,7 @@ export class BasketRowComponent implements OnInit {
 
   @Input() order:IOrder;
 
-  constructor(private orderService:OrderService) { }
+  constructor(public orderService:OrderService) { }
 
   ngOnInit() {
   }

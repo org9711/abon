@@ -13,7 +13,7 @@ export class ProductDisplayContainerComponent implements OnInit {
 
     products: IProduct[]
 
-    constructor(private productService:ProductService) { }
+    constructor(public productService:ProductService) { }
 
     ngOnInit() {
       this.productService.getProducts()

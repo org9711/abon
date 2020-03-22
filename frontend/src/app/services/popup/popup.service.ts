@@ -9,7 +9,7 @@ import { IPopupVis } from '../../models/popupVis.model';
   providedIn: 'root'
 })
 export class PopupService {
-  private popupVis = new BehaviorSubject<IPopupVis>({
+  public popupVis = new BehaviorSubject<IPopupVis>({
     order_checkout: false,
     products: {
       placeholder: false

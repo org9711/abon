@@ -24,7 +24,7 @@ export class InitiateOrderErrorComponent implements OnInit {
     this.produceErrorMessages();
   }
 
-  private produceErrorMessages() {
+  public produceErrorMessages() {
     for(let i = 0; i < this.errors.length; i++) {
       let productName = "";
       for(let j = 0; j < this.orders.length; j++) {

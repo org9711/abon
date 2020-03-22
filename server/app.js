@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
+const history = require('connect-history-api-fallback');
 
 const config = require('./config/database');
 const scheduler = require('./services/lib/scheduler');
@@ -20,6 +21,8 @@ mongoose.connection.on('err', (err) => {
 
 const app = express();
 
+app.use(history({index: '/index.html'}));
+
 const products = require('./routes/products');
 const orders = require('./routes/orders');
 const paypal = require('./routes/paypal');
@@ -34,14 +37,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routing
-app.use('/products', products);
-app.use('/orders', orders);
-app.use('/paypal', paypal);
+app.use('/api/products', products);
+app.use('/api/orders', orders);
+app.use('/api/paypal', paypal);
 
-// 404
-app.use('*', (req, res) => {
-  res.status(404).send();
-});
+app.use('/', express.static('dist', {index: 'index.html'}));
 
 // Start Server
 app.listen(port, () => {

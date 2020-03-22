@@ -30,7 +30,7 @@ export class CheckoutTimerComponent implements OnInit {
     },1000);
   }
 
-  private zeroPad(inpNum:number, digitsShown:number) {
+  public zeroPad(inpNum:number, digitsShown:number) {
     let padding = "0".repeat(digitsShown);
     let whole = padding + inpNum.toString();
     let final = whole.substr(whole.length - digitsShown, whole.length);

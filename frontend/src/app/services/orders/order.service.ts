@@ -12,10 +12,10 @@ import { IOrderCust } from "../../models/orderCust.model";
 })
 export class OrderService {
 
-  private orders = new BehaviorSubject<IOrder[]>([]);
+  public orders = new BehaviorSubject<IOrder[]>([]);
   public ordersObs = this.orders.asObservable();
 
-  constructor(private http:HttpService) { }
+  constructor(public http:HttpService) { }
 
   initiateOrder() {
     let orders = [];
@@ -83,7 +83,7 @@ export class OrderService {
     this.updateOrders([]);
   }
 
-  private newOrder(obj, product:IProduct) {
+  public newOrder(obj, product:IProduct) {
     obj.push({
       product: product,
       quantity: 1,
@@ -91,12 +91,12 @@ export class OrderService {
     return obj;
   }
 
-  private incrementQuantity(obj:IOrder[], ind:number) {
+  public incrementQuantity(obj:IOrder[], ind:number) {
     if(obj[ind].quantity < obj[ind].product.stock) obj[ind].quantity += 1;
     return obj;
   }
 
-  private updateOrders(obj:IOrder[]) {
+  public updateOrders(obj:IOrder[]) {
     this.orders.next(obj);
   }
 

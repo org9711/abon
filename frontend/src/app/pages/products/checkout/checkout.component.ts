@@ -25,8 +25,8 @@ export class CheckoutComponent implements OnInit {
   paymentSuccess:boolean = false;
   orderSummary;
 
-  constructor(private orderService:OrderService,
-    private paypalService:PaypalService) { }
+  constructor(public orderService:OrderService,
+    public paypalService:PaypalService) { }
 
   @ViewChild(CustomerFormsComponent, { static: false }) customerForms:CustomerFormsComponent;
   addCustomerError:boolean = false;

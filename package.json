@@ -1,20 +1,13 @@
 {
-  "name": "abon-server",
+  "name": "abon",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
+    "setup": "npm install frontend/.; npm install server/.;",
+    "build": "cd frontend; ng build --prod;",
+    "start:local": " cd server; node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "connect-history-api-fallback": "^1.6.0",
-    "cors": "^2.8.5",
-    "express": "*",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.11",
-    "node-fetch": "^2.6.0",
-    "nodemailer": "^6.4.2",
-    "paypal-rest-sdk": "^1.8.1"
   },
   "repository": {
     "type": "git",

@@ -38,8 +38,6 @@ The high-level requirements for the website are as follows:
 * Install mongodb locally on your computer and run it using `mongod`
 * Install angular-cli using `npm install -g @angular/cli`
 * Download or pull this git repository
-* Navigate to [frontend](https://github.com/org9711/abon/tree/master/frontend) and run `npm install`
-* Run the server using `ng serve`
-* Navigate to [server](https://github.com/org9711/abon/tree/master/server) and run `npm install`
-* Run the server using `node app.js`
+* Build using `npm run build`
+* Run the server using `npm run start:local`
 * Open localhost:4200 in a browser

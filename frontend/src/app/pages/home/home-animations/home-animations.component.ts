@@ -11,7 +11,7 @@ import { AnimationService } from '../../../services/animations/animation.service
 export class HomeAnimationsComponent implements OnInit {
   animations:any[]
 
-  constructor(private AnimationService: AnimationService) { }
+  constructor(public AnimationService: AnimationService) { }
 
   ngOnInit() {
     this.animations = this.AnimationService.getAnimations();

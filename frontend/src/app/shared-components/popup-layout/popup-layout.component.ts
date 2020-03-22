@@ -15,7 +15,7 @@ export class PopupLayoutComponent implements OnInit {
   popupVis:IPopupVis;
   closing = false;
 
-  constructor(private popupService:PopupService) { }
+  constructor(public popupService:PopupService) { }
 
   ngOnInit() {
     this.popupService.popupVisObs.subscribe(res => this.popupVis = res);

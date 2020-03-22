@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 
 @Injectable({
@@ -9,11 +9,11 @@ export class FormValidationService {
 
   constructor() { }
 
-  checkIfValid(formControl:FormControl) {
+  checkIfValid(formControl:AbstractControl) {
     return formControl.status == "VALID" || !formControl.touched;
   }
 
-  getInvalidText(formControl:FormControl) {
+  getInvalidText(formControl:AbstractControl) {
     let invalidText = "";
     for(let i = 0; i < Object.keys(formControl.errors).length; i++) {
       if(invalidText != "") {
